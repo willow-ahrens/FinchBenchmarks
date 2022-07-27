@@ -1,2 +1,6 @@
 taco/*
 Finch.jl/*
+*.tns
+*.o
+spmv_taco
+settings.json
