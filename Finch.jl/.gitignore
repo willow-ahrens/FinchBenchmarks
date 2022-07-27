@@ -1,0 +1,9 @@
+*.jl.*.cov
+*.jl.cov
+*.jl.mem
+/docs/build/
+.vscode/c_cpp_properties.json
+demos/embed_demo
+embed/finch.o
+embed/libfinch.a
+demos/embed_demo.o
