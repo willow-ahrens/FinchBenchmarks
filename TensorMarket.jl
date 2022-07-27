@@ -1,0 +1,153 @@
+#=
+Copyright (c) 2013: Viral B. Shah.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+=#
+
+module TensorMarket
+
+export ttread, ttwrite
+
+struct ParseError
+    error :: String
+end
+
+_parseint(x) = parse(Int, x)
+
+"""
+### mmread(filename, infoonly::Bool=false, retcoord::Bool=false)
+
+Read the contents of the Matrix Market file 'filename' into a matrix,
+which will be either sparse or dense, depending on the Matrix Market format
+indicated by 'coordinate' (coordinate sparse storage), or 'array' (dense
+array storage).
+
+If infoonly is true (default: false), only information on the size and
+structure is returned from reading the header. The actual data for the
+matrix elements are not parsed.
+
+If retcoord is true (default: false), the coordinate and value vectors
+are returned, if it is a sparse matrix, along with the header information.
+"""
+function ttread(filename, infoonly::Bool=false, retcoord::Bool=false)
+    open(filename,"r") do mmfile
+        # Read first line
+        firstline = chomp(readline(mmfile))
+        tokens = split(firstline)
+        if length(tokens) != 5
+            throw(ParseError(string("Not enough words on first line: ", firstline)))
+        end
+        if tokens[1] != "%%MatrixMarket"
+            throw(ParseError(string("Expected start of header `%%MatrixMarket`, got `$(tokens[1])`")))
+        end
+        (head1, rep, field, symm) = map(lowercase, tokens[2:5])
+        if head1 != "tensor"
+            throw(ParseError("Unknown TensorMarket data type: $head1 (only \"tensor\" is supported)"))
+        end
+        if rep != "coordinate"
+            throw(ParseError("Unknown TensorMarket representation: $rep (only \"coordinate\" is supported)"))
+        end
+
+        eltype = field == "real" ? Float64 :
+                 field == "complex" ? ComplexF64 :
+                 field == "integer" ? Int64 :
+                 field == "pattern" ? Bool :
+                 throw(ParseError("Unsupported field $field (only real and complex are supported)"))
+
+        if symm != "general"
+            throw(ParseError("Unknown TensorMarket symmetry: $symm (only \"general\" is supported)"))
+        end
+
+        # Skip all comments and empty lines
+        ll   = readline(mmfile)
+        while length(chomp(ll))==0 || (length(ll) > 0 && ll[1] == '%')
+            ll = readline(mmfile)
+        end
+        # Read tensor dimensions (and number of entries) from first non-comment line
+        dd = map(_parseint, split(ll))
+        if length(dd) < 1
+            throw(ParseError(string("Could not read in matrix dimensions from line: ", ll)))
+        end
+        shape = dd[1:end-1]
+        entries = dd[end]
+        infoonly && return (shape, entries, rep, field, symm)
+
+        N = length(shape)
+
+        cc = (Vector{Int}(undef, entries) for _ in shape)
+        xx = Vector{eltype}(undef, entries)
+        for i in 1:entries
+            line = split(readline(mmfile))
+            @assert length(line) >= N
+            for n in 1:N
+                cc[n][i] = _parseint(line[n])
+            end
+            if eltype == ComplexF64
+                @assert length(line) == N + 2
+                real = parse(Float64, line[N + 1])
+                imag = parse(Float64, line[N + 2])
+                xx[i] = ComplexF64(real, imag)
+            elseif eltype == Bool
+                @assert length(line) == N
+                xx[i] = true
+            else
+                @assert length(line) == N + 1
+                xx[i] = parse(eltype, line[N + 1])
+            end
+        end
+        (retcoord
+         ? (cc, xx, shape, entries, rep, field, symm)
+         : (cc, xx, shape))
+    end
+end
+
+"""
+### ttwrite(filename, matrix::SparseMatrixCSC)
+
+Write a sparse matrix to file 'filename'.
+"""
+function ttwrite(filename, I, V, shape)
+  open(filename, "w") do file
+    elem = eltype(V) <: Bool ? "pattern" :
+           eltype(V) <: Integer ?  "integer" :
+           eltype(V) <: AbstractFloat ? "real" :
+           eltype(V) <: Complex ? "complex" :
+           error("Invalid matrix type")
+    sym = "general"
+
+    # write mm header
+    write(file, "%%MatrixMarket tensor coordinate $elem $sym\n")
+
+    # write matrix size and number of nonzeros
+    write(file, "$(join(shape, " ")) $(length(V))\n")
+
+    for (coord, val) in zip(zip(I...), V)
+        write(file, join(coord, " "))
+        write(file, " ")
+        if elem == "pattern" # omit values on pattern matrices
+        elseif elem == "complex"
+            write(file, " $(real(val)) $(imag(val))")
+        else
+            write(file, " $(val)")
+        end
+        write(file, "\n")
+    end
+  end
+end
+
+end # module

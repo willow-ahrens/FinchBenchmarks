@@ -1,6 +1,10 @@
 using Finch
 using SparseArrays
 
+include("TensorMarket.jl")
+using TensorMarket
+
+#=
 function readtns_fsparse(fname)
     I = nothing
     V = Float64[]
@@ -32,21 +36,22 @@ function writetns_fsparse(fname, I, V)
         end
     end
 end
+=#
 
 function spmv_taco(A, x)
     y_ref = fiber(x)
     @index @loop i j y_ref[i] += A[i, j] * x[j]
     @index @loop i y_ref[i] = 0
 
-    writetns_fsparse("A.tns", ffindnz(A)...)
-    writetns_fsparse("x.tns", ffindnz(x)...)
-    writetns_fsparse("y.tns", ffindnz(y_ref)...)
+    ttwrite("A.ttx", ffindnz(A)...)
+    ttwrite("x.ttx", ffindnz(x)...)
+    ttwrite("y.ttx", ffindnz(y_ref)...)
 
     io = IOBuffer()
 
-    run(pipeline(`./spmv_taco y.tns A.tns x.tns`, stdout=io))
+    run(pipeline(`./spmv_taco y.ttx A.ttx x.ttx`, stdout=io))
 
-    y = fsparse(readtns_fsparse("y.tns")...)
+    y = fsparse(ttread("y.ttx")...)
 
     @assert FiberArray(y) == FiberArray(y_ref)
 
@@ -54,5 +59,3 @@ function spmv_taco(A, x)
 end
 
 spmv_taco(ones(10, 10), ones(10))
-
-
