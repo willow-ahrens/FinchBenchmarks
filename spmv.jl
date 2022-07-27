@@ -2,7 +2,7 @@ using Finch
 using SparseArrays
 
 include("TensorMarket.jl")
-using TensorMarket
+using .TensorMarket
 
 #=
 function readtns_fsparse(fname)
