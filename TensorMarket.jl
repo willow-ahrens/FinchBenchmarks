@@ -126,7 +126,7 @@ end
 Write a sparse matrix to file 'filename'.
 """
 function ttwrite(filename, I, V, shape)
-  open(filename, "w") do file
+    open(filename, "w") do file
     elem = eltype(V) <: Bool ? "pattern" :
            eltype(V) <: Integer ?  "integer" :
            eltype(V) <: AbstractFloat ? "real" :
