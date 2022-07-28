@@ -32,15 +32,19 @@ int main(int argc, char **argv) {
 
   // Assemble output indices and numerically compute the result
   auto time = benchmark(
-      [&y]() {
-        y.assemble();
-        // tensor_a.setNeedsCompute(true);
-      },
-      [&y]() { y.compute(); });
+    [&y]() {
+      y.setNeedsAssemble(true);
+      y.setNeedsCompute(true);
+    },
+    [&y]() {
+      y.assemble();
+      y.compute();
+    }
+  );
 
   std::cout << time << std::endl;
 
-  write(file_x, x);
+  write(file_y, y);
 
   return 0;
 }

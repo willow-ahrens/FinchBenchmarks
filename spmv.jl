@@ -11,13 +11,13 @@ function spmv_taco(A, x)
     @index @loop i j y_ref[i] += A[i, j] * x[j]
     @index @loop i y_ref[i] = 0
 
+    ttwrite("y.ttx", ffindnz(y_ref)..., size(y_ref))
     ttwrite("A.ttx", ffindnz(A)..., size(A))
     ttwrite("x.ttx", ffindnz(x)..., size(x))
-    ttwrite("y.ttx", ffindnz(y_ref)..., size(y_ref))
 
     io = IOBuffer()
 
-    run(pipeline(`./spmv_taco x.ttx A.ttx y.ttx`, stdout=io))
+    run(pipeline(`./spmv_taco y.ttx A.ttx x.ttx`, stdout=io))
 
     y = fsparse(ttread("y.ttx")...)
 
@@ -29,11 +29,11 @@ function spmv_taco(A, x)
 end
 
 function spmv_finch(A, x)
-    A = fiber(A)
+    A = copyto!(f"sl"(0.0), A)
     y = fiber(x)
     x = fiber(x)
-    return @btime (A = $A; x = $x, y = $y; @index @loop i j y[i] += A[i, j] * x[j])
+    return @belapsed (A = $A; x = $x; y = $y; @index @loop i j y[i] += A[i, j] * x[j])
 end
 
-println("taco_time: ", spmv_taco(ones(10, 10), ones(10)))
-println("finch_time: ", spmv_finch(ones(10, 10), ones(10)))
+println("taco_time: ", spmv_taco(ones(100, 100), ones(100)))
+println("finch_time: ", spmv_finch(ones(100, 100), ones(100)))

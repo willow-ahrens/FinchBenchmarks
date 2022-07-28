@@ -60,11 +60,11 @@ function ttread(filename, infoonly::Bool=false, retcoord::Bool=false)
             throw(ParseError(string("Expected start of header `%%MatrixMarket`, got `$(tokens[1])`")))
         end
         (head1, rep, field, symm) = map(lowercase, tokens[2:5])
-        if head1 != "tensor"
-            throw(ParseError("Unknown TensorMarket data type: $head1 (only \"tensor\" is supported)"))
+        if (head1 != "matrix" && head1 != "tensor")
+            throw(ParseError("Unknown TensorMarket data type: $head1 (only \"matrix\" or \"tensor\" are supported)"))
         end
-        if rep != "coordinate"
-            throw(ParseError("Unknown TensorMarket representation: $rep (only \"coordinate\" is supported)"))
+        if (rep != "coordinate" && rep != "array")
+            throw(ParseError("Unknown TensorMarket representation: $rep (only \"coordinate\" or \"array\" are supported)"))
         end
 
         eltype = field == "real" ? Float64 :
@@ -87,33 +87,59 @@ function ttread(filename, infoonly::Bool=false, retcoord::Bool=false)
         if length(dd) < 1
             throw(ParseError(string("Could not read in matrix dimensions from line: ", ll)))
         end
-        shape = (dd[1:end-1]...,)
-        entries = dd[end]
+        shape = rep == "array" ? (dd...,) : (dd[1:end-1]...,)
+        entries = rep == "array" ? prod(shape) : dd[end]
         infoonly && return (shape, entries, rep, field, symm)
 
         N = length(shape)
 
         cc = ((Vector{Int}(undef, entries) for _ in shape)...,)
         xx = Vector{eltype}(undef, entries)
-        for i in 1:entries
-            line = split(readline(mmfile))
-            @assert length(line) >= N
-            for n in 1:N
-                cc[n][i] = _parseint(line[n])
+
+        if rep == "array"
+            i = 0
+            while i < entries
+                line = split(readline(mmfile))
+                j = 1
+                @assert length(line) >= 1
+                while j <= length(line)
+                    i += 1
+                    if eltype == ComplexF64
+                        real = parse(Float64, line[j + 0])
+                        imag = parse(Float64, line[j + 1])
+                        xx[i] = ComplexF64(real, imag)
+                        j += 2
+                    else
+                        xx[i] = parse(eltype, line[j])
+                        j += 1
+                    end
+                    for n in 1:N
+                        cc[n][i] = reverse(Tuple(CartesianIndices(reverse(shape))[i]))[n]
+                    end
+                end
             end
-            if eltype == ComplexF64
-                @assert length(line) == N + 2
-                real = parse(Float64, line[N + 1])
-                imag = parse(Float64, line[N + 2])
-                xx[i] = ComplexF64(real, imag)
-            elseif eltype == Bool
-                @assert length(line) == N
-                xx[i] = true
-            else
-                @assert length(line) == N + 1
-                xx[i] = parse(eltype, line[N + 1])
+        else
+            for i in 1:entries
+                line = split(readline(mmfile))
+                @assert length(line) >= N
+                for n in 1:N
+                    cc[n][i] = _parseint(line[n])
+                end
+                if eltype == ComplexF64
+                    @assert length(line) == N + 2
+                    real = parse(Float64, line[N + 1])
+                    imag = parse(Float64, line[N + 2])
+                    xx[i] = ComplexF64(real, imag)
+                elseif eltype == Bool
+                    @assert length(line) == N
+                    xx[i] = true
+                else
+                    @assert length(line) == N + 1
+                    xx[i] = parse(eltype, line[N + 1])
+                end
             end
         end
+
         (retcoord
          ? (cc, xx, shape, entries, rep, field, symm)
          : (cc, xx, shape))
