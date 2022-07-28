@@ -1,4 +1,5 @@
 *.tns
+*.ttx
 *.o
 spmv_taco
 settings.json

@@ -1,7 +1,7 @@
 CC = gcc
 LD = ld
 TACO = taco
-CXXFLAGS += -std=c++11 -I$(TACO)/include -I$(TACO)/src -DDECIMAL_DIG=17
+CXXFLAGS += -std=c++11 -I$(TACO)/include -I$(TACO)/src
 LDLIBS += -L$(TACO)/build/lib -ltaco -ldl
 
 #ARCH = $(shell uname)

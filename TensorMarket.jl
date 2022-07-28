@@ -1,4 +1,7 @@
 #=
+This file is a modification of:
+https://github.com/JuliaSparse/MatrixMarket.jl/blob/5a44fe0a2a29c763f8a20ac1ec8247bf45e6b78d/src/MatrixMarket.jl
+
 Copyright (c) 2013: Viral B. Shah.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -22,6 +25,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 module TensorMarket
 
 export ttread, ttwrite
+export tnsread, tnswrite
 
 struct ParseError
     error :: String
@@ -83,13 +87,13 @@ function ttread(filename, infoonly::Bool=false, retcoord::Bool=false)
         if length(dd) < 1
             throw(ParseError(string("Could not read in matrix dimensions from line: ", ll)))
         end
-        shape = dd[1:end-1]
+        shape = (dd[1:end-1]...,)
         entries = dd[end]
         infoonly && return (shape, entries, rep, field, symm)
 
         N = length(shape)
 
-        cc = (Vector{Int}(undef, entries) for _ in shape)
+        cc = ((Vector{Int}(undef, entries) for _ in shape)...,)
         xx = Vector{eltype}(undef, entries)
         for i in 1:entries
             line = split(readline(mmfile))
@@ -148,6 +152,38 @@ function ttwrite(filename, I, V, shape)
         write(file, "\n")
     end
   end
+end
+
+function tnsread(fname)
+    I = nothing
+    V = Float64[]
+    for line in readlines(fname)
+        if length(line) > 1
+            line = split(line, "#")[1]
+            entries = split(line)
+            if length(entries) >= 1
+                if isnothing(I)
+                    I = ((Int[] for _ in 1:length(entries) - 1)...,)
+                end
+                for (n, e) in enumerate(entries[1:end-1])
+                    push!(I[n], parse(Int, e))
+                end
+                push!(V, parse(Float64, entries[end]))
+            end
+        end
+    end
+    return (I, V)
+end
+
+function tnswrite(fname, I, V)
+    open(fname, "w") do io
+        for (crd, val) in zip(zip(I...), V)
+            write(io, join(crd, " "))
+            write(io, " ")
+            write(io, string(val))
+            write(io, "\n")
+        end
+    end
 end
 
 end # module
