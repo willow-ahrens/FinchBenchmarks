@@ -1,4 +1,6 @@
 /*
+   Taken from https://github.com/llohse/libnpy/blob/83164961148d0cc9d6b3e5949d7fd9ad02231ab5/include/npy.hpp
+
    Copyright 2017 Leon Merten Lohse
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
