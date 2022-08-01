@@ -24,14 +24,12 @@ function alpha_opencv(B, C, alpha)
     Cf = copyto!(f"ss"(zero(UInt8)), copy(rawview(channelview(C))))
     A_ref = copyto!(f"ss"(zero(UInt8)), copy(rawview(channelview(B))))
 
-    f = x -> trunc(UInt8, x)
+    f = x -> round(UInt8, x)
 
     @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
     pngwrite("A_ref.png", ffindnz(A_ref)..., size(A_ref))
     
     @index @loop i j A_ref[i, j] = 0
-
-    println(summary(A_ref))
 
     pngwrite("A.png", ffindnz(A_ref)..., size(A_ref))
     pngwrite("B.png", ffindnz(Bf)..., size(Bf))
@@ -44,25 +42,7 @@ function alpha_opencv(B, C, alpha)
     A = load("A.png")
     A_ref = load("A_ref.png")
 
-    if A != A_ref
-        diff = copy(rawview(channelview(A_ref))) - copy(rawview(channelview(A)))
-        diffs = findall( x->x!=0, diff)
-        println(length(diffs))
-        open("errors.log", "w") do io
-            for c in diffs
-                println(io, c, " -- ", diff[c])
-            end
-        end;
-    end
-
     @assert A == A_ref
-    # Af = copyto!(f"ss"(0.0), A)
-
-    # @index @loop i j A_ref[i, j] = f(as[] * B[i, j] + mas[] * C[i, j])
-
-    # pngwrite("A_ref.png", ffindnz(A_ref)..., size(A_ref))
-
-    # @assert FiberArray(Af) == FiberArray(A_ref)
 
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
@@ -76,11 +56,6 @@ function alpha_finch(B, C, alpha)
     A = fiber(B)
     return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; @index @loop i j A[i, j] = as[] * B[i, j] + mas[] * C[i, j])
 end
-
-# println("taco_time: ", spmv_taco(ones(100, 100), ones(100)))
-
-# println("opencv_time: ", alpha_opencv(ones(100, 100), ones(100,100), 0.5))
-# println("finch_time: ", alpha_finch(ones(100, 100), ones(100,100), 0.5))
 
 B = load("/Users/danieldonenfeld/Developer/Finch-Proj/download_cache/sketches/pngs/1.png")
 C = load("/Users/danieldonenfeld/Developer/Finch-Proj/download_cache/sketches/pngs/10001.png")
