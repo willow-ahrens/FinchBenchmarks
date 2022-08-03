@@ -1,4 +1,6 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
+using JSON
+using TensorDepot, MatrixDepot
 
 include("TensorMarket.jl")
 using .TensorMarket
@@ -51,14 +53,51 @@ function alpha_finch(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
-    B = copyto!(@f(s(r(0.0))), B)
-    C = copyto!(@f(s(r(0.0))), C)
+    B = copyto!(@f(s(r((zero(UInt8))))), copy(rawview(channelview(B))))
+    C = copyto!(@f(s(r((zero(UInt8))))), copy(rawview(channelview(C))))
     A = fiber(B)
-    return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; @index @loop i j A[i, j] = as[] * B[i, j] + mas[] * C[i, j])
+    f = x -> round(UInt8, x)
+    return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; f=$f; @index @loop i j A[i, j] = f(as[] * B[i, j] + mas[] * C[i, j]))
 end
 
-B = load("/Users/danieldonenfeld/Developer/Finch-Proj/download_cache/sketches/pngs/1.png")
-C = load("/Users/danieldonenfeld/Developer/Finch-Proj/download_cache/sketches/pngs/10001.png")
+function alpha_finch_sparse(B, C, alpha)
+    as = Scalar{0.0, Float64}(alpha)
+    mas = Scalar{0.0, Float64}(1- alpha)
 
-println("opencv_time: ", alpha_opencv(B, C, 0.5))
-println("finch_time: ", alpha_finch(B, C, 0.5))
+    B = copyto!(@f(s(r((one(UInt8))))), copy(rawview(channelview(B))))
+    C = copyto!(@f(s(r((one(UInt8))))), copy(rawview(channelview(C))))
+
+    A = fiber(B)
+    f = x -> round(UInt8, x)
+    return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; f=$f; @index @loop i j A[i, j] = f(as[] * B[i, j] + mas[] * C[i, j]))
+end
+
+kernel_str = "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
+alpha = 0.5
+
+numSketches = 1_000
+humansketchesA = matrixdepot("humansketches", 1:numSketches)
+humansketchesB = matrixdepot("humansketches", (numSketches+1):(10000+numSketches))
+
+run(pipeline(`make alpha_opencv`))
+
+results = Vector{Dict{String, <: Any}}()
+for i in 1:numSketches 
+    println("Performing op: $i")
+    B = humansketchesA[i, :, :]
+    C = humansketchesB[i, :, :]
+
+    opencvResult = alpha_opencv(B, C, 0.5)
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
+
+    finchrepeat = alpha_finch(B, C, 0.5)
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
+
+    finchSparse = alpha_finch_sparse(B, C, 0.5)
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
+    
+end
+
+open("alpha.json","w") do f
+    JSON.print(f, results)
+end
