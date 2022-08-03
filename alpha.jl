@@ -20,9 +20,9 @@ end
 function alpha_opencv(B, C, alpha)
     as = Scalar{0.0, Float32}(alpha)
     mas = Scalar{0.0, Float32}(1- alpha)
-    Bf = copyto!(f"ss"(zero(UInt8)), copy(rawview(channelview(B))))
-    Cf = copyto!(f"ss"(zero(UInt8)), copy(rawview(channelview(C))))
-    A_ref = copyto!(f"ss"(zero(UInt8)), copy(rawview(channelview(B))))
+    Bf = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(B))))
+    Cf = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(C))))
+    A_ref = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(B))))
 
     f = x -> round(UInt8, x)
 
@@ -51,8 +51,8 @@ function alpha_finch(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
-    B = copyto!(f"ss"(0.0), B)
-    C = copyto!(f"ss"(0.0), C)
+    B = copyto!(@f(s(r(0.0))), B)
+    C = copyto!(@f(s(r(0.0))), C)
     A = fiber(B)
     return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; @index @loop i j A[i, j] = as[] * B[i, j] + mas[] * C[i, j])
 end

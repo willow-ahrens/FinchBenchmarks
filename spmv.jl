@@ -29,7 +29,7 @@ function spmv_taco(A, x)
 end
 
 function spmv_finch(A, x)
-    A = copyto!(f"sl"(0.0), A)
+    A = copyto!(@f(s(l(e(0.0)))), A)
     y = fiber(x)
     x = fiber(x)
     return @belapsed (A = $A; x = $x; y = $y; @index @loop i j y[i] += A[i, j] * x[j])
