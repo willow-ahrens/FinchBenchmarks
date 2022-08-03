@@ -17,6 +17,16 @@ all: spmv_taco
 clean:
 	rm -rf spmv_taco
 	rm -rf *.o *.dSYM *.trace
+	cd taco/build && make clean
+	rm -rf opencv/build
+	rm -rf opencv/install
 
-spmv_taco: spmv_taco.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+spmv_taco: spmv_taco.o taco/build/bin/taco
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
+
+.PHONY: opencv
+opencv:
+	./build_opencv.sh
+
+taco/build/bin/taco:
+	./build_taco.sh

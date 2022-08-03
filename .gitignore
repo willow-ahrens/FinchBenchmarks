@@ -3,3 +3,4 @@
 *.o
 spmv_taco
 settings.json
+opencv/install
