@@ -26,12 +26,12 @@ TensorBase readMTX(std::istream& stream, const ModeFormat& modetype,
 TensorBase readMTX(std::istream& stream, const Format& format, bool pack=true);
 
 TensorBase readSparse(std::istream& stream, const ModeFormat& modetype, 
-                      bool symm = false);
+                      bool symm = false, bool floatingpoint = true);
 TensorBase readDense(std::istream& stream, const ModeFormat& modetype, 
                      bool symm = false);
 
 TensorBase readSparse(std::istream& stream, const Format& format, 
-                      bool symm = false);
+                      bool symm = false, bool floatingpoint = true);
 TensorBase readDense(std::istream& stream, const Format& format, 
                      bool symm = false);
 

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <climits>
+#include <type_traits>
 
 #include "taco/tensor.h"
 #include "taco/format.h"
@@ -51,7 +52,9 @@ TensorBase dispatchReadMTX(std::istream& stream, const T& format, bool pack) {
                                        << "Unknown type of MatrixMarket";
   // formats = [coordinate array]
   // field = [real integer complex pattern]
-  taco_uassert(field=="real")          << "MatrixMarket field not available";
+  taco_uassert(field=="real" || (field=="integer" && formats=="coordinate"))          
+                                    << "MatrixMarket field not available";
+  bool fp = (field=="real");
   // symmetry = [general symmetric skew-symmetric Hermitian]
   taco_uassert((symmetry=="general") || (symmetry=="symmetric"))
                                        << "MatrixMarket symmetry not available";
@@ -60,7 +63,7 @@ TensorBase dispatchReadMTX(std::istream& stream, const T& format, bool pack) {
 
   TensorBase tensor;
   if (formats=="coordinate")
-    tensor = readSparse(stream,format,symm);
+    tensor = readSparse(stream,format,symm, fp);
   else if (formats=="array")
     tensor = readDense(stream,format,symm);
   else
@@ -81,7 +84,7 @@ TensorBase readMTX(std::istream& stream, const Format& format, bool pack) {
   return dispatchReadMTX(stream, format, pack);
 }
 
-template <typename T>
+template <typename T, typename E=double>
 TensorBase dispatchReadSparse(std::istream& stream, const T& format, 
                               bool symm) {
   string line;
@@ -110,7 +113,7 @@ TensorBase dispatchReadSparse(std::istream& stream, const T& format,
     taco_uassert(dimensions.size()==2) << "Symmetry only available for matrix";
 
   vector<int> coordinates;
-  vector<double> values;
+  vector<E> values;
   coordinates.reserve(nnz*dimensions.size());
   values.reserve(nnz);
 
@@ -121,12 +124,16 @@ TensorBase dispatchReadSparse(std::istream& stream, const T& format,
       taco_uassert(index <= INT_MAX) << "Index exceeds INT_MAX";
       coordinates.push_back(static_cast<int>(index));
     }
-    double val = strtod(linePtr, &linePtr);
-    values.push_back(val);
+    if (std::is_floating_point<E>::value) {
+      values.push_back((E) strtod(linePtr, &linePtr));
+    } else {
+      taco_iassert(std::is_integral<E>::value) << "dispatchReadSparse must be used with integral or floating point data";
+      values.push_back((E) strtol(linePtr, &linePtr, 10));
+    }
   }
 
   // Create matrix
-  TensorBase tensor(type<double>(), dimensions, format);
+  TensorBase tensor(type<E>(), dimensions, format);
   if (symm)
     tensor.reserve(2*nnz);
   else
@@ -150,12 +157,21 @@ TensorBase dispatchReadSparse(std::istream& stream, const T& format,
 }
 
 TensorBase readSparse(std::istream& stream, const ModeFormat& modetype, 
-                      bool symm) {
-  return dispatchReadSparse(stream, modetype, symm);
+                      bool symm, bool fp) {
+  if (fp){
+    return dispatchReadSparse(stream, modetype, symm);
+  } else {
+    return dispatchReadSparse<taco::ModeFormat, long>(stream, modetype, symm);
+  }
 }
 
-TensorBase readSparse(std::istream& stream, const Format& format, bool symm) {
-  return dispatchReadSparse(stream, format, symm);
+TensorBase readSparse(std::istream& stream, const Format& format, bool symm, 
+                      bool fp) {
+  if (fp){
+    return dispatchReadSparse(stream, format, symm);
+  } else {
+    return dispatchReadSparse<taco::Format, long>(stream, format, symm);
+  }
 }
 
 template <typename T>
@@ -246,10 +262,11 @@ void writeMTX(std::ostream& stream, const TensorBase& tensor) {
 
 template<typename T>
 static void writeSparseTyped(std::ostream& stream, const TensorBase& tensor) {
+  std::string type = std::is_floating_point<T>::value ? "real" : "integer";
   if(tensor.getOrder() == 2)
-    stream << "%%MatrixMarket matrix coordinate real general" << std::endl;
+    stream << "%%MatrixMarket matrix coordinate " << type << " general" << std::endl;
   else
-    stream << "%%MatrixMarket tensor coordinate real general" << std::endl;
+    stream << "%%MatrixMarket tensor coordinate " << type << " general" << std::endl;
   stream << "%"                                             << std::endl;
   stream << util::join(tensor.getDimensions(), " ") << " ";
   stream << tensor.getStorage().getIndex().getSize() << endl;
