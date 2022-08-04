@@ -280,10 +280,11 @@ static void writeSparseTyped(std::ostream& stream, const TensorBase& tensor) {
 
 template<typename T>
 static void writeSparseCharTyped(std::ostream& stream, const TensorBase& tensor) {
+  std::string type = std::is_floating_point<T>::value ? "real" : "integer";
   if(tensor.getOrder() == 2)
-    stream << "%%MatrixMarket matrix coordinate real general" << std::endl;
+    stream << "%%MatrixMarket matrix coordinate " << type << " general" << std::endl;
   else
-    stream << "%%MatrixMarket tensor coordinate real general" << std::endl;
+    stream << "%%MatrixMarket tensor coordinate " << type << " general" << std::endl;
   stream << "%"                                             << std::endl;
   stream << util::join(tensor.getDimensions(), " ") << " ";
   stream << tensor.getStorage().getIndex().getSize() << endl;
