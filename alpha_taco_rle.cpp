@@ -46,7 +46,7 @@ Func copyFunc(){
 }
 
 int main(int argc, char **argv) {
-    if(argc != 5){
+    if(argc != 6){
         std::cerr << "wrong number of arguments" << std::endl;
     }
 
@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
     std::string file_A = argv[1];
     std::string file_B = argv[2];
     std::string file_C = argv[3];
+    std::string file_A_Dense = argv[5];
     double alpha       = std::stod(argv[4]);
     double beta        = 1 - alpha;
 
@@ -78,13 +79,12 @@ int main(int argc, char **argv) {
   C(i,j) = C_temp(i,j);
   C.evaluate();
 
-
   auto stmt = A(i, j) = roundFunc()(RLEPlus()(alpha*B(i, j), beta*C(i,j)));
 
   // Compile the expression
   A.setAssembleWhileCompute(true);
   A.compile();
-  A.printComputeIR(std::cout);
+  // A.printComputeIR(std::cout);
 
   // Assemble output indices and numerically compute the result
   auto time = benchmark(
@@ -98,14 +98,15 @@ int main(int argc, char **argv) {
     }
   );
 
+  std::cout << time << std::endl;
+
+  write(file_A, A);
+
   Tensor<uint8_t> A_dense("A_dense", A.getDimensions(), {Dense, Dense});
 
   A_dense(i,j) = copyFunc()(A(i,j));
   A_dense.evaluate();
-
-  std::cout << time << std::endl;
-
-  write(file_A, A);
+  write(file_A_Dense, A_dense);
 
   return 0;
 }
