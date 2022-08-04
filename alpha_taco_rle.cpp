@@ -22,6 +22,17 @@ Func RLEPlus(){
   return plus_;
 }
 
+Func roundFunc(){
+  auto roundFunc = [](const std::vector<ir::Expr>& v) {
+      return ir::BinOp::make(v[0], 0, "round(", " /** ", " **/ )"); 
+  };
+  auto algFunc = [](const std::vector<IndexExpr>& v) {
+      return Region(v[0]);
+  };
+  Func roundfunc("round_func", roundFunc, algFunc);
+  return roundfunc;
+}
+
 Func copyFunc(){
   auto copyFunc = [](const std::vector<ir::Expr>& v) {
       return ir::Add::make(v[0], 0);
@@ -68,7 +79,7 @@ int main(int argc, char **argv) {
   C.evaluate();
 
 
-  auto stmt = A(i, j) = RLEPlus()(alpha*B(i, j), beta*C(i,j));
+  auto stmt = A(i, j) = roundFunc()(RLEPlus()(alpha*B(i, j), beta*C(i,j)));
 
   // Compile the expression
   A.setAssembleWhileCompute(true);
