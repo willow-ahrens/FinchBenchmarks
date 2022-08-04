@@ -144,7 +144,7 @@ string Module::compile() {
     prefix + file_ending + " " + shims_file + " " + 
     "-o " + fullpath + " -lm";
 
-  std::cout << prefix + file_ending << std::endl;
+  // std::cout << prefix + file_ending << std::endl;
 
   // open the output file & write out the source
   compileToSource(tmpdir, libname);

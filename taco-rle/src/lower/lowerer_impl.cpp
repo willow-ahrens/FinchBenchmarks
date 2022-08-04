@@ -2346,7 +2346,7 @@ Stmt LowererImpl::lowerMergeCases(ir::Expr coordinate, IndexVar coordinateVar, I
         allOpsFill = false;
       }
       if (it.updatesFillRegion() && !fillRegionSizeOne(it)){
-        std::cout << "Iterator with non-1 fill update: " << it << std::endl;
+        // std::cout << "Iterator with non-1 fill update: " << it << std::endl;
         hasFill = false;
       }
       if (!it.updatesFillRegion() && it.getTensor().defined() && !it.hasLocate()){
@@ -2734,7 +2734,7 @@ Stmt LowererImpl::lowerMergeCases(ir::Expr coordinate, IndexVar coordinateVar, I
             }
 
             forStmts.push_back(body); // TODO: APPLY RLE OPT HERE
-            std::cout << "BODY : " << body << std::endl;
+            // std::cout << "BODY : " << body << std::endl;
             if (!rle) {
               for (auto &iterator : fillsLoop) {
                 if (iterator.updatesFillRegion()) {
