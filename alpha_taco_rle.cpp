@@ -24,7 +24,7 @@ Func RLEPlus(){
 
 Func roundFunc(){
   auto roundFunc = [](const std::vector<ir::Expr>& v) {
-      return ir::BinOp::make(v[0], 0, "round(", " /** ", " **/ )"); 
+      return ir::BinOp::make(v[0], 0, "nearbyint(", " /** ", " **/ )"); 
   };
   auto algFunc = [](const std::vector<IndexExpr>& v) {
       return Region(v[0]);

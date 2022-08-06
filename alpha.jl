@@ -47,6 +47,14 @@ function pngwrite(filename, I, V, shape)
     end
 end
 
+function img_to_dense(img)
+    return copyto!(@f(s(s(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+end
+
+function img_to_repeat(img)
+    return copyto!(@f(s(r(0x0::UInt8))), copy(rawview(channelview(img))))
+end
+
 function alpha_opencv(B, C, alpha)
     APath = joinpath(tmp_tensor_dir, "A.png")
     ARefPath = joinpath(tmp_tensor_dir, "A_ref.png")
@@ -55,9 +63,9 @@ function alpha_opencv(B, C, alpha)
 
     as = Scalar{0.0, Float32}(alpha)
     mas = Scalar{0.0, Float32}(1- alpha)
-    Bf = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(B))))
-    Cf = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(C))))
-    A_ref = copyto!(@f(s(s(e($(zero(UInt8)))))), copy(rawview(channelview(B))))
+    Bf = img_to_dense(B)
+    Cf = img_to_dense(C)
+    A_ref = img_to_dense(B)
 
     f = x -> round(UInt8, x)
 
@@ -74,31 +82,35 @@ function alpha_opencv(B, C, alpha)
 
     run(pipeline(`./alpha_opencv $APath $BPath $CPath $alpha`, stdout=io))
 
-    A = load(APath)
-    A_ref = load(ARefPath)
-
-    @assert A == A_ref
+    @assert load(APath) == load(ARefPath)
 
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
-function ffindrepeats(src)
+function writeRLETacoTTX(filename, src)
+    sz = size(src)
     rows = []
     cols = []
-    for i in 1:src.lvl.I
-        j = 1
-        for jpos in src.lvl.lvl.pos[i]:(src.lvl.lvl.pos[i+1]-1)
-            push!(rows, i)
-            push!(cols, j)
-            j = src.lvl.lvl.idx[jpos]
+    vals = Vector{UInt8}()
+    for i in 1:sz[1]
+        curr = UInt8(src[i,1])
+        push!(rows, i)
+        push!(cols, 1)
+        push!(vals, curr)
+        for j in 1:sz[2]
+            if src[i,j] != curr
+                curr = UInt8(src[i,j])
+                push!(rows, i)
+                push!(cols, j)
+                push!(vals, curr)
+            end
         end
     end
-    return ((rows,cols), src.lvl.lvl.val[1:length(rows)])
+    ttwrite(filename, (rows,cols), vals, size(src))
 end
 
 function alpha_taco_rle(B, C, alpha)
     APath = joinpath(tmp_tensor_dir, "A.ttx")
-    ARefPath = joinpath(tmp_tensor_dir, "A_ref.ttx")
     ARefPngPath = joinpath(tmp_tensor_dir, "A_ref.png")
     ADensePath = joinpath(tmp_tensor_dir, "A_dense.ttx")
     ADensePngPath = joinpath(tmp_tensor_dir, "A_Dense.png")
@@ -108,22 +120,22 @@ function alpha_taco_rle(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
-    Bf = copyto!(@f(s(r($(zero(UInt8))))), copy(rawview(channelview(B))))
-    Cf = copyto!(@f(s(r($(zero(UInt8))))), copy(rawview(channelview(C))))
-    A_ref = copyto!(@f(s(r($(zero(UInt8))))), copy(rawview(channelview(B))))
+    Bf = img_to_repeat(B)
+    Cf = img_to_repeat(C)
+    A_ref = img_to_repeat(B)
 
     f = x -> round(UInt8, x)
     @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
-    ttwrite(ARefPath, ffindrepeats(A_ref)..., size(A_ref))
+
     A_ref_dense = @f(s(s(e($(zero(UInt8))))))
     @index @loop i j A_ref_dense[i, j] = A_ref[i, j]
     pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
     
     @index @loop i j A_ref[i, j] = 0
 
-    ttwrite(APath, ffindrepeats(A_ref)..., size(A_ref))
-    ttwrite(BPath, ffindrepeats(Bf)..., size(Bf))
-    ttwrite(CPath, ffindrepeats(Cf)..., size(Cf))
+    writeRLETacoTTX(APath, zeros(UInt8, size(Bf)))
+    writeRLETacoTTX(BPath, copy(rawview(channelview(B))))
+    writeRLETacoTTX(CPath, copy(rawview(channelview(C))))
 
     io = IOBuffer()
 
@@ -132,10 +144,8 @@ function alpha_taco_rle(B, C, alpha)
     end
     
     pngwrite(ADensePngPath, ttread(ADensePath)...)
-    A = load(ADensePngPath)
-    A_ref = load(ARefPath)
 
-    # @assert A == A_ref # TODO: Reenable this!!
+    @assert load(ADensePngPath) == load(ARefPngPath) 
 
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
@@ -144,8 +154,8 @@ function alpha_finch(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
-    B = copyto!(@f(s(r($(zero(UInt8))))), copy(rawview(channelview(B))))
-    C = copyto!(@f(s(r($(zero(UInt8))))), copy(rawview(channelview(C))))
+    B = img_to_repeat(B)
+    C = img_to_repeat(C)
     A = fiber(B)
     f = x -> round(UInt8, x)
     return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; f=$f; @index @loop i j A[i, j] = f(as[] * B[i, j] + mas[] * C[i, j]))
@@ -155,8 +165,8 @@ function alpha_finch_sparse(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
-    B = copyto!(@f(s(r($(one(UInt8))))), copy(rawview(channelview(B))))
-    C = copyto!(@f(s(r($(one(UInt8))))), copy(rawview(channelview(C))))
+    B = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(B))))
+    C = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(C))))
 
     A = fiber(B)
     f = x -> round(UInt8, x)
@@ -189,8 +199,7 @@ for i in 1:numSketches
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 
     finchSparse = alpha_finch_sparse(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
-    
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))  
 end
 
 open("alpha.json","w") do f
