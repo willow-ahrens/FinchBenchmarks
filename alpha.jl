@@ -152,11 +152,11 @@ function alpha_taco_rle(B, C, alpha)
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
-@inline function unsafe_round_UInt8(x)
-    unsafe_trunc(UInt8, round(x))
-end
-
-Finch.register()
+#@inline function unsafe_round_UInt8(x)
+#    unsafe_trunc(UInt8, round(x))
+#end
+#
+#Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
     @index @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j]))
