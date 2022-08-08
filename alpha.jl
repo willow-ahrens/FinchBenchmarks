@@ -152,11 +152,15 @@ function alpha_taco_rle(B, C, alpha)
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
+@inline function unsafe_round_UInt8(x)
+    unsafe_trunc(UInt8, round(x))
+end
+
 function alpha_finch_kernel(A, B, C, as, mas)
-    @index_code @loop i j A[i, j] = unsafe_trunc($(Finch.ValueInstance{UInt8}()), round(0.5 * B[i, j] + 0.5 * C[i, j]))
-    #display(@index_code @loop i j A[i, j] = unsafe_trunc($(Finch.ValueInstance{UInt8}()), round(0.5 * B[i, j] + 0.5 * C[i, j])) )
-    #println()
-    #exit()
+    #@index @loop i j A[i, j] = unsafe_trunc($UInt8, round(0.5 * B[i, j] + 0.5 * C[i, j]))
+    display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
+    println()
+    exit()
 end
 
 function alpha_finch(B, C, alpha)
