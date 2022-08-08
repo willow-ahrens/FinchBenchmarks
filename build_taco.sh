@@ -2,9 +2,15 @@
 
 # Build our special version of taco
 
-cd taco
+TACO_DIR=${1:-taco}
+
+if [ -z "$NPROC_VAL" ]
+then
+    NPROC_VAL=$(nproc)
+fi
+
+cd $TACO_DIR
 mkdir -p build
 cd build
 cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release ..
-make -j8
-cd ../..
+make -j$NPROC_VAL
