@@ -176,8 +176,8 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = dropdefaults!(@f(s(l(e($(0x0::UInt8))))), copy(rawview(channelview(B))))
-    C = dropdefaults!(@f(s(l(e($(0x0::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@f(s(l(e($(0x00::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@f(s(l(e($(0x00::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
     return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
@@ -199,10 +199,6 @@ for i in 1:numSketches
     B = humansketchesA[i, :, :]
     C = humansketchesB[i, :, :]
 
-
-    finchrepeat = alpha_finch(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
-
     opencvResult = alpha_opencv(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 
@@ -211,6 +207,9 @@ for i in 1:numSketches
 
     finchSparse = alpha_finch_sparse(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))  
+
+    finchrepeat = alpha_finch(B, C, 0.5)
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 end
 
 open("alpha.json","w") do f
