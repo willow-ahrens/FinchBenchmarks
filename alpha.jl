@@ -159,15 +159,17 @@ end
 Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
-    @index @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j])
+    #@index @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j]))
+    display(@index_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
     #display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
-    #println()
-    #exit()
+    #display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
+    println()
+    exit()
 end
 
 function alpha_finch(B, C, alpha)
-    as = Scalar{0.0, Float64}(alpha)
-    mas = Scalar{0.0, Float64}(1- alpha)
+    as = alpha
+    mas = 1 - alpha
 
     B = img_to_repeat(B)
     C = img_to_repeat(C)
@@ -176,8 +178,8 @@ function alpha_finch(B, C, alpha)
 end
 
 function alpha_finch_sparse(B, C, alpha)
-    as = Scalar{0.0, Float64}(alpha)
-    mas = Scalar{0.0, Float64}(1- alpha)
+    as = alpha
+    mas = 1 - alpha
 
     B = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(B))))
     C = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(C))))

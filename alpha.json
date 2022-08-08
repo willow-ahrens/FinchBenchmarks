@@ -2,7 +2,7 @@
     {
         "kind": "finch_repeat",
         "imageC": 10001,
-        "time": 0.000177093,
+        "time": 0.004793279,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -11,7 +11,7 @@
     {
         "kind": "opencv",
         "imageC": 10001,
-        "time": 0.000372666,
+        "time": 0.000373252,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -20,7 +20,7 @@
     {
         "kind": "taco_rle",
         "imageC": 10001,
-        "time": 0.00017423900000000002,
+        "time": 0.000171993,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -29,7 +29,7 @@
     {
         "kind": "finch_sparse",
         "imageC": 10001,
-        "time": 0.006953936,
+        "time": 0.24777248,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -38,7 +38,7 @@
     {
         "kind": "finch_repeat",
         "imageC": 10002,
-        "time": 0.000222468,
+        "time": 0.006321613,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
@@ -47,7 +47,7 @@
     {
         "kind": "opencv",
         "imageC": 10002,
-        "time": 0.000373433,
+        "time": 0.000373034,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
@@ -56,7 +56,7 @@
     {
         "kind": "taco_rle",
         "imageC": 10002,
-        "time": 0.000221618,
+        "time": 0.000221016,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
@@ -65,7 +65,7 @@
     {
         "kind": "finch_sparse",
         "imageC": 10002,
-        "time": 0.006957094,
+        "time": 0.251282174,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
