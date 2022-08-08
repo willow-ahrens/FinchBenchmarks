@@ -1,8 +1,17 @@
 [
     {
+        "kind": "finch_sparse",
+        "imageC": 10001,
+        "time": 0.003540458,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
         "kind": "opencv",
         "imageC": 10001,
-        "time": 0.000374497,
+        "time": 0.00037275700000000004,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -11,16 +20,7 @@
     {
         "kind": "taco_rle",
         "imageC": 10001,
-        "time": 0.000173337,
-        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
-        "alpha": 0.5,
-        "imageB": 1,
-        "dataset": "humansketches"
-    },
-    {
-        "kind": "finch_sparse",
-        "imageC": 10001,
-        "time": 0.006679016,
+        "time": 0.00017411,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
@@ -29,16 +29,25 @@
     {
         "kind": "finch_repeat",
         "imageC": 10001,
-        "time": 0.000177764,
+        "time": 0.00017798,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 1,
         "dataset": "humansketches"
     },
     {
+        "kind": "finch_sparse",
+        "imageC": 10002,
+        "time": 0.003618593,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
         "kind": "opencv",
         "imageC": 10002,
-        "time": 0.00037297400000000004,
+        "time": 0.00037256100000000004,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
@@ -47,16 +56,7 @@
     {
         "kind": "taco_rle",
         "imageC": 10002,
-        "time": 0.00021761500000000002,
-        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
-        "alpha": 0.5,
-        "imageB": 2,
-        "dataset": "humansketches"
-    },
-    {
-        "kind": "finch_sparse",
-        "imageC": 10002,
-        "time": 0.006677342,
+        "time": 0.000221771,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
@@ -65,7 +65,7 @@
     {
         "kind": "finch_repeat",
         "imageC": 10002,
-        "time": 0.000226098,
+        "time": 0.000225744,
         "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
         "alpha": 0.5,
         "imageB": 2,
