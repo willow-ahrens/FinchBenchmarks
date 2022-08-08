@@ -176,8 +176,8 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(B))))
-    C = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@f(s(l(e($(0x0::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@f(s(l(e($(0x0::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
     return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
