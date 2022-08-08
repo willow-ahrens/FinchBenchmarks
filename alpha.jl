@@ -152,15 +152,21 @@ function alpha_taco_rle(B, C, alpha)
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
+function alpha_finch_kernel(A, B, C, as, mas)
+    @index_code @loop i j A[i, j] = unsafe_trunc($(Finch.ValueInstance{UInt8}()), round(0.5 * B[i, j] + 0.5 * C[i, j]))
+    #display(@index_code @loop i j A[i, j] = unsafe_trunc($(Finch.ValueInstance{UInt8}()), round(0.5 * B[i, j] + 0.5 * C[i, j])) )
+    #println()
+    #exit()
+end
+
 function alpha_finch(B, C, alpha)
     as = Scalar{0.0, Float64}(alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
     B = img_to_repeat(B)
     C = img_to_repeat(C)
-    A = fiber(B)
-    f = x -> round(UInt8, x)
-    return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; f=$f; @index @loop i j A[i, j] = f(as[] * B[i, j] + mas[] * C[i, j]))
+    A = similar(B)
+    return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
 end
 
 function alpha_finch_sparse(B, C, alpha)
@@ -170,9 +176,8 @@ function alpha_finch_sparse(B, C, alpha)
     B = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(B))))
     C = copyto!(@f(s(l(e($(0x1::UInt8))))), copy(rawview(channelview(C))))
 
-    A = fiber(B)
-    f = x -> round(UInt8, x)
-    return @belapsed (A = $A; B=$B; C=$C; as=$as; mas=$mas; f=$f; @index @loop i j A[i, j] = f(as[] * B[i, j] + mas[] * C[i, j]))
+    A = similar(B)
+    return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
 end
 
 kernel_str = "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
@@ -191,14 +196,15 @@ for i in 1:numSketches
     B = humansketchesA[i, :, :]
     C = humansketchesB[i, :, :]
 
+
+    finchrepeat = alpha_finch(B, C, 0.5)
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
+
     opencvResult = alpha_opencv(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 
     tacoRLEResult = alpha_taco_rle(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
-
-    finchrepeat = alpha_finch(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 
     finchSparse = alpha_finch_sparse(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))  
