@@ -23,6 +23,9 @@ summary_f_code(lvl::HollowCooLevel{N}) where {N} = "c{$N}($(summary_f_code(lvl.l
 similar_level(lvl::HollowCooLevel{N}) where {N} = HollowCooLevel{N}(similar_level(lvl.lvl))
 similar_level(lvl::HollowCooLevel{N}, tail...) where {N} = HollowCooLevel{N}(ntuple(n->tail[n], N), similar_level(lvl.lvl, tail[N + 1:end]...))
 
+pattern!(lvl::HollowCooLevel{N, Ti, Tq, Tbl}) where {N, Ti, Tq, Tbl} = 
+    HollowCooLevel{N, Ti, Tq, Tbl}(lvl.I, lvl.tbl, lvl.pos, pattern!(lvl.lvl))
+
 function Base.show(io::IO, lvl::HollowCooLevel{N}) where {N}
     print(io, "HollowCoo{$N}(")
     print(io, lvl.I)
@@ -145,7 +148,8 @@ function setdims!(fbr::VirtualFiber{VirtualHollowCooLevel}, ctx::LowerJulia, mod
     fbr
 end
 
-@inline default(fbr::VirtualFiber{VirtualHollowCooLevel}) = default(VirtualFiber(fbr.lvl.lvl, (VirtualEnvironment^fbr.lvl.N)(fbr.env)))
+@inline default(fbr::VirtualFiber{<:VirtualHollowCooLevel}) = default(VirtualFiber(fbr.lvl.lvl, (VirtualEnvironment^fbr.lvl.N)(fbr.env)))
+@inline image(fbr::VirtualFiber{<:VirtualHollowCooLevel}) = image(VirtualFiber(fbr.lvl.lvl, VirtualEnvironment(fbr.env)))
 
 function initialize_level!(fbr::VirtualFiber{VirtualHollowCooLevel}, ctx::LowerJulia, mode::Union{Write, Update})
     @assert isempty(envdeferred(fbr.env))

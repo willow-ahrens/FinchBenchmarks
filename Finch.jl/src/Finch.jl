@@ -9,11 +9,11 @@ using Base.Iterators
 using Base: @kwdef
 using SparseArrays
 
-export @index, @index_program, @index_code
+export @index, @index_program, @index_code, value
 
-export Fiber, HollowList, HollowHash, HollowCoo, HollowByte, Solid, Repeat, Element, FiberArray, Scalar
+export Fiber, HollowList, HollowHash, HollowCoo, HollowByte, Solid, Repeat, Element, Pattern, FiberArray, Scalar
 export walk, gallop, follow, extrude, laminate, select
-export fiber, @f
+export fiber, @f, pattern!, dropdefaults, dropdefaults!
 
 export permit, offset, window
 
@@ -53,6 +53,7 @@ include("hollowbytelevels.jl")
 include("solidlevels.jl")
 include("repeatlevels.jl")
 include("elementlevels.jl")
+include("patternlevels.jl")
 
 include("permit.jl")
 include("offset.jl")

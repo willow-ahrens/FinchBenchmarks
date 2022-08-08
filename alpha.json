@@ -1,0 +1,74 @@
+[
+    {
+        "kind": "opencv",
+        "imageC": 10001,
+        "time": 0.000374497,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10001,
+        "time": 0.000173337,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10001,
+        "time": 0.006679016,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10001,
+        "time": 0.000177764,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10002,
+        "time": 0.00037297400000000004,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10002,
+        "time": 0.00021761500000000002,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10002,
+        "time": 0.006677342,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10002,
+        "time": 0.000226098,
+        "kernel": "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    }
+]

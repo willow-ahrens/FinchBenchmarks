@@ -6,6 +6,8 @@ ElementLevel{D}(args...) where {D} = ElementLevel{D, typeof(D)}(args...)
 ElementLevel{D, Tv}() where {D, Tv} = ElementLevel{D, Tv}(Vector{Tv}(undef, 4))
 const Element = ElementLevel
 
+pattern!(lvl::ElementLevel) = Pattern()
+
 """
 `f_code(e)` = [ElementLevel](@ref).
 """
@@ -70,6 +72,7 @@ setdims!(fbr::VirtualFiber{VirtualElementLevel}, ctx, mode) = fbr
 getdims(::VirtualFiber{VirtualElementLevel}, ctx, mode) = ()
 
 @inline default(fbr::VirtualFiber{VirtualElementLevel}) = fbr.lvl.D
+@inline image(fbr::VirtualFiber{VirtualElementLevel}) = fbr.lvl.Tv
 
 function initialize_level!(fbr::VirtualFiber{VirtualElementLevel}, ctx, mode::Union{Write, Update})
     lvl = fbr.lvl

@@ -21,6 +21,9 @@ summary_f_code(::Repeat{D}) where {D} = "r($(D))"
 similar_level(::RepeatLevel{D}) where {D} = Repeat{D}()
 similar_level(::RepeatLevel{D}, dim, tail...) where {D} = Repeat{D}(dim)
 
+pattern!(lvl::RepeatLevel{D, Ti}) where {D, Ti} = 
+    SolidLevel{Ti}(lvl.I, Pattern())
+
 function Base.show(io::IO, lvl::RepeatLevel{D}) where {D}
     print(io, "Repeat{")
     print(io, D)
@@ -122,6 +125,7 @@ function setdims!(fbr::VirtualFiber{VirtualRepeatLevel}, ctx, mode, dim)
 end
 
 @inline default(fbr::VirtualFiber{<:VirtualRepeatLevel}) = fbr.lvl.D
+@inline image(fbr::VirtualFiber{VirtualRepeatLevel}) = fbr.lvl.Tv
 
 function initialize_level!(fbr::VirtualFiber{VirtualRepeatLevel}, ctx::LowerJulia, mode::Union{Write, Update})
     lvl = fbr.lvl

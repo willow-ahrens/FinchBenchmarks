@@ -15,6 +15,9 @@ summary_f_code(lvl::Solid) = "s($(summary_f_code(lvl.lvl)))"
 similar_level(lvl::SolidLevel) = Solid(similar_level(lvl.lvl))
 similar_level(lvl::SolidLevel, dim, tail...) = Solid(dim, similar_level(lvl.lvl, tail...))
 
+pattern!(lvl::SolidLevel{Ti}) where {Ti} = 
+    SolidLevel{Ti}(lvl.I, pattern!(lvl.lvl))
+
 dimension(lvl::SolidLevel) = lvl.I
 
 @inline arity(fbr::Fiber{<:SolidLevel}) = 1 + arity(Fiber(fbr.lvl.lvl, Environment(fbr.env)))
@@ -96,6 +99,7 @@ function setdims!(fbr::VirtualFiber{VirtualSolidLevel}, ctx, mode, dim, dims...)
 end
 
 @inline default(fbr::VirtualFiber{<:VirtualSolidLevel}) = default(VirtualFiber(fbr.lvl.lvl, VirtualEnvironment(fbr.env)))
+@inline image(fbr::VirtualFiber{VirtualSolidLevel}) = image(VirtualFiber(fbr.lvl.lvl, VirtualEnvironment(fbr.env)))
 
 reinitializeable(lvl::VirtualSolidLevel) = reinitializeable(lvl.lvl)
 function initialize_level!(fbr::VirtualFiber{VirtualSolidLevel}, ctx::LowerJulia, mode::Union{Write, Update})
