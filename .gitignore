@@ -2,5 +2,7 @@
 *.ttx
 *.o
 spmv_taco
+alpha_opencv
+alpha_taco_rle
 settings.json
 opencv/install

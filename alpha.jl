@@ -80,7 +80,9 @@ function alpha_opencv(B, C, alpha)
 
     io = IOBuffer()
 
-    run(pipeline(`./alpha_opencv $APath $BPath $CPath $alpha`, stdout=io))
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./opencv/build/lib", "LD_LIBRARY_PATH" => "./opencv/build/lib") do
+    	run(pipeline(`./alpha_opencv $APath $BPath $CPath $alpha`, stdout=io))
+    end
 
     @assert load(APath) == load(ARefPath)
 
@@ -180,8 +182,8 @@ numSketches = 2
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
-run(pipeline(`make alpha_opencv`))
-run(pipeline(`make alpha_taco_rle`))
+#run(pipeline(`make alpha_opencv`))
+#run(pipeline(`make alpha_taco_rle`))
 
 results = Vector{Dict{String, <: Any}}()
 for i in 1:numSketches 

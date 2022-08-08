@@ -26,7 +26,7 @@ else
 export NPROC_VAL := $(shell lscpu -p | egrep -v '^\#' | wc -l)
 endif
 
-all: spmv_taco
+all: spmv_taco alpha_taco_rle alpha_opencv
 
 clean:
 	rm -rf spmv_taco
