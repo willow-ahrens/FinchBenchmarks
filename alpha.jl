@@ -156,11 +156,13 @@ end
     unsafe_trunc(UInt8, round(x))
 end
 
+Finch.register()
+
 function alpha_finch_kernel(A, B, C, as, mas)
-    #@index @loop i j A[i, j] = unsafe_trunc($UInt8, round(0.5 * B[i, j] + 0.5 * C[i, j]))
-    display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
-    println()
-    exit()
+    @index @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j])
+    #display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
+    #println()
+    #exit()
 end
 
 function alpha_finch(B, C, alpha)
@@ -215,5 +217,5 @@ for i in 1:numSketches
 end
 
 open("alpha.json","w") do f
-    JSON.print(f, results)
+    JSON.print(f, results, 4)
 end
