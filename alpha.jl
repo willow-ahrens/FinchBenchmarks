@@ -159,12 +159,7 @@ end
 Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
-    #@index @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j]))
-    display(@index_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
-    #display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
-    #display(@index_code @loop i j A[i, j] = unsafe_round_UInt8(0.5 * B[i, j] + 0.5 * C[i, j]))
-    println()
-    exit()
+    @index @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j]))
 end
 
 function alpha_finch(B, C, alpha)
