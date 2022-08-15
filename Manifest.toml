@@ -409,9 +409,9 @@ version = "1.12.2+1"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "Dates", "IniFile", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "ed47af35905b7cc8f1a522ca684b35a212269bd8"
+git-tree-sha1 = "f0956f8d42a92816d2bf062f8a6a6a0ad7f9b937"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.2.0"
+version = "1.2.1"
 
 [[deps.IOCapture]]
 deps = ["Logging", "Random"]
@@ -571,9 +571,9 @@ version = "0.7.0"
 
 [[deps.Interpolations]]
 deps = ["Adapt", "AxisAlgorithms", "ChainRulesCore", "LinearAlgebra", "OffsetArrays", "Random", "Ratios", "Requires", "SharedArrays", "SparseArrays", "StaticArrays", "WoodburyMatrices"]
-git-tree-sha1 = "23e651bbb8d00e9971015d0dd306b780edbdb6b9"
+git-tree-sha1 = "64f138f9453a018c8f3562e7bae54edc059af249"
 uuid = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
-version = "0.14.3"
+version = "0.14.4"
 
 [[deps.IntervalSets]]
 deps = ["Dates", "Random", "Statistics"]
@@ -1112,14 +1112,14 @@ version = "0.1.1"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "Random", "StaticArraysCore", "Statistics"]
-git-tree-sha1 = "23368a3313d12a2326ad0035f0db0c0966f438ef"
+git-tree-sha1 = "2d4e51cfad63d2d34acde558027acbc66700349b"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.5.2"
+version = "1.5.3"
 
 [[deps.StaticArraysCore]]
-git-tree-sha1 = "66fe9eb253f910fe8cf161953880cfdaef01cdf0"
+git-tree-sha1 = "5b413a57dd3cea38497d745ce088ac8592fbb5be"
 uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
-version = "1.0.1"
+version = "1.1.0"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -1151,9 +1151,9 @@ version = "0.3.5"
 
 [[deps.StructTypes]]
 deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "d24a825a95a6d98c385001212dc9020d609f2d4f"
+git-tree-sha1 = "79aa7175f0149ba2fe22b96a271f4024429de02d"
 uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
-version = "1.8.1"
+version = "1.9.0"
 
 [[deps.SyntaxInterface]]
 git-tree-sha1 = "ce3b1ff5ed4033ac2d265349303ced9a0b8b37b8"
@@ -1187,8 +1187,8 @@ uuid = "62fd8b95-f654-4bbd-a8a5-9c27f68ccd50"
 version = "0.1.1"
 
 [[deps.TensorDepot]]
-deps = ["Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
-git-tree-sha1 = "bc7e5afcf9daec44d22a06a160be818a80b362e4"
+deps = ["CSV", "DataFrames", "DelimitedFiles", "Downloads", "GZip", "Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
+git-tree-sha1 = "6e5a19ebd26434a1a1964aa89a832b654217ba89"
 repo-rev = "main"
 repo-url = "https://github.com/willow-ahrens/TensorDepot.jl.git"
 uuid = "a265fce4-34b0-4e6b-9b08-892587f3fa1f"
