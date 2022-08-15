@@ -5,4 +5,5 @@ spmv_taco
 alpha_opencv
 alpha_taco_rle
 settings.json
+all_pairs_opencv
 opencv/install
