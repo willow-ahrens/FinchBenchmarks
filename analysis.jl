@@ -1,8 +1,54 @@
 using UnicodePlots
 using BSON
 using JSON
-using Statistics
+using Statistics, StatsBase
 using PrettyTables
+
+using DataFrames
+
+function alpha_blending(alpha_json)
+    data = Dict()
+    open(alpha_json, "r") do f
+        data = JSON.parse(f)
+    end
+
+    data = vcat(DataFrame.(data)...)
+    kinds = unique(data[:, "kind"])
+
+    filtered = []
+    for k in kinds
+        push!(filtered, filter(:kind => kind -> kind == k, data))
+    end
+    data = innerjoin(filtered...;on=["alpha","dataset", "imageB", "imageC","kernel"], makeunique=true)
+
+
+    names = String[]
+    geomeans = Float64[]
+    maxs = Float64[]
+    mins = Float64[]
+    for k in 1:3
+        kstr = "kind_$k"
+        tstr = "time_$k"
+        out_name = string("cmp_", data[1,kstr])
+        transform!(data, ["time", tstr] => ByRow((/)) => out_name)
+        push!(names, out_name)
+        push!(geomeans, geomean(data[:, out_name]))
+        push!(maxs, maximum(data[:, out_name]))
+        push!(mins, minimum(data[:, out_name]))
+    end
+
+    p = barplot(names, mins, title="Min Speedup over OpenCV")
+    println(p)
+
+    p = barplot(names, maxs, title="Max Speedup over OpenCV")
+    println(p)
+
+
+    p = barplot(names, geomeans, title="Geomean Speedup over OpenCV")
+    println(p)
+    savefig(p, "/Users/danieldonenfeld/Developer/Finch-Proj/Finch-CGO-2023-Results/alpha_graph.txt")
+    return DataFrame(Dict(zip(names, geomeans))), data
+end
 
 function main(args)
     println("figure 6:")
@@ -86,4 +132,6 @@ function main(args)
     close(figure7)
 end
 
-main(ARGS)
+# main(ARGS)
+
+alpha_blending("/Users/danieldonenfeld/Developer/Finch-Proj/Finch-CGO-2023-Results/alpha_cvrounding.json")

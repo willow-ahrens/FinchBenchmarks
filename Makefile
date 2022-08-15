@@ -45,6 +45,9 @@ alpha_taco_rle: alpha_taco_rle.cpp taco-rle
 alpha_opencv: alpha_opencv.cpp opencv
 	$(CXX) $(CXXFLAGS_CV) -o $@ $< $(LDLIBS_CV)
 
+all_pairs_opencv: all_pairs_opencv.cpp opencv
+	$(CXX) $(CXXFLAGS_CV) -o $@ $< $(LDLIBS_CV)
+
 .PHONY: opencv
 opencv:
 	./build_opencv.sh
