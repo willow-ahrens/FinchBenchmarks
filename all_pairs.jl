@@ -55,23 +55,48 @@ function img_to_repeat(img)
     return copyto!(@f(s(r(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
-function all_pairs_finch_kernel(o, m, T, O)
-    @index @loop k l i j (o[k, l] += m[k,l] * (convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j]))^2)
-    @index @loop k l (O[k,l] = sqrt(o[k,l]))
+@inline sq(x) = x * x
+
+Finch.register()
+
+function all_pairs_finch_kernel(m, T, O)
+    o = Scalar{0.0}()
+    @index @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j]))))
+    #o = Scalar{0}()
+    #S = @f(s(e(0.0)))
+    #@index @loop k i j S[k] += sq(convert($(value(Int)), T[k, i, j]))
+    #@index @loop k l @sieve m[k,l] ((O[k,l] = sqrt(S[k] + S[l] - 2 * o[])) where (@loop i j o[] += convert($(value(Float64)),T[k, i, j]) * convert($(value(Float64)),T[l, i, j])))
 end
 
 function all_pairs_finch(tensor_func, num_imgs)
     mnist_arr = (tensor_func(1:num_imgs))
     T = dropdefaults!(@f(s(s(l(e($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
-    O = fiber(zeros(num_imgs,num_imgs))
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
     
-    o = similar(O)
-    @index @loop i j o[i, j] = 0.0
-    
-    dense_m = [i < j ? 1.0 : 0.0 for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@f(s(l(e(0.0)))), dense_m)
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@f(s(l(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($o, $m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
+
+    return finch_time, O
+end
+
+function all_pairs_finch_rle_kernel(m, T, O)
+    o = Scalar{0.0}()
+    println(@index_code @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j])))))
+    exit()
+end
+
+function all_pairs_finch_rle(tensor_func, num_imgs)
+    mnist_arr = (tensor_func(1:num_imgs))
+    T = copyto!(@f(s(s(l(r($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
+    println(length(T.lvl.lvl.lvl.lvl.val))
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@f(s(l(p()))), dense_m)
+
+    finch_time = @belapsed all_pairs_finch_rle_kernel($m, $T, $O)
 
     return finch_time, O
 end
@@ -110,10 +135,12 @@ end
 run(pipeline(`make all_pairs_opencv`))
 
 dataset = mnist
-num_imgs = 10
+num_imgs = 5
 
 finch_time, result = all_pairs_finch(dataset, num_imgs)
+#finch_rle_time, result = all_pairs_finch_rle(dataset, num_imgs)
 opencv_time = all_pairs_opencv(dataset, num_imgs, result)
 
 println("Finch (sparse) time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
+println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
 println("OpenCV time         : ", opencv_time)
