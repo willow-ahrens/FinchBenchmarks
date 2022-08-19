@@ -12,6 +12,10 @@ LDLIBS_TACORLE += -L$(TACORLE)/build/lib -ltaco -ldl
 CXXFLAGS_CV += -std=c++11 -I$(OPENCV)/install/include/opencv4 -I$(OPENCV)/install/include/opencv4/opencv2
 LDLIBS_CV += -L$(OPENCV)/install/lib -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_imgcodecs 
 
+TACOBUILD = $(TACO)/build/lib/libtaco.*
+TACORLEBUILD = $(TACORLE)/build/lib/libtaco.*
+OPENCVBUILD = $(OPENCV)/build/lib/libopencv_core.*
+
 #ARCH = $(shell uname)
 #ifeq ($(wildcard $(TOP)/src/Makefile.$(ARCH)),)
 #	MYARCH = Default
@@ -32,27 +36,41 @@ clean:
 	rm -rf spmv_taco
 	rm -rf alpha_opencv
 	rm -rf *.o *.dSYM *.trace
-	# rm -rf taco/build
-	# rm -rf opencv/build
-	# rm -rf opencv/install
+	# rm -rf $(TACO)/build
+	# rm -rf $(TACORLE)/build
+	# rm -rf $(OPENCV)/build
+	# rm -rf $(OPENCV)/install
 
-spmv_taco: spmv_taco.o taco
+spmv_taco: spmv_taco.o $(TACOBUILD)
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
 
-alpha_taco_rle: alpha_taco_rle.cpp taco-rle
+alpha_taco_rle: alpha_taco_rle.cpp $(TACORLEBUILD)
 	$(CXX) $(CXXFLAGS_TACORLE) -o $@ $< $(LDLIBS_TACORLE)
 
-alpha_opencv: alpha_opencv.cpp opencv
+alpha_opencv: alpha_opencv.cpp $(OPENCVBUILD)
 	$(CXX) $(CXXFLAGS_CV) -o $@ $< $(LDLIBS_CV)
 
-.PHONY: opencv
-opencv:
-	./build_opencv.sh
+all_pairs_opencv: all_pairs_opencv.cpp $(OPENCVBUILD)
+	$(CXX) $(CXXFLAGS_CV) -o $@ $< $(LDLIBS_CV)
 
-.PHONY: taco
-taco:
-	./build_taco.sh
+$(OPENCVBUILD):
+	mkdir -p opencv/build
+	mkdir -p opencv/install
+	cd opencv/build
+	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../install -DBUILD_ZLIB=OFF -DBUILD_TESTS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_EXAMPLES=OFF -DBUILD_opencv_apps=OFF -DBUILD_PNG=ON .. 
+	make -j$(NPROC_VAL)
+	make install
 
-.PHONY: taco-rle
-taco-rle:
-	./build_taco.sh taco-rle
+$(TACOBUILD):
+	cd $(TACO)
+	mkdir -p build
+	cd build
+	cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release ..
+	make -j$(NPROC_VAL)
+
+$(TACORLEBUILD):
+	cd $(TACORLE)
+	mkdir -p build
+	cd build
+	cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release ..
+	make -j$(NPROC_VAL)

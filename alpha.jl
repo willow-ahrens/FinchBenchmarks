@@ -5,6 +5,9 @@ using TensorDepot, MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
+using Profile
+using PProf
+
 using Scratch
 tmp_tensor_dir = ""
 if haskey(ENV, "TMP_TENSOR_DIR")
@@ -48,11 +51,11 @@ function pngwrite(filename, I, V, shape)
 end
 
 function img_to_dense(img)
-    return copyto!(@f(s(s(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+    return copyto!(@f(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
 end
 
 function img_to_repeat(img)
-    return copyto!(@f(s(r(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@f(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
@@ -129,7 +132,7 @@ function alpha_taco_rle(B, C, alpha)
     f = x -> round(UInt8, x)
     @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
 
-    A_ref_dense = @f(s(s(e($(zero(UInt8))))))
+    A_ref_dense = @f(d(d(e($(zero(UInt8))))))
     @index @loop i j A_ref_dense[i, j] = A_ref[i, j]
     pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
     
@@ -176,22 +179,33 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = dropdefaults!(@f(s(l(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
-    C = dropdefaults!(@f(s(l(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
-    return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    # display(@index_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
+    # println()
+
+    result = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    # @pprof begin
+    #     for i in 1:2_000
+    #         alpha_finch_kernel(A, B, C, as, mas)
+    #     end
+    # end
+    # readline()
+    # I,V = ffindnz(A)
+    return result #, size(V)
 end
 
 kernel_str = "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
 alpha = 0.5
 
-numSketches = 2
+numSketches = 1
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
-#run(pipeline(`make alpha_opencv`))
-#run(pipeline(`make alpha_taco_rle`))
+run(pipeline(`make alpha_opencv`))
+run(pipeline(`make alpha_taco_rle`))
 
 results = Vector{Dict{String, <: Any}}()
 for i in 1:numSketches 
@@ -206,7 +220,7 @@ for i in 1:numSketches
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
 
     finchSparse = alpha_finch_sparse(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))  
+    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse, "dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))  
 
     finchrepeat = alpha_finch(B, C, 0.5)
     push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>"humansketches","imageB"=>i,"imageC"=>i+10_000))
