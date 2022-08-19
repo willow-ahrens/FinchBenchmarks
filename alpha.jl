@@ -51,11 +51,11 @@ function pngwrite(filename, I, V, shape)
 end
 
 function img_to_dense(img)
-    return copyto!(@f(s(s(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+    return copyto!(@f(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
 end
 
 function img_to_repeat(img)
-    return copyto!(@f(s(r(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@f(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
@@ -132,7 +132,7 @@ function alpha_taco_rle(B, C, alpha)
     f = x -> round(UInt8, x)
     @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
 
-    A_ref_dense = @f(s(s(e($(zero(UInt8))))))
+    A_ref_dense = @f(d(d(e($(zero(UInt8))))))
     @index @loop i j A_ref_dense[i, j] = A_ref[i, j]
     pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
     
@@ -179,8 +179,8 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = dropdefaults!(@f(s(l(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
-    C = dropdefaults!(@f(s(l(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
     # display(@index_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
