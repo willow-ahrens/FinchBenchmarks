@@ -179,6 +179,6 @@ A = SparseList{0.0, Float64, Int}(10, [1, 3, 5, 7, 9, 11], [2.0, 3.0, 4.0, 5.0, 
 B = SparseBlock{0.0, Float64, Int}(10, 3, 9, [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
 C = Scalar{0.0}()
 
-println(@index_code @loop i C[] += A[i] * B[i])
-@index @loop i C[] += A[i] * B[i]
+println(@finch_code @loop i C[] += A[i] * B[i])
+@finch @loop i C[] += A[i] * B[i]
 println(C)

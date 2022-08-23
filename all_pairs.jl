@@ -48,11 +48,11 @@ function pngwrite(filename, I, V, shape)
 end
 
 function img_to_dense(img)
-    return copyto!(@f(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
 end
 
 function img_to_repeat(img)
-    return copyto!(@f(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
 @inline sq(x) = x * x
@@ -61,20 +61,20 @@ Finch.register()
 
 function all_pairs_finch_kernel(m, T, O)
     o = Scalar{0.0}()
-    @index @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j]))))
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j]))))
     #o = Scalar{0}()
-    #S = @f(s(e(0.0)))
-    #@index @loop k i j S[k] += sq(convert($(value(Int)), T[k, i, j]))
-    #@index @loop k l @sieve m[k,l] ((O[k,l] = sqrt(S[k] + S[l] - 2 * o[])) where (@loop i j o[] += convert($(value(Float64)),T[k, i, j]) * convert($(value(Float64)),T[l, i, j])))
+    #S = @fiber(s(e(0.0)))
+    #@finch @loop k i j S[k] += sq(convert($(value(Int)), T[k, i, j]))
+    #@finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(S[k] + S[l] - 2 * o[])) where (@loop i j o[] += convert($(value(Float64)),T[k, i, j]) * convert($(value(Float64)),T[l, i, j])))
 end
 
 function all_pairs_finch(tensor_func, num_imgs)
     mnist_arr = (tensor_func(1:num_imgs))
-    T = dropdefaults!(@f(d(d(sl(e($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
+    T = dropdefaults!(@fiber(d(d(sl(e($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@f(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
 
@@ -83,18 +83,18 @@ end
 
 function all_pairs_finch_rle_kernel(m, T, O)
     o = Scalar{0.0}()
-    println(@index_code @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j])))))
+    println(@finch_code @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j])))))
     exit()
 end
 
 function all_pairs_finch_rle(tensor_func, num_imgs)
     mnist_arr = (tensor_func(1:num_imgs))
-    T = copyto!(@f(d(d(sl(r($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
+    T = copyto!(@fiber(d(d(sl(r($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
     println(length(T.lvl.lvl.lvl.lvl.val))
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@f(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_rle_kernel($m, $T, $O)
 

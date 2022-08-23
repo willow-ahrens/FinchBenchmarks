@@ -51,11 +51,11 @@ function pngwrite(filename, I, V, shape)
 end
 
 function img_to_dense(img)
-    return copyto!(@f(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
 end
 
 function img_to_repeat(img)
-    return copyto!(@f(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
@@ -72,10 +72,10 @@ function alpha_opencv(B, C, alpha)
 
     f = x -> round(UInt8, x)
 
-    @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
+    @finch @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
     pngwrite(ARefPath, ffindnz(A_ref)..., size(A_ref))
     
-    @index @loop i j A_ref[i, j] = 0
+    @finch @loop i j A_ref[i, j] = 0
 
     pngwrite(APath, ffindnz(A_ref)..., size(A_ref))
     pngwrite(BPath, ffindnz(Bf)..., size(Bf))
@@ -130,13 +130,13 @@ function alpha_taco_rle(B, C, alpha)
     A_ref = img_to_repeat(B)
 
     f = x -> round(UInt8, x)
-    @index @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
+    @finch @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
 
-    A_ref_dense = @f(d(d(e($(zero(UInt8))))))
-    @index @loop i j A_ref_dense[i, j] = A_ref[i, j]
+    A_ref_dense = @fiber(d(d(e($(zero(UInt8))))))
+    @finch @loop i j A_ref_dense[i, j] = A_ref[i, j]
     pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
     
-    @index @loop i j A_ref[i, j] = 0
+    @finch @loop i j A_ref[i, j] = 0
 
     writeRLETacoTTX(APath, zeros(UInt8, size(Bf)))
     writeRLETacoTTX(BPath, copy(rawview(channelview(B))))
@@ -162,7 +162,7 @@ end
 #Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
-    @index @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($(value(as)) * B[i, j] + $(value(mas)) * C[i, j]))
+    @finch @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($(value(as)) * B[i, j] + $(value(mas)) * C[i, j]))
 end
 
 function alpha_finch(B, C, alpha)
@@ -179,11 +179,11 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
-    C = dropdefaults!(@f(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@fiber(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@fiber(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
-    # display(@index_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
+    # display(@finch_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
     # println()
 
     result = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
@@ -197,7 +197,7 @@ function alpha_finch_sparse(B, C, alpha)
     return result #, size(V)
 end
 
-kernel_str = "@index @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
+kernel_str = "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
 alpha = 0.5
 
 numSketches = 1
