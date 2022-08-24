@@ -2,6 +2,7 @@ using Finch
 using SparseArrays
 using BenchmarkTools
 using Scratch
+using Profile
 
 using MatrixDepot
 include("TensorMarket.jl")
@@ -26,7 +27,7 @@ function triangle_taco(A, key)
         ttwrite(A3_file, (I, J), ones(Int32, length(V)), size(A))
     end
 
-    b_ref = Scalar{0.0}()
+    b_ref = Scalar{0}()
     A_ref = pattern!(fiber(A))
     @finch @loop i j k b_ref[] += A_ref[i, j] && A_ref[j, k] && A_ref[i, k]
 
@@ -42,143 +43,181 @@ function triangle_taco(A, key)
 end
 
 function triangle_finch_kernel(A)
-    c = Scalar{0.0}()
-    #println(@finch_code @loop i j k c[] += A[i, j] && A[j, k] && A[i, k])
+    c = Scalar{0}()
     @finch @loop i j k c[] += A[i, j] && A[j, k] && A[i, k]
     return c()
 end
 function triangle_finch(_A, key)
-    A = pattern!(fiber(_A))
-    return @belapsed triangle_finch_kernel($A)
+    A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(_A))
+    A = pattern!(A)
+    #return @belapsed triangle_finch_kernel($A)
+    foo(A)
+    @profile foo(A)
+    Profile.print()
+    exit()
+    return @belapsed foo($A)
 end
 
 function triangle_finch_gallop_kernel(A)
-    c = Scalar{0.0}()
+    c = Scalar{0}()
     @finch @loop i j k c[] += A[i, j] && A[j, k::gallop] && A[i, k::gallop]
     return c()
 end
 function triangle_finch_gallop(_A, key)
     A = pattern!(fiber(_A))
-    b_ref = Scalar{0.0}()
-    A_ref = pattern!(fiber(A))
-    @finch @loop i j k b_ref[] += A_ref[i, j] && A_ref[j, k] && A_ref[i, k]
+    b_ref = Scalar{0}()
+    @finch @loop i j k b_ref[] += A[i, j] && A[j, k] && A[i, k]
     b = triangle_finch_gallop_kernel(A)
-    println(b, b_ref)
     @assert b_ref() == b
     return @belapsed triangle_finch_gallop_kernel($A)
-
-end
-
-@inline undefs(T::Type, dims::Vararg{Any, N}) where {N} = Array{T, N}(undef, dims...)
-function symrcm(A::SparseMatrixCSC{Tv, Ti}) where {Tv, Ti}
-    @inbounds begin
-        m, n = size(A)
-
-        deg = undefs(Ti, max(m + 2, n))
-        bkt = undefs(Ti, n)
-        ord = undefs(Ti, n)
-        deg[1] = 1
-        for i = 2:m + 2
-            deg[i] = 0
-        end
-        for j = 1:n
-            deg[A.colptr[j + 1] - A.colptr[j] + 2] += 1
-        end
-        for i = 1:m + 1
-            deg[i + 1] += deg[i]
-        end
-        for j = 1:n
-            d = A.colptr[j + 1] - A.colptr[j] + 1
-            k = deg[d]
-            ord[k] = j
-            deg[d] = k + 1
-        end
-
-        k_start = 1
-
-        prm = undefs(Ti, n)
-        vst = falses(n)
-        k_current = 0
-        k_frontier = k_current
-        while k_frontier < n
-            k_current += 1
-            if k_current > k_frontier
-                while vst[ord[k_start]]
-                    k_start += 1
-                end
-                j = ord[k_start]
-                prm[k_current] = j
-                k_frontier = k_current
-                vst[j] = true
-            else
-                j = prm[k_current]
-            end
-            k_frontier′ = k_frontier
-            for q = A.colptr[j]:A.colptr[j + 1] - 1
-                i = A.rowval[q]
-                if !vst[i]
-                    k_frontier′ += 1
-                    prm[k_frontier′] = i
-                    vst[i] = true
-                end
-            end
-
-            if k_frontier′ > k_frontier
-                let i = prm[k_frontier′]
-                    deg[k_frontier′] = A.colptr[i + 1] - A.colptr[i]
-                    bkt[k_frontier′] = k_frontier′
-                end
-                for k = k_frontier′-1:-1:k_frontier + 1
-                    i = prm[k]
-                    d = A.colptr[i + 1] - A.colptr[i]
-                    while k != k_frontier′ && d > deg[k + 1]
-                        deg[k] = deg[bkt[k + 1]]
-                        prm[k] = prm[bkt[k + 1]]
-                        bkt[k] = bkt[k + 1] - (d != deg[k + 1])
-                        k = bkt[k + 1]
-                    end
-                    prm[k] = i
-                    deg[k] = d
-                    bkt[k] = k
-                end
-
-                k_frontier = k_frontier′
-            end
-        end
-        return prm
-    end
 end
 
 function main()
     for (mtx, key) in [
-        ("SNAP/web-NotreDame", "web-NotreDame"),
-        ("SNAP/roadNet-PA", "roadNet-PA"),
-        ("DIMACS10/sd2010", "sd2010"),
-        ("SNAP/soc-Epinions1", "soc-Epinions1"),
-        ("SNAP/email-EuAll", "email-EuAll"),
-        ("SNAP/wiki-Talk", "wiki-Talk"),
+        #("SNAP/web-NotreDame", "web-NotreDame"),
+        #("SNAP/roadNet-PA", "roadNet-PA"),
+        #("DIMACS10/sd2010", "sd2010"),
+        #("SNAP/soc-Epinions1", "soc-Epinions1"),
+        #("SNAP/email-EuAll", "email-EuAll"),
+        #("SNAP/wiki-Talk", "wiki-Talk"),
         ("SNAP/web-BerkStan", "web-BerkStan"),
-        ("Gleich/flickr", "flickr"),
-        ("Gleich/usroads", "usroads"),
-        ("Pajek/USpowerGrid", "USpowerGrid"),
+        #("Gleich/flickr", "flickr"),
+        #("Gleich/usroads", "usroads"),
+        #("Pajek/USpowerGrid", "USpowerGrid"),
     ]
         println(key)
-        A = matrixdepot(mtx)
+        A = SparseMatrixCSC(matrixdepot(mtx))
         @info key size(A) nnz(A)
+        println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
 
-        println("finch_gallop_time: ", triangle_finch_gallop(A, key))
-        println("taco_time: ", triangle_taco(A, key))
+        #println("taco_time: ", triangle_taco(A, key))
         println("finch_time: ", triangle_finch(A, key))
+        println("finch_gallop_time: ", triangle_finch_gallop(A, key))
 
-        prm = symrcm(A)
-        sym_A = A[prm, prm]
-
-        println("sym-$key")
-
-        println("taco_time: ", triangle_taco(sym_A, "sym-$key"))
-        println("finch_time: ", triangle_finch(sym_A, "sym-$key"))
-        println("finch_gallop_time: ", triangle_finch_gallop(sym_A, "sym-$key"))
     end
+end
+
+foo(A) = @inbounds begin
+    println("hi")
+    A_lvl = A.lvl
+    A_lvl_2 = A_lvl.lvl
+    A_lvl_2_pos_alloc = length(A_lvl_2.pos)
+    A_lvl_2_idx_alloc = length(A_lvl_2.idx)
+    A_lvl_3 = A.lvl
+    A_lvl_4 = A_lvl_3.lvl
+    A_lvl_4_pos_alloc = length(A_lvl_4.pos)
+    A_lvl_4_idx_alloc = length(A_lvl_4.idx)
+    A_lvl_5 = A.lvl
+    A_lvl_6 = A_lvl_5.lvl
+    A_lvl_6_pos_alloc = length(A_lvl_6.pos)
+    A_lvl_6_idx_alloc = length(A_lvl_6.idx)
+    j_stop = A_lvl_2.I
+    k_stop = A_lvl_4.I
+    i_stop = A_lvl.I
+    c_val = 0
+    for i = 1:i_stop
+        A_lvl_q = (1 - 1) * A_lvl.I + i
+        A_lvl_5_q = (1 - 1) * A_lvl_5.I + i
+        A_lvl_2_q_start = A_lvl_2.pos[A_lvl_q]
+        A_lvl_2_q_stop = A_lvl_2.pos[A_lvl_q + 1]
+        if A_lvl_2_q_start < A_lvl_2_q_stop
+            A_lvl_2_i_start = A_lvl_2.idx[A_lvl_2_q_start]
+            A_lvl_2_i_stop = A_lvl_2.idx[A_lvl_2_q_stop - 1]
+        else
+            A_lvl_2_i_start = 1
+            A_lvl_2_i_stop = 0
+        end
+        A_lvl_6_q_start = A_lvl_6.pos[A_lvl_5_q]
+        A_lvl_6_q_stop = A_lvl_6.pos[A_lvl_5_q + 1]
+        if A_lvl_6_q_start < A_lvl_6_q_stop
+            A_lvl_6_i_start = A_lvl_6.idx[A_lvl_6_q_start]
+            A_lvl_6_i_stop = A_lvl_6.idx[A_lvl_6_q_stop - 1]
+        else
+            A_lvl_6_i_start = 1
+            A_lvl_6_i_stop = 0
+        end
+        A_lvl_2_q = A_lvl_2_q_start
+        A_lvl_2_i = A_lvl_2_i_start
+        j = 1
+        j_start = j
+        phase_start = max(j_start)
+        phase_stop = min(A_lvl_2_i_stop, j_stop)
+        if phase_stop >= phase_start
+            j = j
+            j = phase_start
+            while A_lvl_2_q < A_lvl_2_q_stop && A_lvl_2.idx[A_lvl_2_q] < phase_start
+                A_lvl_2_q += 1
+            end
+            while j <= phase_stop
+                j_start_2 = j
+                A_lvl_2_i = A_lvl_2.idx[A_lvl_2_q]
+                phase_stop_2 = A_lvl_2_i
+                j_2 = j
+                if A_lvl_2_i == phase_stop_2
+                    j_3 = phase_stop_2
+                    A_lvl_3_q = (1 - 1) * A_lvl_3.I + j_3
+                    A_lvl_4_q_start = A_lvl_4.pos[A_lvl_3_q]
+                    A_lvl_4_q_stop = A_lvl_4.pos[A_lvl_3_q + 1]
+                    if A_lvl_4_q_start < A_lvl_4_q_stop
+                        A_lvl_4_i_start = A_lvl_4.idx[A_lvl_4_q_start]
+                        A_lvl_4_i_stop = A_lvl_4.idx[A_lvl_4_q_stop - 1]
+                    else
+                        A_lvl_4_i_start = 1
+                        A_lvl_4_i_stop = 0
+                    end
+                    A_lvl_4_q = A_lvl_4_q_start
+                    A_lvl_4_i = A_lvl_4_i_start
+                    A_lvl_6_q = A_lvl_6_q_start
+                    A_lvl_6_i = A_lvl_6_i_start
+                    k = 1
+                    k_start = k
+                    phase_start_3 = max(k_start)
+                    phase_stop_3 = min(A_lvl_4_i_stop, A_lvl_6_i_stop, k_stop)
+                    if phase_stop_3 >= phase_start_3
+                        k = k
+                        k = phase_start_3
+                        #while A_lvl_4_q < A_lvl_4_q_stop && A_lvl_4.idx[A_lvl_4_q] < phase_start_3
+                        #    A_lvl_4_q += 1
+                        #end
+                        #while A_lvl_6_q < A_lvl_6_q_stop && A_lvl_6.idx[A_lvl_6_q] < phase_start_3
+                        #    A_lvl_6_q += 1
+                        #end
+                        #while k <= phase_stop_3
+                        while A_lvl_4_q < A_lvl_4_q_stop && A_lvl_6_q < A_lvl_6_q_stop
+                            #k_start_2 = k
+                            A_lvl_4_i = A_lvl_4.idx[A_lvl_4_q]
+                            A_lvl_6_i = A_lvl_6.idx[A_lvl_6_q]
+                            #phase_start_4 = max(k_start_2)
+                            phase_stop_4 = min(A_lvl_4_i, A_lvl_6_i)#, phase_stop_3)
+                            #if phase_stop_4 >= phase_start_4
+                                #k_2 = k
+                                if A_lvl_4_i == phase_stop_4 && A_lvl_6_i == phase_stop_4
+                                    c_val = c_val + true
+                                end
+                                A_lvl_4_q += A_lvl_4_i == phase_stop_4
+                                A_lvl_6_q += A_lvl_6_i == phase_stop_4
+                                #k = phase_stop_4 + 1
+                            #end
+                        end
+                        k = phase_stop_3 + 1
+                    end
+
+                    A_lvl_2_q += 1
+                else
+                end
+                j = phase_stop_2 + 1
+            end
+            j = phase_stop + 1
+        end
+        j_start = j
+        phase_start_8 = max(j_start)
+        phase_stop_8 = min(j_stop)
+        if phase_stop_8 >= phase_start_8
+            j_4 = j
+            j = phase_stop_8 + 1
+        end
+    end
+    (c = (Scalar){0, Int64}(c_val),)
 end
 
 main()

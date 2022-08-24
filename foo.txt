@@ -1,0 +1,222 @@
+web-NotreDame
+┌ Info: web-NotreDame
+│   size(A) = (325729, 325729)
+└   nnz(A) = 1497134
+taco_time: 0.44068009
+finch_time: 0.571825965
+finch_gallop_time: 0.279147211
+sym-web-NotreDame
+taco_time: 0.44193739000000004
+finch_time: 0.644396404
+finch_gallop_time: 0.34446894
+roadNet-PA
+┌ Info: roadNet-PA
+│   size(A) = (1090920, 1090920)
+└   nnz(A) = 3083796
+taco_time: 0.10844682800000001
+finch_time: 0.149855199
+finch_gallop_time: 0.134372014
+sym-roadNet-PA
+taco_time: 0.08559103700000001
+finch_time: 0.104144051
+finch_gallop_time: 0.09534188
+sd2010
+[ Info: downloading: https://sparse.tamu.edu/MM/DIMACS10/sd2010.tar.gz
+┌ Info: sd2010
+│   size(A) = (88360, 88360)
+└   nnz(A) = 410722
+taco_time: 0.02686391
+finch_time: 0.033954036
+finch_gallop_time: 0.028026995
+sym-sd2010
+taco_time: 0.021645437
+finch_time: 0.028268038
+finch_gallop_time: 0.023808855
+soc-Epinions1
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/soc-Epinions1.tar.gz
+┌ Info: soc-Epinions1
+│   size(A) = (75888, 75888)
+└   nnz(A) = 508837
+taco_time: 0.38184595000000005
+finch_time: 0.506952636
+finch_gallop_time: 0.30529506
+sym-soc-Epinions1
+taco_time: 0.384163093
+finch_time: 0.504182379
+finch_gallop_time: 0.307871224
+email-EuAll
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/email-EuAll.tar.gz
+┌ Info: email-EuAll
+│   size(A) = (265214, 265214)
+└   nnz(A) = 420045
+taco_time: 0.11260792
+finch_time: 0.180400099
+finch_gallop_time: 0.097415507
+sym-email-EuAll
+taco_time: 0.12999987100000002
+finch_time: 0.298544336
+finch_gallop_time: 0.100909555
+wiki-Talk
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/wiki-Talk.tar.gz
+┌ Info: wiki-Talk
+│   size(A) = (2394385, 2394385)
+└   nnz(A) = 5021410
+taco_time: 10.39147239
+finch_time: 5.877774689
+finch_gallop_time: 2.477092625
+sym-wiki-Talk
+taco_time: 11.130346559000001
+finch_time: 6.241872493
+finch_gallop_time: 2.750717347
+o
+web-NotreDame
+┌ Info: web-NotreDame
+│   size(A) = (325729, 325729)
+└   nnz(A) = 1497134
+taco_time: 0.44068009
+finch_time: 0.571825965
+finch_gallop_time: 0.279147211
+sym-web-NotreDame
+taco_time: 0.44193739000000004
+finch_time: 0.644396404
+finch_gallop_time: 0.34446894
+roadNet-PA
+┌ Info: roadNet-PA
+│   size(A) = (1090920, 1090920)
+└   nnz(A) = 3083796
+taco_time: 0.10844682800000001
+finch_time: 0.149855199
+finch_gallop_time: 0.134372014
+sym-roadNet-PA
+taco_time: 0.08559103700000001
+finch_time: 0.104144051
+finch_gallop_time: 0.09534188
+sd2010
+[ Info: downloading: https://sparse.tamu.edu/MM/DIMACS10/sd2010.tar.gz
+┌ Info: sd2010
+│   size(A) = (88360, 88360)
+└   nnz(A) = 410722
+taco_time: 0.02686391
+finch_time: 0.033954036
+finch_gallop_time: 0.028026995
+sym-sd2010
+taco_time: 0.021645437
+finch_time: 0.028268038
+finch_gallop_time: 0.023808855
+soc-Epinions1
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/soc-Epinions1.tar.gz
+┌ Info: soc-Epinions1
+│   size(A) = (75888, 75888)
+└   nnz(A) = 508837
+taco_time: 0.38184595000000005
+finch_time: 0.506952636
+finch_gallop_time: 0.30529506
+sym-soc-Epinions1
+taco_time: 0.384163093
+finch_time: 0.504182379
+finch_gallop_time: 0.307871224
+email-EuAll
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/email-EuAll.tar.gz
+┌ Info: email-EuAll
+│   size(A) = (265214, 265214)
+└   nnz(A) = 420045
+taco_time: 0.11260792
+finch_time: 0.180400099
+finch_gallop_time: 0.097415507
+sym-email-EuAll
+taco_time: 0.12999987100000002
+finch_time: 0.298544336
+finch_gallop_time: 0.100909555
+wiki-Talk
+[ Info: downloading: https://sparse.tamu.edu/MM/SNAP/wiki-Talk.tar.gz
+┌ Info: wiki-Talk
+│   size(A) = (2394385, 2394385)
+└   nnz(A) = 5021410
+taco_time: 10.39147239
+finch_time: 5.877774689
+finch_gallop_time: 2.477092625
+sym-wiki-Talk
+taco_time: 11.130346559000001
+finch_time: 6.241872493
+finch_gallop_time: 2.750717347
+
+
+@inline undefs(T::Type, dims::Vararg{Any, N}) where {N} = Array{T, N}(undef, dims...)
+function symrcm(A::SparseMatrixCSC{Tv, Ti}) where {Tv, Ti}
+    @inbounds begin
+        m, n = size(A)
+
+        deg = undefs(Ti, max(m + 2, n))
+        bkt = undefs(Ti, n)
+        ord = undefs(Ti, n)
+        deg[1] = 1
+        for i = 2:m + 2
+            deg[i] = 0
+        end
+        for j = 1:n
+            deg[A.colptr[j + 1] - A.colptr[j] + 2] += 1
+        end
+        for i = 1:m + 1
+            deg[i + 1] += deg[i]
+        end
+        for j = 1:n
+            d = A.colptr[j + 1] - A.colptr[j] + 1
+            k = deg[d]
+            ord[k] = j
+            deg[d] = k + 1
+        end
+
+        k_start = 1
+
+        prm = undefs(Ti, n)
+        vst = falses(n)
+        k_current = 0
+        k_frontier = k_current
+        while k_frontier < n
+            k_current += 1
+            if k_current > k_frontier
+                while vst[ord[k_start]]
+                    k_start += 1
+                end
+                j = ord[k_start]
+                prm[k_current] = j
+                k_frontier = k_current
+                vst[j] = true
+            else
+                j = prm[k_current]
+            end
+            k_frontier′ = k_frontier
+            for q = A.colptr[j]:A.colptr[j + 1] - 1
+                i = A.rowval[q]
+                if !vst[i]
+                    k_frontier′ += 1
+                    prm[k_frontier′] = i
+                    vst[i] = true
+                end
+            end
+
+            if k_frontier′ > k_frontier
+                let i = prm[k_frontier′]
+                    deg[k_frontier′] = A.colptr[i + 1] - A.colptr[i]
+                    bkt[k_frontier′] = k_frontier′
+                end
+                for k = k_frontier′-1:-1:k_frontier + 1
+                    i = prm[k]
+                    d = A.colptr[i + 1] - A.colptr[i]
+                    while k != k_frontier′ && d > deg[k + 1]
+                        deg[k] = deg[bkt[k + 1]]
+                        prm[k] = prm[bkt[k + 1]]
+                        bkt[k] = bkt[k + 1] - (d != deg[k + 1])
+                        k = bkt[k + 1]
+                    end
+                    prm[k] = i
+                    deg[k] = d
+                    bkt[k] = k
+                end
+
+                k_frontier = k_frontier′
+            end
+        end
+        return prm
+    end
+end
