@@ -30,7 +30,7 @@ else
 export NPROC_VAL := $(shell lscpu -p | egrep -v '^\#' | wc -l)
 endif
 
-all: spmv_taco alpha_taco_rle alpha_opencv
+all: spmv_taco alpha_taco_rle alpha_opencv triangle_taco
 
 clean:
 	rm -rf spmv_taco
@@ -42,6 +42,9 @@ clean:
 	# rm -rf $(OPENCV)/install
 
 spmv_taco: spmv_taco.o $(TACOBUILD)
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
+
+triangle_taco: triangle_taco.o $(TACOBUILD)
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
 
 alpha_taco_rle: alpha_taco_rle.cpp $(TACORLEBUILD)

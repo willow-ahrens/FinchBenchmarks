@@ -84,7 +84,7 @@ function ttread(filename, infoonly::Bool=false, retcoord::Bool=false)
         end
         # Read tensor dimensions (and number of entries) from first non-comment line
         dd = map(_parseint, split(ll))
-        if length(dd) < 1
+        if length(dd) < 0
             throw(ParseError(string("Could not read in matrix dimensions from line: ", ll)))
         end
         shape = rep == "array" ? (dd...,) : (dd[1:end-1]...,)
