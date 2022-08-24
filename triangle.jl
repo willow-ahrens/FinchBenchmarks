@@ -48,7 +48,7 @@ function triangle_finch_kernel(A)
     return c()
 end
 function triangle_finch(_A, key)
-    A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(_A))
+    A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(permutedims(_A)))
     A = pattern!(A)
     #return @belapsed triangle_finch_kernel($A)
     foo(A)
