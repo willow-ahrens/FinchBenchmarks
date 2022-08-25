@@ -61,16 +61,14 @@ Finch.register()
 
 function all_pairs_finch_kernel(m, T, O)
     o = Scalar{0.0}()
-    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j]))))
-    #o = Scalar{0}()
-    #S = @fiber(s(e(0.0)))
-    #@finch @loop k i j S[k] += sq(convert($(value(Int)), T[k, i, j]))
-    #@finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(S[k] + S[l] - 2 * o[])) where (@loop i j o[] += convert($(value(Float64)),T[k, i, j]) * convert($(value(Float64)),T[l, i, j])))
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop ij o[] += $sq(convert($(value(Float64)),T[k, ij]) - convert($(value(Float64)),T[l, ij]))))
 end
 
 function all_pairs_finch(tensor_func, num_imgs)
     mnist_arr = (tensor_func(1:num_imgs))
-    T = dropdefaults!(@fiber(d(d(sl(e($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
+    T = dropdefaults!(@fiber(d(sl(e($(0x00::UInt8))))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
+    println(length(copy(rawview(channelview(mnist_arr)))))
+    println(length(T.lvl.lvl.lvl.val))
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
@@ -81,22 +79,29 @@ function all_pairs_finch(tensor_func, num_imgs)
     return finch_time, O
 end
 
-function all_pairs_finch_rle_kernel(m, T, O)
-    o = Scalar{0.0}()
-    println(@finch_code @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop i j o[] += sq(convert($(value(Float64)),T[k, i, j]) - convert($(value(Float64)),T[l, i, j])))))
-    exit()
-end
-
-function all_pairs_finch_rle(tensor_func, num_imgs)
+function all_pairs_finch_vbl(tensor_func, num_imgs)
     mnist_arr = (tensor_func(1:num_imgs))
-    T = copyto!(@fiber(d(d(sl(r($(0x0::UInt8)))))),copy(rawview(channelview(mnist_arr))))
-    println(length(T.lvl.lvl.lvl.lvl.val))
+    T = dropdefaults!(@fiber(d(sv(e($(0x00::UInt8))))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_rle_kernel($m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
+
+    return finch_time, O
+end
+
+function all_pairs_finch_rle(tensor_func, num_imgs)
+    mnist_arr = (tensor_func(1:num_imgs))
+    T = copyto!(@fiber(d(rl($(0x00::UInt8)))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
+    println(length(T.lvl.lvl.val))
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+
+    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
 
     return finch_time, O
 end
@@ -107,6 +112,7 @@ function all_pairs_opencv(tensor_func, num_imgs, result_compare)
     for i in 1:num_imgs
         img = img_to_dense(T[i, :, :])
         pngwrite(joinpath(tmp_tensor_dir, "$i.png"), ffindnz(img)..., size(img))
+        pngwrite("$i.png", ffindnz(img)..., size(img))
     end
 
     io = IOBuffer()
@@ -120,27 +126,20 @@ function all_pairs_opencv(tensor_func, num_imgs, result_compare)
 
     result = fsparse(ttread(joinpath(tmp_tensor_dir, "result.ttx"))...)
 
-    comp =  FiberArray(result_compare)
-    res = FiberArray(result)
-    # display(comp)
-    # println()    
-    # display(res)
-    # println()
-    # @assert comp == res
-    #TODO: Reenable assertion, currently erroring: "ERROR: LoadError: AssertionError: comp == res"
-
-    return opencv_time
+    return (opencv_time, result)
 end
 
 run(pipeline(`make all_pairs_opencv`))
 
+
 dataset = mnist
-num_imgs = 5
+num_imgs = 20 
 
 finch_time, result = all_pairs_finch(dataset, num_imgs)
-#finch_rle_time, result = all_pairs_finch_rle(dataset, num_imgs)
-opencv_time = all_pairs_opencv(dataset, num_imgs, result)
+finch_vbl_time, result = all_pairs_finch_vbl(dataset, num_imgs)
+finch_rle_time, result = all_pairs_finch_rle(dataset, num_imgs)
+opencv_time, result = all_pairs_opencv(dataset, num_imgs, result)
 
-println("Finch (sparse) time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
+println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
+println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
 println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
-println("OpenCV time         : ", opencv_time)
