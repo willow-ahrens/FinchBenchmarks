@@ -68,16 +68,16 @@ end
 
 function main()
     for (mtx, key) in [
-        #("SNAP/web-NotreDame", "web-NotreDame"),
-        #("SNAP/roadNet-PA", "roadNet-PA"),
-        #("DIMACS10/sd2010", "sd2010"),
-        #("SNAP/soc-Epinions1", "soc-Epinions1"),
-        #("SNAP/email-EuAll", "email-EuAll"),
-        #("SNAP/wiki-Talk", "wiki-Talk"),
+        ("SNAP/web-NotreDame", "web-NotreDame"),
+        ("SNAP/roadNet-PA", "roadNet-PA"),
+        ("DIMACS10/sd2010", "sd2010"),
+        ("SNAP/soc-Epinions1", "soc-Epinions1"),
+        ("SNAP/email-EuAll", "email-EuAll"),
+        ("SNAP/wiki-Talk", "wiki-Talk"),
         ("SNAP/web-BerkStan", "web-BerkStan"),
-        #("Gleich/flickr", "flickr"),
-        #("Gleich/usroads", "usroads"),
-        #("Pajek/USpowerGrid", "USpowerGrid"),
+        ("Gleich/flickr", "flickr"),
+        ("Gleich/usroads", "usroads"),
+        ("Pajek/USpowerGrid", "USpowerGrid"),
     ]
         A = SparseMatrixCSC(matrixdepot(mtx))
         println((key, size(A), nnz(A)))
