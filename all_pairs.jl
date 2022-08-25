@@ -48,8 +48,8 @@ function all_pairs_finch_gallop_kernel(m, A, O)
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij::gallop] * A[l, ij::gallop]))
 end
 
-function all_pairs_finch_gallop(tensor_func, num_imgs)
-    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+function all_pairs_finch_gallop(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
@@ -68,8 +68,8 @@ function all_pairs_finch_kernel(m, A, O)
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij] * A[l, ij]))
 end
 
-function all_pairs_finch(tensor_func, num_imgs)
-    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+function all_pairs_finch(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
@@ -81,8 +81,8 @@ function all_pairs_finch(tensor_func, num_imgs)
     return finch_time, O
 end
 
-function all_pairs_finch_vbl(tensor_func, num_imgs)
-    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+function all_pairs_finch_vbl(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d(sv(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
@@ -95,7 +95,7 @@ function all_pairs_finch_vbl(tensor_func, num_imgs)
 end
 
 function all_pairs_finch_rle(A, num_imgs)
-    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = copyto!(@fiber(d(rl(0.0))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
