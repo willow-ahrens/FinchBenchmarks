@@ -1,14 +1,16 @@
 using Finch
 using SparseArrays
 using BenchmarkTools
+using Scratch
 
 using MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
 
-function spmv_taco(A, x)
+function spmv_taco(_A, x, key)
     y_ref = fiber(x)
+    A = fiber(_A)
     @finch @loop i j y_ref[i] += A[i, j] * x[j]
     @finch @loop i y_ref[i] = 0
 
@@ -18,17 +20,18 @@ function spmv_taco(A, x)
     A_file = joinpath(persist_dir, "A.ttx")
     x_file = joinpath(persist_dir, "x.ttx")
 
-    ttwrite(y_file, (), [0], ())
-    if !(isfile(A_file) && isfile(x_file))
-        (I, J, V) = findnz(A)
-        ttwrite(A_file, (I, J), ones(Int32, length(V)), size(A))
-        ttwrite("x.ttx", ffindnz(x)..., size(x))
-    end
+    ttwrite(y_file, ffindnz(y_ref)..., size(y_ref))
+    #if !(isfile(A_file) && isfile(x_file))
+        (I, J, V) = findnz(_A)
+        ttwrite(A_file, (I, J), V, size(_A))
+        ttwrite(x_file, ffindnz(x)..., size(x))
+    #end
 
     io = IOBuffer()
 
-    @info :run
-    run(pipeline(`./spmv_taco $y_file $A_file $x_file`, stdout=io))
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib") do
+        run(pipeline(`./spmv_taco $y_file $A_file $x_file`, stdout=io))
+    end
 
     #y = fsparse(ttread(y_file)...)
 
@@ -43,7 +46,6 @@ function spmv_finch(_A, x)
     A = fiber(_A)
     y = fiber(x)
     x = fiber(x)
-    println(@finch_code @loop i j y[i] += A[i, j] * x[j])
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j])
 end
 
@@ -51,17 +53,21 @@ function spmv_finch_vbl(_A, x)
     A = copyto!(@fiber(d(sv(e(0.0)))), fiber(_A))
     y = fiber(x)
     x = fiber(x)
-    println(@finch_code @loop i j y[i] += A[i, j] * x[j])
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j])
 end
 
-@info "loading"
+function main()
+    for (mtx, key) in [
+        ("Boeing/ct20stif", "ct20stif"),
+    ]
+        A = SparseMatrixCSC(matrixdepot(mtx))
+        (m, n) = size(A)
+        println((key, m, n, nnz(A)))
+        x = rand(n)
+        println("taco_time: ", spmv_taco(A, x, key))
+        println("finch_time: ", spmv_finch(A, x))
+        println("finch_vbl_time: ", spmv_finch_vbl(A, x))
+    end
+end
 
-A = SparseMatrixCSC(matrixdepot("Boeing/ct20stif"))
-(m, n) = size(A)
-@info "taco"
-println("taco_time: ", spmv_taco(A, rand(n)))
-@info "finch"
-println("finch_time: ", spmv_finch(A, rand(n)))
-@info "finch_vbl"
-println("finch_vbl_time: ", spmv_finch_vbl(A, rand(n)))
+main()
