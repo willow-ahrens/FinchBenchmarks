@@ -8,38 +8,34 @@ using MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
-tensor_dir = get_scratch!(@__MODULE__, "tensors")
-
 function triangle_taco(A, key)
-    b_file = joinpath(mktempdir(prefix="triangle_taco_$(key)"), "b.ttx")
-    persist_dir = joinpath(tensor_dir, "triangle_taco_$(key)")
+    c_file = joinpath(mktempdir(prefix="triangle_taco_$(key)"), "c.ttx")
+    persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_$(key)")
     mkpath(persist_dir)
-    A1_file = joinpath(persist_dir, "A1.ttx")
+    A_file = joinpath(persist_dir, "A.ttx")
     A2_file = joinpath(persist_dir, "A2.ttx")
-    A3_file = joinpath(persist_dir, "A3.ttx")
+    AT_file = joinpath(persist_dir, "AT.ttx")
 
-    ttwrite(b_file, (), [0], ())
-    #if !(isfile(A1_file) && isfile(A2_file) && isfile(A3_file))
+    ttwrite(c_file, (), [0], ())
+    if !(isfile(A_file) && isfile(A2_file) && isfile(AT_file))
         (I, J, V) = findnz(A)
-        ttwrite(A1_file, (I, J), ones(Int32, length(V)), size(A))
+        ttwrite(A_file, (I, J), ones(Int32, length(V)), size(A))
         ttwrite(A2_file, (I, J), ones(Int32, length(V)), size(A))
-        ttwrite(A3_file, (I, J), ones(Int32, length(V)), size(A))
-    #end
-
+        ttwrite(AT_file, (J, I), ones(Int32, length(V)), size(A))
+    end
 
     io = IOBuffer()
 
-    println("running")
-    run(pipeline(`./triangle_taco $b_file $A1_file $A2_file $A3_file`, stdout=io))
-    println("done")
+    run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
 
-    b = ttread(b_file)[2][1]
+    c = ttread(c_file)[2][1]
 
-    b_ref = Scalar{0}()
+    c_ref = Scalar{0}()
     A_ref = pattern!(fiber(A))
-    @finch @loop i j k b_ref[] += A_ref[i, j] && A_ref[j, k] && A_ref[i, k]
+    AT_ref = pattern!(fiber(permutedims(A)))
+    @finch @loop i j k c_ref[] += A_ref[i, j] && A_ref[j, k] && AT_ref[i, k]
 
-    @assert Float64(b) ≈ Float64(b_ref())
+    @assert c == c_ref()
 
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
@@ -50,29 +46,24 @@ function triangle_finch_kernel(A, AT)
     return c()
 end
 function triangle_finch(_A, key)
-    #A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(permutedims(_A)))
     A = pattern!(fiber(_A))
-    A = pattern!(fiber(_A))
-    return @belapsed triangle_finch_kernel($A)
-    #foo(A)
-    #@profile foo(A)
-    #Profile.print()
-    #exit()
-    #return @belapsed foo($A)
+    AT = pattern!(fiber(permutedims(_A)))
+    return @belapsed triangle_finch_kernel($A, $AT)
 end
 
-function triangle_finch_gallop_kernel(A)
+function triangle_finch_gallop_kernel(A, AT)
     c = Scalar{0}()
-    @finch @loop i j k c[] += A[i, j] && A[j, k::gallop] && A[i, k::gallop]
+    @finch @loop i j k c[] += A[i, j] && A[j, k::gallop] && AT[i, k::gallop]
     return c()
 end
 function triangle_finch_gallop(_A, key)
     A = pattern!(fiber(_A))
-    b_ref = Scalar{0}()
-    @finch @loop i j k b_ref[] += A[i, j] && A[j, k] && A[i, k]
-    b = triangle_finch_gallop_kernel(A)
-    @assert b_ref() == b
-    return @belapsed triangle_finch_gallop_kernel($A)
+    AT = pattern!(fiber(permutedims(_A)))
+    c_ref = Scalar{0}()
+    @finch @loop i j k c_ref[] += A[i, j] && A[j, k] && AT[i, k]
+    c = triangle_finch_gallop_kernel(A, AT)
+    @assert c_ref() == c
+    return @belapsed triangle_finch_gallop_kernel($A, $AT)
 end
 
 function main()
@@ -88,13 +79,11 @@ function main()
         #("Gleich/usroads", "usroads"),
         #("Pajek/USpowerGrid", "USpowerGrid"),
     ]
-        println(key)
         A = SparseMatrixCSC(matrixdepot(mtx))
-        @info key size(A) nnz(A)
-        println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
-        println(maximum(permutedims(A).colptr[2:end] - permutedims(A).colptr[1:end-1]))
+        println((key, size(A), nnz(A)))
+        #println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
+        #println(maximum(permutedims(A).colptr[2:end] - permutedims(A).colptr[1:end-1]))
 
-        #A = permutedims(A)
         println("taco_time: ", triangle_taco(A, key))
         println("finch_time: ", triangle_finch(A, key))
         println("finch_gallop_time: ", triangle_finch_gallop(A, key))
@@ -102,8 +91,7 @@ function main()
     end
 end
 
-foo(A) = @inbounds begin
-    println("hi")
+foo(A, AT) = @inbounds begin
     A_lvl = A.lvl
     A_lvl_2 = A_lvl.lvl
     A_lvl_2_pos_alloc = length(A_lvl_2.pos)
@@ -112,7 +100,7 @@ foo(A) = @inbounds begin
     A_lvl_4 = A_lvl_3.lvl
     A_lvl_4_pos_alloc = length(A_lvl_4.pos)
     A_lvl_4_idx_alloc = length(A_lvl_4.idx)
-    A_lvl_5 = A.lvl
+    A_lvl_5 = AT.lvl
     A_lvl_6 = A_lvl_5.lvl
     A_lvl_6_pos_alloc = length(A_lvl_6.pos)
     A_lvl_6_idx_alloc = length(A_lvl_6.idx)

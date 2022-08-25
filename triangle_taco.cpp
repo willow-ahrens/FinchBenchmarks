@@ -16,37 +16,37 @@ int main(int argc, char **argv) {
     std::cerr << "wrong number of arguments" << std::endl;
   }
 
-  std::string file_b = argv[1];
-  std::string file_A1 = argv[2];
+  std::string file_c = argv[1];
+  std::string file_A = argv[2];
   std::string file_A2 = argv[3];
-  std::string file_A3 = argv[4];
+  std::string file_AT = argv[4];
 
-  Tensor<int64_t> A1 = read(file_A1, Format({Dense, Sparse}), true);
+  Tensor<int64_t> A = read(file_A, Format({Dense, Sparse}), true);
   Tensor<int64_t> A2 = read(file_A2, Format({Dense, Sparse}), true);
-  Tensor<int64_t> A3 = read(file_A3, Format({Dense, Sparse}), true);
+  Tensor<int64_t> AT = read(file_AT, Format({Dense, Sparse}), true);
 
-  Tensor<int64_t> b = read(file_b, Format({}), true);
+  Tensor<int64_t> c = read(file_c, Format({}), true);
 
   IndexVar i, j, k;
 
-  b = A1(i, j) * A2(i, k) * A3(j, k);
+  c = A(i, j) * A2(j, k) * AT(i, k);
 
   // Compile the expression
-  b.compile();
+  c.compile();
 
   // Assemble output indices and numerically compute the result
   auto time = benchmark(
-    [&b]() {
-      b.setNeedsCompute(true);
+    [&c]() {
+      c.setNeedsCompute(true);
     },
-    [&b]() {
-      b.compute();
+    [&c]() {
+      c.compute();
     }
   );
 
   std::cout << time << std::endl;
 
-  write(file_b, b);
+  write(file_c, c);
 
   return 0;
 }
