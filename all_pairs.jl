@@ -125,10 +125,8 @@ function all_pairs_opencv(A, num_imgs, key)
     	run(pipeline(`./all_pairs_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
-    println("opencv time: ", opencv_time)
 
-
-    result = fsparse(ttread(joinpath(tmp_tensor_dir, "result.ttx"))...)
+    result = fsparse(ttread(result_file)...)
 
     return (opencv_time, result)
 end
@@ -144,6 +142,7 @@ for (mtx, key) in [
     A = matrixdepot(mtx)
 
     opencv_time, result = all_pairs_opencv(A, num_imgs, key)
+    println("opencv time: ", opencv_time)
 
     finch_time, result = all_pairs_finch(A, num_imgs)
     println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
