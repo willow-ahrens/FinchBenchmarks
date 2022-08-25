@@ -14,48 +14,51 @@ function triangle_taco(A, key)
     b_file = joinpath(mktempdir(prefix="triangle_taco_$(key)"), "b.ttx")
     persist_dir = joinpath(tensor_dir, "triangle_taco_$(key)")
     mkpath(persist_dir)
-    b_ref_file = joinpath(persist_dir, "b_ref.ttx")
     A1_file = joinpath(persist_dir, "A1.ttx")
     A2_file = joinpath(persist_dir, "A2.ttx")
     A3_file = joinpath(persist_dir, "A3.ttx")
 
     ttwrite(b_file, (), [0], ())
-    if !(isfile(A1_file) && isfile(A2_file) && isfile(A3_file))
+    #if !(isfile(A1_file) && isfile(A2_file) && isfile(A3_file))
         (I, J, V) = findnz(A)
         ttwrite(A1_file, (I, J), ones(Int32, length(V)), size(A))
         ttwrite(A2_file, (I, J), ones(Int32, length(V)), size(A))
         ttwrite(A3_file, (I, J), ones(Int32, length(V)), size(A))
-    end
+    #end
+
+
+    io = IOBuffer()
+
+    println("running")
+    run(pipeline(`./triangle_taco $b_file $A1_file $A2_file $A3_file`, stdout=io))
+    println("done")
+
+    b = ttread(b_file)[2][1]
 
     b_ref = Scalar{0}()
     A_ref = pattern!(fiber(A))
     @finch @loop i j k b_ref[] += A_ref[i, j] && A_ref[j, k] && A_ref[i, k]
-
-    io = IOBuffer()
-
-    run(pipeline(`./triangle_taco $b_file $A1_file $A2_file $A3_file`, stdout=io))
-
-    b = ttread(b_file)[2][1]
 
     @assert Float64(b) ≈ Float64(b_ref())
 
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
-function triangle_finch_kernel(A)
+function triangle_finch_kernel(A, AT)
     c = Scalar{0}()
-    @finch @loop i j k c[] += A[i, j] && A[j, k] && A[i, k]
+    @finch @loop i j k c[] += A[i, j] && A[j, k] && AT[i, k]
     return c()
 end
 function triangle_finch(_A, key)
-    A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(permutedims(_A)))
-    A = pattern!(A)
-    #return @belapsed triangle_finch_kernel($A)
-    foo(A)
-    @profile foo(A)
-    Profile.print()
-    exit()
-    return @belapsed foo($A)
+    #A = copyto!(Fiber(Dense(SparseList{Int32}(Element(0.0)))), fiber(permutedims(_A)))
+    A = pattern!(fiber(_A))
+    A = pattern!(fiber(_A))
+    return @belapsed triangle_finch_kernel($A)
+    #foo(A)
+    #@profile foo(A)
+    #Profile.print()
+    #exit()
+    #return @belapsed foo($A)
 end
 
 function triangle_finch_gallop_kernel(A)
@@ -89,8 +92,10 @@ function main()
         A = SparseMatrixCSC(matrixdepot(mtx))
         @info key size(A) nnz(A)
         println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
+        println(maximum(permutedims(A).colptr[2:end] - permutedims(A).colptr[1:end-1]))
 
-        #println("taco_time: ", triangle_taco(A, key))
+        #A = permutedims(A)
+        println("taco_time: ", triangle_taco(A, key))
         println("finch_time: ", triangle_finch(A, key))
         println("finch_gallop_time: ", triangle_finch_gallop(A, key))
 
