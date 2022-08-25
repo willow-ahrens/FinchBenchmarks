@@ -1,17 +1,11 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
 using JSON
-using TensorDepot, MatrixDepot
+using MatrixDepot,TensorDepot
+using Scratch
 
 include("TensorMarket.jl")
 using .TensorMarket
 
-using Scratch
-tmp_tensor_dir = ""
-if haskey(ENV, "TMP_TENSOR_DIR")
-    tmp_tensor_dir = ENV["TMP_TENSOR_DIR"]
-else
-    tmp_tensor_dir = get_scratch!(@__MODULE__, "tmp_tensor_dir")
-end
 
 function pngwrite(filename, I, V, shape)
     @boundscheck begin
@@ -47,98 +41,88 @@ function pngwrite(filename, I, V, shape)
     end
 end
 
-function img_to_dense(img)
-    return copyto!(@fiber(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
-end
-
-function img_to_repeat(img)
-    return copyto!(@fiber(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
-end
-
-@inline sq(x) = x * x
-
-Finch.register()
-
-function all_pairs_finch_gallop_kernel(m, T, O)
+function all_pairs_finch_gallop_kernel(m, A, O)
     o = Scalar{0.0}()
-    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop ij o[] += $sq(convert($(value(Float64)),T[k, ij::gallop]) - convert($(value(Float64)),T[l, ij::gallop]))))
+    R = @fiber(d(e(0.0)))
+    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij::gallop] * A[l, ij::gallop]))
 end
 
 function all_pairs_finch_gallop(tensor_func, num_imgs)
-    mnist_arr = (tensor_func(1:num_imgs))
-    T = dropdefaults!(@fiber(d(sl(e($(0x00::UInt8))))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
-    println(length(copy(rawview(channelview(mnist_arr)))))
-    println(length(T.lvl.lvl.lvl.val))
+    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_gallop_kernel($m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_gallop_kernel($m, $A, $O)
 
     return finch_time, O
 end
 
-function all_pairs_finch_kernel(m, T, O)
+function all_pairs_finch_kernel(m, A, O)
     o = Scalar{0.0}()
-    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(o[])) where (@loop ij o[] += $sq(convert($(value(Float64)),T[k, ij]) - convert($(value(Float64)),T[l, ij]))))
+    R = @fiber(d(e(0.0)))
+    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij] * A[l, ij]))
 end
 
 function all_pairs_finch(tensor_func, num_imgs)
-    mnist_arr = (tensor_func(1:num_imgs))
-    T = dropdefaults!(@fiber(d(sl(e($(0x00::UInt8))))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
-    println(length(copy(rawview(channelview(mnist_arr)))))
-    println(length(T.lvl.lvl.lvl.val))
+    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
     return finch_time, O
 end
 
 function all_pairs_finch_vbl(tensor_func, num_imgs)
-    mnist_arr = (tensor_func(1:num_imgs))
-    T = dropdefaults!(@fiber(d(sv(e($(0x00::UInt8))))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
+    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sv(e(0.0)))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
     return finch_time, O
 end
 
-function all_pairs_finch_rle(tensor_func, num_imgs)
-    mnist_arr = (tensor_func(1:num_imgs))
-    T = copyto!(@fiber(d(rl($(0x00::UInt8)))),reshape(copy(rawview(channelview(mnist_arr))), num_imgs, :))
-    println(length(T.lvl.lvl.val))
+function all_pairs_finch_rle(A, num_imgs)
+    A = reshape(permutedims(mnist_arr[:, :, num_imgs], (3, 1, 2)), num_imgs, :)
+    A = copyto!(@fiber(d(rl(0.0))),A)
     O = fiber(zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $T, $O)
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
     return finch_time, O
 end
 
 
-function all_pairs_opencv(tensor_func, num_imgs, result_compare)
-    T = tensor_func(1:num_imgs)
+function all_pairs_opencv(A, num_imgs, key)
+    persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "allpairs_opencv_$(key)")
+
+    result_file = joinpath(mktempdir(prefix="allpairs_opencv_$(key)"), "result.ttx")
+
     for i in 1:num_imgs
-        img = img_to_dense(T[i, :, :])
-        pngwrite(joinpath(tmp_tensor_dir, "$i.png"), ffindnz(img)..., size(img))
-        pngwrite("$i.png", ffindnz(img)..., size(img))
+        img = A[:, :, i]
+        pngwrite(joinpath(persist_dir, "$i.png"), ffindnz(img)..., size(img))
     end
 
     io = IOBuffer()
 
+    
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./opencv/build/lib", "LD_LIBRARY_PATH" => "./opencv/build/lib") do
-    	run(pipeline(`./all_pairs_opencv $tmp_tensor_dir/ $num_imgs $tmp_tensor_dir/result.ttx`, stdout=io))
+    	run(pipeline(`./all_pairs_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
     println("opencv time: ", opencv_time)
@@ -149,22 +133,27 @@ function all_pairs_opencv(tensor_func, num_imgs, result_compare)
     return (opencv_time, result)
 end
 
-run(pipeline(`make all_pairs_opencv`))
+num_imgs = 40
+for (mtx, key) in [
+    ("mnist_train", "mnist"),
+    ("emnist_train","emnist"),
+    ("omniglot_train", "omniglot")]
 
+    println(key)
 
-dataset = mnist
-num_imgs = 20
+    A = matrixdepot(mtx)
 
-opencv_time, result = all_pairs_opencv(dataset, num_imgs, result)
+    opencv_time, result = all_pairs_opencv(A, num_imgs, key)
 
-finch_time, result = all_pairs_finch(dataset, num_imgs)
-println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
+    finch_time, result = all_pairs_finch(A, num_imgs)
+    println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
 
-finch_gallop_time, result = all_pairs_finch_gallop(dataset, num_imgs)
-println("Finch (gallop) time : ", finch_gallop_time, " -- ", opencv_time/finch_gallop_time, "x faster than OpenCV")
+    finch_gallop_time, result = all_pairs_finch_gallop(A, num_imgs)
+    println("Finch (gallop) time : ", finch_gallop_time, " -- ", opencv_time/finch_gallop_time, "x faster than OpenCV")
 
-finch_vbl_time, result = all_pairs_finch_vbl(dataset, num_imgs)
-println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
+    finch_vbl_time, result = all_pairs_finch_vbl(A, num_imgs)
+    println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
 
-finch_rle_time, result = all_pairs_finch_rle(dataset, num_imgs)
-println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
+    finch_rle_time, result = all_pairs_finch_rle(A, num_imgs)
+    println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
+end
