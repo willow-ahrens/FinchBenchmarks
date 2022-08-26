@@ -199,9 +199,6 @@ numSketches = 1
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
-run(pipeline(`make alpha_opencv`))
-run(pipeline(`make alpha_taco_rle`))
-
 results = Vector{Dict{String, <: Any}}()
 for i in 1:numSketches 
     println("Performing op: $i")
