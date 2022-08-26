@@ -108,6 +108,72 @@ function all_pairs_finch_rle(A, num_imgs)
     return finch_time, O
 end
 
+function all_pairs_finch_uint8_gallop_kernel(m, A, O)
+    o = Scalar{0.0}()
+    R = @fiber(d(e(0.0)))
+    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij::gallop]) * convert($(value(Float64)), A[l, ij::gallop])))
+end
+
+function all_pairs_finch_uint8_gallop(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_gallop_kernel($m, $A, $O)
+
+    return finch_uint8_time, O
+end
+
+function all_pairs_finch_uint8_kernel(m, A, O)
+    o = Scalar{0.0}()
+    R = @fiber(d(e(0.0)))
+    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij]) * convert($(value(Float64)), A[l, ij])))
+end
+
+function all_pairs_finch_uint8(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sl(e(0x00)))),A)
+    O = fiber(zeros(Float64, num_imgs, num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
+
+    return finch_uint8_time, O
+end
+
+function all_pairs_finch_uint8_vbl(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
+    A = dropdefaults!(@fiber(d(sv(e(0x00)))),A)
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
+
+    return finch_uint8_time, O
+end
+
+function all_pairs_finch_uint8_rle(A, num_imgs)
+    A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
+    A = copyto!(@fiber(d(rl(0x00))),A)
+    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    
+    dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
+    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
+
+    return finch_uint8_time, O
+end
+
 
 function all_pairs_opencv(A, num_imgs, key)
     persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "allpairs_opencv_$(key)")
@@ -175,16 +241,32 @@ function main(result_file)
         finch_rle_time, result = all_pairs_finch_rle(A, num_imgs)
         println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
 
+        finch_uint8_time, result = all_pairs_finch_uint8(A, num_imgs)
+        println("Finch time : ", finch_uint8_time, " -- ", opencv_time/finch_uint8_time, "x faster than OpenCV")
+
+        finch_uint8_gallop_time, result = all_pairs_finch_uint8_gallop(A, num_imgs)
+        println("Finch (gallop) time : ", finch_uint8_gallop_time, " -- ", opencv_time/finch_uint8_gallop_time, "x faster than OpenCV")
+
+        finch_uint8_vbl_time, result = all_pairs_finch_uint8_vbl(A, num_imgs)
+        println("Finch (vbl) time : ", finch_uint8_vbl_time, " -- ", opencv_time/finch_uint8_vbl_time, "x faster than OpenCV")
+
+        finch_uint8_rle_time, result = all_pairs_finch_uint8_rle(A, num_imgs)
+        println("Finch (rle) time : ", finch_uint8_rle_time, " -- ", opencv_time/finch_uint8_rle_time, "x faster than OpenCV")
+
         open(result_file,"a") do f
             println()
             JSON.print(f, Dict(
                 "matrix"=>mtx,
                 "n"=>size(A,1),
-                "taco_time"=>taco_time,
+                "opencv_time"=>opencv_time,
                 "finch_time"=>finch_time,
                 "finch_gallop_time"=>finch_gallop_time,
                 "finch_vbl_time"=>finch_vbl_time,
                 "finch_rle_time"=>finch_rle_time,
+                "finch_uint8_time"=>finch_uint8_time,
+                "finch_uint8_gallop_time"=>finch_uint8_gallop_time,
+                "finch_uint8_vbl_time"=>finch_uint8_vbl_time,
+                "finch_uint8_rle_time"=>finch_uint8_rle_time,
             ))
             println(f, ",")
         end
