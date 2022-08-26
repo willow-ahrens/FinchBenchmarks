@@ -185,6 +185,7 @@ function main(result_file)
         push!(finch_rle_times, time)
 
         open(result_file,"a") do f
+            println()
             JSON.print(f, Dict(
                 "matrix"=>mtx,
                 "n"=>size(A,1),
