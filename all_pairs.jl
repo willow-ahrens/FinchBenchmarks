@@ -226,6 +226,8 @@ function main(result_file)
             A = reshape(A, size(A, 1), size(A, 2), :)
         end
 
+	println("begin")
+
         opencv_time, result = all_pairs_opencv(A, num_imgs, key)
         println("opencv time: ", opencv_time)
 

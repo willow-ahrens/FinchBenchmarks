@@ -52,7 +52,7 @@ function img_to_dense(img)
 end
 
 function img_to_repeat(img)
-    return copyto!(@fiber(d(r(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d(rl(0x0::UInt8))), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
