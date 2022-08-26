@@ -5,9 +5,6 @@ using TensorDepot, MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
-using Profile
-using PProf
-
 using Scratch
 tmp_tensor_dir = ""
 if haskey(ENV, "TMP_TENSOR_DIR")
