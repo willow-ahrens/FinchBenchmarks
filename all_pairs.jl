@@ -150,7 +150,9 @@ function main(result_file)
         ("mnist_train", "mnist"),
         ("emnist_letters_train","emnist_letters"),
         ("emnist_digits_train","emnist_digits"),
-        ("omniglot_train", "omniglot")]
+        ("omniglot_train", "omniglot"),
+        ("cifar10_train", "cifar10"),
+        ]
 
         println(key)
         push!(datasets, key)

@@ -167,6 +167,7 @@ function main(result_file)
         println("finch_gallop_time: ", finch_gallop_time)
 
         open(result_file,"a") do f
+            println()
             JSON.print(f, Dict(
                 "matrix"=>mtx,
                 "n"=>size(A,1),
