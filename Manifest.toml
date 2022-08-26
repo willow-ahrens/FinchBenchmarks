@@ -281,9 +281,9 @@ version = "0.9.1"
 
 [[deps.Documenter]]
 deps = ["ANSIColoredPrinters", "Base64", "Dates", "DocStringExtensions", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "REPL", "Test", "Unicode"]
-git-tree-sha1 = "ee945ed10767de73cf8b610951b98228cb65af80"
+git-tree-sha1 = "6030186b00a38e9d0434518627426570aac2ef95"
 uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-version = "0.27.22"
+version = "0.27.23"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
@@ -416,9 +416,9 @@ version = "1.12.2+1"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "Dates", "IniFile", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "071bc27ca07f09c1692389e9034acb816c754402"
+git-tree-sha1 = "59ba44e0aa49b87a8c7a8920ec76f8afe87ed502"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.3.2"
+version = "1.3.3"
 
 [[deps.IOCapture]]
 deps = ["Logging", "Random"]
@@ -1213,7 +1213,7 @@ version = "0.1.1"
 
 [[deps.TensorDepot]]
 deps = ["CSV", "DataFrames", "DelimitedFiles", "Downloads", "GZip", "Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
-git-tree-sha1 = "3ee2dc7ef6bfa0023861537005dddf14ea87e698"
+git-tree-sha1 = "165614c48f0669b50fe18e4c237b91e01a9e1cb6"
 repo-rev = "main"
 repo-url = "https://github.com/willow-ahrens/TensorDepot.jl.git"
 uuid = "a265fce4-34b0-4e6b-9b08-892587f3fa1f"

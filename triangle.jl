@@ -26,7 +26,9 @@ function triangle_taco(A, key)
 
     io = IOBuffer()
 
-    run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib") do
+        run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
+    end
 
     c = ttread(c_file)[2][1]
 
@@ -66,151 +68,122 @@ function triangle_finch_gallop(_A, key)
     return @belapsed triangle_finch_gallop_kernel($A, $AT)
 end
 
-function main()
+        #("SNAP/web-NotreDame", "web-NotreDame"),
+        #("SNAP/roadNet-PA", "roadNet-PA"),
+        #("DIMACS10/sd2010", "sd2010"),
+        #("SNAP/soc-Epinions1", "soc-Epinions1"),
+        #("SNAP/email-EuAll", "email-EuAll"),
+        #("SNAP/wiki-Talk", "wiki-Talk"),
+        #("SNAP/web-BerkStan", "web-BerkStan"),
+        #("Gleich/flickr", "flickr"),
+        #("Gleich/usroads", "usroads"),
+        #("Pajek/USpowerGrid", "USpowerGrid"),
+
+function main(result_file)
+    open(result_file,"w") do f
+        println(f, "[")
+    end
     for (mtx, key) in [
-        ("SNAP/web-NotreDame", "web-NotreDame"),
-        ("SNAP/roadNet-PA", "roadNet-PA"),
-        ("DIMACS10/sd2010", "sd2010"),
+        ("SNAP/email-Eu-core", "email-Eu-core"),
+        ("SNAP/email-Eu-core-temporal", "email-Eu-core-temporal"),
+        ("SNAP/CollegeMsg", "CollegeMsg"),
+        ("SNAP/soc-sign-bitcoin-alpha", "soc-sign-bitcoin-alpha"),
+        ("SNAP/ca-GrQc", "ca-GrQc"),
+        ("SNAP/soc-sign-bitcoin-otc", "soc-sign-bitcoin-otc"),
+        ("SNAP/p2p-Gnutella08", "p2p-Gnutella08"),
+        ("SNAP/as-735", "as-735"),
+        ("SNAP/p2p-Gnutella09", "p2p-Gnutella09"),
+        ("SNAP/wiki-Vote", "wiki-Vote"),
+        ("SNAP/p2p-Gnutella06", "p2p-Gnutella06"),
+        ("SNAP/p2p-Gnutella05", "p2p-Gnutella05"),
+        ("SNAP/ca-HepTh", "ca-HepTh"),
+        ("SNAP/p2p-Gnutella04", "p2p-Gnutella04"),
+        ("SNAP/wiki-RfA", "wiki-RfA"),
+        ("SNAP/Oregon-1", "Oregon-1"),
+        ("SNAP/Oregon-2", "Oregon-2"),
+        ("SNAP/ca-HepPh", "ca-HepPh"),
+        ("SNAP/ca-AstroPh", "ca-AstroPh"),
+        ("SNAP/p2p-Gnutella25", "p2p-Gnutella25"),
+        ("SNAP/ca-CondMat", "ca-CondMat"),
+        ("SNAP/sx-mathoverflow", "sx-mathoverflow"),
+        ("SNAP/p2p-Gnutella24", "p2p-Gnutella24"),
+        ("SNAP/cit-HepTh", "cit-HepTh"),
+        ("SNAP/as-caida", "as-caida"),
+        ("SNAP/cit-HepPh", "cit-HepPh"),
+        ("SNAP/p2p-Gnutella30", "p2p-Gnutella30"),
+        ("SNAP/email-Enron", "email-Enron"),
+        ("SNAP/loc-Brightkite", "loc-Brightkite"),
+        ("SNAP/p2p-Gnutella31", "p2p-Gnutella31"),
         ("SNAP/soc-Epinions1", "soc-Epinions1"),
+        ("SNAP/soc-sign-Slashdot081106", "soc-sign-Slashdot081106"),
+        ("SNAP/soc-Slashdot0811", "soc-Slashdot0811"),
+        ("SNAP/soc-sign-Slashdot090216", "soc-sign-Slashdot090216"),
+        ("SNAP/soc-sign-Slashdot090221", "soc-sign-Slashdot090221"),
+        ("SNAP/soc-Slashdot0902", "soc-Slashdot0902"),
+        ("SNAP/soc-sign-epinions", "soc-sign-epinions"),
+        ("SNAP/sx-askubuntu", "sx-askubuntu"),
+        ("SNAP/sx-superuser", "sx-superuser"),
+        ("SNAP/loc-Gowalla", "loc-Gowalla"),
+        ("SNAP/amazon0302", "amazon0302"),
         ("SNAP/email-EuAll", "email-EuAll"),
-        ("SNAP/wiki-Talk", "wiki-Talk"),
+        ("SNAP/web-Stanford", "web-Stanford"),
+        ("SNAP/com-DBLP", "com-DBLP"),
+        ("SNAP/web-NotreDame", "web-NotreDame"),
+        ("SNAP/com-Amazon", "com-Amazon"),
+        ("SNAP/amazon0312", "amazon0312"),
+        ("SNAP/amazon0601", "amazon0601"),
+        ("SNAP/amazon0505", "amazon0505"),
+        ("SNAP/higgs-twitter", "higgs-twitter"),
         ("SNAP/web-BerkStan", "web-BerkStan"),
-        ("Gleich/flickr", "flickr"),
-        ("Gleich/usroads", "usroads"),
-        ("Pajek/USpowerGrid", "USpowerGrid"),
+        ("SNAP/web-Google", "web-Google"),
+        ("SNAP/roadNet-PA", "roadNet-PA"),
+        ("SNAP/com-Youtube", "com-Youtube"),
+        ("SNAP/wiki-talk-temporal", "wiki-talk-temporal"),
+        ("SNAP/roadNet-TX", "roadNet-TX"),
+        ("SNAP/soc-Pokec", "soc-Pokec"),
+        ("SNAP/as-Skitter", "as-Skitter"),
+        ("SNAP/wiki-topcats", "wiki-topcats"),
+        ("SNAP/roadNet-CA", "roadNet-CA"),
+        ("SNAP/wiki-Talk", "wiki-Talk"),
+        ("SNAP/sx-stackoverflow", "sx-stackoverflow"),
+        ("SNAP/com-Orkut", "com-Orkut"),
+        ("SNAP/cit-Patents", "cit-Patents"),
+        ("SNAP/com-LiveJournal", "com-LiveJournal"),
+        ("SNAP/soc-LiveJournal1", "soc-LiveJournal1"),
+        ("SNAP/twitter7", "twitter7"),
+        ("SNAP/com-Friendster", "com-Friendster"),
     ]
         A = SparseMatrixCSC(matrixdepot(mtx))
         println((key, size(A), nnz(A)))
         #println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
         #println(maximum(permutedims(A).colptr[2:end] - permutedims(A).colptr[1:end-1]))
 
-        println("taco_time: ", triangle_taco(A, key))
-        println("finch_time: ", triangle_finch(A, key))
-        println("finch_gallop_time: ", triangle_finch_gallop(A, key))
+        taco_time = triangle_taco(A, key)
+        println("taco_time: ", taco_time)
+        finch_time = triangle_finch(A, key)
+        println("finch_time: ", finch_time)
+        gallop_time = triangle_finch_gallop(A, key)
+        println("finch_gallop_time: ", finch_gallop_time)
 
+        open(result_file,"a") do f
+            JSON.print(f, Dict(
+                :matrix=>mtx,
+                :n=>size(A,1),
+                :nnz=>nnz(A),
+                :taco_time=>taco_time,
+                :finch_time=>finch_time,
+                :finch_gallop_time=>finch_gallop_time
+            ))
+            println(",")
+        end
     end
 end
 
-foo(A, AT) = @inbounds begin
-    A_lvl = A.lvl
-    A_lvl_2 = A_lvl.lvl
-    A_lvl_2_pos_alloc = length(A_lvl_2.pos)
-    A_lvl_2_idx_alloc = length(A_lvl_2.idx)
-    A_lvl_3 = A.lvl
-    A_lvl_4 = A_lvl_3.lvl
-    A_lvl_4_pos_alloc = length(A_lvl_4.pos)
-    A_lvl_4_idx_alloc = length(A_lvl_4.idx)
-    A_lvl_5 = AT.lvl
-    A_lvl_6 = A_lvl_5.lvl
-    A_lvl_6_pos_alloc = length(A_lvl_6.pos)
-    A_lvl_6_idx_alloc = length(A_lvl_6.idx)
-    j_stop = A_lvl_2.I
-    k_stop = A_lvl_4.I
-    i_stop = A_lvl.I
-    c_val = 0
-    for i = 1:i_stop
-        A_lvl_q = (1 - 1) * A_lvl.I + i
-        A_lvl_5_q = (1 - 1) * A_lvl_5.I + i
-        A_lvl_2_q_start = A_lvl_2.pos[A_lvl_q]
-        A_lvl_2_q_stop = A_lvl_2.pos[A_lvl_q + 1]
-        if A_lvl_2_q_start < A_lvl_2_q_stop
-            A_lvl_2_i_start = A_lvl_2.idx[A_lvl_2_q_start]
-            A_lvl_2_i_stop = A_lvl_2.idx[A_lvl_2_q_stop - 1]
-        else
-            A_lvl_2_i_start = 1
-            A_lvl_2_i_stop = 0
-        end
-        A_lvl_6_q_start = A_lvl_6.pos[A_lvl_5_q]
-        A_lvl_6_q_stop = A_lvl_6.pos[A_lvl_5_q + 1]
-        if A_lvl_6_q_start < A_lvl_6_q_stop
-            A_lvl_6_i_start = A_lvl_6.idx[A_lvl_6_q_start]
-            A_lvl_6_i_stop = A_lvl_6.idx[A_lvl_6_q_stop - 1]
-        else
-            A_lvl_6_i_start = 1
-            A_lvl_6_i_stop = 0
-        end
-        A_lvl_2_q = A_lvl_2_q_start
-        A_lvl_2_i = A_lvl_2_i_start
-        j = 1
-        j_start = j
-        phase_start = max(j_start)
-        phase_stop = min(A_lvl_2_i_stop, j_stop)
-        if phase_stop >= phase_start
-            j = j
-            j = phase_start
-            while A_lvl_2_q < A_lvl_2_q_stop && A_lvl_2.idx[A_lvl_2_q] < phase_start
-                A_lvl_2_q += 1
-            end
-            while j <= phase_stop
-                j_start_2 = j
-                A_lvl_2_i = A_lvl_2.idx[A_lvl_2_q]
-                phase_stop_2 = A_lvl_2_i
-                j_2 = j
-                if A_lvl_2_i == phase_stop_2
-                    j_3 = phase_stop_2
-                    A_lvl_3_q = (1 - 1) * A_lvl_3.I + j_3
-                    A_lvl_4_q_start = A_lvl_4.pos[A_lvl_3_q]
-                    A_lvl_4_q_stop = A_lvl_4.pos[A_lvl_3_q + 1]
-                    if A_lvl_4_q_start < A_lvl_4_q_stop
-                        A_lvl_4_i_start = A_lvl_4.idx[A_lvl_4_q_start]
-                        A_lvl_4_i_stop = A_lvl_4.idx[A_lvl_4_q_stop - 1]
-                    else
-                        A_lvl_4_i_start = 1
-                        A_lvl_4_i_stop = 0
-                    end
-                    A_lvl_4_q = A_lvl_4_q_start
-                    A_lvl_4_i = A_lvl_4_i_start
-                    A_lvl_6_q = A_lvl_6_q_start
-                    A_lvl_6_i = A_lvl_6_i_start
-                    k = 1
-                    k_start = k
-                    phase_start_3 = max(k_start)
-                    phase_stop_3 = min(A_lvl_4_i_stop, A_lvl_6_i_stop, k_stop)
-                    if phase_stop_3 >= phase_start_3
-                        k = k
-                        k = phase_start_3
-                        #while A_lvl_4_q < A_lvl_4_q_stop && A_lvl_4.idx[A_lvl_4_q] < phase_start_3
-                        #    A_lvl_4_q += 1
-                        #end
-                        #while A_lvl_6_q < A_lvl_6_q_stop && A_lvl_6.idx[A_lvl_6_q] < phase_start_3
-                        #    A_lvl_6_q += 1
-                        #end
-                        #while k <= phase_stop_3
-                        while A_lvl_4_q < A_lvl_4_q_stop && A_lvl_6_q < A_lvl_6_q_stop
-                            #k_start_2 = k
-                            A_lvl_4_i = A_lvl_4.idx[A_lvl_4_q]
-                            A_lvl_6_i = A_lvl_6.idx[A_lvl_6_q]
-                            #phase_start_4 = max(k_start_2)
-                            phase_stop_4 = min(A_lvl_4_i, A_lvl_6_i)#, phase_stop_3)
-                            #if phase_stop_4 >= phase_start_4
-                                #k_2 = k
-                                if A_lvl_4_i == phase_stop_4 && A_lvl_6_i == phase_stop_4
-                                    c_val = c_val + true
-                                end
-                                A_lvl_4_q += A_lvl_4_i == phase_stop_4
-                                A_lvl_6_q += A_lvl_6_i == phase_stop_4
-                                #k = phase_stop_4 + 1
-                            #end
-                        end
-                        k = phase_stop_3 + 1
-                    end
+#mtxs = listdata("SNAP/*")
+#@assert all(mtx->mtx.n == mtx.m, mtxs)
+#sort!(mtxs, by=(mtx->mtx.n))
+#for mtx in (map(mtx -> mtx.name, mtxs))
+#    println(mtx, ", ")
+#end
 
-                    A_lvl_2_q += 1
-                else
-                end
-                j = phase_stop_2 + 1
-            end
-            j = phase_stop + 1
-        end
-        j_start = j
-        phase_start_8 = max(j_start)
-        phase_stop_8 = min(j_stop)
-        if phase_stop_8 >= phase_start_8
-            j_4 = j
-            j = phase_stop_8 + 1
-        end
-    end
-    (c = (Scalar){0, Int64}(c_val),)
-end
-
-main()
+main(ARGS...)
