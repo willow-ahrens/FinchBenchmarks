@@ -1,5 +1,4 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
-using Noise
 using JSON
 using MatrixDepot,TensorDepot
 using Scratch
@@ -73,7 +72,7 @@ end
 function all_pairs_finch(A, num_imgs)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    O = fiber(zeros(Float64, num_imgs, num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
@@ -135,11 +134,6 @@ end
 
 num_imgs = 40
 datasets = []
-opencv_times = []
-finch_times = []
-finch_gallop_times = []
-finch_vbl_times = []
-finch_rle_times = []
 
 function main(result_file)
     open(result_file,"w") do f
@@ -162,36 +156,30 @@ function main(result_file)
             A = A[:, :, randperm(end)]
         elseif ndims(A) == 4
             A = A[:, :, :, randperm(end)]
-            A = A .>> 16
+            A = (A .>> 4) .<< 4
             A = reshape(A, size(A, 1), size(A, 2), :)
         end
 
         opencv_time, result = all_pairs_opencv(A, num_imgs, key)
         println("opencv time: ", opencv_time)
-        push!(opencv_times, time)
 
         finch_time, result = all_pairs_finch(A, num_imgs)
         println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
-        push!(finch_times, time)
 
         finch_gallop_time, result = all_pairs_finch_gallop(A, num_imgs)
         println("Finch (gallop) time : ", finch_gallop_time, " -- ", opencv_time/finch_gallop_time, "x faster than OpenCV")
-        push!(finch_gallop_times, time)
 
         finch_vbl_time, result = all_pairs_finch_vbl(A, num_imgs)
         println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
-        push!(finch_vbl_times, time)
 
         finch_rle_time, result = all_pairs_finch_rle(A, num_imgs)
         println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
-        push!(finch_rle_times, time)
 
         open(result_file,"a") do f
             println()
             JSON.print(f, Dict(
                 "matrix"=>mtx,
                 "n"=>size(A,1),
-                "nnz"=>nnz(A),
                 "taco_time"=>taco_time,
                 "finch_time"=>finch_time,
                 "finch_gallop_time"=>finch_gallop_time,
@@ -206,3 +194,5 @@ function main(result_file)
         println(f, "]")
     end
 end
+
+main(ARGS...)

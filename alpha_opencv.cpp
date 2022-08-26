@@ -12,6 +12,8 @@ int main(int argc, char **argv)
     if(argc != 5){
         std::cerr << "wrong number of arguments" << std::endl;
     }
+    cv::setNumThreads(1);
+
 
     // A = x*B + (1-x)*C
     std::string file_A = argv[1];

@@ -31,6 +31,7 @@ void mtxWriteDense(std::string filename, cv::Mat& m){
 
 int main(int argc, char **argv)
 {
+    cv::setNumThreads(1);
     if(argc != 4){
         std::cerr << "wrong number of arguments " << argc << std::endl;
     }
