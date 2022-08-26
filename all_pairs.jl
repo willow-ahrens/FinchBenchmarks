@@ -111,7 +111,7 @@ end
 function all_pairs_finch_uint8_gallop_kernel(m, A, O)
     o = Scalar{0.0}()
     R = @fiber(d(e(0.0)))
-    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k ij R[k] += convert($(value(Float64)), A[k, ij])^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij::gallop]) * convert($(value(Float64)), A[l, ij::gallop])))
 end
 
@@ -131,7 +131,7 @@ end
 function all_pairs_finch_uint8_kernel(m, A, O)
     o = Scalar{0.0}()
     R = @fiber(d(e(0.0)))
-    @finch @loop k ij R[k] += A[k, ij]^2
+    @finch @loop k ij R[k] += convert($(value(Float64)), A[k, ij])^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij]) * convert($(value(Float64)), A[l, ij])))
 end
 
@@ -242,16 +242,16 @@ function main(result_file)
         println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
 
         finch_uint8_time, result = all_pairs_finch_uint8(A, num_imgs)
-        println("Finch time : ", finch_uint8_time, " -- ", opencv_time/finch_uint8_time, "x faster than OpenCV")
+        println("Finch uint8 time : ", finch_uint8_time, " -- ", opencv_time/finch_uint8_time, "x faster than OpenCV")
 
         finch_uint8_gallop_time, result = all_pairs_finch_uint8_gallop(A, num_imgs)
-        println("Finch (gallop) time : ", finch_uint8_gallop_time, " -- ", opencv_time/finch_uint8_gallop_time, "x faster than OpenCV")
+        println("Finch uint8 (gallop) time : ", finch_uint8_gallop_time, " -- ", opencv_time/finch_uint8_gallop_time, "x faster than OpenCV")
 
         finch_uint8_vbl_time, result = all_pairs_finch_uint8_vbl(A, num_imgs)
-        println("Finch (vbl) time : ", finch_uint8_vbl_time, " -- ", opencv_time/finch_uint8_vbl_time, "x faster than OpenCV")
+        println("Finch uint8 (vbl) time : ", finch_uint8_vbl_time, " -- ", opencv_time/finch_uint8_vbl_time, "x faster than OpenCV")
 
         finch_uint8_rle_time, result = all_pairs_finch_uint8_rle(A, num_imgs)
-        println("Finch (rle) time : ", finch_uint8_rle_time, " -- ", opencv_time/finch_uint8_rle_time, "x faster than OpenCV")
+        println("Finch uint8 (rle) time : ", finch_uint8_rle_time, " -- ", opencv_time/finch_uint8_rle_time, "x faster than OpenCV")
 
         open(result_file,"a") do f
             println()
