@@ -70,9 +70,7 @@ function alpha_opencv(B, C, alpha)
     Cf = img_to_dense(C)
     A_ref = img_to_dense(B)
 
-    f = x -> round(UInt8, x)
-
-    @finch @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
+    @finch @loop i j A_ref[i, j] = round($(value(UInt8)), as[] * Bf[i, j] + mas[] * Cf[i, j])
     pngwrite(ARefPath, ffindnz(A_ref)..., size(A_ref))
     
     @finch @loop i j A_ref[i, j] = 0
