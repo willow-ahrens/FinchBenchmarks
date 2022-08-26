@@ -1,4 +1,5 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
+using Noise
 using JSON
 using MatrixDepot,TensorDepot
 using Scratch
@@ -140,35 +141,65 @@ finch_gallop_times = []
 finch_vbl_times = []
 finch_rle_times = []
 
-for (mtx, key) in [
-    ("mnist_train", "mnist"),
-    ("emnist_letters_train","emnist_letters"),
-    ("emnist_digits_train","emnist_digits"),
-    ("omniglot_train", "omniglot")]
+function main(result_file)
+    open(result_file,"w") do f
+        println(f, "[")
+    end
 
-    println(key)
-    push!(datasets, key)
+    for (mtx, key) in [
+        ("mnist_train", "mnist"),
+        ("emnist_letters_train","emnist_letters"),
+        ("emnist_digits_train","emnist_digits"),
+        ("omniglot_train", "omniglot")]
 
-    A = matrixdepot(mtx)
-    A = A[:, :, randperm(end)]
+        println(key)
+        push!(datasets, key)
 
-    opencv_time, result = all_pairs_opencv(A, num_imgs, key)
-    println("opencv time: ", opencv_time)
-    push!(opencv_times, time)
+        A = matrixdepot(mtx)
+        if ndims(A) == 3
+            A = A[:, :, randperm(end)]
+        elseif ndims(A) == 4
+            A = A[:, :, :, randperm(end)]
+            A = A .>> 16
+            A = reshape(A, size(A, 1), size(A, 2), :)
+        end
 
-    finch_time, result = all_pairs_finch(A, num_imgs)
-    println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
-    push!(finch_times, time)
+        opencv_time, result = all_pairs_opencv(A, num_imgs, key)
+        println("opencv time: ", opencv_time)
+        push!(opencv_times, time)
 
-    finch_gallop_time, result = all_pairs_finch_gallop(A, num_imgs)
-    println("Finch (gallop) time : ", finch_gallop_time, " -- ", opencv_time/finch_gallop_time, "x faster than OpenCV")
-    push!(finch_gallop_times, time)
+        finch_time, result = all_pairs_finch(A, num_imgs)
+        println("Finch time : ", finch_time, " -- ", opencv_time/finch_time, "x faster than OpenCV")
+        push!(finch_times, time)
 
-    finch_vbl_time, result = all_pairs_finch_vbl(A, num_imgs)
-    println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
-    push!(finch_vbl_times, time)
+        finch_gallop_time, result = all_pairs_finch_gallop(A, num_imgs)
+        println("Finch (gallop) time : ", finch_gallop_time, " -- ", opencv_time/finch_gallop_time, "x faster than OpenCV")
+        push!(finch_gallop_times, time)
 
-    finch_rle_time, result = all_pairs_finch_rle(A, num_imgs)
-    println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
-    push!(finch_rle_times, time)
+        finch_vbl_time, result = all_pairs_finch_vbl(A, num_imgs)
+        println("Finch (vbl) time : ", finch_vbl_time, " -- ", opencv_time/finch_vbl_time, "x faster than OpenCV")
+        push!(finch_vbl_times, time)
+
+        finch_rle_time, result = all_pairs_finch_rle(A, num_imgs)
+        println("Finch (rle) time : ", finch_rle_time, " -- ", opencv_time/finch_rle_time, "x faster than OpenCV")
+        push!(finch_rle_times, time)
+
+        open(result_file,"a") do f
+            JSON.print(f, Dict(
+                "matrix"=>mtx,
+                "n"=>size(A,1),
+                "nnz"=>nnz(A),
+                "taco_time"=>taco_time,
+                "finch_time"=>finch_time,
+                "finch_gallop_time"=>finch_gallop_time,
+                "finch_vbl_time"=>finch_vbl_time,
+                "finch_rle_time"=>finch_rle_time,
+            ))
+            println(f, ",")
+        end
+    end
+
+    open(result_file,"a") do f
+        println(f, "]")
+    end
 end

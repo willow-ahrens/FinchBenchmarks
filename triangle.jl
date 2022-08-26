@@ -3,6 +3,7 @@ using SparseArrays
 using BenchmarkTools
 using Scratch
 using Profile
+using JSON
 
 using MatrixDepot
 include("TensorMarket.jl")
@@ -162,20 +163,23 @@ function main(result_file)
         println("taco_time: ", taco_time)
         finch_time = triangle_finch(A, key)
         println("finch_time: ", finch_time)
-        gallop_time = triangle_finch_gallop(A, key)
+        finch_gallop_time = triangle_finch_gallop(A, key)
         println("finch_gallop_time: ", finch_gallop_time)
 
         open(result_file,"a") do f
             JSON.print(f, Dict(
-                :matrix=>mtx,
-                :n=>size(A,1),
-                :nnz=>nnz(A),
-                :taco_time=>taco_time,
-                :finch_time=>finch_time,
-                :finch_gallop_time=>finch_gallop_time
+                "matrix"=>mtx,
+                "n"=>size(A,1),
+                "nnz"=>nnz(A),
+                "taco_time"=>taco_time,
+                "finch_time"=>finch_time,
+                "finch_gallop_time"=>finch_gallop_time,
             ))
-            println(",")
+            println(f, ",")
         end
+    end
+    open(result_file,"a") do f
+        println(f, "]")
     end
 end
 

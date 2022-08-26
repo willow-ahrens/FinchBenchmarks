@@ -1213,7 +1213,7 @@ version = "0.1.1"
 
 [[deps.TensorDepot]]
 deps = ["CSV", "DataFrames", "DelimitedFiles", "Downloads", "GZip", "Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
-git-tree-sha1 = "165614c48f0669b50fe18e4c237b91e01a9e1cb6"
+git-tree-sha1 = "2621aa81f4f3048ffea0a69f5738a1c959982884"
 repo-rev = "main"
 repo-url = "https://github.com/willow-ahrens/TensorDepot.jl.git"
 uuid = "a265fce4-34b0-4e6b-9b08-892587f3fa1f"
