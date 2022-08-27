@@ -198,7 +198,7 @@ function all_pairs_opencv(A, num_imgs, key)
     return (opencv_time, result)
 end
 
-num_imgs = 40
+num_imgs = 256
 datasets = []
 
 function main(result_file)
