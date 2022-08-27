@@ -55,4 +55,5 @@
 {"nnz":5975248,"matrix":"SNAP/com-Youtube","finch_time":19.65914374,"taco_time":20.60398383,"finch_gallop_time":5.457086794,"n":1134890},
 {"nnz":3309592,"matrix":"SNAP/wiki-talk-temporal","finch_time":4.592085507,"taco_time":3.92042545,"finch_gallop_time":2.201649208,"n":1140149},
 {"nnz":3843320,"matrix":"SNAP/roadNet-TX","finch_time":0.233966001,"taco_time":0.161610786,"finch_gallop_time":0.210439969,"n":1393383},
-{"nnz":30622564,"matrix":"SNAP/soc-Pokec","finch_time":30.148693671,"taco_time":23.744214438,"finch_gallop_time":20.519454459,"n":1632803},
+{"nnz":30622564,"matrix":"SNAP/soc-Pokec","finch_time":30.148693671,"taco_time":23.744214438,"finch_gallop_time":20.519454459,"n":1632803}
+]

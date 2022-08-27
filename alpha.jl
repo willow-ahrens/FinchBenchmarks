@@ -124,8 +124,7 @@ function alpha_taco_rle(B, C, alpha)
     Cf = img_to_repeat(C)
     A_ref = img_to_repeat(B)
 
-    f = x -> round(UInt8, x)
-    @finch @loop i j A_ref[i, j] = f(as[] * Bf[i, j] + mas[] * Cf[i, j])
+    @finch @loop i j A_ref[i, j] = round($(value(UInt8)), as[] * Bf[i, j] + mas[] * Cf[i, j])
 
     A_ref_dense = @fiber(d(d(e($(zero(UInt8))))))
     @finch @loop i j A_ref_dense[i, j] = A_ref[i, j]
