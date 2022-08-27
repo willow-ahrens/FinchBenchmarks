@@ -194,7 +194,7 @@ end
 kernel_str = "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
 alpha = 0.5
 
-numSketches = 1
+numSketches = 10
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
