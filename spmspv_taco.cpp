@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
 
   IndexVar i, j;
 
-  y(i) += A(i, j) * x(j);
+  y(i) = A(i, j) * x(j);
 
   // Compile the expression
   y.compile();
