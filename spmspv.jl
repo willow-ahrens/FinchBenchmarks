@@ -421,9 +421,12 @@ function main(result_file)
     #]
         A = SparseMatrixCSC{Float64}(matrixdepot(mtx))
         (m, n) = size(A)
+	if m < 100 || n < 100
+	    continue
+	end
         println("0.1 density: ", (key, m, n, nnz(A)))
         row = Dict("matrix"=>mtx, "x" => "0.1 density", "n"=>size(A, 1), "nnz"=>(nnz(A)))
-        for _ = 1:2
+        for _ = 1:1
             x = fsprand((n,), 0.1)
             for (mtd, timer) in [
                 ("taco", (A, x) -> spmspv_taco(A, x, key)),
@@ -446,7 +449,7 @@ function main(result_file)
 
         println("10 count: ", (key, m, n, nnz(A)))
         row = Dict("matrix"=>mtx, "x" => "10 count", "n"=>size(A, 1), "nnz"=>(nnz(A)))
-        for _ = 1:10
+        for _ = 1:1
             x = Fiber(SparseList(n, [1, 11], sort(randperm(n)[1:10]), Element{0.0}(rand(10))))
             for (mtd, timer) in [
                 ("taco", (A, x) -> spmspv_taco(A, x, key)),
