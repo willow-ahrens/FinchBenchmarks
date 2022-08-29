@@ -84,8 +84,8 @@ function conv_dense_time(A, F)
 end
 
 function conv_opencv_time(A, F, key)
-    A_file = "A.png"#joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
-    C_file = "C.ttx"#joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
+    A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
+    C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
 
     pngwrite(A_file, ffindnz(A)..., size(A))
 

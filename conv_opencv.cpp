@@ -59,7 +59,5 @@ int main(int argc, char **argv)
     cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
     //cv::filter2D(A, C, -1, F);
     mtxWriteDense(C_path, C);
-    mtxWriteDense("hello", A);
-
     return 0;
 }
