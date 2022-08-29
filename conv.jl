@@ -1,6 +1,5 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
 using JSON
-using MatrixDepot,TensorDepot
 using Scratch
 using Random
 
@@ -43,38 +42,64 @@ function pngwrite(filename, I, V, shape)
 end
 
 function conv_finch_kernel(C, A, F)
-    @finch @loop i j k l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]], 0) * coalesce(F[permit[j], permit[l]], 0)
+    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]], 0) * coalesce(F[permit[j], permit[l]], 0)
 end
 
 function conv_finch_time(A, F)
     C = similar(A)
-    @belapsed conv_finch_kernel($C, $A, $F)
+    A = pattern!(A)
+    F = copyto!(@fiber(d(d(e(0.0)))), F)
+    time = @belapsed conv_finch_kernel($C, $A, $F)
+    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]], 0) * coalesce(F[permit[j], permit[l]], 0)
+    return (time, C)
 end
 
-#=
-function all_pairs_opencv(A, num_imgs, key)
-    persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "allpairs_opencv_$(key)")
-
-    result_file = joinpath(mktempdir(prefix="allpairs_opencv_$(key)"), "result.ttx")
-
-    for i in 1:num_imgs
-        img = A[:, :, i]
-        pngwrite(joinpath(persist_dir, "$i.png"), ffindnz(img)..., size(img))
+function conv_dense_kernel(C, A, F)
+    (m, n) = size(A)
+    C .= 0
+    for k = 1:n
+        for l = 1:11
+            if 1 <= k-6+l <= n
+                for i = 1:m
+                    if A[i, k] != 0
+                        for j = 1:11
+                            if 1 <= i-6+j <= m
+                                C[i, k] += A[i-6+j, k-6+l] * F[j, l]
+                            end
+                        end
+                    end
+                end
+            end
+        end
     end
+    return C
+end
+
+function conv_dense_time(A, F)
+    (m, n) = size(FiberArray(A))
+    A = copyto!(Array{UInt8}(undef, m, n), FiberArray(A))
+    C = Array{UInt8}(undef, m, n)
+    time = @belapsed conv_dense_kernel($C, $A, $F)
+    return (time, C)
+end
+
+function all_pairs_opencv(A, num_imgs, key)
+    A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
+    C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
+
+    pngwrite(A_file, ffindnz(A_file)..., size(img))
 
     io = IOBuffer()
-
     
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./opencv/build/lib", "LD_LIBRARY_PATH" => "./opencv/build/lib") do
     	run(pipeline(`./all_pairs_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    result = fsparse(ttread(result_file)...)
+    C = fsparse(ttread(C_file)...)
 
-    return (opencv_time, result)
+    return (opencv_time, C)
 end
-=#
 
 num_imgs = 256
 datasets = []
@@ -86,17 +111,23 @@ function main(result_file)
 
     for p in [0.1, 0.01, 0.001, 0.0001]
 
-        A = pattern(fsprand((1000, 1000), p))
-        F = rand(11, 11)
+        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((20, 20), p)))
+        F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
             println()
-            finch_time = conv_finch_time(A, F)
-            println(finch_time)
+            finch_time, finch_C = conv_finch_time(A, F)
+            println("finch", finch_time)
+            dense_time, dense_C = conv_dense_time(A, F)
+            println("dense", dense_time)
+            display(Int.(dense_C))
+            display(Int.(copyto!(similar(dense_C), FiberArray(finch_C))))
+            @assert dense_C == FiberArray(finch_C)
             JSON.print(f, Dict(
-                "matrix"=>mtx,
+                "p"=>p,
                 "n"=>size(A,1),
                 "finch_time"=>finch_time,
+                "dense_time"=>dense_time,
             ))
             println(f, ",")
         end
