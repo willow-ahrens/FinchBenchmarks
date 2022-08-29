@@ -98,7 +98,6 @@ function conv_opencv_time(A, F, key)
 
     C = FiberArray(fsparse(ttread(C_file)...)) .* FiberArray(A)
 
-
     return (opencv_time, C)
 end
 
@@ -112,15 +111,15 @@ function main(result_file)
 
     for p in [0.1, 0.01, 0.001, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((20, 20), p)))
+        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((1000, 1000), p)))
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
             dense_time, dense_C = conv_dense_time(A, F)
             println("dense", dense_time)
             opencv_time, opencv_C = conv_opencv_time(A, F, p)
-            display(Int.(dense_C))
-            display(Int.(opencv_C))
+            #display(Int.(dense_C))
+            #display(Int.(opencv_C))
             #@assert opencv_C == dense_C
             println("opencv", opencv_time)
             finch_time, finch_C = conv_finch_time(A, F)
