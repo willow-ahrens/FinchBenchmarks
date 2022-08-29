@@ -83,16 +83,16 @@ function conv_dense_time(A, F)
     return (time, C)
 end
 
-function conv_opencv(A, num_imgs, key)
+function conv_opencv_time(A, F, key)
     A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
     C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
 
-    pngwrite(A_file, ffindnz(A_file)..., size(img))
+    pngwrite(A_file, ffindnz(A)..., size(A))
 
     io = IOBuffer()
     
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./opencv/build/lib", "LD_LIBRARY_PATH" => "./opencv/build/lib") do
-    	run(pipeline(`./conv_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
+    	run(pipeline(`./conv_opencv $A_file $C_file`, stdout=io))
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
@@ -115,6 +115,8 @@ function main(result_file)
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
+            opencv_time, opencv_C = conv_opencv_time(A, F, p)
+            println("opencv", opencv_time)
             finch_time, finch_C = conv_finch_time(A, F)
             println("finch", finch_time)
             dense_time, dense_C = conv_dense_time(A, F)
