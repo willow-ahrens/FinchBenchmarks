@@ -13,7 +13,7 @@ function pngwrite(filename, I, V, shape)
     end
 
     if length(shape) == 2
-        out = Array{Gray{N0f8}, 2}(undef, shape[1],shape[2])
+        out = zeros(Gray{N0f8}, shape[1], shape[2])
 
         for (coord, val) in zip(zip(I...), V)
             out[coord[1], coord[2]] = reinterpret(N0f8, convert(UInt8,val))
@@ -48,7 +48,7 @@ end
 function conv_finch_time(A, F)
     C = similar(A)
     A = pattern!(A)
-    F = copyto!(@fiber(d(d(e(0.0)))), F)
+    F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
     time = @belapsed conv_finch_kernel($C, $A, $F)
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
     return (time, C)
@@ -84,8 +84,8 @@ function conv_dense_time(A, F)
 end
 
 function conv_opencv_time(A, F, key)
-    A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
-    C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
+    A_file = "A.png"#joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
+    C_file = "C.ttx"#joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
 
     pngwrite(A_file, ffindnz(A)..., size(A))
 
@@ -96,7 +96,8 @@ function conv_opencv_time(A, F, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    C = fsparse(ttread(C_file)...)
+    C = FiberArray(fsparse(ttread(C_file)...)) .* FiberArray(A)
+
 
     return (opencv_time, C)
 end
@@ -111,19 +112,20 @@ function main(result_file)
 
     for p in [0.1, 0.01, 0.001, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((1000, 1000), p)))
+        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((20, 20), p)))
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
-            opencv_time, opencv_C = conv_opencv_time(A, F, p)
-            println("opencv", opencv_time)
-            finch_time, finch_C = conv_finch_time(A, F)
-            println("finch", finch_time)
             dense_time, dense_C = conv_dense_time(A, F)
             println("dense", dense_time)
-            #display(Int.(dense_C))
-            #display(Int.(copyto!(similar(dense_C), FiberArray(finch_C))))
-            @assert dense_C == FiberArray(finch_C)
+            opencv_time, opencv_C = conv_opencv_time(A, F, p)
+            display(Int.(dense_C))
+            display(Int.(opencv_C))
+            #@assert opencv_C == dense_C
+            println("opencv", opencv_time)
+            finch_time, finch_C = conv_finch_time(A, F)
+            @assert FiberArray(finch_C) == dense_C
+            println("finch", finch_time)
             JSON.print(f, Dict(
                 "p"=>p,
                 "finch_time"=>finch_time,
