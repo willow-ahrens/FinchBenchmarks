@@ -120,8 +120,8 @@ function main(result_file)
             println("finch", finch_time)
             dense_time, dense_C = conv_dense_time(A, F)
             println("dense", dense_time)
-            display(Int.(dense_C))
-            display(Int.(copyto!(similar(dense_C), FiberArray(finch_C))))
+            #display(Int.(dense_C))
+            #display(Int.(copyto!(similar(dense_C), FiberArray(finch_C))))
             @assert dense_C == FiberArray(finch_C)
             JSON.print(f, Dict(
                 "p"=>p,
