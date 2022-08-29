@@ -83,7 +83,7 @@ function conv_dense_time(A, F)
     return (time, C)
 end
 
-function all_pairs_opencv(A, num_imgs, key)
+function conv_opencv(A, num_imgs, key)
     A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
     C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
 
@@ -92,7 +92,7 @@ function all_pairs_opencv(A, num_imgs, key)
     io = IOBuffer()
     
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./opencv/build/lib", "LD_LIBRARY_PATH" => "./opencv/build/lib") do
-    	run(pipeline(`./all_pairs_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
+    	run(pipeline(`./conv_opencv $persist_dir/ $num_imgs $result_file`, stdout=io))
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
@@ -115,7 +115,6 @@ function main(result_file)
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
-            println()
             finch_time, finch_C = conv_finch_time(A, F)
             println("finch", finch_time)
             dense_time, dense_C = conv_dense_time(A, F)
