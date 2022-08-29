@@ -204,5 +204,5 @@
 {"nnz":2014701,"finch_follow_times":[0.307067605],"finch_times":[0.21924983],"finch_vbl_times":[0.051672075],"x":"0.1 density","matrix":"HB/bcsstk32","finch_gallop_times":[0.055371324],"finch_lead_times":[0.058858659],"taco_times":[0.53605462],"n":44609},
 {"nnz":2014701,"finch_follow_times":[0.012811333],"finch_times":[0.013515421],"finch_vbl_times":[0.002493221],"x":"10 count","matrix":"HB/bcsstk32","finch_gallop_times":[0.012204284],"finch_lead_times":[0.006889129],"taco_times":[0.011340969000000001],"n":44609},
 {"nnz":2043492,"finch_follow_times":[0.126157188],"finch_times":[0.097388934],"finch_vbl_times":[0.023436211],"x":"0.1 density","matrix":"HB/bcsstk30","finch_gallop_times":[0.026089464],"finch_lead_times":[0.030527164],"taco_times":[0.22172708400000002],"n":28924},
-{"nnz":2043492,"finch_follow_times":[0.011589344],"finch_times":[0.012763057],"finch_vbl_times":[0.002149014],"x":"10 count","matrix":"HB/bcsstk30","finch_gallop_times":[0.011323177],"finch_lead_times":[0.006374284],"taco_times":[0.010268953],"n":28924},
+{"nnz":2043492,"finch_follow_times":[0.011589344],"finch_times":[0.012763057],"finch_vbl_times":[0.002149014],"x":"10 count","matrix":"HB/bcsstk30","finch_gallop_times":[0.011323177],"finch_lead_times":[0.006374284],"taco_times":[0.010268953],"n":28924}
 ]

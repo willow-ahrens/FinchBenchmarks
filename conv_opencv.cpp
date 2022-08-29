@@ -16,14 +16,14 @@ void mtxWriteDense(std::string filename, cv::Mat& m){
         std::cout<<"File Not Opened : " << filename << std::endl;  return;
     }
 
-    fout << "%%MatrixMarket matrix array real general" << std::endl;
+    fout << "%%MatrixMarket matrix array integer general" << std::endl;
     fout << m.rows << " " << m.cols << std::endl;
     
     for(int i=0; i<m.rows; i++)
     {
         for(int j=0; j<m.cols; j++)
         {
-            fout << m.at<double>(i,j) << std::endl;
+            fout << (int)m.at<uchar>(i,j) << std::endl;
         }
     }
 
@@ -41,21 +41,23 @@ int main(int argc, char **argv)
     std::string C_path = argv[2];
 
     Mat A = imread(A_path, IMREAD_GRAYSCALE);
-    Mat C(1000,1000, CV_8U, 0);
-    Mat F = Mat::ones(11,11, CV_64F);
+    Mat C = Mat::ones(A.rows,A.cols, CV_8U);
+    Mat F(11,11, CV_64F, Scalar::all(1.0));
 
     // Assemble output indices and numerically compute the result
     auto time = benchmark(
         []() {},
         [&]() {
-            cv::filter2D(A, C, -1, F);
+            cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
+            //cv::filter2D(A, C, -1, F);
         }
     );
 
 
     std::cout << time << std::endl;
     
+    cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
+    //cv::filter2D(A, C, -1, F);
     mtxWriteDense(C_path, C);
-
     return 0;
 }
