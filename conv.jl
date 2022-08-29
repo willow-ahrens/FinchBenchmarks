@@ -111,7 +111,7 @@ function main(result_file)
 
     for p in [0.1, 0.01, 0.001, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((20, 20), p)))
+        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((1000, 1000), p)))
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
@@ -125,7 +125,6 @@ function main(result_file)
             @assert dense_C == FiberArray(finch_C)
             JSON.print(f, Dict(
                 "p"=>p,
-                "n"=>size(A,1),
                 "finch_time"=>finch_time,
                 "dense_time"=>dense_time,
             ))
