@@ -42,7 +42,7 @@ function pngwrite(filename, I, V, shape)
 end
 
 function conv_finch_kernel(C, A, F)
-    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]], 0) * coalesce(F[permit[j], permit[l]], 0)
+    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
 end
 
 function conv_finch_time(A, F)
@@ -50,7 +50,7 @@ function conv_finch_time(A, F)
     A = pattern!(A)
     F = copyto!(@fiber(d(d(e(0.0)))), F)
     time = @belapsed conv_finch_kernel($C, $A, $F)
-    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]], 0) * coalesce(F[permit[j], permit[l]], 0)
+    @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
     return (time, C)
 end
 
