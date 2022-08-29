@@ -29,15 +29,15 @@ int main(int argc, char **argv) {
 
   // Compile the expression
   y.compile();
+  y.assemble();
 
   // Assemble output indices and numerically compute the result
   auto time = benchmark(
     [&y]() {
-      y.setNeedsAssemble(true);
+      //y.setNeedsAssemble(true);
       y.setNeedsCompute(true);
     },
     [&y]() {
-      y.assemble();
       y.compute();
     }
   );

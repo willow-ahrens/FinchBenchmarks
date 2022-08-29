@@ -419,9 +419,13 @@ function main(result_file)
     for (mtx, key) in hb#[
         #("Boeing/ct20stif", "ct20stif"),
     #]
-        A = SparseMatrixCSC{Float64}(matrixdepot(mtx))
+    	raw = matrixdepot(mtx)
+	if !(eltype(raw) <: Real)
+            continue
+        end
+        A = SparseMatrixCSC{Float64}(raw)
         (m, n) = size(A)
-	if m < 100 || n < 100
+	if m < 1000 || n < 1000
 	    continue
 	end
         println("0.1 density: ", (key, m, n, nnz(A)))

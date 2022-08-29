@@ -198,30 +198,31 @@ numSketches = 10
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
+results = Vector{Dict{String, <: Any}}()
+
 for (humansketchesA, humansketchesB) in [
     (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
-    (permutedims(matrixdepot("omniglot")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot"), "omniglot")[10_0001:10_000+numSketches], (3, 1, 2)),
+    (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train"), "omniglot")[:, :, 10_0001:10_000+numSketches], (3, 1, 2)),
 ]
-
-results = Vector{Dict{String, <: Any}}()
-for i in 1:numSketches 
-    println("Performing op: $i")
-    B = humansketchesA[i, :, :]
-    C = humansketchesB[i, :, :]
-
-    opencvResult = alpha_opencv(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
-
-    tacoRLEResult = alpha_taco_rle(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
-
-    finchSparse = alpha_finch_sparse(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse, "dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))  
-
-    finchrepeat = alpha_finch(B, C, 0.5)
-    push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+    for i in 1:numSketches 
+        println("Performing op: $i")
+        B = humansketchesA[i, :, :]
+        C = humansketchesB[i, :, :]
+    
+        opencvResult = alpha_opencv(B, C, 0.5)
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+    
+        tacoRLEResult = alpha_taco_rle(B, C, 0.5)
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+    
+        finchSparse = alpha_finch_sparse(B, C, 0.5)
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse, "dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))  
+    
+        finchrepeat = alpha_finch(B, C, 0.5)
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+    end
 end
 
-open("alpha.json","w") do f
+open(ARGS[1],"w") do f
     JSON.print(f, results, 4)
 end
