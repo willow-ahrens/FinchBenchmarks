@@ -11,4 +11,4 @@ export PATH="$SCRATCH/julia:$PATH"
 export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
 export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
 
-../julia/julia --project=. conv.jl conv_results_research.json
+../julia/julia --project=. conv.jl conv_results.json
