@@ -3,6 +3,7 @@
 *.o
 spmv_taco
 spmspv_taco
+conv_opencv
 triangle_taco
 alpha_opencv
 alpha_taco_rle
