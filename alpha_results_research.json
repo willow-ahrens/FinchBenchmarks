@@ -1,0 +1,722 @@
+[
+    {
+        "kind": "opencv",
+        "imageC": 10001,
+        "time": 0.000870599,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10001,
+        "time": 0.000199568,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10001,
+        "time": 0.000251421,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10001,
+        "time": 0.00032278,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10002,
+        "time": 0.0008339560000000001,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10002,
+        "time": 0.000250121,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10002,
+        "time": 0.000323481,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10002,
+        "time": 0.000410043,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10003,
+        "time": 0.0008342450000000001,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10003,
+        "time": 0.00027445700000000003,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10003,
+        "time": 0.000341559,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10003,
+        "time": 0.000431841,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10004,
+        "time": 0.000833899,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10004,
+        "time": 0.00022285000000000002,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10004,
+        "time": 0.000260967,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10004,
+        "time": 0.000359305,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10005,
+        "time": 0.000834897,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10005,
+        "time": 0.000286732,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10005,
+        "time": 0.000356029,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10005,
+        "time": 0.000454404,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10006,
+        "time": 0.0008341580000000001,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10006,
+        "time": 0.00026127100000000004,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10006,
+        "time": 0.000325743,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10006,
+        "time": 0.000423953,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10007,
+        "time": 0.0008340400000000001,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10007,
+        "time": 0.00020699500000000002,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10007,
+        "time": 0.000272237,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10007,
+        "time": 0.00030654,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10008,
+        "time": 0.000834093,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10008,
+        "time": 0.00023437700000000002,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10008,
+        "time": 0.000283569,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10008,
+        "time": 0.000351728,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10009,
+        "time": 0.000833858,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10009,
+        "time": 0.000308317,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10009,
+        "time": 0.00037526,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10009,
+        "time": 0.00049705,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10010,
+        "time": 0.000843896,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10010,
+        "time": 0.00022696100000000002,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10010,
+        "time": 0.000315228,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10010,
+        "time": 0.000346661,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "humansketches"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10001,
+        "time": 7.818e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10001,
+        "time": 4.0106000000000005e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10001,
+        "time": 9.0999e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10001,
+        "time": 1.3263e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 1,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10002,
+        "time": 7.857000000000001e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10002,
+        "time": 3.7198000000000005e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10002,
+        "time": 9.1409e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10002,
+        "time": 1.3686e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 2,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10003,
+        "time": 7.823000000000001e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10003,
+        "time": 3.6991000000000005e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10003,
+        "time": 9.145e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10003,
+        "time": 1.2888e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 3,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10004,
+        "time": 7.803e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10004,
+        "time": 3.6978000000000004e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10004,
+        "time": 9.145e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10004,
+        "time": 1.3552e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 4,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10005,
+        "time": 7.817e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10005,
+        "time": 3.6506e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10005,
+        "time": 9.1192e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10005,
+        "time": 1.2918e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 5,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10006,
+        "time": 7.814e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10006,
+        "time": 3.6953000000000003e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10006,
+        "time": 9.146e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10006,
+        "time": 1.2919e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 6,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10007,
+        "time": 7.819000000000001e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10007,
+        "time": 3.6991000000000005e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10007,
+        "time": 9.1433e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10007,
+        "time": 1.4098e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 7,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10008,
+        "time": 7.819000000000001e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10008,
+        "time": 3.6031e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10008,
+        "time": 9.2008e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10008,
+        "time": 1.3298e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 8,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10009,
+        "time": 7.819000000000001e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10009,
+        "time": 3.7981e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10009,
+        "time": 9.1695e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10009,
+        "time": 1.4281e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 9,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "opencv",
+        "imageC": 10010,
+        "time": 7.953e-6,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "taco_rle",
+        "imageC": 10010,
+        "time": 3.6745e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_sparse",
+        "imageC": 10010,
+        "time": 9.144e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "omniglot"
+    },
+    {
+        "kind": "finch_repeat",
+        "imageC": 10010,
+        "time": 1.3222e-5,
+        "kernel": "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])",
+        "alpha": 0.5,
+        "imageB": 10,
+        "dataset": "omniglot"
+    }
+]

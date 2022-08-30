@@ -1,0 +1,9 @@
+[
+{"opencv_time":0.039557153000000005,"dense_time":0.080113193,"finch_time":0.061552936,"p":0.1},
+{"opencv_time":0.038919819,"dense_time":0.057194843,"finch_time":0.027843747,"p":0.05},
+{"opencv_time":0.038823438,"dense_time":0.038234319,"finch_time":0.003670376,"p":0.01},
+{"opencv_time":0.039124552,"dense_time":0.035490963,"finch_time":0.001573544,"p":0.005},
+{"opencv_time":0.039014876000000004,"dense_time":0.033247375,"finch_time":0.000220182,"p":0.001},
+{"opencv_time":0.038782016,"dense_time":0.032957496,"finch_time":7.9652e-5,"p":0.0005},
+{"opencv_time":0.039068249,"dense_time":0.032714991,"finch_time":1.4677e-5,"p":0.0001},
+]
