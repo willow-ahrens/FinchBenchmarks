@@ -11,6 +11,5 @@ export SCRATCH=/data/scratch/pahrens
 export PATH="$SCRATCH/julia:$PATH"
 export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
 export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
-export DATADEPS_ALWAYS_ACCEPT=true
 
-../julia/julia --project=. alpha.jl alpha_results_research.json
+../julia/julia --project=. conv.jl conv_results_research.json
