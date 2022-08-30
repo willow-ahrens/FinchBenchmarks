@@ -47,8 +47,9 @@ end
 
 function conv_finch_time(A, F)
     C = similar(A)
-    A = pattern!(A)
-    F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
+    #A = pattern!(A)
+    #F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
+    F = copyto!(@fiber(d(d(e(0.0)))), F)
     time = @belapsed conv_finch_kernel($C, $A, $F)
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
     return (time, C)
@@ -87,7 +88,8 @@ function conv_opencv_time(A, F, key)
     A_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "A.png")
     C_file = joinpath(mktempdir(prefix="conv_opencv_$(key)"), "C.ttx")
 
-    pngwrite(A_file, ffindnz(A)..., size(A))
+    (crds, val) = ffindnz(A)
+    pngwrite(A_file, crds, ones(UInt8, length(val)), size(A))
 
     io = IOBuffer()
     
@@ -111,7 +113,7 @@ function main(result_file)
 
     for p in [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0x00)))), pattern!(fsprand((1000, 1000), p)))
+        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
@@ -127,6 +129,7 @@ function main(result_file)
             println("finch", finch_time)
             JSON.print(f, Dict(
                 "p"=>p,
+                "opencv_time"=>opencv_time,
                 "finch_time"=>finch_time,
                 "dense_time"=>dense_time,
             ))

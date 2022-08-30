@@ -40,24 +40,26 @@ int main(int argc, char **argv)
     std::string A_path = argv[1];
     std::string C_path = argv[2];
 
-    Mat A = imread(A_path, IMREAD_GRAYSCALE);
-    Mat C = Mat::ones(A.rows,A.cols, CV_8U);
+    Mat A_in = imread(A_path, IMREAD_GRAYSCALE);
+    Mat A(A_in.rows, A_in.cols, CV_64F);
+    A_in.convertTo(A, CV_64F);
+    Mat C = Mat::ones(A.rows,A.cols, CV_64F);
     Mat F(11,11, CV_64F, Scalar::all(1.0));
 
     // Assemble output indices and numerically compute the result
     auto time = benchmark(
         []() {},
         [&]() {
-            cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
-            //cv::filter2D(A, C, -1, F);
+            //cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
+            cv::filter2D(A, C, -1, F);
         }
     );
 
 
     std::cout << time << std::endl;
     
-    cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
-    //cv::filter2D(A, C, -1, F);
+    //cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
+    cv::filter2D(A, C, -1, F);
     mtxWriteDense(C_path, C);
     return 0;
 }
