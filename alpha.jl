@@ -200,9 +200,9 @@ humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
 results = Vector{Dict{String, <: Any}}()
 
-for (humansketchesA, humansketchesB) in [
+for (humansketchesA, humansketchesB, key) in [
     (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
-    (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train"), "omniglot")[:, :, 10_0001:10_000+numSketches], (3, 1, 2)),
+    (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train")[:, :, 10_001:10_000+numSketches], (3, 1, 2)), "omniglot"),
 ]
     for i in 1:numSketches 
         println("Performing op: $i")
