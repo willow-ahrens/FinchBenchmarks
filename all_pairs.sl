@@ -13,5 +13,4 @@ export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
 export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
 export DATADEPS_ALWAYS_ACCEPT=true
 
-$SCRATCH/julia/julia --project=. foo.jl 
-$SCRATCH/julia/julia --project=. all_pairs.jl all_pairs_research.json
+$SCRATCH/julia/julia --project=. all_pairs.jl all_pairs.json
