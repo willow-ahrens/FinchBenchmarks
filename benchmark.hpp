@@ -1,4 +1,4 @@
-#define TIME_MAX 10.0
+#define TIME_MAX 5.0
 #define TRIAL_MAX 10000
 
 template <typename Setup, typename Test>
