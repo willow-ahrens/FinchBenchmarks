@@ -1,7 +1,7 @@
 using JSON
 using Statistics
 
-d = open("alpha_results_research.json", "r") do f
+d = open("alpha_results.json", "r") do f
     JSON.parse(f)
 end
 

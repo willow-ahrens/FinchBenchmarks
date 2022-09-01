@@ -1,7 +1,7 @@
 using JSON
 
 
-d = open("all_pairs_research_final.json", "r") do f
+d = open("all_pairs_results.json", "r") do f
     JSON.parse(f)
 end
 
