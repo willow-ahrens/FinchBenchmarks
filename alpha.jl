@@ -138,7 +138,7 @@ function alpha_taco_rle(B, C, alpha)
 
     io = IOBuffer()
 
-    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco-rle/build/lib", "LD_LIBRARY_PATH" => "./taco-rle/build/lib") do
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco-rle/build/lib", "LD_LIBRARY_PATH" => "./taco-rle/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=corei7-avx -ggdb") do
         run(pipeline(`./alpha_taco_rle $APath $BPath $CPath $alpha $ADensePath`, stdout=io))
     end
     
