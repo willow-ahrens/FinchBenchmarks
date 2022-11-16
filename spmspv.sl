@@ -7,10 +7,8 @@
 #SBATCH -o slurm-%A_%a.out
 #SBATCH --partition=lanka-v3
 
-export SCRATCH=/data/scratch/pahrens
-export PATH="$SCRATCH/julia:$PATH"
-export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
-export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
+export SCRATCH=/scratch
+export MATRIXDEPOT_DATA=$SCRATCH/MatrixData
 export DATADEPS_ALWAYS_ACCEPT=true
 
-$SCRATCH/julia/julia --project=. spmspv.jl spmspv_hb.json
+julia --project=. spmspv.jl spmspv_hb.json

@@ -6,9 +6,7 @@
 #SBATCH -e slurm-%A_%a.err
 #SBATCH -o slurm-%A_%a.out
 
-export SCRATCH=/data/scratch/pahrens
-export PATH="$SCRATCH/julia:$PATH"
-export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
-export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
+export SCRATCH=/SCRATCH
+export MATRIXDEPOT_DATA=/$SCRATCH/MatrixData
 
-../julia/julia --project=. conv.jl conv_results.json
+julia --project=. conv.jl conv_results.json

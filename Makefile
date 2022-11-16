@@ -36,10 +36,10 @@ clean:
 	rm -rf spmv_taco
 	rm -rf alpha_opencv
 	rm -rf *.o *.dSYM *.trace
-	# rm -rf $(TACO)/build
-	# rm -rf $(TACORLE)/build
-	# rm -rf $(OPENCV)/build
-	# rm -rf $(OPENCV)/install
+	rm -rf $(TACO)/build
+	rm -rf $(TACORLE)/build
+	rm -rf $(OPENCV)/build
+	rm -rf $(OPENCV)/install
 
 spmv_taco: spmv_taco.o $(TACOBUILD)
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
