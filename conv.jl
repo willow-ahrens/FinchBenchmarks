@@ -98,7 +98,7 @@ function conv_opencv_time(A, F, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    C = Array{eltype(A)}(size(A)...)
+    C = Array{eltype(A)}(undef, size(A)...)
     res = fsparse(ttread(C_file)...)
     @finch @loop i j C[i, j] = res[i, j] * A[i, j]
 
@@ -127,7 +127,7 @@ function main(result_file)
             #@assert opencv_C == dense_C
             println("opencv", opencv_time)
             finch_time, finch_C = conv_finch_time(A, F)
-            res = Scalar(false)
+            res = Scalar(true)
             @finch @loop i j res[] &= finch_C[i, j] == dense_C[i, j]
             @assert res[]
             println("finch", finch_time)
