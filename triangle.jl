@@ -27,7 +27,7 @@ function triangle_taco(A, key)
 
     io = IOBuffer()
 
-    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=corei7-avx -ggdb") do
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
         run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
     end
 

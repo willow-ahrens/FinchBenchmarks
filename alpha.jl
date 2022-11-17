@@ -67,7 +67,7 @@ function alpha_opencv(B, C, alpha)
     Cf = img_to_dense(C)
     A_ref = img_to_dense(B)
 
-    @finch @loop i j A_ref[i, j] = round($(value(UInt8)), as[] * Bf[i, j] + mas[] * Cf[i, j])
+    @finch @loop i j A_ref[i, j] = round(UInt8, as[] * Bf[i, j] + mas[] * Cf[i, j])
     pngwrite(ARefPath, ffindnz(A_ref)..., size(A_ref))
     
     @finch @loop i j A_ref[i, j] = 0
@@ -124,7 +124,8 @@ function alpha_taco_rle(B, C, alpha)
     Cf = img_to_repeat(C)
     A_ref = img_to_repeat(B)
 
-    @finch @loop i j A_ref[i, j] = round($(value(UInt8)), as[] * Bf[i, j] + mas[] * Cf[i, j])
+    # value_instance
+    @finch @loop i j A_ref[i, j] = round(UInt8, as[] * Bf[i, j] + mas[] * Cf[i, j])
 
     A_ref_dense = @fiber(d(d(e($(zero(UInt8))))))
     @finch @loop i j A_ref_dense[i, j] = A_ref[i, j]
@@ -138,7 +139,7 @@ function alpha_taco_rle(B, C, alpha)
 
     io = IOBuffer()
 
-    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco-rle/build/lib", "LD_LIBRARY_PATH" => "./taco-rle/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=corei7-avx -ggdb") do
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco-rle/build/lib", "LD_LIBRARY_PATH" => "./taco-rle/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
         run(pipeline(`./alpha_taco_rle $APath $BPath $CPath $alpha $ADensePath`, stdout=io))
     end
     
@@ -156,7 +157,7 @@ end
 #Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
-    @finch @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($(value(as)) * B[i, j] + $(value(mas)) * C[i, j]))
+    @finch @loop i j A[i, j] = unsafe_trunc(UInt8, round(as * B[i, j] + mas * C[i, j]))
 end
 
 function alpha_finch(B, C, alpha)

@@ -33,7 +33,7 @@ function spmspv_taco(_A, x, key)
 
     println("running")
 
-    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=corei7-avx -ggdb") do
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
         run(pipeline(`./spmspv_taco $y_file $A_file $x_file`, stdout=io))
     end
 

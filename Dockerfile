@@ -57,10 +57,10 @@ COPY ./conv_viz.jl /Finch-CGO-2023-Results/conv_viz.jl
 COPY ./alpha.sl /Finch-CGO-2023-Results/alpha.sl
 COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
 COPY ./alpha_viz.jl /Finch-CGO-2023-Results/alpha_viz.jl
-# RUN bash -e alpha.sl
+RUN bash -e alpha.sl
 
 COPY ./all_pairs.sl /Finch-CGO-2023-Results/all_pairs.sl
 COPY ./all_pairs.jl /Finch-CGO-2023-Results/all_pairs.jl
 COPY ./all_pairs_viz.jl /Finch-CGO-2023-Results/all_pairs_viz.jl
-# RUN bash -e all_pairs.sl
+RUN bash -e all_pairs.sl
 
