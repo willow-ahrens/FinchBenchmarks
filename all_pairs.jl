@@ -111,8 +111,8 @@ end
 function all_pairs_finch_uint8_gallop_kernel(m, A, O)
     o = Scalar{0.0}()
     R = @fiber(d(e(0.0)))
-    @finch @loop k ij R[k] += convert($(value(Float64)), A[k, ij])^2
-    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij::gallop]) * convert($(value(Float64)), A[l, ij::gallop])))
+    @finch @loop k ij R[k] += convert(Float64, A[k, ij])^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert(Float64, A[k, ij::gallop]) * convert(Float64, A[l, ij::gallop])))
 end
 
 function all_pairs_finch_uint8_gallop(A, num_imgs)
@@ -131,8 +131,8 @@ end
 function all_pairs_finch_uint8_kernel(m, A, O)
     o = Scalar{0.0}()
     R = @fiber(d(e(0.0)))
-    @finch @loop k ij R[k] += convert($(value(Float64)), A[k, ij])^2
-    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert($(value(Float64)), A[k, ij]) * convert($(value(Float64)), A[l, ij])))
+    @finch @loop k ij R[k] += convert(Float64, A[k, ij])^2
+    @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert(Float64, A[k, ij]) * convert(Float64, A[l, ij])))
 end
 
 function all_pairs_finch_uint8(A, num_imgs)

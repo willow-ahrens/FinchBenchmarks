@@ -52,7 +52,7 @@ function img_to_dense(img)
 end
 
 function img_to_repeat(img)
-    return copyto!(@fiber(d(rl(0x0::UInt8))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d{Int32}(rl{0x0::UInt8, Int32}())), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
@@ -174,8 +174,8 @@ function alpha_finch_sparse(B, C, alpha)
     as = alpha
     mas = 1 - alpha
 
-    B = dropdefaults!(@fiber(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
-    C = dropdefaults!(@fiber(d(sl(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
+    B = dropdefaults!(@fiber(d{Int32}(sl{Int32}(e($(0xff::UInt8))))), copy(rawview(channelview(B))))
+    C = dropdefaults!(@fiber(d{Int32}(sl{Int32}(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
     # display(@finch_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
