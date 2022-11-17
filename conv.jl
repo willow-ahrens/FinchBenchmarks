@@ -77,8 +77,8 @@ function conv_dense_kernel(C, A, F)
 end
 
 function conv_dense_time(A, F)
-    (m, n) = size(FiberArray(A))
-    A = copyto!(Array{UInt8}(undef, m, n), FiberArray(A))
+    (m, n) = size(A)
+    A = copyto!(Array{UInt8}(undef, m, n), A)
     C = Array{UInt8}(undef, m, n)
     time = @belapsed conv_dense_kernel($C, $A, $F)
     return (time, C)
@@ -98,7 +98,9 @@ function conv_opencv_time(A, F, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    C = FiberArray(fsparse(ttread(C_file)...)) .* FiberArray(A)
+    C = Array{eltype(A)}(size(A)...)
+    res = fsparse(ttread(C_file)...)
+    @finch @loop i j C[i, j] = res[i, j] * A[i, j]
 
     return (opencv_time, C)
 end
@@ -125,7 +127,9 @@ function main(result_file)
             #@assert opencv_C == dense_C
             println("opencv", opencv_time)
             finch_time, finch_C = conv_finch_time(A, F)
-            @assert FiberArray(finch_C) == dense_C
+            res = Scalar(false)
+            @finch @loop i j res[] &= finch_C[i, j] == dense_C[i, j]
+            @assert res[]
             println("finch", finch_time)
             JSON.print(f, Dict(
                 "p"=>p,
