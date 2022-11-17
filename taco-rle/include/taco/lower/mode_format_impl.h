@@ -286,7 +286,7 @@ protected:
   virtual bool equals(const ModeFormatImpl& other) const;
 };
 
-static const int DEFAULT_ALLOC_SIZE = 1 << 20;
+static const int DEFAULT_ALLOC_SIZE = 1 << 4;
 
 }
 #endif

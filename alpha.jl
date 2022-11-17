@@ -137,16 +137,21 @@ function alpha_taco_rle(B, C, alpha)
     writeRLETacoTTX(CPath, copy(rawview(channelview(C))))
 
     io = IOBuffer()
+    io_err = IOBuffer()
 
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco-rle/build/lib", "LD_LIBRARY_PATH" => "./taco-rle/build/lib") do
-        run(pipeline(`./alpha_taco_rle $APath $BPath $CPath $alpha $ADensePath`, stdout=io))
+        run(pipeline(`./alpha_taco_rle $APath $BPath $CPath $alpha $ADensePath`, stdout=io, stderr=io_err))
     end
     
     pngwrite(ADensePngPath, ttread(ADensePath)...)
 
     @assert load(ADensePngPath) == load(ARefPngPath) 
 
-    return parse(Int64, String(take!(io))) * 1.0e-9
+    # println("Sizes: " * String(take!(io_err)))
+    sizes = [parse(Int, d) for d in split(String(take!(io_err)), "\n")]
+
+    return sizes[1], sizes[2], sizes[3], (parse(Int64, String(take!(io))) * 1.0e-9)
+    # return 0,0,0,parse(Int64, String(take!(io))) * 1.0e-9
 end
 
 #@inline function unsafe_round_UInt8(x)
@@ -159,6 +164,16 @@ function alpha_finch_kernel(A, B, C, as, mas)
     @finch @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($(value(as)) * B[i, j] + $(value(mas)) * C[i, j]))
 end
 
+function repeatSize(A)
+    totalSize = 8 # Need to count size of I in dense level
+    totalSize += (A.lvl.I+1)*sizeof(eltype(A.lvl.lvl.pos)) # Add the size of the pos array
+    
+    numVals = A.lvl.lvl.pos[A.lvl.I+1]-1
+    totalSize += numVals * (sizeof(eltype(A.lvl.lvl.idx)) + sizeof(eltype(A.lvl.lvl.val)))
+
+    return totalSize
+end
+
 function alpha_finch(B, C, alpha)
     as = alpha
     mas = 1 - alpha
@@ -166,7 +181,9 @@ function alpha_finch(B, C, alpha)
     B = img_to_repeat(B)
     C = img_to_repeat(C)
     A = similar(B)
-    return @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    result = @belapsed (A = similar($B); alpha_finch_kernel(A, $B, $C, $as, $mas))
+    A = alpha_finch_kernel(A, B, C, as, mas).A
+    return (repeatSize(B), repeatSize(C), repeatSize(A), result)
 end
 
 function alpha_finch_sparse(B, C, alpha)
@@ -180,7 +197,7 @@ function alpha_finch_sparse(B, C, alpha)
     # display(@finch_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
     # println()
 
-    result = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    result = @belapsed (A = similar($B); alpha_finch_kernel(A, $B, $C, $as, $mas))
     # @pprof begin
     #     for i in 1:2_000
     #         alpha_finch_kernel(A, B, C, as, mas)
@@ -209,17 +226,19 @@ for (humansketchesA, humansketchesB, key) in [
         B = humansketchesA[i, :, :]
         C = humansketchesB[i, :, :]
     
-        opencvResult = alpha_opencv(B, C, 0.5)
-        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+        # opencvResult = alpha_opencv(B, C, 0.5)
+        # push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"opencv","time"=>opencvResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
     
-        tacoRLEResult = alpha_taco_rle(B, C, 0.5)
-        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+        szB, szC, szA, tacoRLEResult = alpha_taco_rle(B, C, 0.5)
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"taco_rle","time"=>tacoRLEResult,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000, "sizeA"=>szA, "sizeB"=>szB, "sizeC"=>szC))
     
-        finchSparse = alpha_finch_sparse(B, C, 0.5)
-        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse, "dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))  
+        # finchSparse = alpha_finch_sparse(B, C, 0.5)
+        # push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_sparse","time"=>finchSparse, "dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))  
     
-        finchrepeat = alpha_finch(B, C, 0.5)
-        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000))
+        szB, szC, szA, finchrepeat = alpha_finch(B, C, 0.5)        
+        push!(results, Dict("kernel"=>kernel_str, "alpha"=>alpha,"kind"=>"finch_repeat","time"=>finchrepeat,"dataset"=>key,"imageB"=>i,"imageC"=>i+10_000, "sizeA"=>szA, "sizeB"=>szB, "sizeC"=>szC))
+
+
     end
 end
 
