@@ -17,4 +17,3 @@ for (dataset, tt) in times
     print(dataset, ", ")
     println(join(mean.(map(kind -> tt[kind], header)), ", "))
 end
-
