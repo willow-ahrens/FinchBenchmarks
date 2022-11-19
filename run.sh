@@ -1,14 +1,14 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH --exclusive
+#SBATCH -t 240:00:00
+#SBATCH -t 4-0
+#SBATCH -e slurm-%A_%a.err
+#SBATCH -o slurm-%A_%a.out
+#SBATCH --partition=lanka-v3
 
-# Initialize environment variables
-
-export PATH=./julia:$PATH
-export JULIA_PROJECT=.
-export LD_LIBRARY_PATH=./taco/build/lib:$LD_LIBRARY_PATH
-export DYLD_FALLBACK_LIBRARY_PATH=./taco/build/lib:$DYLD_FALLBACK_LIBRARY_PATH
-
-#julia spmv.jl
-#julia spgemm.jl
-#julia spmv2.jl
-#julia spgemm2.jl
-#julia spgemmh.jl
-#julia smttkrp.jl
+bash -e spmspv.sl
+bash -e triangle.sl
+bash -e conv.sl
+bash -e alpha.sl 
+bash -e all_pairs.sl

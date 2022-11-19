@@ -6,7 +6,20 @@
 #SBATCH -e slurm-%A_%a.err
 #SBATCH -o slurm-%A_%a.out
 
-export SCRATCH=/SCRATCH
-export MATRIXDEPOT_DATA=/$SCRATCH/MatrixData
+if [ -n $SLURM_JOB_ID ];  then
+    # check the original location through scontrol and $SLURM_JOB_ID
+    SCRIPT_DIR=$(scontrol show job $SLURM_JOBID | awk -F= '/Command=/{print $2}')
+    SCRIPT_DIR=$(dirname $SCRIPT_DIR)
+else
+    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+fi
+
+export SCRATCH=$SCRIPT_DIR/scratch
+export MATRIXDEPOT_DATA=$SCRATCH/MatrixData
+export TENSORDEPOT_DATA=$SCRATCH/TensorData
+export DATADEPS_ALWAYS_ACCEPT=true
+
+bash -e $SCRIPT_DIR/download_julia.sh
+source julia_env.sh
 
 julia --project=. conv.jl conv_results.json
