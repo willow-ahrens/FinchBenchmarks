@@ -245,11 +245,11 @@ function main(result_file)
             open(result_file,"a") do f
                 println()
                 JSON.print(f, Dict(
-                    "dataset"=>mtx,
-                    "method"=>method,
                     "n"=>size(A,1),
+                    "matrix"=>mtx,
                     "time"=>time,
-                ))
+                    "method"=>method,
+                ), indent=4)
                 println(f, ",")
             end
         end

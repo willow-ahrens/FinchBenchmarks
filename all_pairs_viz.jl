@@ -2,13 +2,69 @@ using JSON
 using DataFrames
 #import UnicodePlots
 using StatsPlots
-unicodeplots()
+using CategoricalArrays
+#unicodeplots()
+pyplot()
 
 all_pairs_data = DataFrame(open("all_pairs_results.json", "r") do f
     JSON.parse(f)
 end)
 
-all_pairs_data = stack(all_pairs_data, [:opencv_time, :finch_time, :finch_gallop_time, :finch_vbl_time, :finch_rle_time])
+interest = [
+    "opencv",
+    "finch",
+    "finch_gallop",
+    "finch_vbl",
+    "finch_rle",
+]
+
+all_pairs_labels = Dict(
+    "mnist_train" => "MNIST",
+    "emnist_letters_train" => "EMNIST Letters",
+    "emnist_digits_train" => "EMNIST Digits",
+    "omniglot_train" => "Omniglot",
+    "opencv"=>"opencv",
+    "finch"=>"Finch (Sparse)",
+    "finch_gallop"=>"Finch (Gallop)",
+    "finch_vbl"=>"Finch (VBL)",
+    "finch_rle"=>"Finch (RLE)",
+    "finch_uint8"=>"Finch (Sparse) (UInt8)",
+    "finch_uint8_gallop"=>"Finch (Gallop) (UInt8)",
+    "finch_uint8_vbl"=>"Finch (VBL) (UInt8)",
+    "finch_uint8_rle"=>"Finch (RLE) (UInt8)"
+)
+all_pairs_data.matrix = map(key -> all_pairs_labels[key], all_pairs_data.matrix)
+
+all_pairs_data = all_pairs_data[map(m -> m in interest, all_pairs_data.method), :]
+group = CategoricalArray(all_pairs_data.method, levels=interest)
+group = map(key -> all_pairs_labels[key], group)
+
+p = groupedbar(all_pairs_data.matrix,
+    all_pairs_data.time,
+    group=group
+    xlabel="Dataset",
+    ylabel = "Speedup Over OpenCV",
+    #xticks = (1:length(unique(all_pairs_data.matrix)),
+    #all_pairs_data.matrix),
+)
+
+savefig(p, "all_pairs.png")
+#display(p)
+
+#=
+all_pairs_data.time = all_pairs_data.value
+all_pairs_data.method = all_pairs_data.variable
+
+sort!(all_pairs_data, [:matrix])
+
+select!(all_pairs_data, Not([:value, :variable]))
+open("all_pairs_results2.json", "w") do f
+    JSON.print(f, eachrow(all_pairs_data), 4)
+end
+
+exit()
+
+reference_data = all_pairs_data[:, all_pairs_data.method=:opencv]
 
 all_pairs_labels = Dict(
     "mnist_train" => "MNIST",
@@ -17,19 +73,8 @@ all_pairs_labels = Dict(
     "omniglot_train" => "Omniglot",
 )
 all_pairs_data[:, :matrix] = map(key->all_pairs_labels[key], all_pairs_data.matrix)
-
-p = groupedbar(all_pairs_data.matrix,
-    all_pairs_data.value,
-    group=all_pairs_data.variable,
-    xlabel="Dataset",
-    ylabel = "Speedup Over OpenCV",
-    #xticks = (1:length(unique(all_pairs_data.matrix)),
-    #all_pairs_data.matrix),
-)
-
-display(p)
+=#
 #=
-savefig(p, "all_pairs.png")
 =#
 
 #=
