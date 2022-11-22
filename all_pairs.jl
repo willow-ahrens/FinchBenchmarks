@@ -246,6 +246,7 @@ function main(result_file)
                 println()
                 JSON.print(f, Dict(
                     "dataset"=>mtx,
+                    "method"=>method,
                     "n"=>size(A,1),
                     "time"=>time,
                 ))

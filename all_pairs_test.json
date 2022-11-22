@@ -30,3 +30,6 @@
 {"time":0.8353835,"dataset":"omniglot_train","n":105},
 {"time":0.82538423,"dataset":"omniglot_train","n":105},
 {"time":0.350089646,"dataset":"omniglot_train","n":105},
+{"time":0.053362583,"dataset":"omniglot_train","n":105},
+{"time":0.903426546,"dataset":"omniglot_train","n":105},
+{"time":0.83046717,"dataset":"omniglot_train","n":105},
