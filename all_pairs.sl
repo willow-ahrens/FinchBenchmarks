@@ -9,21 +9,8 @@
 
 if [[ -n $SLURM_JOB_ID ]];  then
     # check the original location through scontrol and $SLURM_JOB_ID
-    SCRIPT_DIR=$(scontrol show job $SLURM_JOBID | awk -F= '/Command=/{print $2}')
-    SCRIPT_DIR=$(dirname $SCRIPT_DIR)
-else
-    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+    export SCRIPT_DIR=$(scontrol show job $SLURM_JOBID | awk -F= '/Command=/{print $2}')
+    export SCRIPT_DIR=$(dirname $SCRIPT_DIR)
 fi
 
-export SCRATCH=$SCRIPT_DIR/scratch
-export MATRIXDEPOT_DATA=$SCRATCH/MatrixData
-export TENSORDEPOT_DATA=$SCRATCH/TensorData
-export DATADEPS_ALWAYS_ACCEPT=true
-
-
-if [[ -f "$SCRIPT_DIR/download_julia.sh" ]]; then
-    bash -e $SCRIPT_DIR/download_julia.sh
-    source julia_env.sh
-fi
-
-julia --project=. all_pairs.jl all_pairs.json
+bash -e all_pairs.sh
