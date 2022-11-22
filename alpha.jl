@@ -1,6 +1,7 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
 using JSON
 using TensorDepot, MatrixDepot
+using Finch.IndexNotation:literal_instance
 
 include("TensorMarket.jl")
 using .TensorMarket
@@ -48,7 +49,7 @@ function pngwrite(filename, I, V, shape)
 end
 
 function img_to_dense(img)
-    return copyto!(@fiber(d(d(e(0x0::UInt8)))), copy(rawview(channelview(img))))
+    return copyto!(@fiber(d{Int32}(d{Int32}(e(0x0::UInt8)))), copy(rawview(channelview(img))))
 end
 
 function img_to_repeat(img)
@@ -127,7 +128,7 @@ function alpha_taco_rle(B, C, alpha)
     # value_instance
     @finch @loop i j A_ref[i, j] = round(UInt8, as[] * Bf[i, j] + mas[] * Cf[i, j])
 
-    A_ref_dense = @fiber(d(d(e($(zero(UInt8))))))
+    A_ref_dense = @fiber(d{Int32}(d{Int32}(e($(zero(UInt8))))))
     @finch @loop i j A_ref_dense[i, j] = A_ref[i, j]
     pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
     
@@ -150,14 +151,8 @@ function alpha_taco_rle(B, C, alpha)
     return parse(Int64, String(take!(io))) * 1.0e-9
 end
 
-#@inline function unsafe_round_UInt8(x)
-#    unsafe_trunc(UInt8, round(x))
-#end
-#
-#Finch.register()
-
 function alpha_finch_kernel(A, B, C, as, mas)
-    @finch @loop i j A[i, j] = unsafe_trunc(UInt8, round(as * B[i, j] + mas * C[i, j]))
+    @finch @loop i j A[i, j] = unsafe_trunc(UInt8, round($(literal_instance(as)) * B[i, j] + $(literal_instance(mas)) * C[i, j]))
 end
 
 function alpha_finch(B, C, alpha)
@@ -178,26 +173,15 @@ function alpha_finch_sparse(B, C, alpha)
     C = dropdefaults!(@fiber(d{Int32}(sl{Int32}(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
-    # display(@finch_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
-    # println()
 
     result = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
-    # @pprof begin
-    #     for i in 1:2_000
-    #         alpha_finch_kernel(A, B, C, as, mas)
-    #     end
-    # end
-    # readline()
-    # I,V = ffindnz(A)
-    return result #, size(V)
+    return result 
 end
 
 kernel_str = "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
 alpha = 0.5
 
 numSketches = 10
-humansketchesA = matrixdepot("humansketches", 1:numSketches)
-humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
 results = Vector{Dict{String, <: Any}}()
 

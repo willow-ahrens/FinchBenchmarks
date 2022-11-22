@@ -50,7 +50,7 @@ function spmv_finch(_A, x)
 end
 
 function spmv_finch_vbl(_A, x)
-    A = copyto!(@fiber(d(sv(e(0.0)))), fiber(_A))
+    A = copyto!(@fiber(d{Int32}(sv{Int32}(e(0.0)))), fiber(_A))
     y = fiber(x)
     x = fiber(x)
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j])

@@ -13,7 +13,7 @@ MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
 
 function spmspv_taco(_A, x, key)
-    y_ref = @fiber(d(e(0.0)))
+    y_ref = @fiber(d{Int32}(e(0.0)))
     A = fiber(_A)
     @finch @loop i j y_ref[i] += A[i, j] * x[j]
     @finch @loop i y_ref[i] = 0
@@ -51,36 +51,36 @@ end
 
 function spmspv_finch(_A, x)
     A = fiber(_A)
-    x = copyto!(@fiber(sl(e(0.0))), x)
-    y = @fiber(d(e(0.0)))
+    x = copyto!(@fiber(sl{Int32}(e(0.0))), x)
+    y = @fiber(d{Int32}(e(0.0)))
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j])
 end
 
 function spmspv_gallop_finch(_A, x)
     A = fiber(_A)
-    x = copyto!(@fiber(sl(e(0.0))), x)
-    y = @fiber(d(e(0.0)))
+    x = copyto!(@fiber(sl{Int32}(e(0.0))), x)
+    y = @fiber(d{Int32}(e(0.0)))
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j::gallop])
 end
 
 function spmspv_lead_finch(_A, x)
     A = fiber(_A)
-    x = copyto!(@fiber(sl(e(0.0))), x)
-    y = @fiber(d(e(0.0)))
+    x = copyto!(@fiber(sl{Int32}(e(0.0))), x)
+    y = @fiber(d{Int32}(e(0.0)))
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j])
 end
 
 function spmspv_follow_finch(_A, x)
     A = fiber(_A)
-    x = copyto!(@fiber(sl(e(0.0))), x)
-    y = @fiber(d(e(0.0)))
+    x = copyto!(@fiber(sl{Int32}(e(0.0))), x)
+    y = @fiber(d{Int32}(e(0.0)))
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j::gallop])
 end
 
 function spmspv_finch_vbl(_A, x)
-    A = copyto!(@fiber(d(sv(e(0.0)))), fiber(_A))
-    x = copyto!(@fiber(sl(e(0.0))), x)
-    y = @fiber(d(e(0.0)))
+    A = copyto!(@fiber(d{Int32}(sv{Int32}(e(0.0)))), fiber(_A))
+    x = copyto!(@fiber(sl{Int32}(e(0.0))), x)
+    y = @fiber(d{Int32}(e(0.0)))
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j])
 end
 
@@ -415,6 +415,10 @@ hb = [
 ]
 
 function main(result_file)
+    for (mtx, key) in hb
+        MatrixDepot.load(mtx)
+    end
+
     open(result_file,"w") do f
         println(f, "[")
     end

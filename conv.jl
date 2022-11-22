@@ -48,8 +48,8 @@ end
 function conv_finch_time(A, F)
     C = similar(A)
     #A = pattern!(A)
-    #F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
-    F = copyto!(@fiber(d(d(e(0.0)))), F)
+    #F = pattern!(copyto!(@fiber(d{Int32}(d{Int32}(e(0.0)))), F))
+    F = copyto!(@fiber(d{Int32}(d{Int32}(e(0.0)))), F)
     time = @belapsed conv_finch_kernel($C, $A, $F)
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
     return (time, C)
@@ -115,7 +115,7 @@ function main(result_file)
 
     for p in [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
+        A = copyto!(@fiber(d{Int32}(sl{Int32}(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
         F = ones(UInt8, 11, 11)
 
         open(result_file,"a") do f
