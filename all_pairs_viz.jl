@@ -1,12 +1,14 @@
 using JSON
 using DataFrames
-import UnicodePlots
+#import UnicodePlots
 using StatsPlots
-pyplot()
+unicodeplots()
 
 all_pairs_data = DataFrame(open("all_pairs_results.json", "r") do f
     JSON.parse(f)
 end)
+
+all_pairs_data = stack(all_pairs_data, [:opencv_time, :finch_time, :finch_gallop_time, :finch_vbl_time, :finch_rle_time])
 
 all_pairs_labels = Dict(
     "mnist_train" => "MNIST",
@@ -16,21 +18,27 @@ all_pairs_labels = Dict(
 )
 all_pairs_data[:, :matrix] = map(key->all_pairs_labels[key], all_pairs_data.matrix)
 
-p = groupedbar(
+p = groupedbar(all_pairs_data.matrix,
+    all_pairs_data.value,
+    group=all_pairs_data.variable,
     xlabel="Dataset",
     ylabel = "Speedup Over OpenCV",
-    xticks = (1:nrow(all_pairs_data),
-    all_pairs_data.matrix),
-    bar_position=:dodge
+    #xticks = (1:length(unique(all_pairs_data.matrix)),
+    #all_pairs_data.matrix),
 )
+
+display(p)
+#=
+savefig(p, "all_pairs.png")
+=#
+
+#=
 @df all_pairs_data begin
-    groupedbar!(p, :finch_time ./ :opencv_time)
+    groupedbar!(p, :finch_time ./ :opencv_time, bar_position=:dodge)
     groupedbar!(p, :finch_gallop_time ./ :opencv_time)
 end
 
-savefig(p, "all_pairs.png")
 
-#=
 
     k
     "Finch" => all_pairs_data.finch_time ./ all_pairs_data.opencv_time,
