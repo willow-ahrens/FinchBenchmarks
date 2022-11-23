@@ -1,6 +1,218 @@
 [
-{"n":28,"finch_uint8_time":0.051866873,"opencv_time":0.010373551,"finch_gallop_time":0.036382124,"finch_uint8_gallop_time":0.036328663,"finch_vbl_time":0.025207469,"matrix":"mnist_train","finch_time":0.0523496,"finch_uint8_vbl_time":0.026404345,"finch_rle_time":0.05574746,"finch_uint8_rle_time":0.056048846},
-{"n":28,"finch_uint8_time":0.077283198,"opencv_time":0.010478895,"finch_gallop_time":0.053947508,"finch_uint8_gallop_time":0.054072564,"finch_vbl_time":0.033244565,"matrix":"emnist_letters_train","finch_time":0.078150115,"finch_uint8_vbl_time":0.035153734,"finch_rle_time":0.081182197,"finch_uint8_rle_time":0.082361702},
-{"n":28,"finch_uint8_time":0.07577264,"opencv_time":0.010409382,"finch_gallop_time":0.054029889,"finch_uint8_gallop_time":0.054488774,"finch_vbl_time":0.031415233,"matrix":"emnist_digits_train","finch_time":0.076485396,"finch_uint8_vbl_time":0.03344982,"finch_rle_time":0.080376341,"finch_uint8_rle_time":0.0815191},
-{"n":105,"finch_uint8_time":1.312113676,"opencv_time":0.044696303,"finch_gallop_time":1.406526406,"finch_uint8_gallop_time":1.426906425,"finch_vbl_time":0.435798048,"matrix":"omniglot_train","finch_time":1.204128008,"finch_uint8_vbl_time":0.478650644,"finch_rle_time":0.064980447,"finch_uint8_rle_time":0.064682344}
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.010409382,
+    "method": "opencv"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.076485396,
+    "method": "finch"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.054029889,
+    "method": "finch_gallop"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.031415233,
+    "method": "finch_vbl"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.080376341,
+    "method": "finch_rle"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.07577264,
+    "method": "finch_uint8"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.054488774,
+    "method": "finch_uint8_gallop"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.03344982,
+    "method": "finch_uint8_vbl"
+},
+{
+    "n": 28,
+    "matrix": "emnist_digits_train",
+    "time": 0.0815191,
+    "method": "finch_uint8_rle"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.010478895,
+    "method": "opencv"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.078150115,
+    "method": "finch"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.053947508,
+    "method": "finch_gallop"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.033244565,
+    "method": "finch_vbl"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.081182197,
+    "method": "finch_rle"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.077283198,
+    "method": "finch_uint8"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.054072564,
+    "method": "finch_uint8_gallop"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.035153734,
+    "method": "finch_uint8_vbl"
+},
+{
+    "n": 28,
+    "matrix": "emnist_letters_train",
+    "time": 0.082361702,
+    "method": "finch_uint8_rle"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.010373551,
+    "method": "opencv"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.0523496,
+    "method": "finch"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.036382124,
+    "method": "finch_gallop"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.025207469,
+    "method": "finch_vbl"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.05574746,
+    "method": "finch_rle"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.051866873,
+    "method": "finch_uint8"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.036328663,
+    "method": "finch_uint8_gallop"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.026404345,
+    "method": "finch_uint8_vbl"
+},
+{
+    "n": 28,
+    "matrix": "mnist_train",
+    "time": 0.056048846,
+    "method": "finch_uint8_rle"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 0.044696303,
+    "method": "opencv"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 1.204128008,
+    "method": "finch"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 1.406526406,
+    "method": "finch_gallop"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 0.435798048,
+    "method": "finch_vbl"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 0.064980447,
+    "method": "finch_rle"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 1.312113676,
+    "method": "finch_uint8"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 1.426906425,
+    "method": "finch_uint8_gallop"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 0.478650644,
+    "method": "finch_uint8_vbl"
+},
+{
+    "n": 105,
+    "matrix": "omniglot_train",
+    "time": 0.064682344,
+    "method": "finch_uint8_rle"
+}
 ]
