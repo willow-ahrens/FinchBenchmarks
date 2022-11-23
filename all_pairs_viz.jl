@@ -6,19 +6,18 @@ using CategoricalArrays
 #unicodeplots()
 pyplot()
 
-all_pairs_data = DataFrame(open("all_pairs_results.json", "r") do f
+data = DataFrame(open("all_pairs_results.json", "r") do f
     JSON.parse(f)
 end)
 
 interest = [
-    "opencv",
     "finch",
     "finch_gallop",
     "finch_vbl",
     "finch_rle",
 ]
 
-all_pairs_labels = Dict(
+labels = Dict(
     "mnist_train" => "MNIST",
     "emnist_letters_train" => "EMNIST Letters",
     "emnist_digits_train" => "EMNIST Digits",
@@ -33,96 +32,21 @@ all_pairs_labels = Dict(
     "finch_uint8_vbl"=>"Finch (VBL) (UInt8)",
     "finch_uint8_rle"=>"Finch (RLE) (UInt8)"
 )
-all_pairs_data.matrix = map(key -> all_pairs_labels[key], all_pairs_data.matrix)
+data.matrix = map(key -> labels[key], data.matrix)
 
-all_pairs_data = all_pairs_data[map(m -> m in interest, all_pairs_data.method), :]
-group = CategoricalArray(all_pairs_data.method, levels=interest)
-group = map(key -> all_pairs_labels[key], group)
+ref = data[isequal("opencv").(data.method), [:matrix, :time]]
+rename!(ref, :time => :ref)
+data = outerjoin(data, ref, on = [:matrix])
+data.speedup = data.ref ./ data.time
 
-p = groupedbar(all_pairs_data.matrix,
-    all_pairs_data.time,
+data = data[map(m -> m in interest, data.method), :]
+group = CategoricalArray(map(key -> labels[key], data.method), levels=map(key -> labels[key], interest))
+
+p = groupedbar(data.matrix,
+    data.speedup,
     group=group,
     xlabel="Dataset",
-    ylabel = "Speedup Over OpenCV",
-    #xticks = (1:length(unique(all_pairs_data.matrix)),
-    #all_pairs_data.matrix),
+    ylabel = "Speedup Over OpenCV"
 )
 
 savefig(p, "all_pairs.png")
-#display(p)
-
-#=
-all_pairs_data.time = all_pairs_data.value
-all_pairs_data.method = all_pairs_data.variable
-
-sort!(all_pairs_data, [:matrix])
-
-select!(all_pairs_data, Not([:value, :variable]))
-open("all_pairs_results2.json", "w") do f
-    JSON.print(f, eachrow(all_pairs_data), 4)
-end
-
-exit()
-
-reference_data = all_pairs_data[:, all_pairs_data.method=:opencv]
-
-all_pairs_labels = Dict(
-    "mnist_train" => "MNIST",
-    "emnist_letters_train" => "EMNIST Letters",
-    "emnist_digits_train" => "EMNIST Digits",
-    "omniglot_train" => "Omniglot",
-)
-all_pairs_data[:, :matrix] = map(key->all_pairs_labels[key], all_pairs_data.matrix)
-=#
-#=
-=#
-
-#=
-@df all_pairs_data begin
-    groupedbar!(p, :finch_time ./ :opencv_time, bar_position=:dodge)
-    groupedbar!(p, :finch_gallop_time ./ :opencv_time)
-end
-
-
-
-    k
-    "Finch" => all_pairs_data.finch_time ./ all_pairs_data.opencv_time,
-    "Finch (Gallop)" => all_pairs_data.finch_gallop_time ./ all_pairs_data.opencv_time,
-    "Finch (VBL)" => all_pairs_data.finch_vbl_time ./ all_pairs_data.opencv_time,
-    "Finch (RLE)" => all_pairs_data.finch_rle_time ./ all_pairs_data.opencv_time
-)
-
-p = bar(
-
-display(bar(
-    1:nrow(all_pairs_plot_data),
-    Matrix(all_pairs_plot_data),
-    xticks = (1:nrow(all_pairs_plot_data),
-    all_pairs_data.matrix),
-    x="Dataset",
-    ylabel = "Speedup Over OpenCV"))
-=#
-
-
-#=
-frame = pd.read_csv('ReadyAllPairs.csv')
-viz = frame.plot(kind="bar", figsize=(10,3.5), x="Dataset", ylabel = "Speedup Over OpenCV", rot=0, yticks = [y*0.2 for y in range(6)], color=color)
-viz.axes.get_xaxis().get_label().set_visible(False)
-viz.axes.axhline(1, color="grey")
-viz.legend(loc="upper left")
-viz.get_figure().savefig("images/allpairs.png", bbox_inches="tight")
-
-
-
-
-
-
-
-headers = ["matrix", "opencv_time", "finch_time", "finch_gallop_time", "finch_vbl_time", "finch_rle_time"]
-
-println(join(headers, ", "))
-for dd in d
-    println(join(map(key -> dd[key], headers), ", "))
-end
-
-=#
