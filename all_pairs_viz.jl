@@ -41,7 +41,7 @@ group = map(key -> all_pairs_labels[key], group)
 
 p = groupedbar(all_pairs_data.matrix,
     all_pairs_data.time,
-    group=group
+    group=group,
     xlabel="Dataset",
     ylabel = "Speedup Over OpenCV",
     #xticks = (1:length(unique(all_pairs_data.matrix)),
