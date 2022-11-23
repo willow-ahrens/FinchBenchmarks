@@ -9,6 +9,9 @@ using MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
+MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
+    `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
+
 function triangle_taco(A, key)
     c_file = joinpath(mktempdir(prefix="triangle_taco_$(key)"), "c.ttx")
     persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_$(key)")
@@ -142,17 +145,17 @@ function main(result_file)
         ("SNAP/wiki-talk-temporal", "wiki-talk-temporal"),
         ("SNAP/roadNet-TX", "roadNet-TX"),
         ("SNAP/soc-Pokec", "soc-Pokec"),
-        ("SNAP/as-Skitter", "as-Skitter"),
-        ("SNAP/wiki-topcats", "wiki-topcats"),
-        ("SNAP/roadNet-CA", "roadNet-CA"),
-        ("SNAP/wiki-Talk", "wiki-Talk"),
-        ("SNAP/sx-stackoverflow", "sx-stackoverflow"),
-        ("SNAP/com-Orkut", "com-Orkut"),
-        ("SNAP/cit-Patents", "cit-Patents"),
-        ("SNAP/com-LiveJournal", "com-LiveJournal"),
-        ("SNAP/soc-LiveJournal1", "soc-LiveJournal1"),
-        ("SNAP/twitter7", "twitter7"),
-        ("SNAP/com-Friendster", "com-Friendster"),
+        # ("SNAP/as-Skitter", "as-Skitter"),
+        # ("SNAP/wiki-topcats", "wiki-topcats"),
+        # ("SNAP/roadNet-CA", "roadNet-CA"),
+        # ("SNAP/wiki-Talk", "wiki-Talk"),
+        # ("SNAP/sx-stackoverflow", "sx-stackoverflow"),
+        # ("SNAP/com-Orkut", "com-Orkut"),
+        # ("SNAP/cit-Patents", "cit-Patents"),
+        # ("SNAP/com-LiveJournal", "com-LiveJournal"),
+        # ("SNAP/soc-LiveJournal1", "soc-LiveJournal1"),
+        # ("SNAP/twitter7", "twitter7"),
+        # ("SNAP/com-Friendster", "com-Friendster"),
     ]
         A = SparseMatrixCSC(matrixdepot(mtx))
         println((key, size(A), nnz(A)))

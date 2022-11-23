@@ -7,7 +7,10 @@
 #SBATCH -o slurm-%A_%a.out
 #SBATCH --partition=lanka-v3
 
-export SCRATCH=/SCRATCH
-export MATRIXDEPOT_DATA=/$SCRATCH/MatrixData
+if [[ -n $SLURM_JOB_ID ]];  then
+    # check the original location through scontrol and $SLURM_JOB_ID
+    export SCRIPT_DIR=$(scontrol show job $SLURM_JOBID | awk -F= '/Command=/{print $2}')
+    export SCRIPT_DIR=$(dirname $SCRIPT_DIR)
+fi
 
-julia --project=. triangle.jl triangle_results.json
+bash -e triangle.sh
