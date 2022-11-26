@@ -12,9 +12,9 @@ using .TensorMarket
 MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
 
-function triangle_taco(A, key)
-    c_file = joinpath(mktempdir(prefix="triangle_taco_$(key)"), "c.ttx")
-    persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_$(key)")
+function triangle_taco_sparse(A, key)
+    c_file = joinpath(mktempdir(prefix="triangle_taco_sparse_$(key)"), "c.ttx")
+    persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_sparse_$(key)")
     mkpath(persist_dir)
     A_file = joinpath(persist_dir, "A.ttx")
     A2_file = joinpath(persist_dir, "A2.ttx")
@@ -31,7 +31,7 @@ function triangle_taco(A, key)
     io = IOBuffer()
 
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
-        run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
+        run(pipeline(`./triangle_taco_sparse $c_file $A_file $A2_file $AT_file`, stdout=io))
     end
 
     c = ttread(c_file)[2][1]
@@ -51,7 +51,7 @@ function triangle_finch_kernel(A, AT)
     @finch @loop i j k c[] += A[i, j] && A[j, k] && AT[i, k]
     return c()
 end
-function triangle_finch(_A, key)
+function triangl_finch_sparse(_A, key)
     A = pattern!(fiber(_A))
     AT = pattern!(fiber(permutedims(_A)))
     return @belapsed triangle_finch_kernel($A, $AT)
@@ -159,15 +159,18 @@ function main(result_file)
     ]
         A = SparseMatrixCSC(matrixdepot(mtx))
         println((key, size(A), nnz(A)))
-        #println(maximum(A.colptr[2:end] - A.colptr[1:end-1]))
-        #println(maximum(permutedims(A).colptr[2:end] - permutedims(A).colptr[1:end-1]))
 
-        taco_time = triangle_taco(A, key)
-        println("taco_time: ", taco_time)
-        finch_time = triangle_finch(A, key)
-        println("finch_time: ", finch_time)
-        finch_gallop_time = triangle_finch_gallop(A, key)
-        println("finch_gallop_time: ", finch_gallop_time)
+        time, ref = triangle_taco_sparse(A, key)
+
+        for (method, f) in [
+            ("taco_sparse", triangle_taco_sparse),
+            ("finch_sparse", triangle_finch_sparse),
+            ("finch_gallop", triangle_finch_gallop),
+        ]
+
+        time, res = f(A, key)
+        check = Scalar(true)
+        @finch @loop i j check[] &= ref[i, j] == res[i, j]
 
         open(result_file,"a") do f
             println()
@@ -175,9 +178,8 @@ function main(result_file)
                 "matrix"=>mtx,
                 "n"=>size(A,1),
                 "nnz"=>nnz(A),
-                "taco_time"=>taco_time,
-                "finch_time"=>finch_time,
-                "finch_gallop_time"=>finch_gallop_time,
+                "method"=method,
+                "time"=>time,
             ))
             println(f, ",")
         end

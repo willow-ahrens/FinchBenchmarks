@@ -28,7 +28,7 @@ data = combine(groupby(data, [:method, :dataset]), :speedup=>mean=>:speedup)
 
 data = data[map(m -> m in interest, data.method), :]
 group = CategoricalArray(label.(data.method), levels=label.(interest))
-dataset = CategoricalArray(label.(data.dataset), levels=label.([:omniglot, :humansketches]))
+dataset = CategoricalArray(label.(data.dataset), levels=label.(["omniglot_train", "humansketches"]))
 
 p = groupedbar(dataset,
     data.speedup,
