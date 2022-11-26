@@ -9,7 +9,7 @@
     "n": 28,
     "matrix": "emnist_digits_train",
     "time": 0.076485396,
-    "method": "finch"
+    "method": "finch_sparse"
 },
 {
     "n": 28,
@@ -63,7 +63,7 @@
     "n": 28,
     "matrix": "emnist_letters_train",
     "time": 0.078150115,
-    "method": "finch"
+    "method": "finch_sparse"
 },
 {
     "n": 28,
@@ -117,7 +117,7 @@
     "n": 28,
     "matrix": "mnist_train",
     "time": 0.0523496,
-    "method": "finch"
+    "method": "finch_sparse"
 },
 {
     "n": 28,
@@ -171,7 +171,7 @@
     "n": 105,
     "matrix": "omniglot_train",
     "time": 1.204128008,
-    "method": "finch"
+    "method": "finch_sparse"
 },
 {
     "n": 105,

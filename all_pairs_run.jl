@@ -225,15 +225,15 @@ function main(result_file)
         (opencv_time, reference) = all_pairs_opencv(A, num_imgs, key)
 
         for (method, f) = [
-            "opencv_time"=>all_pairs_opencv,
-            "finch_time"=>all_pairs_finch,
-            "finch_gallop_time"=>all_pairs_finch_gallop,
-            "finch_vbl_time"=>all_pairs_finch_vbl,
-            "finch_rle_time"=>all_pairs_finch_rle,
-            "finch_uint8_time"=>all_pairs_finch_uint8,
-            "finch_uint8_gallop_time"=>all_pairs_finch_uint8_gallop,
-            "finch_uint8_vbl_time"=>all_pairs_finch_uint8_vbl,
-            "finch_uint8_rle_time"=>all_pairs_finch_uint8_rle,
+            "opencv"=>all_pairs_opencv,
+            "finch_sparse"=>all_pairs_finch,
+            "finch_gallop"=>all_pairs_finch_gallop,
+            "finch_vbl"=>all_pairs_finch_vbl,
+            "finch_rle"=>all_pairs_finch_rle,
+            "finch_uint8"=>all_pairs_finch_uint8,
+            "finch_uint8_gallop"=>all_pairs_finch_uint8_gallop,
+            "finch_uint8_vbl"=>all_pairs_finch_uint8_vbl,
+            "finch_uint8_rle"=>all_pairs_finch_uint8_rle,
         ]
             time, result = f(A, num_imgs, key)
 
