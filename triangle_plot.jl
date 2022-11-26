@@ -9,7 +9,7 @@ pyplot()
 
 include("plot_labels.jl")
 
-data = DataFrame(open("alpha_results.json", "r") do f
+data = DataFrame(open("triangle_results.json", "r") do f
     JSON.parse(f)
 end)
 
@@ -25,13 +25,12 @@ data.speedup = data.ref ./ data.time
 
 data = data[map(m -> m in interest, data.method), :]
 group = CategoricalArray(label.(data.method), levels=label.(interest))
-dataset = CategoricalArray(label.(data.dataset), levels=label.([:omniglot_train, :humansketches_train]))
 
-p = groupedbar(dataset,
+p = boxplot(
+    group,
     data.speedup,
-    group=group,
-    xlabel="Dataset",
-    ylabel = "Speedup Over OpenCV"
+    xlabel="Method",
+    ylabel = "Speedup Over TACO"
 )
 
-savefig(p, "alpha.png")
+savefig(p, "triangle.png")

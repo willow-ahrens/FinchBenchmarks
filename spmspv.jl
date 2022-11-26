@@ -431,12 +431,11 @@ function main(result_file)
 	    continue
 	end
         println("0.1 density: ", (key, m, n, nnz(A)))
-        row = Dict("matrix"=>mtx, "x" => "0.1 density", "n"=>size(A, 1), "nnz"=>(nnz(A)))
-        for _ = 1:1
+        for run = 1:1
             x = fsprand((n,), 0.1)
             for (mtd, timer) in [
-                ("taco", (A, x) -> spmspv_taco(A, x, key)),
-                ("finch", spmspv_finch),
+                ("taco_sparse", (A, x) -> spmspv_taco(A, x, key)),
+                ("finch_sparse", spmspv_finch),
                 ("finch_gallop", spmspv_gallop_finch),
                 ("finch_lead", spmspv_lead_finch),
                 ("finch_follow", spmspv_follow_finch),
@@ -444,22 +443,27 @@ function main(result_file)
             ]
                 time = timer(A, x)
                 println("time $(mtd):", time)
-                push!(get!(row, "$(mtd)_times", []), time)
+                open(result_file,"a") do f
+                    println()
+                    JSON.print(f, Dict(
+                        "matrix"=>mtx,
+                        "x" => "0.1 density",
+                        "run"=> run,
+                        "n"=>size(A, 1),
+                        "time"=>time,
+                        "nnz"=>(nnz(A))
+                    ))
+                    println(f, ",")
+                end
             end
-        end
-        open(result_file,"a") do f
-            println()
-            JSON.print(f, row)
-            println(f, ",")
         end
 
         println("10 count: ", (key, m, n, nnz(A)))
-        row = Dict("matrix"=>mtx, "x" => "10 count", "n"=>size(A, 1), "nnz"=>(nnz(A)))
-        for _ = 1:1
+        for run = 1:1
             x = Fiber(SparseList(n, [1, 11], sort(randperm(n)[1:10]), Element{0.0}(rand(10))))
             for (mtd, timer) in [
-                ("taco", (A, x) -> spmspv_taco(A, x, key)),
-                ("finch", spmspv_finch),
+                ("taco_sparse", (A, x) -> spmspv_taco(A, x, key)),
+                ("finch_sparse", spmspv_finch),
                 ("finch_gallop", spmspv_gallop_finch),
                 ("finch_lead", spmspv_lead_finch),
                 ("finch_follow", spmspv_follow_finch),
@@ -467,13 +471,19 @@ function main(result_file)
             ]
                 time = timer(A, x)
                 println("time $(mtd):", time)
-                push!(get!(row, "$(mtd)_times", []), time)
+                open(result_file,"a") do f
+                    println()
+                    JSON.print(f, Dict(
+                        "matrix"=>mtx,
+                        "x" => "10 count",
+                        "run"=> run,
+                        "n"=>size(A, 1),
+                        "time"=>time,
+                        "nnz"=>(nnz(A))
+                    ))
+                    println(f, ",")
+                end
             end
-        end
-        open(result_file,"a") do f
-            println()
-            JSON.print(f, row)
-            println(f, ",")
         end
     end
 
