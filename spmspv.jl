@@ -418,70 +418,50 @@ function main(result_file)
     open(result_file,"w") do f
         println(f, "[")
     end
-    for (mtx, key) in hb#[
-        #("Boeing/ct20stif", "ct20stif"),
-    #]
+    comma = false
+    for (mtx, key) in hb
     	raw = matrixdepot(mtx)
-	if !(eltype(raw) <: Real)
+        if !(eltype(raw) <: Real)
             continue
         end
         A = SparseMatrixCSC{Float64}(raw)
         (m, n) = size(A)
-	if m < 1000 || n < 1000
-	    continue
-	end
+        if m < 1000 || n < 1000
+            continue
+        end
         println("0.1 density: ", (key, m, n, nnz(A)))
         for run = 1:1
-            x = fsprand((n,), 0.1)
-            for (mtd, timer) in [
-                ("taco_sparse", (A, x) -> spmspv_taco(A, x, key)),
-                ("finch_sparse", spmspv_finch),
-                ("finch_gallop", spmspv_gallop_finch),
-                ("finch_lead", spmspv_lead_finch),
-                ("finch_follow", spmspv_follow_finch),
-                ("finch_vbl", spmspv_finch_vbl),
+            for (x, xname) in [
+                (fsprand((n,), 0.1), "0.1 density"),
+                (Fiber(SparseList(n, [1, 11], sort(randperm(n)[1:10]), Element{0.0}(rand(10)))), "10 count")
             ]
-                time = timer(A, x)
-                println("time $(mtd):", time)
-                open(result_file,"a") do f
-                    println()
-                    JSON.print(f, Dict(
-                        "matrix"=>mtx,
-                        "x" => "0.1 density",
-                        "run"=> run,
-                        "n"=>size(A, 1),
-                        "time"=>time,
-                        "nnz"=>(nnz(A))
-                    ))
-                    println(f, ",")
-                end
-            end
-        end
 
-        println("10 count: ", (key, m, n, nnz(A)))
-        for run = 1:1
-            x = Fiber(SparseList(n, [1, 11], sort(randperm(n)[1:10]), Element{0.0}(rand(10))))
-            for (mtd, timer) in [
-                ("taco_sparse", (A, x) -> spmspv_taco(A, x, key)),
-                ("finch_sparse", spmspv_finch),
-                ("finch_gallop", spmspv_gallop_finch),
-                ("finch_lead", spmspv_lead_finch),
-                ("finch_follow", spmspv_follow_finch),
-                ("finch_vbl", spmspv_finch_vbl),
-            ]
-                time = timer(A, x)
-                println("time $(mtd):", time)
-                open(result_file,"a") do f
-                    println()
-                    JSON.print(f, Dict(
-                        "matrix"=>mtx,
-                        "x" => "10 count",
-                        "run"=> run,
-                        "n"=>size(A, 1),
-                        "time"=>time,
-                        "nnz"=>(nnz(A))
-                    ))
-                    println(f, ",")
+                for (mtd, timer) in [
+                    ("taco_sparse", (A, x) -> spmspv_taco(A, x, key)),
+                    ("finch_sparse", spmspv_finch),
+                    ("finch_gallop", spmspv_gallop_finch),
+                    ("finch_lead", spmspv_lead_finch),
+                    ("finch_follow", spmspv_follow_finch),
+                    ("finch_vbl", spmspv_finch_vbl),
+                ]
+                    time = timer(A, x)
+                    open(result_file,"a") do f
+                        if comma
+                            println(f, ",")
+                        end
+                        print(f, """
+                            {
+                                "matrix": $(repr(mtx)),
+                                "n": $(size(A, 1)),
+                                "nnz": $(nnz(A)),
+                                "x": $(repr(xname)),
+                                "run": $(run),
+                                "method": $(repr(mtd)),
+                                "time": $time
+                            }""")
+                    end
+                    @info "spmspv" mtx size(A, 1) nnz(A) xname run mtd time
+                    comma = true
                 end
             end
         end

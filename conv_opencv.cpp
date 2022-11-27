@@ -16,14 +16,14 @@ void mtxWriteDense(std::string filename, cv::Mat& m){
         std::cout<<"File Not Opened : " << filename << std::endl;  return;
     }
 
-    fout << "%%MatrixMarket matrix array integer general" << std::endl;
+    fout << "%%MatrixMarket matrix array real general" << std::endl;
     fout << m.rows << " " << m.cols << std::endl;
     
     for(int i=0; i<m.rows; i++)
     {
         for(int j=0; j<m.cols; j++)
         {
-            fout << (int)m.at<uchar>(i,j) << std::endl;
+            fout << m.at<double>(i,j) << std::endl;
         }
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
         []() {},
         [&]() {
             //cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
-            cv::filter2D(A, C, -1, F);
+            cv::filter2D(A, C, -1, F, Point(-1, -1), false, BORDER_CONSTANT);
         }
     );
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     std::cout << time << std::endl;
     
     //cv::boxFilter(A, C, -1, Point(11, 11), Point(-1, -1), false, BORDER_CONSTANT);
-    cv::filter2D(A, C, -1, F);
+    cv::filter2D(A, C, -1, F, Point(-1, -1), false, BORDER_CONSTANT);
     mtxWriteDense(C_path, C);
     return 0;
 }

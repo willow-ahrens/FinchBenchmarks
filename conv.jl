@@ -98,7 +98,7 @@ function conv_opencv_time(A, F, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    C = Array{eltype(A)}(undef, size(A)...)
+    C = Array{Float64}(undef, size(A)...)
     res = fsparse(ttread(C_file)...)
     @finch @loop i j C[i, j] = res[i, j] * A[i, j]
 
@@ -117,11 +117,12 @@ function main(result_file)
 
     for p in [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((20, 20), p)))
+        A = copyto!(@fiber(d(sl(e(0.0)))), pattern!(fsprand((1000, 1000), p)))
+        run = 1
         F = ones(UInt8, 11, 11)
 
-        dense_time, dense_C = conv_opencv_time(A, F, p)
-        ref = Array{Float64}(dense_C)
+        time, ref = conv_opencv_time(A, F, p)
+        ref = Array{Float64}(ref)
 
 
         for (method, timer) in [
@@ -129,10 +130,6 @@ function main(result_file)
             ("finch_sparse", conv_finch_time)
         ]
             time, res = timer(A, F, p)
-            display(copyto!(similar(ref), res))
-            println()
-            display(ref)
-            println()
             check = Scalar(true)
             @finch @loop i j check[] &= res[i, j] == ref[i, j]
             @assert check[]
@@ -140,14 +137,15 @@ function main(result_file)
                 if comma
                     println(f, ",")
                 end
-                JSON.print(f, Dict(
-                    "p"=>p,
-                    "run"=>1,
-                    "method"=>method,
-                    "time"=>time,
-                ))
+                print(f, """
+                    {
+                        "p": $(p),
+                        "run": 1,
+                        "method": $(repr(method)),
+                        "time": $time
+                    }""")
             end
-            @info p run method time
+            @info "conv" p run method time
             comma = true
         end
     end

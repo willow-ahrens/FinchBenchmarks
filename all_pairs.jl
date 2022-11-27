@@ -245,14 +245,13 @@ function main(result_file)
                 if comma
                     println(f, ",")
                 end
-                print(f,
-"""
-    {
-        "matrix": $(repr(mtx)),
-        "n": $(size(A, 1)),
-        "method": $(repr(method)),
-        "time": $time
-    }""")
+                print(f, """
+                    {
+                        "matrix": $(repr(mtx)),
+                        "n": $(size(A, 1)),
+                        "method": $(repr(method)),
+                        "time": $time
+                    }""")
             end
             @info "all pairs" mtx size(A, 1) method time
             comma = true
