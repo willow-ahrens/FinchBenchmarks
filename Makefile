@@ -34,12 +34,20 @@ all: spmv_taco spmspv_taco alpha_taco_rle alpha_opencv triangle_taco all_pairs_o
 
 clean:
 	rm -rf spmv_taco
+	rm -rf spmspv_taco
+	rm -rf conv_opencv
+	rm -rf triangle_taco
 	rm -rf alpha_opencv
+	rm -rf alpha_taco_rle
+	rm -rf all_pairs_opencv
 	rm -rf *.o *.dSYM *.trace
+
+superclean: clean
 	rm -rf $(TACO)/build
 	rm -rf $(TACORLE)/build
 	rm -rf $(OPENCV)/build
 	rm -rf $(OPENCV)/install
+	rm -rf scratch
 
 spmv_taco: spmv_taco.o $(TACOBUILD)
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
