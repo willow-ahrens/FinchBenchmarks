@@ -170,7 +170,9 @@ numSketches = 10
 humansketchesA = matrixdepot("humansketches", 1:numSketches)
 humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
-results = Vector{Dict{String, <: Any}}()
+open(ARGS[1],"w") do f
+    println(f, "[\n")
+end
 
 for (humansketchesA, humansketchesB, key) in [
     (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
@@ -194,16 +196,15 @@ for (humansketchesA, humansketchesB, key) in [
             check = Scalar(true)
             @finch @loop i j check[] &= reference[i, j] == result[i, j]
             @assert check[]
-            push!(results, Dict(
-                "method"=>method,
-                "time"=>time,
-                "dataset"=>key,
-                "imageB"=>i,
-                "imageC"=>i+10_000))
+            open(ARGS[1], "a") do f
+                println()
+                JSON.print(f, Dict("method"=>method, "time"=>time, "dataset"=>key, "imageB"=>i, "imageC"=>i+10_000), indent=4)
+                println(f, ",")
+            end
         end
     end
 end
 
-open(ARGS[1],"w") do f
-    JSON.print(f, results, 4)
+open(ARGS[1],"a") do f
+    println(f, "]\n")
 end
