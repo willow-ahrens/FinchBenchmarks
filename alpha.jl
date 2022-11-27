@@ -79,7 +79,7 @@ function alpha_opencv(B, C, alpha)
     	run(pipeline(`./alpha_opencv $APath $BPath $CPath $alpha`, stdout=io))
     end
 
-    return (parse(Int64, String(take!(io))) * 1.0e-9, load(APath))
+    return (parse(Int64, String(take!(io))) * 1.0e-9, rawview(channelview(load(APath))))
 end
 
 function writeRLETacoTTX(filename, src)
@@ -106,9 +106,7 @@ end
 
 function alpha_taco_rle(B, C, alpha)
     APath = joinpath(tmp_tensor_dir, "A.ttx")
-    ARefPngPath = joinpath(tmp_tensor_dir, "A_ref.png")
     ADensePath = joinpath(tmp_tensor_dir, "A_dense.ttx")
-    ADensePngPath = joinpath(tmp_tensor_dir, "A_Dense.png")
     BPath = joinpath(tmp_tensor_dir, "B.ttx")
     CPath = joinpath(tmp_tensor_dir, "C.ttx")
    
@@ -117,16 +115,6 @@ function alpha_taco_rle(B, C, alpha)
 
     Bf = img_to_repeat(B)
     Cf = img_to_repeat(C)
-    A_ref = img_to_repeat(B)
-
-    # value_instance
-    @finch @loop i j A_ref[i, j] = round(UInt8, as[] * Bf[i, j] + mas[] * Cf[i, j])
-
-    A_ref_dense = @fiber(d(d(e($(zero(UInt8))))))
-    @finch @loop i j A_ref_dense[i, j] = A_ref[i, j]
-    pngwrite(ARefPngPath, ffindnz(A_ref_dense)..., size(A_ref_dense))
-    
-    @finch @loop i j A_ref[i, j] = 0
 
     writeRLETacoTTX(APath, zeros(UInt8, size(Bf)))
     writeRLETacoTTX(BPath, copy(rawview(channelview(B))))
@@ -138,7 +126,7 @@ function alpha_taco_rle(B, C, alpha)
         run(pipeline(`./alpha_taco_rle $APath $BPath $CPath $alpha $ADensePath`, stdout=io))
     end
 
-    return (parse(Int64, String(take!(io))) * 1.0e-9, ttread(ADensePath))
+    return (parse(Int64, String(take!(io))) * 1.0e-9, fsparse(ttread(ADensePath)...))
 end
 
 #@inline function unsafe_round_UInt8(x)
