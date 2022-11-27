@@ -204,7 +204,7 @@ for (humansketchesA, humansketchesB, key) in [
                 ("finch_sparse", alpha_finch_sparse)]
 
             time, result = f(B, C, 0.5)
-            check = Scalar(false)
+            check = Scalar(true)
             @finch @loop i j check[] &= reference[i, j] == result[i, j]
             @assert check[]
             push!(results, Dict(

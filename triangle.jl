@@ -171,6 +171,7 @@ function main(result_file)
         time, res = f(A, key)
         check = Scalar(true)
         @finch @loop i j check[] &= ref[i, j] == res[i, j]
+        @assert check[]
 
         open(result_file,"a") do f
             println()
