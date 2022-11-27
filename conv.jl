@@ -45,7 +45,7 @@ function conv_finch_kernel(C, A, F)
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
 end
 
-function conv_finch_time(A, F)
+function conv_finch_time(A, F, key)
     C = similar(A)
     #A = pattern!(A)
     #F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
@@ -76,7 +76,7 @@ function conv_dense_kernel(C, A, F)
     return C
 end
 
-function conv_dense_time(A, F)
+function conv_dense_time(A, F, key)
     (m, n) = size(A)
     A = copyto!(Array{UInt8}(undef, m, n), A)
     C = Array{UInt8}(undef, m, n)
@@ -118,26 +118,26 @@ function main(result_file)
         A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
         F = ones(UInt8, 11, 11)
 
-        open(result_file,"a") do f
-            dense_time, dense_C = conv_dense_time(A, F)
-            println("dense", dense_time)
-            opencv_time, opencv_C = conv_opencv_time(A, F, p)
-            #display(Int.(dense_C))
-            #display(Int.(opencv_C))
-            #@assert opencv_C == dense_C
-            println("opencv", opencv_time)
-            finch_time, finch_C = conv_finch_time(A, F)
-            res = Scalar(true)
-            @finch @loop i j res[] &= finch_C[i, j] == dense_C[i, j]
-            @assert res[]
-            println("finch", finch_time)
-            JSON.print(f, Dict(
-                "p"=>p,
-                "opencv_time"=>opencv_time,
-                "finch_time"=>finch_time,
-                "dense_time"=>dense_time,
-            ))
-            println(f, ",")
+        dense_time, dense_C = conv_dense_time(A, F)
+
+        for (method, f) in [
+            ("finch_sparse", conv_finch_time)
+            ("opencv", conv_opencv_time)
+        ]
+
+            open(result_file,"a") do f
+                time, res = f(A, F, p)
+                check = Scalar(true)
+                @finch @loop i j check[] &= res[i, j] == dense_C[i, j]
+                @assert check[]
+                JSON.print(f, Dict(
+                    "p"=>p,
+                    "run"=>1,
+                    "method"=>method,
+                    "time"=>time,
+                ))
+                println(f, ",")
+            end
         end
     end
 
