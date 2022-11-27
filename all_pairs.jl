@@ -212,7 +212,7 @@ function main(result_file)
         ("emnist_digits_train","emnist_digits"),
         ("omniglot_train", "omniglot"),
         ("cifar10_train", "cifar10"),
-        ]
+    ]
 
         A = matrixdepot(mtx)
         if ndims(A) == 3

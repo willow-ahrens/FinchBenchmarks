@@ -237,7 +237,7 @@ grayscale values. This returns the test split from the letters extension of emni
 """
 function emnist_letters_test()
     dir = joinpath(download_cache, "emnist")
-    EMNIST(:letters, dir=dir, Tx=UInt8).features
+    EMNIST(:letters, :test, dir=dir, Tx=UInt8).features
 end
 
 """

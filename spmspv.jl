@@ -468,6 +468,7 @@ function main(result_file)
     end
 
     open(result_file,"a") do f
+        println()
         println(f, "]")
     end
 end

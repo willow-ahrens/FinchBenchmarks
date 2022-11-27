@@ -31,19 +31,12 @@ function triangle_taco_sparse(A, key)
     io = IOBuffer()
 
     withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
-        run(pipeline(`./triangle_taco_sparse $c_file $A_file $A2_file $AT_file`, stdout=io))
+        run(pipeline(`./triangle_taco $c_file $A_file $A2_file $AT_file`, stdout=io))
     end
 
     c = ttread(c_file)[2][1]
 
-    c_ref = Scalar{0}()
-    A_ref = pattern!(fiber(A))
-    AT_ref = pattern!(fiber(permutedims(A)))
-    @finch @loop i j k c_ref[] += A_ref[i, j] && A_ref[j, k] && AT_ref[i, k]
-
-    @assert c == c_ref()
-
-    return parse(Int64, String(take!(io))) * 1.0e-9
+    return (parse(Int64, String(take!(io))) * 1.0e-9, c)
 end
 
 function triangle_finch_kernel(A, AT)
@@ -51,10 +44,12 @@ function triangle_finch_kernel(A, AT)
     @finch @loop i j k c[] += A[i, j] && A[j, k] && AT[i, k]
     return c()
 end
-function triangl_finch_sparse(_A, key)
+function triangle_finch_sparse(_A, key)
     A = pattern!(fiber(_A))
     AT = pattern!(fiber(permutedims(_A)))
-    return @belapsed triangle_finch_kernel($A, $AT)
+    time = @belapsed triangle_finch_kernel($A, $AT)
+    c = triangle_finch_kernel(A, AT)
+    return time, c
 end
 
 function triangle_finch_gallop_kernel(A, AT)
@@ -65,11 +60,9 @@ end
 function triangle_finch_gallop(_A, key)
     A = pattern!(fiber(_A))
     AT = pattern!(fiber(permutedims(_A)))
-    c_ref = Scalar{0}()
-    @finch @loop i j k c_ref[] += A[i, j] && A[j, k] && AT[i, k]
+    time = @belapsed triangle_finch_gallop_kernel($A, $AT)
     c = triangle_finch_gallop_kernel(A, AT)
-    @assert c_ref() == c
-    return @belapsed triangle_finch_gallop_kernel($A, $AT)
+    return (time, c)
 end
 
         #("SNAP/web-NotreDame", "web-NotreDame"),
@@ -87,6 +80,7 @@ function main(result_file)
     open(result_file,"w") do f
         println(f, "[")
     end
+    comma = false
     for (mtx, key) in [
         ("SNAP/email-Eu-core", "email-Eu-core"),
         ("SNAP/email-Eu-core-temporal", "email-Eu-core-temporal"),
@@ -168,24 +162,28 @@ function main(result_file)
             ("finch_gallop", triangle_finch_gallop),
         ]
 
-        time, res = f(A, key)
-        check = Scalar(true)
-        @finch @loop i j check[] &= ref[i, j] == res[i, j]
-        @assert check[]
+            time, res = f(A, key)
+            @assert res == ref
 
-        open(result_file,"a") do f
-            println()
-            JSON.print(f, Dict(
-                "matrix"=>mtx,
-                "n"=>size(A,1),
-                "nnz"=>nnz(A),
-                "method"=method,
-                "time"=>time,
-            ))
-            println(f, ",")
+            open(result_file,"a") do f
+                if comma
+                    println(f, ",")
+                end
+                print(f, """
+                    {
+                        "matrix": $(repr(mtx)),
+                        "n": $(size(A, 1)),
+                        "nnz": $(nnz(A)),
+                        "method": $(repr(method)),
+                        "time": $time
+                    }""")
+            end
+            @info "triangle" mtx size(A, 1) nnz(A) method time
+            comma = true
         end
     end
     open(result_file,"a") do f
+        println()
         println(f, "]")
     end
 end

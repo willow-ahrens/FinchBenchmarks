@@ -11,4 +11,4 @@ if [[ -f "$SCRIPT_DIR/download_julia.sh" ]]; then
     source julia_env.sh
 fi
 
-julia --project=. all_pairs.jl all_pairs.json
+julia --project=. all_pairs.jl all_pairs_results.json
