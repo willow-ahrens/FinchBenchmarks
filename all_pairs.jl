@@ -201,6 +201,8 @@ end
 num_imgs = 256
 
 function main(result_file)
+    comma = false
+
     open(result_file,"w") do f
         println(f, "[")
     end
@@ -224,7 +226,7 @@ function main(result_file)
 
         (opencv_time, reference) = all_pairs_opencv(A, num_imgs, key)
 
-        for (method, f) = [
+        for (method, timer) = [
             "opencv"=>all_pairs_opencv,
             "finch_sparse"=>all_pairs_finch,
             "finch_gallop"=>all_pairs_finch_gallop,
@@ -235,7 +237,7 @@ function main(result_file)
             "finch_uint8_vbl"=>all_pairs_finch_uint8_vbl,
             "finch_uint8_rle"=>all_pairs_finch_uint8_rle,
         ]
-            time, result = f(A, num_imgs, key)
+            time, result = timer(A, num_imgs, key)
 
             check = Scalar(true)
             @finch @loop i j check[] &= abs(result[i, j] - reference[i, j]) < 0.1 
@@ -243,19 +245,23 @@ function main(result_file)
             @info :result method key time time/opencv_time
 
             open(result_file,"a") do f
-                println()
+                if comma
+                    println(f, ",")
+                end
                 JSON.print(f, Dict(
                     "n"=>size(A,1),
                     "matrix"=>mtx,
                     "time"=>time,
                     "method"=>method,
-                ), indent=4)
-                println(f, ",")
+                ), 4)
             end
+            @info mtx size(A, 1) method time
+            comma = true
         end
     end
 
     open(result_file,"a") do f
+        println(f)
         println(f, "]")
     end
 end

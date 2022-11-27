@@ -1,5 +1,4 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
-using JSON
 using TensorDepot, MatrixDepot
 
 include("TensorMarket.jl")
@@ -163,48 +162,61 @@ function alpha_finch_sparse(B, C, alpha)
     return (time, A)
 end
 
-kernel_str = "@finch @loop i j round(UInt8, A[i, j] = as[] * B[i, j] + mas[] * C[i, j])"
-alpha = 0.5
+function main(result_file)
+    numSketches = 10
+    humansketchesA = matrixdepot("humansketches", 1:numSketches)
+    humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
-numSketches = 10
-humansketchesA = matrixdepot("humansketches", 1:numSketches)
-humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
+    open(result_file, "w") do f
+        println(f, "[")
+    end
 
-open(ARGS[1],"w") do f
-    println(f, "[\n")
-end
+    comma = false
 
-for (humansketchesA, humansketchesB, key) in [
-    (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
-    (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train")[:, :, 10_001:10_000+numSketches], (3, 1, 2)), "omniglot_train"),
-]
-    for i in 1:numSketches
-        println("Performing op: $i")
-        B = humansketchesA[i, :, :]
-        C = humansketchesB[i, :, :]
+    for (humansketchesA, humansketchesB, key) in [
+        (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
+        (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train")[:, :, 10_001:10_000+numSketches], (3, 1, 2)), "omniglot_train"),
+    ]
+        for i in 1:numSketches
+            B = humansketchesA[i, :, :]
+            C = humansketchesB[i, :, :]
 
-        time, reference = alpha_opencv(B, C, 0.5)
+            time, reference = alpha_opencv(B, C, 0.5)
 
-        for (method, f) in [
-            ("opencv", alpha_opencv),
-            ("taco_rle", alpha_taco_rle),
-            ("finch_rle", alpha_finch_rle),
-            ("finch_sparse", alpha_finch_sparse)
-        ]
+            for (method, timer) in [
+                ("opencv", alpha_opencv),
+                ("taco_rle", alpha_taco_rle),
+                ("finch_rle", alpha_finch_rle),
+                ("finch_sparse", alpha_finch_sparse)
+            ]
+                time, result = timer(B, C, 0.5)
+                check = Scalar(true)
+                @finch @loop i j check[] &= reference[i, j] == result[i, j]
+                @assert check[]
+                open(result_file, "a") do f
+                    if comma
+                        println(f, ",")
+                    end
+                    print(f, """
+                        {
+                            "dataset": $(repr(key)),
+                            "imageB": $i,
+                            "imageC": $(i+10_000),
+                            "method": $(repr(method)),
+                            "time": $time
+                        }""")
+                end
+                @info "alpha" method key i time
 
-            time, result = f(B, C, 0.5)
-            check = Scalar(true)
-            @finch @loop i j check[] &= reference[i, j] == result[i, j]
-            @assert check[]
-            open(ARGS[1], "a") do f
-                println()
-                JSON.print(f, Dict("method"=>method, "time"=>time, "dataset"=>key, "imageB"=>i, "imageC"=>i+10_000), indent=4)
-                println(f, ",")
+                comma = true
             end
         end
     end
+
+    open(result_file,"a") do f
+        println(f)
+        println(f, "]")
+    end
 end
 
-open(ARGS[1],"a") do f
-    println(f, "]\n")
-end
+main(ARGS...)

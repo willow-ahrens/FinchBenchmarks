@@ -113,35 +113,47 @@ function main(result_file)
         println(f, "[")
     end
 
+    comma = false
+
     for p in [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
+        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((20, 20), p)))
         F = ones(UInt8, 11, 11)
 
-        dense_time, dense_C = conv_dense_time(A, F)
+        dense_time, dense_C = conv_opencv_time(A, F, p)
+        ref = Array{Float64}(dense_C)
 
-        for (method, f) in [
+
+        for (method, timer) in [
+            ("opencv", conv_opencv_time),
             ("finch_sparse", conv_finch_time)
-            ("opencv", conv_opencv_time)
         ]
-
+            time, res = timer(A, F, p)
+            display(copyto!(similar(ref), res))
+            println()
+            display(ref)
+            println()
+            check = Scalar(true)
+            @finch @loop i j check[] &= res[i, j] == ref[i, j]
+            @assert check[]
             open(result_file,"a") do f
-                time, res = f(A, F, p)
-                check = Scalar(true)
-                @finch @loop i j check[] &= res[i, j] == dense_C[i, j]
-                @assert check[]
+                if comma
+                    println(f, ",")
+                end
                 JSON.print(f, Dict(
                     "p"=>p,
                     "run"=>1,
                     "method"=>method,
                     "time"=>time,
                 ))
-                println(f, ",")
             end
+            @info p run method time
+            comma = true
         end
     end
 
     open(result_file,"a") do f
+        println()
         println(f, "]")
     end
 end
