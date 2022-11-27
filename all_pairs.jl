@@ -1,5 +1,4 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
-using JSON
 using MatrixDepot,TensorDepot
 using Scratch
 using Random
@@ -242,20 +241,20 @@ function main(result_file)
             check = Scalar(true)
             @finch @loop i j check[] &= abs(result[i, j] - reference[i, j]) < 0.1 
             @assert check[]
-            @info :result method key time time/opencv_time
-
             open(result_file,"a") do f
                 if comma
                     println(f, ",")
                 end
-                JSON.print(f, Dict(
-                    "n"=>size(A,1),
-                    "matrix"=>mtx,
-                    "time"=>time,
-                    "method"=>method,
-                ), 4)
+                print(f,
+"""
+    {
+        "matrix": $(repr(mtx)),
+        "n": $(size(A, 1)),
+        "method": $(repr(method)),
+        "time": $time
+    }""")
             end
-            @info mtx size(A, 1) method time
+            @info "all pairs" mtx size(A, 1) method time
             comma = true
         end
     end

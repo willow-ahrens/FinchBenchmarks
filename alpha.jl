@@ -197,14 +197,15 @@ function main(result_file)
                     if comma
                         println(f, ",")
                     end
-                    print(f, """
-                        {
-                            "dataset": $(repr(key)),
-                            "imageB": $i,
-                            "imageC": $(i+10_000),
-                            "method": $(repr(method)),
-                            "time": $time
-                        }""")
+                    print(f,
+"""
+    {
+        "dataset": $(repr(key)),
+        "imageB": $i,
+        "imageC": $(i+10_000),
+        "method": $(repr(method)),
+        "time": $time
+    }""")
                 end
                 @info "alpha" method key i time
 
