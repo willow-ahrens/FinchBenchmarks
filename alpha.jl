@@ -170,8 +170,6 @@ function alpha_finch_sparse(B, C, alpha)
     C = dropdefaults!(@fiber(d{Int32}(sl{Int32}(e($(0xff::UInt8))))), copy(rawview(channelview(C))))
 
     A = similar(B)
-    # display(@finch_code @loop i j A[i, j] = unsafe_trunc($(value(UInt8)), round($as * B[i, j] + $mas * C[i, j])))
-    # println()
 
     time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
     return (time, A)
@@ -190,7 +188,7 @@ for (humansketchesA, humansketchesB, key) in [
     (matrixdepot("humansketches", 1:numSketches), matrixdepot("humansketches", (10_001):(10_000+numSketches)), "humansketches"),
     (permutedims(matrixdepot("omniglot_train")[:, :, 1:numSketches], (3, 1, 2)), permutedims(matrixdepot("omniglot_train")[:, :, 10_001:10_000+numSketches], (3, 1, 2)), "omniglot_train"),
 ]
-    for i in 1:numSketches 
+    for i in 1:numSketches
         println("Performing op: $i")
         B = humansketchesA[i, :, :]
         C = humansketchesB[i, :, :]
@@ -198,10 +196,11 @@ for (humansketchesA, humansketchesB, key) in [
         time, reference = alpha_opencv(B, C, 0.5)
 
         for (method, f) in [
-                ("opencv", alpha_opencv),
-                ("taco_rle", alpha_taco_rle),
-                ("finch_rle", alpha_finch_rle),
-                ("finch_sparse", alpha_finch_sparse)]
+            ("opencv", alpha_opencv),
+            ("taco_rle", alpha_taco_rle),
+            ("finch_rle", alpha_finch_rle),
+            ("finch_sparse", alpha_finch_sparse)
+        ]
 
             time, result = f(B, C, 0.5)
             check = Scalar(true)
@@ -213,6 +212,7 @@ for (humansketchesA, humansketchesB, key) in [
                 "dataset"=>key,
                 "imageB"=>i,
                 "imageC"=>i+10_000))
+        end
     end
 end
 
