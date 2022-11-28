@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SCRATCH=./scratch
+export SCRATCH=$(pwd)/scratch
 mkdir -p $SCRATCH
 export MATRIXDEPOT_DATA=$SCRATCH/MatrixData
 export TENSORDEPOT_DATA=$SCRATCH/TensorData

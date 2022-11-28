@@ -207,8 +207,8 @@ function main(result_file)
     end
 
     for (mtx, key) in [
-        ("emnist_letters_train","emnist_letters"),
         ("mnist_train", "mnist"),
+        ("emnist_letters_train","emnist_letters"),
         ("emnist_digits_train","emnist_digits"),
         ("omniglot_train", "omniglot"),
         ("cifar10_train", "cifar10"),

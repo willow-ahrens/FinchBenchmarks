@@ -4,7 +4,7 @@ if [[ -n $SCRIPT_DIR ]];  then
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 fi
 
-export SCRATCH=./scratch
+export SCRATCH=$(pwd)/scratch
 mkdir -p $SCRATCH
 export MATRIXDEPOT_DATA=$SCRATCH/MatrixData
 export TENSORDEPOT_DATA=$SCRATCH/TensorData
