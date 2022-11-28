@@ -37,6 +37,16 @@ COPY ./Finch.jl /Finch-CGO-2023-Results/Finch.jl
 COPY ./build_project.sh /Finch-CGO-2023-Results
 RUN julia --project=/Finch-CGO-2023-Results -e "using Pkg; Pkg.instantiate()"
 
+COPY ./TensorDepot.jl Finch-CGO-2023-Results/TensorDepot.jl
+
+COPY ./alpha.sh /Finch-CGO-2023-Results/alpha.sh
+COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
+RUN bash -e alpha.sh
+
+COPY ./all_pairs.sh /Finch-CGO-2023-Results/all_pairs.sh
+COPY ./all_pairs.jl /Finch-CGO-2023-Results/all_pairs.jl
+RUN bash -e all_pairs.sh
+
 COPY ./spmspv.sh /Finch-CGO-2023-Results/spmspv.sh
 COPY ./spmspv.jl /Finch-CGO-2023-Results/spmspv.jl
 COPY ./TensorMarket.jl /Finch-CGO-2023-Results/TensorMarket.jl
@@ -49,14 +59,6 @@ RUN bash -e triangle.sh
 COPY ./conv.sh /Finch-CGO-2023-Results/conv.sh
 COPY ./conv.jl /Finch-CGO-2023-Results/conv.jl
 RUN bash -e conv.sh
-
-COPY ./alpha.sh /Finch-CGO-2023-Results/alpha.sh
-COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
-RUN bash -e alpha.sh
-
-COPY ./all_pairs.sh /Finch-CGO-2023-Results/all_pairs.sh
-COPY ./all_pairs.jl /Finch-CGO-2023-Results/all_pairs.jl
-RUN bash -e all_pairs.sh
 
 COPY ./spmspv_plot.sh /Finch-CGO-2023-Results/spmspv_plot.sh
 COPY ./spmspv_plot.jl /Finch-CGO-2023-Results/spmspv_plot.jl
