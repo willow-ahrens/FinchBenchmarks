@@ -1,218 +1,218 @@
 [
 {
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.010409382,
-    "method": "opencv"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.076485396,
-    "method": "finch_sparse"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.054029889,
-    "method": "finch_gallop"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.031415233,
-    "method": "finch_vbl"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.080376341,
-    "method": "finch_rle"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.07577264,
-    "method": "finch_uint8"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.054488774,
-    "method": "finch_uint8_gallop"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.03344982,
-    "method": "finch_uint8_vbl"
-},
-{
-    "n": 28,
-    "matrix": "emnist_digits_train",
-    "time": 0.0815191,
-    "method": "finch_uint8_rle"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.010478895,
-    "method": "opencv"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.078150115,
-    "method": "finch_sparse"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.053947508,
-    "method": "finch_gallop"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.033244565,
-    "method": "finch_vbl"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.081182197,
-    "method": "finch_rle"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.077283198,
-    "method": "finch_uint8"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.054072564,
-    "method": "finch_uint8_gallop"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.035153734,
-    "method": "finch_uint8_vbl"
-},
-{
-    "n": 28,
-    "matrix": "emnist_letters_train",
-    "time": 0.082361702,
-    "method": "finch_uint8_rle"
-},
-{
-    "n": 28,
     "matrix": "mnist_train",
-    "time": 0.010373551,
-    "method": "opencv"
-},
-{
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.0523496,
-    "method": "finch_sparse"
+    "method": "opencv",
+    "time": 0.030557675000000003
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.036382124,
-    "method": "finch_gallop"
+    "method": "finch_sparse",
+    "time": 0.038249296
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.025207469,
-    "method": "finch_vbl"
+    "method": "finch_gallop",
+    "time": 0.037917069
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.05574746,
-    "method": "finch_rle"
+    "method": "finch_vbl",
+    "time": 0.019943968
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.051866873,
-    "method": "finch_uint8"
+    "method": "finch_rle",
+    "time": 0.047011909
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.036328663,
-    "method": "finch_uint8_gallop"
+    "method": "finch_uint8",
+    "time": 0.03828328
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
-    "matrix": "mnist_train",
-    "time": 0.026404345,
-    "method": "finch_uint8_vbl"
+    "method": "finch_uint8_gallop",
+    "time": 0.038131823
 },
 {
+    "matrix": "mnist_train",
     "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.020126623
+},
+{
     "matrix": "mnist_train",
-    "time": 0.056048846,
-    "method": "finch_uint8_rle"
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.046755911
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 0.044696303,
-    "method": "opencv"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.030463694000000003
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 1.204128008,
-    "method": "finch_sparse"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.056846446
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 1.406526406,
-    "method": "finch_gallop"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.057022048
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 0.435798048,
-    "method": "finch_vbl"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.027176539
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 0.064980447,
-    "method": "finch_rle"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.068186675
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 1.312113676,
-    "method": "finch_uint8"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.058027325
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 1.426906425,
-    "method": "finch_uint8_gallop"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.057676253
 },
 {
-    "n": 105,
-    "matrix": "omniglot_train",
-    "time": 0.478650644,
-    "method": "finch_uint8_vbl"
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.02791638
 },
 {
-    "n": 105,
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.067441611
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.03203571
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.056914572
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.057230688
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.026330815
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.06855336
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.058481903
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.056987645
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.026988698
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.067235557
+},
+{
     "matrix": "omniglot_train",
-    "time": 0.064682344,
-    "method": "finch_uint8_rle"
+    "n": 105,
+    "method": "opencv",
+    "time": 0.137934613
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_sparse",
+    "time": 0.908774226
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_gallop",
+    "time": 0.88310587
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_vbl",
+    "time": 0.365343421
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_rle",
+    "time": 0.064324875
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8",
+    "time": 0.941270941
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_gallop",
+    "time": 0.865364342
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_vbl",
+    "time": 0.38883404
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_rle",
+    "time": 0.068120525
 }
 ]

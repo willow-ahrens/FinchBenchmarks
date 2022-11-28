@@ -211,7 +211,6 @@ function main(result_file)
         ("emnist_letters_train","emnist_letters"),
         ("emnist_digits_train","emnist_digits"),
         ("omniglot_train", "omniglot"),
-        ("cifar10_train", "cifar10"),
     ]
 
         A = matrixdepot(mtx)

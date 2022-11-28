@@ -9,29 +9,33 @@ pyplot()
 
 include("plot_labels.jl")
 
-data = DataFrame(open("conv_results.json", "r") do f
-    JSON.parse(f)
-end)
+function main(infile, outfile)
+    data = DataFrame(open(infile, "r") do f
+        JSON.parse(f)
+    end)
 
-interest = [
-    "opencv",
-    "finch_sparse",
-]
+    interest = [
+        "opencv",
+        "finch_sparse",
+    ]
 
-p = plot(
-    xlabel="Density",
-    ylabel = "Runtime",
-    xscale = :log,
-    yscale = :log,
-    xflip = true
-)
-for method in interest
-    target = data[isequal(method).(data.method), :]
-    plot!(p,
-        target.p,
-        target.time,
-        label=label(method)
+    p = plot(
+        xlabel="Density",
+        ylabel = "Runtime",
+        xscale = :log,
+        yscale = :log,
+        xflip = true
     )
+    for method in interest
+        target = data[isequal(method).(data.method), :]
+        plot!(p,
+            target.p,
+            target.time,
+            label=label(method)
+        )
+    end
+
+    savefig(p, outfile)
 end
 
-savefig(p, "conv.png")
+main(args...)
