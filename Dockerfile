@@ -44,21 +44,36 @@ RUN bash -e spmspv.sh
 
 COPY ./triangle.sh /Finch-CGO-2023-Results/triangle.sh
 COPY ./triangle.jl /Finch-CGO-2023-Results/triangle.jl
-COPY ./triangle_viz.jl /Finch-CGO-2023-Results/triangle_viz.jl
 RUN bash -e triangle.sh
 
 COPY ./conv.sh /Finch-CGO-2023-Results/conv.sh
 COPY ./conv.jl /Finch-CGO-2023-Results/conv.jl
-COPY ./conv_viz.jl /Finch-CGO-2023-Results/conv_viz.jl
 RUN bash -e conv.sh
 
 COPY ./alpha.sh /Finch-CGO-2023-Results/alpha.sh
 COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
-COPY ./alpha_viz.jl /Finch-CGO-2023-Results/alpha_viz.jl
 RUN bash -e alpha.sh
 
 COPY ./all_pairs.sh /Finch-CGO-2023-Results/all_pairs.sh
 COPY ./all_pairs.jl /Finch-CGO-2023-Results/all_pairs.jl
-COPY ./all_pairs_viz.jl /Finch-CGO-2023-Results/all_pairs_viz.jl
 RUN bash -e all_pairs.sh
 
+COPY ./spmspv_plot.sh /Finch-CGO-2023-Results/spmspv_plot.sh
+COPY ./spmspv_plot.jl /Finch-CGO-2023-Results/spmspv_plot.jl
+RUN bash -e spmspv_plot.sh
+
+COPY ./triangle_plot.sh /Finch-CGO-2023-Results/triangle_plot.sh
+COPY ./triangle_plot.jl /Finch-CGO-2023-Results/triangle_plot.jl
+RUN bash -e triangle_plot.sh
+
+COPY ./conv_plot.sh /Finch-CGO-2023-Results/conv_plot.sh
+COPY ./conv_plot.jl /Finch-CGO-2023-Results/conv_plot.jl
+RUN bash -e conv_plot.sh
+
+COPY ./alpha_plot.sh /Finch-CGO-2023-Results/alpha_plot.sh
+COPY ./alpha_plot.jl /Finch-CGO-2023-Results/alpha_plot.jl
+RUN bash -e alpha_plot.sh
+
+COPY ./all_pairs_plot.sh /Finch-CGO-2023-Results/all_pairs_plot.sh
+COPY ./all_pairs_plot.jl /Finch-CGO-2023-Results/all_pairs_plot.jl
+RUN bash -e all_pairs_plot.sh
