@@ -83,11 +83,11 @@ $(TACOBUILD):
 	mkdir -p build ;\
 	cd build ;\
 	cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release .. ;\
-	make -j$(NPROC_VAL)
+	make taco -j$(NPROC_VAL)
 
 $(TACORLEBUILD):
 	cd $(TACORLE) ;\
 	mkdir -p build ;\
 	cd build ;\
 	cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release .. ;\
-	make -j$(NPROC_VAL)
+	make taco -j$(NPROC_VAL)
