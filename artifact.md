@@ -8,7 +8,7 @@ Debian bullseye. The artifact is implemented as a Julia package Finch.jl that
 implements the looplets described in the paper, and a set of benchmark scripts
 to run the benchmarks described in the paper. The specific runtimes measured
 depend on the host computer, however we expect the relative performance between
-Finch, TACO and OpenCV to match the results presented in the paper.
+Finch, TACO and OpenCV to roughly match the results presented in the paper.
 
 ## Artifact check-list (meta-information)
 - **Compilation:**  This artifact compares to two versions of TACO which are
