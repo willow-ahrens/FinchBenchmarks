@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$(pwd)
 bash -e $SCRIPT_DIR/download_julia.sh
 source $SCRIPT_DIR/julia_env.sh
 

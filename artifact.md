@@ -37,31 +37,22 @@ Our artifact is distributed by cloning the repo from
 
 # Installation
 
-The artifact can be run containerized, using docker, or locally, using our
-provided scripts.
-
-If you choose to run containerized, Docker is used to build all the dependencies
-and run the artifact. From the toplevel directory (e.g.
-`.../FinchBenchmarks/`), run the `artifact.sh` script, which has two separate
-commands. The first command runs docker to build, install, run, and plot the
-results.  The dockerscript handles all parts of results collection and analysis.
-The local build instructions contain more explanation of the steps the
-Dockerscript takes.  The second command copies the results from the docker image
-back into the toplevel directory on the host machine.   
-
-To run locally, first install cmake, gcc, g++, python, python3, and git. Results
+1. First install cmake, gcc, g++, python, python3, and git. Results
 were originally collected using gcc 7.5.0, however a more modern version should
-work. Next, run the `build_project.sh` script to download julia 1.8.2 and build
-OpenCV and TACO (this uses the included Makefile). The results can be collected
-using the `run.sh` script which runs all of the experiments and generates the
-graphs shown in the paper. Running the data collection scripts automatically
-downloads the appropriate datasets.
+work.
 
-TODO however they are also included in the artifact distribution. 
+2. Run the `build.sh` script to download julia 1.8.2 and build
+OpenCV and TACO (this uses the included Makefile).
+
 
 # Experiment Workflow
 There are five experiments described in the paper in sections 9.1 through 9.5,
-with associated scripts to collect and analyze results.
+with associated scripts to collect and analyze results. You can run all these
+commands with the `run.sh` script. This script runs all of the experiments and
+generates the graphs shown in the paper. Running the data collection scripts
+automatically downloads the appropriate datasets.
+
+TODO however they are also included in the artifact distribution. 
 
 The experiments are named as follows:
   - `all_pairs` (for all-pairs image similarity)
@@ -81,7 +72,7 @@ where `RESULT_FILE` is the name of the json output in long format.
 
 `alpha.sh` is a bash script that runs `alpha.jl` after setting appropriate
 environment variables to keep dataset and julia package downloads inside the
-toplevel directory.
+toplevel directory. This script produces `alpha_results.json`, the results.
 
 `alpha_plot.jl` is a julia script that reads the results file and generates
 plots. It can be invoked as 
@@ -91,41 +82,22 @@ plots. It can be invoked as
 where `PLOT_FILE` is the name of the output plot (with a `.png` extension).
 
 `alpha_plot.sh` is a bash script that runs `alpha.jl` after setting similar
-appropriate environment variables.
+appropriate environment variables. This script produces `alpha_plot.png`,
+the plot of the results you just collected.
 
 `alpha_results_reference.json` contains the results we used to generate the
-plots for the paper. You can point the plotting scripts at this file to repr
-It takes `alpha.jl` after setting appropriate
-environment variables to keep dataset downloads inside the toplevel directory.
+plots for the paper. You can point the plotting scripts at this file to
+reproduce the results in the paper exactly (you could also just look at the
+plots in the paper).
 
-
-
-and each has an associated bash script to run the experiment and generate the
-associated graphs, and a julia script to collect the benchmark data. There are
-separate binaries for the OpenCV and TACO experiments, which are called from the
-Julia files with the appropriate environment variables set. 
-
-The 
-
-Each section is
-described as follows.
-
-- SpMSpV: 
-- Triangle Counting: 
-- Convolution: 
-- Alpha Blending: 
-- All-Pairs Image Similarity:  
-
-The JSON files produced contain the **TODO: describe format of the output json**. 
-
-**TODO: describe high level implementation structure of Finch?**
+There are separate binaries for the OpenCV and TACO experiments, which are
+called from the Julia files with the appropriate environment variables set. 
 
 # Evaluation and expected result
 Running the artifact as described above produces the raw execution timing, and
-the relative performance plotted in graphs which match the paper. We include
-reference results which match the paper, and the scripts compare the relative
-speedups of the artifact to the reference. **TODO: More
-details here**.
+the relative performance plotted in graphs which match the paper. You can verify that
+each experiment matches it's corresponding `.png` file. We also include
+reference results which match the paper. 
 
 # Experiment customization
 
