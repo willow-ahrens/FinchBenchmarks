@@ -12,3 +12,5 @@ settings.json
 all_pairs_opencv
 opencv/install
 scratch
+julia-1.8.2
+.julia
