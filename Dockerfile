@@ -33,10 +33,11 @@ RUN mkdir -p /scratch
 COPY ./Project.toml /Finch-CGO-2023-Results/
 COPY ./Manifest.toml /Finch-CGO-2023-Results/
 COPY ./Finch.jl /Finch-CGO-2023-Results/Finch.jl
-COPY ./TensorDepot.jl Finch-CGO-2023-Results/TensorDepot.jl
+COPY ./TensorDepot.jl /Finch-CGO-2023-Results/TensorDepot.jl
 
 COPY ./build_project.sh /Finch-CGO-2023-Results
 RUN julia --project=/Finch-CGO-2023-Results -e "using Pkg; Pkg.instantiate()"
+COPY ./TensorMarket.jl /Finch-CGO-2023-Results/TensorMarket.jl
 
 COPY ./alpha.sh /Finch-CGO-2023-Results/alpha.sh
 COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
@@ -48,7 +49,6 @@ RUN bash -e all_pairs.sh
 
 COPY ./spmspv.sh /Finch-CGO-2023-Results/spmspv.sh
 COPY ./spmspv.jl /Finch-CGO-2023-Results/spmspv.jl
-COPY ./TensorMarket.jl /Finch-CGO-2023-Results/TensorMarket.jl
 RUN bash -e spmspv.sh
 
 COPY ./triangle.sh /Finch-CGO-2023-Results/triangle.sh

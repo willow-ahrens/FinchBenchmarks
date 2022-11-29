@@ -1,5 +1,59 @@
 [
 {
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.010373551
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.0523496
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.036382124
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.025207469
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.05574746
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.051866873
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.036328663
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.026404345
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.056048846
+},
+{
     "matrix": "emnist_digits_train",
     "n": 28,
     "method": "opencv",
@@ -107,60 +161,7 @@
     "method": "finch_uint8_rle",
     "time": 0.082361702
 },
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "opencv",
-    "time": 0.010373551
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_sparse",
-    "time": 0.0523496
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_gallop",
-    "time": 0.036382124
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_vbl",
-    "time": 0.025207469
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_rle",
-    "time": 0.05574746
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_uint8",
-    "time": 0.051866873
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_uint8_gallop",
-    "time": 0.036328663
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_uint8_vbl",
-    "time": 0.026404345
-},
-{
-    "matrix": "mnist_train",
-    "n": 28,
-    "method": "finch_uint8_rle",
-    "time": 0.056048846
-},
+
 {
     "matrix": "omniglot_train",
     "n": 105,

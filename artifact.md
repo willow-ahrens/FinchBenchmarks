@@ -61,10 +61,53 @@ TODO however they are also included in the artifact distribution.
 
 # Experiment Workflow
 There are five experiments described in the paper in sections 9.1 through 9.5,
+with associated scripts to collect and analyze results.
+
+The experiments are named as follows:
+  - `all_pairs` (for all-pairs image similarity)
+  - `alpha` (for alpha blending)
+  - `conv` (for sparse convolution)
+  - `smpspv` (for sparse matrix sparse vector multiply)
+  - `triangle` (for triangle counting)
+
+Each experiment has several associated scripts that are all prefixed by it's
+name. We use `alpha` as an example.
+
+`alpha.jl` is a julia script that runs the experiments. It can be invoked as
+
+`julia --project=. alpha.jl RESULT_FILE`
+
+where `RESULT_FILE` is the name of the json output in long format.
+
+`alpha.sh` is a bash script that runs `alpha.jl` after setting appropriate
+environment variables to keep dataset and julia package downloads inside the
+toplevel directory.
+
+`alpha_plot.jl` is a julia script that reads the results file and generates
+plots. It can be invoked as 
+
+`julia --project=. alpha_plot.jl RESULT_FILE PLOT_FILE`
+
+where `PLOT_FILE` is the name of the output plot (with a `.png` extension).
+
+`alpha_plot.sh` is a bash script that runs `alpha.jl` after setting similar
+appropriate environment variables.
+
+`alpha_results_reference.json` contains the results we used to generate the
+plots for the paper. You can point the plotting scripts at this file to repr
+It takes `alpha.jl` after setting appropriate
+environment variables to keep dataset downloads inside the toplevel directory.
+
+
+
 and each has an associated bash script to run the experiment and generate the
 associated graphs, and a julia script to collect the benchmark data. There are
 separate binaries for the OpenCV and TACO experiments, which are called from the
-Julia files with the appropriate environment variables set. Each section is
+Julia files with the appropriate environment variables set. 
+
+The 
+
+Each section is
 described as follows.
 
 - SpMSpV: 
