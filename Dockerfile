@@ -33,11 +33,10 @@ RUN mkdir -p /scratch
 COPY ./Project.toml /Finch-CGO-2023-Results/
 COPY ./Manifest.toml /Finch-CGO-2023-Results/
 COPY ./Finch.jl /Finch-CGO-2023-Results/Finch.jl
+COPY ./TensorDepot.jl Finch-CGO-2023-Results/TensorDepot.jl
 
 COPY ./build_project.sh /Finch-CGO-2023-Results
 RUN julia --project=/Finch-CGO-2023-Results -e "using Pkg; Pkg.instantiate()"
-
-COPY ./TensorDepot.jl Finch-CGO-2023-Results/TensorDepot.jl
 
 COPY ./alpha.sh /Finch-CGO-2023-Results/alpha.sh
 COPY ./alpha.jl /Finch-CGO-2023-Results/alpha.jl
