@@ -52,7 +52,12 @@ access in perpetuity.
 ## Description
 # How Delivered
 Our artifact is distributed by cloning the repo from
-[https://github.com/willow-ahrens/FinchBenchmarks.git](https://github.com/willow-ahrens/FinchBenchmarks.git).
+[github](https://github.com/willow-ahrens/FinchBenchmarks/tree/cgo23-artifact).
+using the following command:
+
+```
+git clone -b cgo23-artifact https://github.com/willow-ahrens/FinchBenchmarks.git
+```
 
 # Installation
 
@@ -141,4 +146,4 @@ the repository
 
 Finch can also be used as a standalone sparse tensor compiler. More details and
 documentation is available at
-[https://github.com/willow-ahrens/Finch.jl](https://github.com/willow-ahrens/Finch.jl). 
+[https://github.com/willow-ahrens/Finch.jl](https://github.com/willow-ahrens/Finch.jl).
