@@ -135,7 +135,7 @@ end
 #Finch.register()
 
 function alpha_finch_kernel(A, B, C, as, mas)
-    @finch @loop i j A[i, j] = unsafe_trunc(UInt8, round(as * B[i, j] + mas * C[i, j]))
+    @finch @loop i j A[i, j] = unsafe_trunc(UInt8, round($(literal_instance(as)) * B[i, j] + $(literal_instance(mas)) * C[i, j]))
 end
 
 function alpha_finch_rle(B, C, alpha)

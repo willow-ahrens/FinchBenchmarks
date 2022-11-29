@@ -32,6 +32,7 @@ function main(infile, outfile)
     p = groupedbar(data.matrix,
         data.speedup,
         group=group,
+        legend=:topleft,
         xlabel="Dataset",
         ylabel = "Speedup Over OpenCV"
     )
