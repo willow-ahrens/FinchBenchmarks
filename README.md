@@ -36,12 +36,12 @@ to work on most modern mac or linux distributions.
   automatically downloaded).
 - **Hardware:** The artifact requires x86 processor.
 - **Execution:** The experiments should be ran single threaded pinned to a
-  single socket. The experiments from the paper take **TODO** in total. 
+  single socket. The experiments from the paper take 2 hours in total. 
 - **Metrics:** Execution time is reported.
 - **Output:** The output is long format data including the execution time stored
   in JSON files. We also provide scripts to plot the data in the same format as
   the paper.
-- **How much disk space required (approximately)?** **TODO**
+- **How much disk space required (approximately)?** 4GB
 - **Publicly available?:** Yes
 - **Code licenses (if publicly available)?:** The code has been released under
   the MIT license. 
@@ -59,6 +59,8 @@ using the following command:
 git clone -b cgo23-artifact https://github.com/willow-ahrens/FinchBenchmarks.git
 ```
 
+Notice that we use the cgo23-artifact branch of the repo.
+
 # Installation
 
 1. First install cmake, gcc, g++, python, python3, and git. Results were
@@ -75,8 +77,6 @@ with associated scripts to collect and analyze results. You can run all these
 commands with the `run.sh` script. This script runs all of the experiments and
 generates the graphs shown in the paper. Running the data collection scripts
 automatically downloads the appropriate datasets.
-
-TODO however they are also included in the artifact distribution. 
 
 The experiments are named as follows:
   - `all_pairs` (for all-pairs image similarity)
@@ -119,9 +119,9 @@ called from the Julia files with the appropriate environment variables set.
 
 # Evaluation and expected result
 Running the artifact as described above produces the raw execution timing, and
-the relative performance plotted in graphs which match the paper. You can verify that
-each experiment matches it's corresponding `.png` file. We also include
-reference results which match the paper. 
+the relative performance plotted in graphs which match the paper. You can verify
+that each experiment matches it's corresponding figure in the paper. We also
+include reference results which were used to generate the figures in the paper.
 
 # Experiment customization
 
