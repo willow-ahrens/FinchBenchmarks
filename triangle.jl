@@ -67,6 +67,19 @@ function triangle_finch_gallop(_A, key)
     return (time, c)
 end
 
+snap_short = [
+    ("SNAP/email-Eu-core", "email-Eu-core"),
+    ("SNAP/email-Eu-core-temporal", "email-Eu-core-temporal"),
+    ("SNAP/CollegeMsg", "CollegeMsg"),
+    ("SNAP/soc-sign-bitcoin-alpha", "soc-sign-bitcoin-alpha"),
+    ("SNAP/ca-GrQc", "ca-GrQc"),
+    ("SNAP/com-Youtube", "com-Youtube"),
+    ("SNAP/as-caida", "as-caida"),
+    ("SNAP/Oregon-1", "Oregon-1"),
+    ("SNAP/as-735", "as-735"),
+    ("SNAP/loc-Gowalla", "loc-Gowalla"),
+] 
+
 snap = [
     ("SNAP/email-Eu-core", "email-Eu-core"),
     ("SNAP/email-Eu-core-temporal", "email-Eu-core-temporal"),
@@ -135,7 +148,7 @@ function main(result_file, short="short")
     comma = false
 
     if short == "short"
-        snap = snap[1:10]
+        snap = snap_short
     end
 
     for (mtx, key) in snap

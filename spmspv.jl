@@ -87,6 +87,19 @@ function spmspv_finch_vbl(_A, x)
     return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j])
 end
 
+hb_short = [
+    ("HB/bcsstm08", "bcsstm08"),
+    ("HB/bcsstm09", "bcsstm09"),
+    ("HB/bcsstm11", "bcsstm11"),
+    ("HB/bcsstm26", "bcsstm26"),
+    ("HB/bcsstm23", "bcsstm23"),
+    ("HB/bcsstm25", "bcsstm25"),
+    ("HB/bcsstk32", "bcsstk32"),
+    ("HB/cegb2802", "cegb2802"),
+    ("HB/bcsstk30", "bcsstk30"),
+    ("HB/bcsstk31", "bcsstk31"),
+]
+
 hb = [
     ("HB/bcsstm08", "bcsstm08"),
     ("HB/bcsstm09", "bcsstm09"),
@@ -201,7 +214,7 @@ function main(result_file, short="short")
     comma = false
 
     if short == "short" 
-        hb = hb[1:10]
+        hb = hb_short
     end
 
     for (mtx, key) in hb

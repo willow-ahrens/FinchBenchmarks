@@ -1,5 +1,6 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
 using TensorDepot, MatrixDepot
+using Finch.IndexNotation:literal_instance
 
 include("TensorMarket.jl")
 using .TensorMarket
