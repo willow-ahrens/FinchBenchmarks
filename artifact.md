@@ -12,18 +12,20 @@ Finch, TACO and OpenCV to roughly match the results presented in the paper.
 
 ## Artifact check-list (meta-information)
 - **Compilation:**  This artifact compares to two versions of TACO which are
-  included as source code and built.
+  included as source code and built. Additionally, we build OpenCV and several
+  wrapper scripts to call taco.
 - **Data set:** We use matrices from the Harwell-Boeing collection, graphs from
-  the SNAP network dataset collection, MNIST images, and include two image
-  datasets.
+  the SNAP network dataset collection, and several image datasets, MNIST, EMNIST,
+  Omniglot, and HumanSketches.
 - **Hardware:** The artifact requires x86 processor.
 - **Execution:** The experiments should be ran single threaded pinned to a
   single socket. The experiments from the paper take **TODO** in total. 
 - **Metrics:** Execution time is reported.
 - **Output:** The output is long format data including the execution time stored
-  in JSON files, and the graphs from the paper.
+  in JSON files. We also provide scripts to plot the data in the same format as
+  the paper.
 - **How much disk space required (approximately)?** **TODO**
-- **Publicly available?:** Yes, **TODO**
+- **Publicly available?:** Yes
 - **Code licenses (if publicly available)?:** The code has been released under
   the MIT license. 
 - **Archived?:** **TODO**
@@ -32,31 +34,37 @@ Finch, TACO and OpenCV to roughly match the results presented in the paper.
 # How Delivered
 Our artifact is distributed by cloning the repo from
 [https://github.com/willow-ahrens/FinchBenchmarks.git](https://github.com/willow-ahrens/FinchBenchmarks.git).
-**TODO: Zenodo link so the datasets are all included!**
-When fully expanded the artifact takes approximately **TODO** space. 
 
 # Installation
-Docker is used to build all the dependencies and run the artifact. From the
-scripts (**TODO: change this?**) directory, run the `artifact.sh` script to
-build the docker image, which runs the experiments, and copy the result files
-from the docker image to the local machine. The dockerscript automatically
-installs the necessary dependencies and builds OpenCV and TACO to compare
-against. 
+
+The artifact can be run containerized, using docker, or locally, using our
+provided scripts.
+
+If you choose to run containerized, Docker is used to build all the dependencies
+and run the artifact. From the toplevel directory (e.g.
+`.../FinchBenchmarks/`), run the `artifact.sh` script, which has two separate
+commands. The first command runs docker to build, install, run, and plot the
+results.  The dockerscript handles all parts of results collection and analysis.
+The local build instructions contain more explanation of the steps the
+Dockerscript takes.  The second command copies the results from the docker image
+back into the toplevel directory on the host machine.   
 
 To run locally, first install cmake, gcc, g++, python, python3, and git. Results
-were collected using gcc 7.5.0, however a more modern version should work. Next,
-run the `build_project.sh` script to download julia 1.8.2 and build OpenCV and
-TACO. The results can be collected using the `run.sh` script which runs all of
-the experiments and generates the graphs shown in the paper. Running the data
-collection scripts automatically downloads the appropriate datasets, however
-they are also included in the artifact distribution. 
+were originally collected using gcc 7.5.0, however a more modern version should
+work. Next, run the `build_project.sh` script to download julia 1.8.2 and build
+OpenCV and TACO (this uses the included Makefile). The results can be collected
+using the `run.sh` script which runs all of the experiments and generates the
+graphs shown in the paper. Running the data collection scripts automatically
+downloads the appropriate datasets.
+
+TODO however they are also included in the artifact distribution. 
 
 # Experiment Workflow
 There are five experiments described in the paper in sections 9.1 through 9.5,
 and each has an associated bash script to run the experiment and generate the
 associated graphs, and a julia script to collect the benchmark data. There are
 separate binaries for the OpenCV and TACO experiments, which are called from the
-julia files with the appropriate environment variables set. Each section is
+Julia files with the appropriate environment variables set. Each section is
 described as follows.
 
 - SpMSpV: 
