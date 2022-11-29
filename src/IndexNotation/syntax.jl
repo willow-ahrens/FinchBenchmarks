@@ -70,15 +70,13 @@ function (ctx::FinchParserContext)(ex::Expr)
         return ctx(:(@loop($(idxs...), $body)))
     elseif @capture ex :macrocall($(Symbol("@loop")), ~ln::islinenum, ~idxs..., ~body)
         return quote
-            let
-                $(Expr(:block, (:($(esc(idx)) = $(ctx.nodes.index(idx))) for idx in idxs if idx isa Symbol)...))
+            let $((:($(esc(idx)) = $(ctx.nodes.index(idx))) for idx in idxs if idx isa Symbol)...)
                 $(ctx.nodes.loop)($((idx isa Symbol ? esc(idx) : ctx(idx) for idx in idxs)...), $(ctx(body)))
             end
         end
     elseif @capture ex :macrocall($(Symbol("@chunk")), ~ln::islinenum, ~idx, ~ext, ~body)
         return quote
-            let
-                $(idx isa Symbol ? :($(esc(idx)) = $(ctx.nodes.index(idx))) : quote end)
+            let $(idx isa Symbol ? :($(esc(idx)) = $(ctx.nodes.index(idx))) : quote end)
                 $(ctx.nodes.chunk)($(idx isa Symbol ? esc(idx) : ctx(idx)), $(ctx(ext)), $(ctx(body)))
             end
         end
@@ -123,8 +121,8 @@ function (ctx::FinchParserContext)(ex::Expr)
         return ctx(:($or($a, $b)))
     elseif @capture ex :call(~op, ~args...)
         return :($(ctx.nodes.call)($(ctx(op)), $(map(ctx, args)...)))
-    elseif @capture ex :(::)(~idx, ~proto)
-        return :($(ctx.nodes.protocol)($(ctx(idx)), $(esc(proto))))
+    elseif @capture ex :(::)(~idx, ~mode)
+        return :($(ctx.nodes.protocol)($(ctx(idx)), $(esc(mode))))
     elseif @capture ex :(...)(~arg)
         return esc(ex)
     elseif @capture ex :$(~arg)
