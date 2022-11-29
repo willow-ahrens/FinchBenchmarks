@@ -28,8 +28,8 @@ function main(infile, outfile)
     )
     for method in interest
         target = data[isequal(method).(data.method), :]
-        plot!(p .* 100,
-            target.p,
+        plot!(p,
+            target.p .* 100,
             target.time,
             label=label(method)
         )
