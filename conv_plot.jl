@@ -20,15 +20,15 @@ function main(infile, outfile)
     ]
 
     p = plot(
-        xlabel="Density",
-        ylabel = "Runtime",
+        xlabel="Sparsity (% Nonzero)",
+        ylabel = "Runtime (s)",
         xscale = :log,
         yscale = :log,
         xflip = true
     )
     for method in interest
         target = data[isequal(method).(data.method), :]
-        plot!(p,
+        plot!(p .* 100,
             target.p,
             target.time,
             label=label(method)
