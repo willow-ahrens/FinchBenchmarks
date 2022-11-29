@@ -49,7 +49,6 @@ to work on most modern mac or linux distributions.
 All of the datasets we used are publicly accessible with considerations for
 access in perpetuity.
 
-## Description
 # How Delivered
 Our artifact is distributed by cloning the repo from
 [github](https://github.com/willow-ahrens/FinchBenchmarks/tree/cgo23-artifact).
