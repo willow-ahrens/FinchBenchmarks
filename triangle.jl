@@ -12,6 +12,8 @@ using .TensorMarket
 MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
 
+MatrixDepot.init()
+
 function triangle_taco_sparse(A, key)
     c_file = joinpath(mktempdir(prefix="triangle_taco_sparse_$(key)"), "c.ttx")
     persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_sparse_$(key)")

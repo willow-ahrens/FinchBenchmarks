@@ -9,8 +9,11 @@ using MatrixDepot
 include("TensorMarket.jl")
 using .TensorMarket
 
-MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
+function MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-")
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
+end
+
+MatrixDepot.init()
 
 function spmspv_taco(_A, x, key)
     y_ref = @fiber(d(e(0.0)))
