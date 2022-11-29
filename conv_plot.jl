@@ -38,4 +38,4 @@ function main(infile, outfile)
     savefig(p, outfile)
 end
 
-main(args...)
+main(ARGS...)

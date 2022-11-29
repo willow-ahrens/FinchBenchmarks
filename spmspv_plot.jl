@@ -53,3 +53,5 @@ function main(infile, outname)
 
     savefig(p, "$(outname)_10count.png")
 end
+
+main(ARGS...)
