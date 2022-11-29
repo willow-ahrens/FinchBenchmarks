@@ -117,6 +117,12 @@ plots in the paper).
 There are separate binaries for the OpenCV and TACO experiments, which are
 called from the Julia files with the appropriate environment variables set. 
 
+## Short lists
+
+To save time, `spmspv.jl` and `triangle.jl` run a subset of results in the paper
+consisting of the 5 smallest and 5 best performing datasets. To run the full
+versions, pass `long` as an additional final argument to these scripts.
+
 # Evaluation and expected result
 Running the artifact as described above produces the raw execution timing, and
 the relative performance plotted in graphs which match the paper. You can verify
@@ -127,10 +133,9 @@ include reference results which were used to generate the figures in the paper.
 
 It is possible to customize the benchmark scripts to use additional datasets.
 The matrices used in SpMSpV and Triangle counting are downloaded using the
-MatrixDepot Julia package. In `spmspv.jl`, the `hb` variable can be modified to
-use any other matrix from MatrixDepot. Similarly, in `triangle.jl`, the main
-function can be modified by adding an additional matrix name to the list of
-tests. 
+MatrixDepot Julia package. The main functions of these scripts can be modified
+to use a different list of matrix names recognized by
+[MatrixDepot](https://github.com/JuliaLinearAlgebra/MatrixDepot.jl).
 
 The `alpha.jl` and `all_pairs.jl` datasets use images downloaded using the
 TensorDepot Julia package. Other datasets included in this package can be used,
@@ -140,10 +145,11 @@ image, and the next two indices represent the rows and column of the image. The
 match. Other datasets can be added to TensorDepot for easy integration into the
 test harness, or they can be downloaded directly. 
 
-The experiments can be run on different platforms with Julia support, by cloning
-the repository
-[https://github.com/willow-ahrens/FinchBenchmarks](https://github.com/willow-ahrens/FinchBenchmarks). 
-
 Finch can also be used as a standalone sparse tensor compiler. More details and
 documentation is available at
 [https://github.com/willow-ahrens/Finch.jl](https://github.com/willow-ahrens/Finch.jl).
+Very briefly, any `@finch` macro expression in the benchmark suite is calling
+the Finch compiler and using Looplets to compile sparse kernels. The `@fiber`
+macro sets up level formats with the abbreviations of `d` for a dense level,
+`sl` for a sparse list of nonzeros, `sv` for a vbl level, and `rl` for a
+runlength level.
