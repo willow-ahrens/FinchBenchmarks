@@ -136,7 +136,7 @@ function main(result_file, short="short")
         snap = snap[1:10]
     end
 
-    for (mtx, key) in 
+    for (mtx, key) in snap
         A = SparseMatrixCSC(matrixdepot(mtx))
         println((key, size(A), nnz(A)))
 
