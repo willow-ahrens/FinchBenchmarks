@@ -1648,7 +1648,7 @@ version = "0.1.1"
 
 [[deps.TensorDepot]]
 deps = ["CSV", "DataFrames", "DelimitedFiles", "Downloads", "GZip", "Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
-path = "/Users/willow/.julia/dev/TensorDepot"
+path = "TensorDepot.jl"
 uuid = "a265fce4-34b0-4e6b-9b08-892587f3fa1f"
 version = "0.1.0"
 
