@@ -2,21 +2,38 @@
 
 ## Abstract
 
-This artifact is packaged as a docker container which builds and runs all of the
-experiments described in the paper. The container requires an x86 host, and runs
-Debian bullseye. The artifact is implemented as a Julia package Finch.jl that
-implements the looplets described in the paper, and a set of benchmark scripts
-to run the benchmarks described in the paper. The specific runtimes measured
-depend on the host computer, however we expect the relative performance between
-Finch, TACO and OpenCV to roughly match the results presented in the paper.
+This artifact has two scripts that build and run all of the experiments
+described in the paper. We require an x86 host, and runs Debian bullseye. The
+artifact is implemented as a Julia package Finch.jl that implements the looplets
+described in the paper, and a set of benchmark scripts to run the benchmarks
+described in the paper. The specific runtimes measured depend on the host
+computer, however we expect the relative performance between Finch, TACO and
+OpenCV to roughly match the results presented in the paper.
+
+Please list all requirements that are needed to build and test your artifact.
+For instance, minimum disk space required, cache size, CPU/GPU, OS version,
+compiler versions, AWS/Azure space requirements, docker support requirements,
+any special hardware, proprietary benchmarks such as SPEC CPU benchmarks, etc.
+The overall idea is to share these details upfront with the AEC so they can
+manage the resources in time to evaluate your artifact.
+
+
+
 
 ## Artifact check-list (meta-information)
+- **Operating System:** We tested on Ubuntu 18 and MacOS 12.5, but we expect it
+to work on most modern mac or linux distributions.
 - **Compilation:**  This artifact compares to two versions of TACO which are
   included as source code and built. Additionally, we build OpenCV and several
   wrapper scripts to call taco.
 - **Data set:** We use matrices from the Harwell-Boeing collection, graphs from
   the SNAP network dataset collection, and several image datasets, MNIST, EMNIST,
-  Omniglot, and HumanSketches.
+  Omniglot, and HumanSketches (these are automatically downloaded).
+- **Software:** The artifact requires cmake (we used 3.10), gcc/g++ (we used
+  7.5), python (we used 2.7/3.9), and git (we used 2.17).  We used Julia 1.8.2
+  (which is automatically downloaded). We have several julia dependencies whose
+  exact versions are recorded in the Manifest.toml file (these are also
+  automatically downloaded).
 - **Hardware:** The artifact requires x86 processor.
 - **Execution:** The experiments should be ran single threaded pinned to a
   single socket. The experiments from the paper take **TODO** in total. 
@@ -28,7 +45,9 @@ Finch, TACO and OpenCV to roughly match the results presented in the paper.
 - **Publicly available?:** Yes
 - **Code licenses (if publicly available)?:** The code has been released under
   the MIT license. 
-- **Archived?:** **TODO**
+- **Archived?:** After evaluation, we plan to distribute our repo on zenodo.
+All of the datasets we used are publicly accessible with considerations for
+access in perpetuity.
 
 ## Description
 # How Delivered
@@ -37,9 +56,9 @@ Our artifact is distributed by cloning the repo from
 
 # Installation
 
-1. First install cmake, gcc, g++, python, python3, and git. Results
-were originally collected using gcc 7.5.0, however a more modern version should
-work.
+1. First install cmake, gcc, g++, python, python3, and git. Results were
+originally collected using gcc 7.5.0, however a more modern version should work.
+The gcc compiler only affects TACO and OpenCV, not Finch.
 
 2. Run the `build.sh` script to download julia 1.8.2 and build
 OpenCV and TACO (this uses the included Makefile).
