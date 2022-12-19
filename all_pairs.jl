@@ -97,7 +97,7 @@ end
 
 function all_pairs_finch_rle(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = copyto!(@fiber(d{MyInt}(rl{0.0, MyInt, MyInt})), A)
+    A = copyto!(@fiber(d{MyInt}(rl{0.0, MyInt, MyInt}())), A)
     O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
@@ -193,7 +193,7 @@ function all_pairs_opencv(A, num_imgs, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    result = fsparse(ttread{MyInt}(result_file)...)
+    result = fsparse(ttread(result_file)...)
 
     return (opencv_time, result)
 end
