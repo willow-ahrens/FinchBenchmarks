@@ -240,6 +240,9 @@ function main(result_file)
 
             check = Scalar(true)
             @finch @loop i j check[] &= abs(result[i, j] - reference[i, j]) < 0.1 
+            foo = Scalar(0.0)
+            @finch @loop i j foo[] <<max>>= abs(result[i, j] - reference[i, j])
+            println(foo)
             @assert check[]
             open(result_file,"a") do f
                 if comma

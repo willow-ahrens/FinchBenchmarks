@@ -81,7 +81,7 @@ function execute_code(ex, T, algebra = DefaultAlgebra())
         end
     end
     code = quote
-        @inbounds begin
+        begin
             $code
         end
     end

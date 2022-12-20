@@ -234,7 +234,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseVBLLevel}, ctx, mode, ::Walk, idx
                 body = (start, step) -> Stepper(
                     seek = (ctx, ext) -> quote
                         #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                        while $my_r < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext)))
+                        while ($my_r + 1) < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext)))
                             $my_r += 1
                         end
                     end,
@@ -317,7 +317,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseVBLLevel}, ctx, mode, ::Gallop, i
                         body = Jump(
                             seek = (ctx, ext) -> quote
                                 #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                                while $my_r < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext)))
+                                while ($my_r + 1) < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext)))
                                     $my_r += 1
                                 end
                                 $my_i = $(lvl.ex).idx[$my_r]
@@ -353,7 +353,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseVBLLevel}, ctx, mode, ::Gallop, i
                                 literal(true) => Stepper(
                                     seek = (ctx, ext) -> quote
                                         #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                                        while $my_r < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext_2)))
+                                        while ($my_r + 1) < $my_r_stop && $(lvl.ex).idx[$my_r] < $(ctx(getstart(ext_2)))
                                             $my_r += 1
                                         end
                                     end,
