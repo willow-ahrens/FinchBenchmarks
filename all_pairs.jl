@@ -6,6 +6,7 @@ using Random
 include("TensorMarket.jl")
 using .TensorMarket
 
+const MyInt = Int32
 
 function pngwrite(filename, I, V, shape)
     @boundscheck begin
@@ -43,18 +44,18 @@ end
 
 function all_pairs_finch_gallop_kernel(m, A, O)
     o = Scalar{0.0}()
-    R = @fiber(d(e(0.0)))
+    R = @fiber(d{MyInt}(e(0.0)))
     @finch @loop k ij R[k] += A[k, ij]^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij::gallop] * A[l, ij::gallop]))
 end
 
 function all_pairs_finch_gallop(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
+    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_gallop_kernel($m, $A, $O)
 
@@ -63,18 +64,18 @@ end
 
 function all_pairs_finch_kernel(m, A, O)
     o = Scalar{0.0}()
-    R = @fiber(d(e(0.0)))
+    R = @fiber(d{MyInt}(e(0.0)))
     @finch @loop k ij R[k] += A[k, ij]^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += A[k, ij] * A[l, ij]))
 end
 
 function all_pairs_finch(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
-    O = fiber(zeros(Float64, num_imgs, num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
+    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
@@ -83,8 +84,8 @@ end
 
 function all_pairs_finch_vbl(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sv(e(0.0)))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sv{MyInt, MyInt}(e(0.0)))),A)
+    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
@@ -96,11 +97,11 @@ end
 
 function all_pairs_finch_rle(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = copyto!(@fiber(d(rl(0.0))), A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = copyto!(@fiber(d{MyInt}(rl{0.0, MyInt, MyInt}())), A)
+    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
@@ -109,18 +110,18 @@ end
 
 function all_pairs_finch_uint8_gallop_kernel(m, A, O)
     o = Scalar{0.0}()
-    R = @fiber(d(e(0.0)))
+    R = @fiber(d{MyInt}(e(0.0)))
     @finch @loop k ij R[k] += convert(Float64, A[k, ij])^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert(Float64, A[k, ij::gallop]) * convert(Float64, A[l, ij::gallop])))
 end
 
 function all_pairs_finch_uint8_gallop(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sl(e(0.0)))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
+    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_uint8_time = @belapsed all_pairs_finch_uint8_gallop_kernel($m, $A, $O)
 
@@ -129,7 +130,7 @@ end
 
 function all_pairs_finch_uint8_kernel(m, A, O)
     o = Scalar{0.0}()
-    R = @fiber(d(e(0.0)))
+    R = @fiber(d{MyInt}(e(0.0)))
     @finch @loop k ij R[k] += convert(Float64, A[k, ij])^2
     @finch @loop k l @sieve m[k,l] ((O[k,l] = sqrt(R[k] + R[l] - 2 * o[])) where (@loop ij o[] += convert(Float64, A[k, ij]) * convert(Float64, A[l, ij])))
 end
