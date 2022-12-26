@@ -52,7 +52,7 @@ end
 function all_pairs_finch_gallop(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
-    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
@@ -72,7 +72,7 @@ end
 function all_pairs_finch(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
-    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
@@ -85,10 +85,10 @@ end
 function all_pairs_finch_vbl(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d{MyInt}(sv{MyInt, MyInt}(e(0.0)))),A)
-    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O)
 
@@ -98,7 +98,7 @@ end
 function all_pairs_finch_rle(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = copyto!(@fiber(d{MyInt}(rl{0.0, MyInt, MyInt}())), A)
-    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
@@ -118,7 +118,7 @@ end
 function all_pairs_finch_uint8_gallop(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
     A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
-    O = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), zeros(Float64,num_imgs,num_imgs))
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
@@ -137,11 +137,11 @@ end
 
 function all_pairs_finch_uint8(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sl(e(0x00)))),A)
-    O = fiber(zeros(Float64, num_imgs, num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0x00)))),A)
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
 
@@ -150,11 +150,11 @@ end
 
 function all_pairs_finch_uint8_vbl(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d(sv(e(0x00)))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = dropdefaults!(@fiber(d{MyInt}(sv{MyInt, MyInt}(e(0x00)))),A)
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
 
@@ -163,11 +163,11 @@ end
 
 function all_pairs_finch_uint8_rle(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = copyto!(@fiber(d(rl(0x00))),A)
-    O = fiber(zeros(Float64,num_imgs,num_imgs))
+    A = copyto!(@fiber(d{MyInt}(rl{0x00, MyInt, MyInt}())),A)
+    O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
-    m = dropdefaults!(@fiber(d(sl(p()))), dense_m)
+    m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
     finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O)
 
@@ -240,6 +240,9 @@ function main(result_file)
 
             check = Scalar(true)
             @finch @loop i j check[] &= abs(result[i, j] - reference[i, j]) < 0.1 
+            #foo = Scalar(0.0)
+            #@finch @loop i j foo[] <<max>>= abs(result[i, j] - reference[i, j])
+            #println(foo)
             @assert check[]
             open(result_file,"a") do f
                 if comma
