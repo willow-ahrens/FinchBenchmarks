@@ -1,9 +1,8 @@
-function register()
+execute(ex) = execute(ex, DefaultAlgebra())
+function register(algebra)
     Base.eval(Finch, quote
-        @generated function execute(ex)
-            contain(LowerJulia()) do ctx
-                execute_code(:ex, ex)
-            end
+        @generated function execute(ex, a::$algebra)
+            execute_code(:ex, ex, a())
         end
     end)
 end
@@ -51,9 +50,9 @@ end
 #    end
 #end
 
-function execute_code(ex, T)
+function execute_code(ex, T, algebra = DefaultAlgebra())
     prgm = nothing
-    code = contain(LowerJulia()) do ctx
+    code = contain(LowerJulia(algebra = algebra)) do ctx
         quote
             $(begin
                 prgm = virtualize(ex, T, ctx)
@@ -66,14 +65,17 @@ function execute_code(ex, T)
                     (prgm, dims) = dimensionalize!(prgm, ctx_2)
                     prgm = Initialize(ctx = ctx_2)(prgm)
                     prgm = ThunkVisitor(ctx_2)(prgm) #TODO this is a bit of a hack.
-                    prgm = simplify(prgm)
+                    prgm = simplify(prgm, ctx_2)
                     ctx_2(prgm)
                 end
             end)
             $(contain(ctx) do ctx_2
                 prgm = Finalize(ctx = ctx_2)(prgm)
                 :(($(map(getresults(prgm)) do acc
-                    :($(getname(acc)) = $(ctx_2(acc.tns)))
+                    @assert acc.tns.kind === virtual
+                    name = getname(acc)
+                    tns = trim!(acc.tns.val, ctx_2)
+                    :($name = $(ctx_2(tns)))
                 end...), ))
             end)
         end
@@ -85,17 +87,16 @@ function execute_code(ex, T)
     end
     code |>
         lower_caches |>
-        lower_cleanup |>
-        striplines |>
-        unblock |>
-        unquote_literals
+        lower_cleanup
 end
 
-macro finch(ex)
+macro finch(args_ex...)
+    @assert length(args_ex) >= 1
+    (args, ex) = (args_ex[1:end-1], args_ex[end])
     results = Set()
     prgm = IndexNotation.finch_parse_instance(ex, results)
     thunk = quote
-        res = $execute($prgm)
+        res = $execute($prgm, $(map(esc, args)...))
     end
     for tns in results
         push!(thunk.args, quote
@@ -108,10 +109,15 @@ macro finch(ex)
     thunk
 end
 
-macro finch_code(ex)
+macro finch_code(args_ex...)
+    @assert length(args_ex) >= 1
+    (args, ex) = (args_ex[1:end-1], args_ex[end])
     prgm = IndexNotation.finch_parse_instance(ex)
     return quote
-        $execute_code(:ex, typeof($prgm))
+        $execute_code(:ex, typeof($prgm), $(map(esc, args)...)) |>
+        striplines |>
+        unblock |>
+        unquote_literals
     end
 end
 
@@ -191,5 +197,3 @@ function (ctx::Finalize)(node::IndexNode)
         return node
     end
 end
-
-register()
