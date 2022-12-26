@@ -38,8 +38,8 @@
             end
             j = 1
             j_start = j
-            phase_start = max(j_start)
-            phase_stop = min(A_lvl_2_i1, j_stop)
+            phase_start = j_start
+            phase_stop = (min)(A_lvl_2_i1, j_stop)
             if phase_stop >= phase_start
                 j = j
                 j = phase_start
@@ -49,7 +49,7 @@
                 while j <= phase_stop
                     j_start_2 = j
                     A_lvl_2_i = A_lvl_2.idx[A_lvl_2_q]
-                    phase_stop_2 = min(A_lvl_2_i, phase_stop)
+                    phase_stop_2 = (min)(A_lvl_2_i, phase_stop)
                     j_2 = j
                     if A_lvl_2_i == phase_stop_2
                         A_lvl_3_val = A_lvl_3.val[A_lvl_2_q]
@@ -63,7 +63,7 @@
                         B_lvl_2_val = B_lvl_2.val[B_lvl_q_2]
                         B_lvl_guard_2 = false
                         B_lvl_guard_2 = false
-                        B_lvl_2_val = B_lvl_2_val + A_lvl_3_val
+                        B_lvl_2_val = (+)(A_lvl_3_val, B_lvl_2_val)
                         B_lvl_2.val[B_lvl_q_2] = B_lvl_2_val
                         if !B_lvl_guard_2
                             B_lvl_idx_alloc = B_lvl_q_2
@@ -78,8 +78,8 @@
                 j = phase_stop + 1
             end
             j_start = j
-            phase_start_3 = max(j_start)
-            phase_stop_3 = min(j_stop)
+            phase_start_3 = j_start
+            phase_stop_3 = j_stop
             if phase_stop_3 >= phase_start_3
                 j_4 = j
                 j = phase_stop_3 + 1
@@ -91,5 +91,10 @@
         for B_lvl_p_2 = 1:B_lvl_P
             B_lvl.pos[B_lvl_p_2 + 1] += B_lvl.pos[B_lvl_p_2]
         end
-        (B = Fiber((Finch.SparseHashLevel){2, Tuple{Int64, Int64}, Int64, Int64, Dict{Tuple{Int64, Tuple{Int64, Int64}}, Int64}}((A_lvl.I, A_lvl_2.I), B_lvl.tbl, B_lvl.srt, B_lvl.pos, B_lvl_2), (Finch.Environment)(; name = :B)),)
+        B_lvl_pos_alloc = 1 + 1
+        resize!(B_lvl.pos, B_lvl_pos_alloc)
+        B_lvl_idx_alloc = B_lvl.pos[B_lvl_pos_alloc] - 1
+        resize!(B_lvl.srt, B_lvl_idx_alloc)
+        resize!(B_lvl_2.val, B_lvl_idx_alloc)
+        (B = Fiber((Finch.SparseHashLevel){2, Tuple{Int64, Int64}, Int64, Dict{Tuple{Int64, Tuple{Int64, Int64}}, Int64}}((A_lvl.I, A_lvl_2.I), B_lvl.tbl, B_lvl.pos, B_lvl.srt, B_lvl_2), (Finch.Environment)(; )),)
     end
