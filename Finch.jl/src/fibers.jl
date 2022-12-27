@@ -48,9 +48,6 @@ getname(fbr::VirtualFiber) = envname(fbr.env)
 setname(fbr::VirtualFiber, name) = VirtualFiber(fbr.lvl, envrename!(fbr.env, name))
 #setname(fbr::VirtualFiber, name) = (fbr.env.name = name; fbr)
 
-priority(::VirtualFiber) = (3,6)
-comparators(x::VirtualFiber) = (Lexicography(getname(x)),) #TODO this is probably good enough, but let's think about it later.
-
 """
     default(fbr)
 
@@ -72,7 +69,7 @@ function initialize!(fbr::VirtualFiber, ctx::LowerJulia, mode, idxs...)
         fbr = VirtualFiber(initialize_level!(fbr, ctx, mode), fbr.env)
         assemble!(fbr, ctx, mode)
     end
-    return refurl(fbr, ctx, mode, idxs...)
+    return access(refurl(fbr, ctx, mode), mode, idxs...)
 end
 
 """
@@ -110,6 +107,12 @@ function finalize_level! end
 
 finalize_level!(fbr, ctx, mode) = fbr.lvl
 
+function trim!(fbr::VirtualFiber, ctx)
+    delete!(fbr.env, :name)
+    VirtualFiber(trim_level!(fbr.lvl, ctx, 1), fbr.env)
+end
+trim!(fbr, ctx) = fbr
+
 #TODO get rid of isa IndexNode when this is all over
 
 function stylize_access(node, ctx::Stylize{LowerJulia}, tns::VirtualFiber)
@@ -127,8 +130,12 @@ function select_access(node, ctx::Finch.SelectVisitor, tns::VirtualFiber)
     if !isempty(node.idxs)
         if getunbound(node.idxs[1]) ⊆ keys(ctx.ctx.bindings)
             var = index(ctx.ctx.freshen(:s))
-            ctx.idxs[var] = node.idxs[1]
-            return access(node.tns, node.mode, var, node.idxs[2:end]...)
+            val = cache!(ctx.ctx, :s, node.idxs[1])
+            ctx.idxs[var] = val
+            ext = first(getsize(tns, ctx.ctx, node.mode))
+            ext_2 = Extent(val, val)
+            tns_2 = truncate(tns, ctx.ctx, ext, ext_2)
+            return access(tns_2, node.mode, var, node.idxs[2:end]...)
         end
     end
     return similarterm(node, operation(node), map(ctx, arguments(node)))
@@ -136,10 +143,11 @@ end
 
 function chunkify_access(node, ctx, tns::VirtualFiber)
     if !isempty(node.idxs)
-        idxs = map(ctx, node.idxs)
         if ctx.idx == get_furl_root(node.idxs[1])
-            return access(unfurl(tns, ctx.ctx, node.mode, nothing, node.idxs...), node.mode, get_furl_root(node.idxs[1])) #TODO do this nicer
+            idxs = map(ctx, node.idxs)
+            return access(unfurl(tns, ctx.ctx, node.mode, nothing, node.idxs...), node.mode, get_furl_root(node.idxs[1]), idxs[2:end]...)
         else
+            idxs = map(ctx, node.idxs)
             return access(node.tns, node.mode, idxs...)
         end
     end
@@ -161,7 +169,7 @@ end
 get_furl_root_access(idx, tns) = nothing
 #These are also good examples of where modifiers might be great.
 
-refurl(tns, ctx, mode, idxs...) = access(tns, mode, idxs...)
+refurl(tns, ctx, mode) = tns
 function exfurl(tns, ctx, mode, idx::IndexNode)
     if idx.kind === index
         return tns
@@ -180,23 +188,6 @@ function Base.show(io::IO, fbr::Fiber)
         print(io, fbr.env)
     end
     print(io, ")")
-end
-
-function show_region(io::IO, vec::Vector) 
-    print(io, "[")
-    if length(vec) > 3
-        for i = 1:3
-            print(io, vec[i])
-            print(io, ", ")
-        end
-        print(io, "…")
-    else
-        for i = 1:length(vec)
-            print(io, vec[i])
-            i != length(vec) && print(io, ", ")
-        end
-    end
-    print(io, "]")
 end
 
 function Base.show(io::IO, mime::MIME"text/plain", fbr::Fiber)

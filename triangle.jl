@@ -6,8 +6,9 @@ using Profile
 using JSON
 
 using MatrixDepot
-include("TensorMarket.jl")
-using .TensorMarket
+using TensorMarket
+
+const MyInt=Int32
 
 MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
@@ -47,8 +48,8 @@ function triangle_finch_kernel(A, AT)
     return c()
 end
 function triangle_finch_sparse(_A, key)
-    A = pattern!(fiber(_A))
-    AT = pattern!(fiber(permutedims(_A)))
+    A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
+    AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
     time = @belapsed triangle_finch_kernel($A, $AT)
     c = triangle_finch_kernel(A, AT)
     return time, c
@@ -60,8 +61,8 @@ function triangle_finch_gallop_kernel(A, AT)
     return c()
 end
 function triangle_finch_gallop(_A, key)
-    A = pattern!(fiber(_A))
-    AT = pattern!(fiber(permutedims(_A)))
+    A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
+    AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
     time = @belapsed triangle_finch_gallop_kernel($A, $AT)
     c = triangle_finch_gallop_kernel(A, AT)
     return (time, c)

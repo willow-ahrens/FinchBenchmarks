@@ -13,8 +13,9 @@ using Compat
 export @finch, @finch_program, @finch_code, value
 
 export Fiber, SparseList, SparseHash, SparseCoo, SparseBytemap, SparseVBL, Dense, RepeatRLE, Element, Pattern, Scalar
-export walk, fastwalk, gallop, follow, extrude, laminate, select
+export walk, fastwalk, gallop, follow, extrude, laminate
 export fiber, @fiber, pattern!, dropdefaults, dropdefaults!
+export diagmask, lotrimask, uptrimask, bandmask
 
 export choose
 
@@ -87,6 +88,8 @@ module h
 
     generate_embed_docs()
 end
+
+register(DefaultAlgebra)
 
 include("glue_AbstractArrays.jl")
 include("glue_SparseArrays.jl")

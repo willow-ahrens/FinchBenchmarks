@@ -1,19 +1,25 @@
-struct SparseCooLevel{N, Ti<:Tuple, Tq, Tbl, Lvl}
+struct SparseCooLevel{N, Ti<:Tuple, Tp, Tbl, Lvl}
     I::Ti
     tbl::Tbl
-    pos::Vector{Tq}
+    pos::Vector{Tp}
     lvl::Lvl
 end
 const SparseCoo = SparseCooLevel
 SparseCooLevel{N}(lvl) where {N} = SparseCooLevel{N}(((0 for _ in 1:N)..., ), lvl)
 SparseCooLevel{N, Ti}(lvl) where {N, Ti} = SparseCooLevel{N, Ti}((map(zero, Ti.parameters)..., ), lvl)
+SparseCooLevel{N, Ti, Tp}(lvl) where {N, Ti, Tp} = SparseCooLevel{N, Ti, Tp}((map(zero, Ti.parameters)..., ), lvl)
+
 SparseCooLevel{N}(I::Ti, lvl) where {N, Ti} = SparseCooLevel{N, Ti}(I, lvl)
-SparseCooLevel{N, Ti}(I::Ti, lvl) where {N, Ti} = SparseCooLevel{N, Ti, Int}(I, lvl)
-SparseCooLevel{N, Ti, Tq}(I::Ti, lvl) where {N, Ti, Tq} = SparseCooLevel{N, Ti, Tq}(I, ((Vector{T}(undef, 16) for T in Ti.parameters)...,), Tq[1, 1, 3:17...], lvl)
-SparseCooLevel{N, Ti, Tq}(I::Ti, tbl::Tbl, pos, lvl) where {N, Ti, Tq, Tbl} =
-    SparseCooLevel{N, Ti, Tq, Tbl}(I, tbl, pos, lvl)
-SparseCooLevel{N, Ti, Tq, Tbl}(I::Ti, tbl::Tbl, pos, lvl::Lvl) where {N, Ti, Tq, Tbl, Lvl} =
-    SparseCooLevel{N, Ti, Tq, Tbl, Lvl}(I, tbl, pos, lvl)
+SparseCooLevel{N, Ti}(I, lvl) where {N, Ti} = SparseCooLevel{N, Ti, Int}(Ti(I), lvl)
+SparseCooLevel{N, Ti, Tp}(I, lvl) where {N, Ti, Tp} =
+    SparseCooLevel{N, Ti, Tp}(Ti(I), ((T[] for T in Ti.parameters)...,), Tp[1, 1], lvl)
+
+SparseCooLevel{N}(I::Ti, tbl::Tbl, pos::Vector{Tp}, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseCooLevel{N, Ti, Tp, Tbl, Lvl}(I, tbl, pos, lvl)
+SparseCooLevel{N, Ti}(I, tbl::Tbl, pos::Vector{Tp}, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseCooLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, pos, lvl)
+SparseCooLevel{N, Ti, Tp}(I, tbl::Tbl, pos, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseCooLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, pos, lvl)
 
 """
 `f_code(sc)` = [SparseCooLevel](@ref).
@@ -23,23 +29,28 @@ summary_f_code(lvl::SparseCooLevel{N}) where {N} = "sc{$N}($(summary_f_code(lvl.
 similar_level(lvl::SparseCooLevel{N}) where {N} = SparseCooLevel{N}(similar_level(lvl.lvl))
 similar_level(lvl::SparseCooLevel{N}, tail...) where {N} = SparseCooLevel{N}(ntuple(n->tail[n], N), similar_level(lvl.lvl, tail[N + 1:end]...))
 
-pattern!(lvl::SparseCooLevel{N, Ti, Tq, Tbl}) where {N, Ti, Tq, Tbl} = 
-    SparseCooLevel{N, Ti, Tq, Tbl}(lvl.I, lvl.tbl, lvl.pos, pattern!(lvl.lvl))
+pattern!(lvl::SparseCooLevel{N, Ti, Tp}) where {N, Ti, Tp} = 
+    SparseCooLevel{N, Ti, Tp}(lvl.I, lvl.tbl, lvl.pos, pattern!(lvl.lvl))
 
-function Base.show(io::IO, lvl::SparseCooLevel{N}) where {N}
-    print(io, "SparseCoo{$N}(")
-    print(io, lvl.I)
+function Base.show(io::IO, lvl::SparseCooLevel{N, Ti, Tp}) where {N, Ti, Tp}
+    if get(io, :compact, false)
+        print(io, "SparseCoo{$N}(")
+    else
+        print(io, "SparseCoo{$N, $Ti, $Tp}(")
+    end
+    show(IOContext(io, :typeinfo=>Ti), lvl.I)
     print(io, ", ")
-    if get(io, :compact, true)
+    if get(io, :compact, false)
         print(io, "…")
     else
         print(io, "(")
-        for n = 1:N
-            show_region(io, lvl.tbl[n])
+        for (n, ti) = enumerate(Ti.parameters)
+            print(io, ti) #TODO we have to do something about this.
+            show(IOContext(io, :typeinfo=>Vector{ti}), lvl.tbl[n])
             print(io, ", ")
         end
         print(io, "), ")
-        show_region(io, lvl.pos)
+        show(IOContext(io, :typeinfo=>Vector{Tp}), lvl.pos)
     end
     print(io, ", ")
     show(io, lvl.lvl)
@@ -95,16 +106,20 @@ mutable struct VirtualSparseCooLevel
     ex
     N
     Ti
-    Tq
+    Tp
     Tbl
     I
+    pos_fill
+    pos_stop
     pos_alloc
     idx_alloc
     lvl
 end
-function virtualize(ex, ::Type{SparseCooLevel{N, Ti, Tq, Tbl, Lvl}}, ctx, tag=:lvl) where {N, Ti, Tq, Tbl, Lvl}   
+function virtualize(ex, ::Type{SparseCooLevel{N, Ti, Tp, Tbl, Lvl}}, ctx, tag=:lvl) where {N, Ti, Tp, Tbl, Lvl}   
     sym = ctx.freshen(tag)
     I = map(n->value(:($sym.I[$n]), Int), 1:N)
+    pos_fill = ctx.freshen(sym, :_pos_fill)
+    pos_stop = ctx.freshen(sym, :_pos_stop)
     pos_alloc = ctx.freshen(sym, :_pos_alloc)
     idx_alloc = ctx.freshen(sym, :_idx_alloc)
     push!(ctx.preamble, quote
@@ -113,11 +128,11 @@ function virtualize(ex, ::Type{SparseCooLevel{N, Ti, Tq, Tbl, Lvl}}, ctx, tag=:l
         $idx_alloc = length($sym.tbl)
     end)
     lvl_2 = virtualize(:($sym.lvl), Lvl, ctx, sym)
-    VirtualSparseCooLevel(sym, N, Ti, Tq, Tbl, I, pos_alloc, idx_alloc, lvl_2)
+    VirtualSparseCooLevel(sym, N, Ti, Tp, Tbl, I, pos_fill, pos_stop, pos_alloc, idx_alloc, lvl_2)
 end
 function (ctx::Finch.LowerJulia)(lvl::VirtualSparseCooLevel)
     quote
-        $SparseCooLevel{$(lvl.N), $(lvl.Ti), $(lvl.Tq), $(lvl.Tbl)}(
+        $SparseCooLevel{$(lvl.N), $(lvl.Ti), $(lvl.Tp)}(
             ($(map(ctx, lvl.I)...),),
             $(lvl.ex).tbl,
             $(lvl.ex).pos,
@@ -155,12 +170,29 @@ function initialize_level!(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx::LowerJ
     lvl = fbr.lvl
     my_p = ctx.freshen(lvl.ex, :_p)
     push!(ctx.preamble, quote
-        $(lvl.pos_alloc) = length($(lvl.ex).pos) - 1
+        $(lvl.pos_alloc) = length($(lvl.ex).pos)
+        $(lvl.pos_fill) = 1
+        $(lvl.pos_stop) = 2
         $(lvl.ex).pos[1] = 1
+        $(lvl.ex).pos[2] = 1
         $(lvl.idx_alloc) = length($(lvl.ex).tbl[1])
     end)
 
     lvl.lvl = initialize_level!(VirtualFiber(fbr.lvl.lvl, (VirtualEnvironment^lvl.N)(fbr.env)), ctx, mode)
+    return lvl
+end
+
+function trim_level!(lvl::VirtualSparseCooLevel, ctx::LowerJulia, pos)
+    idx = ctx.freshen(:idx)
+    push!(ctx.preamble, quote
+        $(lvl.pos_alloc) = $(ctx(pos)) + 1
+        resize!($(lvl.ex).pos, $(lvl.pos_alloc))
+        $(lvl.idx_alloc) = $(lvl.ex).pos[$(lvl.pos_alloc)] - 1
+        for $idx in $(lvl.ex).tbl
+            resize!($idx, $(lvl.idx_alloc))
+        end
+    end)
+    lvl.lvl = trim_level!(lvl.lvl, ctx, lvl.idx_alloc)
     return lvl
 end
 
@@ -172,13 +204,21 @@ function assemble!(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode)
     p_stop = ctx(cache!(ctx, ctx.freshen(lvl.ex, :_p_stop), getstop(envposition(fbr.env))))
     push!(ctx.preamble, quote
         $(lvl.pos_alloc) < ($p_stop + 1) && ($(lvl.pos_alloc) = $Finch.regrow!($(lvl.ex).pos, $(lvl.pos_alloc), $p_stop + 1))
+        $(lvl.pos_stop) = ($p_stop + 1)
     end)
 end
 
 function finalize_level!(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx::LowerJulia, mode)
     @assert isempty(envdeferred(fbr.env))
     lvl = fbr.lvl
-
+    my_p = ctx.freshen(:p)
+    my_q = ctx.freshen(:q)
+    push!(ctx.preamble, quote
+        $my_q = $(lvl.ex).pos[$(lvl.pos_fill)]
+        for $my_p = $(lvl.pos_fill):$(lvl.pos_stop)
+            $(lvl.ex).pos[$(my_p)] = $my_q
+        end
+    end)
     lvl.lvl = finalize_level!(VirtualFiber(fbr.lvl.lvl, (VirtualEnvironment^lvl.N)(fbr.env)), ctx, mode)
     return lvl
 end
@@ -204,8 +244,8 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Walk, idx
     my_i_stop = ctx.freshen(tag, :_i_stop)
     R = length(envdeferred(fbr.env)) + 1
     if R == 1
-        q_start = value(:($(lvl.ex).pos[$(ctx(envposition(fbr.env)))]), lvl.Tq)
-        q_stop = value(:($(lvl.ex).pos[$(ctx(envposition(fbr.env))) + 1]), lvl.Tq)
+        q_start = value(:($(lvl.ex).pos[$(ctx(envposition(fbr.env)))]), lvl.Tp)
+        q_stop = value(:($(lvl.ex).pos[$(ctx(envposition(fbr.env))) + 1]), lvl.Tp)
     else
         q_start = fbr.env.start
         q_stop = fbr.env.stop
@@ -228,7 +268,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Walk, idx
                 stride = (ctx, idx, ext) -> value(my_i_stop),
                 body = (start, stop) -> Stepper(
                     seek = (ctx, ext) -> quote
-                        while $my_q < $my_q_stop && $(lvl.ex).tbl[$R][$my_q] < $(ctx(getstart(ext)))
+                        while $my_q + 1 < $my_q_stop && $(lvl.ex).tbl[$R][$my_q] < $(ctx(getstart(ext)))
                             $my_q += 1
                         end
                     end,
@@ -240,8 +280,8 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Walk, idx
                             body = Step(
                                 stride =  (ctx, idx, ext) -> value(my_i),
                                 chunk = Spike(
-                                    body = Simplify(literal(default(fbr))),
-                                    tail = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tq), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode, idxs...),
+                                    body = Simplify(Fill(default(fbr))),
+                                    tail = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tp), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode),
                                 ),
                                 next = (ctx, idx, ext) -> quote
                                     $my_q += 1
@@ -260,8 +300,8 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Walk, idx
                             body = Step(
                                 stride = (ctx, idx, ext) -> value(my_i),
                                 chunk = Spike(
-                                    body = Simplify(literal(default(fbr))),
-                                    tail = refurl(VirtualFiber(lvl, VirtualEnvironment(start=value(my_q, lvl.Ti), stop=value(my_q_step, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env, internal=true)), ctx, mode, idxs...),
+                                    body = Simplify(Fill(default(fbr))),
+                                    tail = refurl(VirtualFiber(lvl, VirtualEnvironment(start=value(my_q, lvl.Ti), stop=value(my_q_step, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env, internal=true)), ctx, mode),
                                 ),
                                 next = (ctx, idx, ext) -> quote
                                     $my_q = $my_q_step
@@ -272,7 +312,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Walk, idx
                 )
             ),
             Phase(
-                body = (start, step) -> Run(Simplify(literal(default(fbr))))
+                body = (start, step) -> Run(Simplify(Fill(default(fbr))))
             )
         ])
     )
@@ -289,8 +329,12 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Extrude, 
 
     if R == 1
         my_q = ctx.freshen(tag, :_q)
+        my_p = ctx.freshen(tag, :_p)
         push!(ctx.preamble, quote
-            $my_q = $(lvl.ex).pos[$(ctx(envposition(envexternal(fbr.env))))]
+            $my_q = $(lvl.ex).pos[$(lvl.pos_fill)]
+            for $my_p = $(lvl.pos_fill):$(ctx(envposition(envexternal(fbr.env))))
+                $(lvl.ex).pos[$(my_p)] = $my_q
+            end
         end)
     else
         my_q = fbr.env.my_q
@@ -308,7 +352,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Extrude, 
                         quote end
                     end)
                 end,
-                body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode, idxs...),
+                body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode),
                 epilogue = begin
                     resize_body = quote end
                     writer_body = quote end
@@ -357,12 +401,13 @@ function unfurl(fbr::VirtualFiber{VirtualSparseCooLevel}, ctx, mode, ::Extrude, 
     else
         body = Lookup(
             val = default(fbr),
-            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, my_q=my_q, parent=fbr.env, internal=true)), ctx, mode, idxs...)
+            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, my_q=my_q, parent=fbr.env, internal=true)), ctx, mode)
         )
     end
     if R == 1
         push!(ctx.epilogue, quote
             $(lvl.ex).pos[$(ctx(envposition(envexternal(fbr.env)))) + 1] = $my_q
+            $(lvl.pos_fill) = $(ctx(envposition(envexternal(fbr.env)))) + 1
         end)
     end
 

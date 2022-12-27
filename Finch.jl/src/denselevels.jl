@@ -35,9 +35,13 @@ function (fbr::Fiber{<:DenseLevel{Ti}})(i, tail...) where {Ti}
     fbr_2(tail...)
 end
 
-function Base.show(io::IO, lvl::DenseLevel)
-    print(io, "Dense(")
-    print(io, lvl.I)
+function Base.show(io::IO, lvl::DenseLevel{Ti}) where {Ti}
+    if get(io, :compact, false)
+        print(io, "Dense(")
+    else
+        print(io, "Dense{$Ti}(")
+    end
+    show(io, lvl.I)
     print(io, ", ")
     show(io, lvl.lvl)
     print(io, ")")
@@ -129,6 +133,16 @@ function reinitialize!(fbr::VirtualFiber{VirtualDenseLevel}, ctx, mode)
     end
 end
 
+function trim_level!(lvl::VirtualDenseLevel, ctx::LowerJulia, pos)
+    qos = ctx.freshen(:qos)
+    push!(ctx.preamble, quote
+        $qos = $pos * $(ctx(lvl.I))
+    end)
+    lvl.lvl = trim_level!(lvl.lvl, ctx, qos)
+    return lvl
+end
+
+
 interval_assembly_depth(lvl::VirtualDenseLevel) = min(Inf, interval_assembly_depth(lvl.lvl) - 1)
 
 function assemble!(fbr::VirtualFiber{VirtualDenseLevel}, ctx, mode)
@@ -181,7 +195,7 @@ function unfurl(fbr::VirtualFiber{VirtualDenseLevel}, ctx, mode, ::Union{Follow,
             preamble = quote
                 $q = ($(ctx(p)) - 1) * $(ctx(lvl.I)) + $(ctx(i))
             end,
-            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(q, lvl.Ti), index=i, guard=envdefaultcheck(fbr.env), parent=fbr.env)), ctx, mode, idxs...),
+            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(q, lvl.Ti), index=i, guard=envdefaultcheck(fbr.env), parent=fbr.env)), ctx, mode),
         )
     )
 

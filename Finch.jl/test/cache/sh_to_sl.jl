@@ -15,11 +15,13 @@
         i_stop = B_lvl.I[1]
         A_lvl_pos_alloc = length(A_lvl.pos)
         A_lvl_pos_fill = 1
+        A_lvl_pos_stop = 2
         A_lvl.pos[1] = 1
         A_lvl.pos[2] = 1
         A_lvl_idx_alloc = length(A_lvl.idx)
         A_lvl_2_val_alloc = (Finch).refill!(A_lvl_2.val, 0.0, 0, 4)
         A_lvl_pos_alloc < 1 + 1 && (A_lvl_pos_alloc = (Finch).refill!(A_lvl.pos, 0, A_lvl_pos_alloc, 1 + 1))
+        A_lvl_pos_stop = 1 + 1
         A_lvl_q = A_lvl.pos[A_lvl_pos_fill]
         for A_lvl_p = A_lvl_pos_fill:1
             A_lvl.pos[A_lvl_p] = A_lvl_q
@@ -35,29 +37,28 @@
         end
         i = 1
         i_start = i
-        phase_start = max(i_start)
-        phase_stop = min(B_lvl_i_stop, i_stop)
+        phase_start = i_start
+        phase_stop = (min)(B_lvl_i_stop, i_stop)
         if phase_stop >= phase_start
             i = i
             i = phase_start
-            B_lvl_q_step = B_lvl_q + 1
-            while B_lvl_q_step < B_lvl_q_stop && (last(first(B_lvl.srt[B_lvl_q_step])))[1] < phase_start
-                B_lvl_q_step += 1
+            while B_lvl_q + 1 < B_lvl_q_stop && (last(first(B_lvl.srt[B_lvl_q])))[1] < phase_start
+                B_lvl_q += 1
             end
             while i <= phase_stop
                 i_start_2 = i
                 B_lvl_i = (last(first(B_lvl.srt[B_lvl_q])))[1]
-                phase_stop_2 = min(B_lvl_i, phase_stop)
+                phase_stop_2 = (min)(B_lvl_i, phase_stop)
                 i_2 = i
                 if B_lvl_i == phase_stop_2
-                    B_lvl_2_val = B_lvl_2.val[(last(B_lvl.srt[B_lvl_q]))[1]]
+                    B_lvl_2_val = B_lvl_2.val[last(B_lvl.srt[B_lvl_q])]
                     i_3 = phase_stop_2
                     A_lvl_2_val_alloc < A_lvl_q && (A_lvl_2_val_alloc = (Finch).refill!(A_lvl_2.val, 0.0, A_lvl_2_val_alloc, A_lvl_q))
                     A_lvl_isdefault = true
                     A_lvl_2_val = A_lvl_2.val[A_lvl_q]
                     A_lvl_isdefault = false
                     A_lvl_isdefault = false
-                    A_lvl_2_val = A_lvl_2_val + B_lvl_2_val
+                    A_lvl_2_val = (+)(B_lvl_2_val, A_lvl_2_val)
                     A_lvl_2.val[A_lvl_q] = A_lvl_2_val
                     if !A_lvl_isdefault
                         A_lvl_idx_alloc < A_lvl_q && (A_lvl_idx_alloc = (Finch).regrow!(A_lvl.idx, A_lvl_idx_alloc, A_lvl_q))
@@ -72,13 +73,22 @@
             i = phase_stop + 1
         end
         i_start = i
-        phase_start_3 = max(i_start)
-        phase_stop_3 = min(i_stop)
+        phase_start_3 = i_start
+        phase_stop_3 = i_stop
         if phase_stop_3 >= phase_start_3
             i_4 = i
             i = phase_stop_3 + 1
         end
         A_lvl.pos[1 + 1] = A_lvl_q
         A_lvl_pos_fill = 1 + 1
-        (A = Fiber((Finch.SparseListLevel){Int64}(B_lvl.I[1], A_lvl.pos, A_lvl.idx, A_lvl_2), (Finch.Environment)(; name = :A)),)
+        q = A_lvl.pos[A_lvl_pos_fill]
+        for p = A_lvl_pos_fill:A_lvl_pos_stop
+            A_lvl.pos[p] = q
+        end
+        A_lvl_pos_alloc = 1 + 1
+        resize!(A_lvl.pos, A_lvl_pos_alloc)
+        A_lvl_idx_alloc = A_lvl.pos[A_lvl_pos_alloc] - 1
+        resize!(A_lvl.idx, A_lvl_idx_alloc)
+        resize!(A_lvl_2.val, A_lvl_idx_alloc)
+        (A = Fiber((Finch.SparseListLevel){Int64}(B_lvl.I[1], A_lvl.pos, A_lvl.idx, A_lvl_2), (Finch.Environment)(; )),)
     end

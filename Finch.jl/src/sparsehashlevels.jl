@@ -1,26 +1,40 @@
-struct SparseHashLevel{N, Ti<:Tuple, Tp, T_q, Tbl, Lvl}
+struct SparseHashLevel{N, Ti<:Tuple, Tp, Tbl, Lvl}
     I::Ti
     tbl::Tbl
-    srt::Vector{Pair{Tuple{Tp, Ti}, T_q}}
-    pos::Vector{T_q}
+    pos::Vector{Tp}
+    srt::Vector{Pair{Tuple{Tp, Ti}, Tp}}
     lvl::Lvl
 end
 const SparseHash = SparseHashLevel
 SparseHashLevel{N}(lvl) where {N} = SparseHashLevel{N}(((0 for _ in 1:N)...,), lvl)
 SparseHashLevel{N, Ti}(lvl) where {N, Ti} = SparseHashLevel{N, Ti}((map(zero, Ti.parameters)..., ), lvl)
+SparseHashLevel{N, Ti, Tp}(lvl) where {N, Ti, Tp} = SparseHashLevel{N, Ti, Tp}((map(zero, Ti.parameters)..., ), lvl)
+SparseHashLevel{N, Ti, Tp, Tbl}(lvl) where {N, Ti, Tp, Tbl} = SparseHashLevel{N, Ti, Tp, Tbl}((map(zero, Ti.parameters)..., ), lvl)
+
 SparseHashLevel{N}(I::Ti, lvl) where {N, Ti} = SparseHashLevel{N, Ti}(I, lvl)
-SparseHashLevel{N, Ti}(I::Ti, lvl) where {N, Ti} = SparseHashLevel{N, Ti, Int, Int}(I, lvl)
-SparseHashLevel{N, Ti, Tp, T_q}(I::Ti, lvl) where {N, Ti, Tp, T_q} =
-    SparseHashLevel{N, Ti, Tp, T_q}(I, Dict{Tuple{Tp, Ti}, T_q}(), lvl)
-SparseHashLevel{N, Ti, Tp, T_q}(I::Ti, tbl::Tbl, lvl) where {N, Ti, Tp, T_q, Tbl} =
-    SparseHashLevel{N, Ti, Tp, T_q, Tbl}(I, tbl, lvl)
-SparseHashLevel{N, Ti}(I::Ti, tbl::Tbl, lvl) where {N, Ti, Tp, T_q, Tbl <: AbstractDict{Tuple{Tp, Ti}, T_q}} =
-    SparseHashLevel{N, Ti, Tp, T_q, Tbl}(I, tbl, lvl)
-#TODO it would be best if we could supply defaults all at once.
-SparseHashLevel{N, Ti, Tp, T_q, Tbl}(I::Ti, tbl::Tbl, lvl) where {N, Ti, Tp, T_q, Tbl} =
-    SparseHashLevel{N, Ti, Tp, T_q, Tbl}(I::Ti, tbl, Vector{Pair{Tuple{Tp, Ti}, T_q}}(undef, 0), T_q[1, 1, 2:17...], lvl) 
-SparseHashLevel{N, Ti, Tp, T_q, Tbl}(I::Ti, tbl::Tbl, srt, pos, lvl::Lvl) where {N, Ti, Tp, T_q, Tbl, Lvl} =
-    SparseHashLevel{N, Ti, Tp, T_q, Tbl, Lvl}(I, tbl, srt, pos, lvl)
+SparseHashLevel{N, Ti}(I, lvl) where {N, Ti} = SparseHashLevel{N, Ti, Int}(Ti(I), lvl)
+SparseHashLevel{N, Ti, Tp}(I, lvl) where {N, Ti, Tp} =
+    SparseHashLevel{N, Ti, Tp}(Ti(I), Dict{Tuple{Tp, Ti}, Tp}(), lvl)
+SparseHashLevel{N, Ti, Tp, Tbl}(I, lvl) where {N, Ti, Tp, Tbl} =
+    SparseHashLevel{N, Ti, Tp, Tbl}(Ti(I), Tbl(), lvl)
+
+SparseHashLevel{N}(I::Ti, tbl::Tbl, lvl) where {N, Ti, Tp, Tbl<:AbstractDict{Tuple{Tp, Ti}}} =
+    SparseHashLevel{N, Ti, Tp, Tbl}(I, tbl, lvl)
+SparseHashLevel{N, Ti}(I, tbl::Tbl, lvl) where {N, Ti, Tp, Tbl<:AbstractDict{Tuple{Tp, Ti}}} =
+    SparseHashLevel{N, Ti, Tp, Tbl}(Ti(I), tbl, lvl)
+SparseHashLevel{N, Ti, Tp}(I, tbl::Tbl, lvl) where {N, Ti, Tp, Tbl} =
+    SparseHashLevel{N, Ti, Tp, Tbl}(Ti(I), tbl, lvl)
+SparseHashLevel{N, Ti, Tp, Tbl}(I, tbl, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseHashLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, Tp[1, 1], Pair{Tuple{Tp, Ti}, Tp}[], lvl)
+
+SparseHashLevel{N}(I::Ti, tbl::Tbl, pos::Vector{Tp}, srt, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseHashLevel{N, Ti, Tp, Tbl, Lvl}(I, tbl, pos, srt, lvl) 
+SparseHashLevel{N, Ti}(I, tbl::Tbl, pos::Vector{Tp}, srt, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseHashLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, pos, srt, lvl) 
+SparseHashLevel{N, Ti, Tp}(I, tbl::Tbl, pos, srt, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseHashLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, pos, srt, lvl) 
+SparseHashLevel{N, Ti, Tp, Tbl}(I, tbl, pos, srt, lvl::Lvl) where {N, Ti, Tp, Tbl, Lvl} =
+    SparseHashLevel{N, Ti, Tp, Tbl, Lvl}(Ti(I), tbl, pos, srt, lvl) 
 
 """
 `f_code(sh)` = [SparseHashLevel](@ref).
@@ -30,21 +44,27 @@ summary_f_code(lvl::SparseHashLevel{N}) where {N} = "sh{$N}($(summary_f_code(lvl
 similar_level(lvl::SparseHashLevel{N}) where {N} = SparseHashLevel{N}(similar_level(lvl.lvl))
 similar_level(lvl::SparseHashLevel{N}, tail...) where {N} = SparseHashLevel{N}(ntuple(n->tail[n], N), similar_level(lvl.lvl, tail[N + 1:end]...))
 
-pattern!(lvl::SparseHashLevel{N, Ti, Tp, T_q, Tbl}) where {N, Ti, Tp, T_q, Tbl} = 
-    SparseHashLevel{N, Ti, Tp, T_q, Tbl}(lvl.I, lvl.tbl, lvl.srt, lvl.pos, pattern!(lvl.lvl))
+pattern!(lvl::SparseHashLevel{N, Ti, Tp, Tbl}) where {N, Ti, Tp, Tbl} = 
+    SparseHashLevel{N, Ti, Tp, Tbl}(lvl.I, lvl.tbl, lvl.pos, lvl.srt, pattern!(lvl.lvl))
 
-function Base.show(io::IO, lvl::SparseHashLevel{N}) where {N}
-    print(io, "SparseHash{$N}(")
-    print(io, lvl.I)
+function Base.show(io::IO, lvl::SparseHashLevel{N, Ti, Tp}) where {N, Ti, Tp}
+    if get(io, :compact, false)
+        print(io, "SparseHash{$N}(")
+    else
+        print(io, "SparseHash{$N, $Ti, $Tp}(")
+    end
+    show(IOContext(io, :typeinfo=>Ti), lvl.I)
     print(io, ", ")
-    if get(io, :compact, true)
+    if get(io, :compact, false)
         print(io, "…")
     else
         print(io, typeof(lvl.tbl))
-        print(io, "(…), ")
-        show_region(io, lvl.srt)
+        print(io, "(")
+        print(io, join(sort!(collect(pairs(lvl.tbl))), ", "))
+        print(io, "), ")
+        show(IOContext(io, :typeinfo=>Vector{Tp}), lvl.pos)
         print(io, ", ")
-        show_region(io, lvl.pos)
+        show(IOContext(io, :typeinfo=>Vector{Pair{Tuple{Tp, Ti}, Tp}}), lvl.srt)
     end
     print(io, ", ")
     show(io, lvl.lvl)
@@ -96,7 +116,6 @@ mutable struct VirtualSparseHashLevel
     N
     Ti
     Tp
-    T_q
     Tbl
     I
     P
@@ -104,7 +123,7 @@ mutable struct VirtualSparseHashLevel
     idx_alloc
     lvl
 end
-function virtualize(ex, ::Type{SparseHashLevel{N, Ti, Tp, T_q, Tbl, Lvl}}, ctx, tag=:lvl) where {N, Ti, Tp, T_q, Tbl, Lvl}   
+function virtualize(ex, ::Type{SparseHashLevel{N, Ti, Tp, Tbl, Lvl}}, ctx, tag=:lvl) where {N, Ti, Tp, Tbl, Lvl}   
     sym = ctx.freshen(tag)
     I = map(n->value(:($sym.I[$n]), Int), 1:N)
     P = ctx.freshen(sym, :_P)
@@ -117,15 +136,15 @@ function virtualize(ex, ::Type{SparseHashLevel{N, Ti, Tp, T_q, Tbl, Lvl}}, ctx, 
         $idx_alloc = length($sym.tbl)
     end)
     lvl_2 = virtualize(:($sym.lvl), Lvl, ctx, sym)
-    VirtualSparseHashLevel(sym, N, Ti, Tp, T_q, Tbl, I, P, pos_alloc, idx_alloc, lvl_2)
+    VirtualSparseHashLevel(sym, N, Ti, Tp, Tbl, I, P, pos_alloc, idx_alloc, lvl_2)
 end
 function (ctx::Finch.LowerJulia)(lvl::VirtualSparseHashLevel)
     quote
-        $SparseHashLevel{$(lvl.N), $(lvl.Ti), $(lvl.Tp), $(lvl.T_q), $(lvl.Tbl)}(
+        $SparseHashLevel{$(lvl.N), $(lvl.Ti), $(lvl.Tp), $(lvl.Tbl)}(
             ($(map(ctx, lvl.I)...),),
             $(lvl.ex).tbl,
-            $(lvl.ex).srt,
             $(lvl.ex).pos,
+            $(lvl.ex).srt,
             $(ctx(lvl.lvl)),
         )
     end
@@ -206,6 +225,18 @@ function finalize_level!(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx::LowerJu
     return lvl
 end
 
+function trim_level!(lvl::VirtualSparseHashLevel, ctx::LowerJulia, pos)
+    idx = ctx.freshen(:idx)
+    push!(ctx.preamble, quote
+        $(lvl.pos_alloc) = $(ctx(pos)) + 1
+        resize!($(lvl.ex).pos, $(lvl.pos_alloc))
+        $(lvl.idx_alloc) = $(lvl.ex).pos[$(lvl.pos_alloc)] - 1
+        resize!($(lvl.ex).srt, $(lvl.idx_alloc))
+    end)
+    lvl.lvl = trim_level!(lvl.lvl, ctx, lvl.idx_alloc)
+    return lvl
+end
+
 function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Nothing, idx, idxs...)
     if idx.kind === protocol
         @assert idx.mode.kind === literal
@@ -247,42 +278,65 @@ function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Walk, id
                 $my_i_stop = 0
             end
         end,
-        body = Pipeline([
-            Phase(
-                stride = (ctx, idx, ext) -> value(my_i_stop),
-                body = (start, step) -> Stepper(
-                    seek = (ctx, ext) -> quote
-                        $my_q_step = $my_q + 1
-                        while $my_q_step < $my_q_stop && last(first($(lvl.ex).srt[$my_q_step]))[$R] < $(ctx(getstart(ext)))
-                            $my_q_step += 1
-                        end
-                    end,
-                    body = Thunk(
-                        preamble = :(
-                            $my_i = last(first($(lvl.ex).srt[$my_q]))[$R]
-                        ),
-                        body = if R == lvl.N
-                            Step(
+        body = if R == lvl.N
+            Pipeline([
+                Phase(
+                    stride = (ctx, idx, ext) -> value(my_i_stop),
+                    body = (start, step) -> Stepper(
+                        seek = (ctx, ext) -> quote
+                            while $my_q + 1 < $my_q_stop && last(first($(lvl.ex).srt[$my_q]))[$R] < $(ctx(getstart(ext)))
+                                $my_q += 1
+                            end
+                        end,
+                        body = Thunk(
+                            preamble = :(
+                                $my_i = last(first($(lvl.ex).srt[$my_q]))[$R]
+                            ),
+                            body = Step(
                                 stride =  (ctx, idx, ext) -> value(my_i),
                                 chunk = Spike(
-                                    body = Simplify(literal(default(fbr))),
+                                    body = Simplify(Fill(default(fbr))),
                                     tail = begin
                                         env_2 = VirtualEnvironment(
-                                        position=value(:(last($(lvl.ex).srt[$my_q])[$R]), lvl.Ti),
+                                        position=value(:(last($(lvl.ex).srt[$my_q])), lvl.Ti),
                                         index=value(my_i, lvl.Ti),
                                         parent=fbr.env)
-                                        refurl(VirtualFiber(lvl.lvl, env_2), ctx, mode, idxs...)
+                                        refurl(VirtualFiber(lvl.lvl, env_2), ctx, mode)
                                     end,
                                 ),
                                 next =  (ctx, idx, ext) -> quote
                                     $my_q += 1
                                 end
                             )
-                        else
-                            Step(
+                        )
+                    )
+                ),
+                Phase(
+                    body = (start, step) -> Run(Simplify(Fill(default(fbr))))
+                )
+            ])
+        else
+            Pipeline([
+                Phase(
+                    stride = (ctx, idx, ext) -> value(my_i_stop),
+                    body = (start, step) -> Stepper(
+                        seek = (ctx, ext) -> quote
+                            while $my_q + 1 < $my_q_stop && last(first($(lvl.ex).srt[$my_q]))[$R] < $(ctx(start))
+                                $my_q += 1
+                            end
+                        end,
+                        body = Thunk(
+                            preamble = quote
+                                $my_i = last(first($(lvl.ex).srt[$my_q]))[$R]
+                                $my_q_step = $my_q + 1
+                                while $my_q_step < $my_q_stop && last(first($(lvl.ex).srt[$my_q_step]))[$R] == $my_i
+                                    $my_q_step += 1
+                                end
+                            end,
+                            body = Step(
                                 stride =  (ctx, idx, ext) -> value(my_i),
                                 chunk = Spike(
-                                    body = Simplify(literal(default(fbr))),
+                                    body = Simplify(Fill(default(fbr))),
                                     tail = begin
                                         env_2 = VirtualEnvironment(
                                             start=value(my_q, lvl.Ti),
@@ -290,25 +344,21 @@ function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Walk, id
                                             index=value(my_i, lvl.Ti),
                                             parent=fbr.env,
                                             internal=true)
-                                        refurl(VirtualFiber(lvl, env_2), ctx, mode, idxs...)
-                                    end,
+                                        refurl(VirtualFiber(lvl, env_2), ctx, mode)
+                                    end
                                 ),
                                 next =  (ctx, idx, ext) -> quote
                                     $my_q = $my_q_step
-                                    $my_q_step = $my_q + 1
-                                    while $my_q_step < $my_q_stop && last(first($(lvl.ex).srt[$my_q_step]))[$R] == $my_i
-                                        $my_q_step += 1
-                                    end
                                 end
                             )
-                        end
+                        )
                     )
+                ),
+                Phase(
+                    body = (start, step) -> Run(Simplify(Fill(default(fbr))))
                 )
-            ),
-            Phase(
-                body = (start, step) -> Run(Simplify(literal(default(fbr))))
-            )
-        ])
+            ])
+        end
     )
 
     exfurl(body, ctx, mode, idx)
@@ -329,14 +379,14 @@ function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Follow, 
                     $my_q = get($(lvl.ex).tbl, $my_key, 0)
                 end,
                 body = Switch([
-                    value(:($my_q != 0)) => refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tq_2), index=i, parent=fbr.env)), ctx, mode, idxs...),
-                    literal(true) => Simplify(literal(default(fbr)))
+                    value(:($my_q != 0)) => refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tp), index=i, parent=fbr.env)), ctx, mode),
+                    literal(true) => Simplify(Fill(default(fbr)))
                 ])
             )
         )
     else
         body = Lookup(
-            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, parent=fbr.env, internal=true)), ctx, mode, idxs...)
+            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, parent=fbr.env, internal=true)), ctx, mode)
         )
     end
 
@@ -373,7 +423,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Union{Ex
                             end)
                         end
                     end,
-                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode, idxs...),
+                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode),
                     epilogue = begin
                         body = quote
                             $(lvl.idx_alloc) = $my_q
@@ -401,7 +451,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseHashLevel}, ctx, mode, ::Union{Ex
     else
         body = Lookup(
             val = default(fbr),
-            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, parent=fbr.env, internal=true)), ctx, mode, idxs...)
+            body = (i) -> refurl(VirtualFiber(lvl, VirtualEnvironment(index=i, parent=fbr.env, internal=true)), ctx, mode)
         )
     end
 

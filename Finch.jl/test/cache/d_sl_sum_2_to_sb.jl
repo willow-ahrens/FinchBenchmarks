@@ -1,9 +1,9 @@
 @inbounds begin
         B_lvl = ex.body.body.lhs.tns.tns.lvl
+        B_lvl_pos_alloc = length(B_lvl.pos)
         B_lvl_tbl_alloc = length(B_lvl.tbl)
         B_lvl_srt_alloc = length(B_lvl.srt)
         B_lvl_srt_stop = B_lvl.srt_stop[]
-        B_lvl_pos_alloc = length(B_lvl.pos)
         B_lvl_2 = B_lvl.lvl
         B_lvl_2_val_alloc = length(B_lvl.lvl.val)
         B_lvl_2_val = 0.0
@@ -49,18 +49,18 @@
             end
             j = 1
             j_start = j
-            phase_start = max(j_start)
-            phase_stop = min(A_lvl_2_i1, j_stop)
+            phase_start = j_start
+            phase_stop = (min)(A_lvl_2_i1, j_stop)
             if phase_stop >= phase_start
                 j = j
                 j = phase_start
-                while A_lvl_2_q < A_lvl_2_q_stop && A_lvl_2.idx[A_lvl_2_q] < phase_start
+                while A_lvl_2_q + 1 < A_lvl_2_q_stop && A_lvl_2.idx[A_lvl_2_q] < phase_start
                     A_lvl_2_q += 1
                 end
                 while j <= phase_stop
                     j_start_2 = j
                     A_lvl_2_i = A_lvl_2.idx[A_lvl_2_q]
-                    phase_stop_2 = min(A_lvl_2_i, phase_stop)
+                    phase_stop_2 = (min)(A_lvl_2_i, phase_stop)
                     j_2 = j
                     if A_lvl_2_i == phase_stop_2
                         A_lvl_3_val = A_lvl_3.val[A_lvl_2_q]
@@ -70,7 +70,7 @@
                         B_lvl_2_val = B_lvl_2.val[B_lvl_q_2]
                         B_lvl_guard = false
                         B_lvl_guard = false
-                        B_lvl_2_val = B_lvl_2_val + A_lvl_3_val
+                        B_lvl_2_val = (+)(A_lvl_3_val, B_lvl_2_val)
                         B_lvl_2.val[B_lvl_q_2] = B_lvl_2_val
                         if !B_lvl_guard
                             if !(B_lvl.tbl[B_lvl_q_2])
@@ -88,8 +88,8 @@
                 j = phase_stop + 1
             end
             j_start = j
-            phase_start_3 = max(j_start)
-            phase_stop_3 = min(j_stop)
+            phase_start_3 = j_start
+            phase_stop_3 = j_stop
             if phase_stop_3 >= phase_start_3
                 j_4 = j
                 j = phase_stop_3 + 1
@@ -107,5 +107,12 @@
         end
         B_lvl.pos[B_lvl_p_prev_2 + 1] = B_lvl_srt_stop + 1
         B_lvl.srt_stop[] = B_lvl_srt_stop
-        (B = Fiber((Finch.SparseBytemapLevel){Int64, Int64, Int64}(A_lvl_2.I, B_lvl.tbl, B_lvl.srt, B_lvl.srt_stop, B_lvl.pos, B_lvl_2), (Finch.Environment)(; name = :B)),)
+        B_lvl_pos_alloc = 1 + 1
+        resize!(B_lvl.pos, B_lvl_pos_alloc)
+        B_lvl_tbl_alloc = (B_lvl_pos_alloc - 1) * A_lvl_2.I
+        resize!(B_lvl.tbl, B_lvl_tbl_alloc)
+        B_lvl_srt_alloc = B_lvl.srt_stop[]
+        resize!(B_lvl.srt, B_lvl_srt_alloc)
+        resize!(B_lvl_2.val, B_lvl_tbl_alloc)
+        (B = Fiber((Finch.SparseBytemapLevel){Int64, Int64}(A_lvl_2.I, B_lvl.pos, B_lvl.tbl, B_lvl.srt, B_lvl.srt_stop, B_lvl_2), (Finch.Environment)(; )),)
     end

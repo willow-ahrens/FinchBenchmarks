@@ -1,23 +1,31 @@
-struct SparseBytemapLevel{Ti, Tp, Tq, Lvl}
+struct SparseBytemapLevel{Ti, Tp, Lvl}
     I::Ti
+    pos::Vector{Tp}
     tbl::Vector{Bool}
     srt::Vector{Tuple{Tp, Ti}}
-    srt_stop::Ref{Int}
-    pos::Vector{Tq}
+    srt_stop::Ref{Tp} #TODO remove this after trimming levels
     lvl::Lvl
 end
 const SparseBytemap = SparseBytemapLevel
+
 SparseBytemapLevel(lvl) = SparseBytemapLevel(0, lvl)
 SparseBytemapLevel{Ti}(lvl) where {Ti} = SparseBytemapLevel{Ti}(zero(Ti), lvl)
-SparseBytemapLevel(I::Ti, lvl) where {Ti} = SparseBytemapLevel{Ti}(I, lvl)
-SparseBytemapLevel{Ti}(I::Ti, lvl) where {Ti} = SparseBytemapLevel{Ti, Int, Int}(I, lvl)
-SparseBytemapLevel{Ti, Tp, Tq}(I::Ti, lvl) where {Ti, Tp, Tq} =
-    SparseBytemapLevel{Ti, Tp, Tq}(I::Ti, [false, false, false, false], Vector{Tuple{Tp, Ti}}(undef, 4), Ref(0), Tq[1, 1, 0, 0, 0], lvl)
-SparseBytemapLevel{Ti, Tp, Tq}(I::Ti, tbl, srt, srt_stop, pos, lvl::Lvl) where {Ti, Tp, Tq, Lvl} =
-    SparseBytemapLevel{Ti, Tp, Tq, Lvl}(I, tbl, srt, srt_stop, pos, lvl)
+SparseBytemapLevel{Ti, Tp}(lvl) where {Ti, Tp} = SparseBytemapLevel{Ti, Tp}(zero(Ti), lvl)
 
-pattern!(lvl::SparseBytemapLevel{Ti, Tp, Tq}) where {Ti, Tp, Tq} = 
-    SparseBytemapLevel{Ti, Tp, Tq}(lvl.I, lvl.tbl, lvl.srt, lvl.srt_stop, lvl.pos, pattern!(lvl.lvl))
+SparseBytemapLevel(I::Ti, lvl) where {Ti} = SparseBytemapLevel{Ti}(I, lvl)
+SparseBytemapLevel{Ti}(I, lvl) where {Ti} = SparseBytemapLevel{Ti, Int}(Ti(I), lvl)
+SparseBytemapLevel{Ti, Tp}(I, lvl) where {Ti, Tp} =
+    SparseBytemapLevel{Ti, Tp}(Ti(I), Tp[1, 1], fill(false, I), Tuple{Tp, Ti}[], Ref(Tp(0)), lvl)
+
+SparseBytemapLevel(I::Ti, pos::Vector{Tp}, tbl, srt, srt_stop, lvl::Lvl) where {Ti, Tp, Lvl} =
+    SparseBytemapLevel{Ti, Tp, Lvl}(I, pos, tbl, srt, srt_stop, lvl)
+SparseBytemapLevel{Ti}(I, pos::Vector{Tp}, tbl, srt, srt_stop, lvl::Lvl) where {Ti, Tp, Lvl} =
+    SparseBytemapLevel{Ti, Tp, Lvl}(Ti(I), pos, tbl, srt, srt_stop, lvl)
+SparseBytemapLevel{Ti, Tp}(I, pos, tbl, srt, srt_stop, lvl::Lvl) where {Ti, Tp, Lvl} =
+    SparseBytemapLevel{Ti, Tp, Lvl}(Ti(I), pos, tbl, srt, srt_stop, lvl)
+
+pattern!(lvl::SparseBytemapLevel{Ti, Tp}) where {Ti, Tp} = 
+    SparseBytemapLevel{Ti, Tp}(lvl.I, lvl.pos, lvl.tbl, lvl.srt, lvl.srt_stop, pattern!(lvl.lvl))
 
 """
 `f_code(sm)` = [SparseBytemapLevel](@ref).
@@ -27,20 +35,24 @@ summary_f_code(lvl::SparseBytemapLevel) = "sm($(summary_f_code(lvl.lvl)))"
 similar_level(lvl::SparseBytemapLevel) = SparseBytemap(similar_level(lvl.lvl))
 similar_level(lvl::SparseBytemapLevel, dim, tail...) = SparseBytemap(dim, similar_level(lvl.lvl, tail...))
 
-function Base.show(io::IO, lvl::SparseBytemapLevel)
-    print(io, "SparseBytemap(")
-    print(io, lvl.I)
+function Base.show(io::IO, lvl::SparseBytemapLevel{Ti, Tp}) where {Ti, Tp}
+    if get(io, :compact, false)
+        print(io, "SparseBytemap(")
+    else
+        print(io, "SparseBytemap{$Ti, $Tp}(")
+    end
+    show(IOContext(io, :typeinfo=>Ti), lvl.I)
     print(io, ", ")
-    if get(io, :compact, true)
+    if get(io, :compact, false)
         print(io, "…")
     else
-        show_region(io, lvl.tbl)
+        show(IOContext(io, :typeinfo=>Vector{Tp}), lvl.pos)
         print(io, ", ")
-        show_region(io, lvl.srt)
+        show(IOContext(io, :typeinfo=>Vector{Bool}), lvl.tbl)
         print(io, ", ")
-        print(io, lvl.srt_stop)
+        show(IOContext(io, :typeinfo=>Vector{Tuple{Tp, Ti}}), lvl.srt)
         print(io, ", ")
-        show_region(io, lvl.pos)
+        show(IOContext(io, :typeinfo=>Ref{Tp}), lvl.srt_stop)
     end
     print(io, ", ")
     show(io, lvl.lvl)
@@ -83,39 +95,38 @@ mutable struct VirtualSparseBytemapLevel
     ex
     Ti
     Tp
-    Tq
     I
+    pos_alloc
     tbl_alloc
     srt_alloc
     srt_stop
-    pos_alloc
     lvl
 end
-function virtualize(ex, ::Type{SparseBytemapLevel{Ti, Tp, Tq, Lvl}}, ctx, tag=:lvl) where {Ti, Tp, Tq, Lvl}   
+function virtualize(ex, ::Type{SparseBytemapLevel{Ti, Tp, Lvl}}, ctx, tag=:lvl) where {Ti, Tp, Lvl}   
     sym = ctx.freshen(tag)
     I = value(:($sym.I))
+    pos_alloc = ctx.freshen(sym, :_pos_alloc)
     tbl_alloc = ctx.freshen(sym, :_tbl_alloc)
     srt_stop = ctx.freshen(sym, :_srt_stop)
     srt_alloc = ctx.freshen(sym, :_srt_alloc)
-    pos_alloc = ctx.freshen(sym, :_pos_alloc)
     push!(ctx.preamble, quote
         $sym = $ex
+        $pos_alloc = length($sym.pos)
         $tbl_alloc = length($sym.tbl)
         $srt_alloc = length($sym.srt)
         $srt_stop = $sym.srt_stop[]
-        $pos_alloc = length($sym.pos)
     end)
     lvl_2 = virtualize(:($sym.lvl), Lvl, ctx, sym)
-    VirtualSparseBytemapLevel(sym, Ti, Tp, Tq, I, tbl_alloc, srt_alloc, srt_stop, pos_alloc, lvl_2)
+    VirtualSparseBytemapLevel(sym, Ti, Tp, I, pos_alloc, tbl_alloc, srt_alloc, srt_stop, lvl_2)
 end
 function (ctx::Finch.LowerJulia)(lvl::VirtualSparseBytemapLevel)
     quote
-        $SparseBytemapLevel{$(lvl.Ti), $(lvl.Tp), $(lvl.Tq)}(
+        $SparseBytemapLevel{$(lvl.Ti), $(lvl.Tp)}(
             $(ctx(lvl.I)),
+            $(lvl.ex).pos,
             $(lvl.ex).tbl,
             $(lvl.ex).srt,
             $(lvl.ex).srt_stop,
-            $(lvl.ex).pos,
             $(ctx(lvl.lvl)),
         )
     end
@@ -182,6 +193,19 @@ function initialize_level!(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx::Lo
         end)
     end
     lvl.lvl = initialize_level!(VirtualFiber(fbr.lvl.lvl, VirtualEnvironment(fbr.env, reinitialized = reinitializeable(lvl.lvl))), ctx, mode)
+    return lvl
+end
+
+function trim_level!(lvl::VirtualSparseBytemapLevel, ctx::LowerJulia, pos)
+    push!(ctx.preamble, quote
+        $(lvl.pos_alloc) = $(ctx(pos)) + 1
+        resize!($(lvl.ex).pos, $(lvl.pos_alloc))
+        $(lvl.tbl_alloc) = ($(lvl.pos_alloc) - 1) * $(ctx(lvl.I))
+        resize!($(lvl.ex).tbl, $(lvl.tbl_alloc))
+        $(lvl.srt_alloc) = $(lvl.ex).srt_stop[]
+        resize!($(lvl.ex).srt, $(lvl.srt_alloc))
+    end)
+    lvl.lvl = trim_level!(lvl.lvl, ctx, lvl.tbl_alloc)
     return lvl
 end
 
@@ -284,8 +308,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Walk,
                 stride = (ctx, idx, ext) -> value(my_i_stop),
                 body = (start, step) -> Stepper(
                     seek = (ctx, ext) -> quote
-                        #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                        while $my_r < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext)))
+                        while $my_r + 1 < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext)))
                             $my_r += 1
                         end
                     end,
@@ -296,12 +319,12 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Walk,
                         body = Step(
                             stride = (ctx, idx, ext) -> value(my_i),
                             chunk = Spike(
-                                body = Simplify(literal(default(fbr))),
+                                body = Simplify(Fill(default(fbr))),
                                 tail = Thunk(
                                     preamble = quote
                                         $my_q = ($(ctx(envposition(fbr.env))) - 1) * $(ctx(lvl.I)) + $my_i
                                     end,
-                                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode, idxs...),
+                                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode),
                                 ),
                             ),
                             next = (ctx, idx, ext) -> quote
@@ -312,7 +335,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Walk,
                 )
             ),
             Phase(
-                body = (start, step) -> Run(Simplify(literal(default(fbr))))
+                body = (start, step) -> Run(Simplify(Fill(default(fbr))))
             )
         ])
     )
@@ -348,8 +371,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Gallo
                     body = Thunk(
                         body = Jump(
                             seek = (ctx, ext) -> quote
-                                #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                                while $my_r < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext_2)))
+                                while $my_r + 1 < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext)))
                                     $my_r += 1
                                 end
                                 $my_i = last($(lvl.ex).srt[$my_r])
@@ -358,12 +380,12 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Gallo
                             body = (ctx, ext, ext_2) -> Switch([
                                 value(:($(ctx(getstop(ext_2))) == $my_i)) => Thunk(
                                     body = Spike(
-                                        body = Simplify(literal(default(fbr))),
+                                        body = Simplify(Fill(default(fbr))),
                                         tail = Thunk(
                                             preamble = quote
                                                 $my_q = ($(ctx(envposition(fbr.env))) - 1) * $(ctx(lvl.I)) + $my_i
                                             end,
-                                            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode, idxs...),
+                                            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode),
                                         ),
                                     ),
                                     epilogue = quote
@@ -372,8 +394,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Gallo
                                 ),
                                 literal(true) => Stepper(
                                     seek = (ctx, ext) -> quote
-                                        #$my_r = searchsortedfirst($(lvl.ex).idx, $start, $my_r, $my_r_stop, Base.Forward)
-                                        while $my_r < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext)))
+                                        while $my_r + 1 < $my_r_stop && last($(lvl.ex).srt[$my_r]) < $(ctx(getstart(ext)))
                                             $my_r += 1
                                         end
                                     end,
@@ -384,12 +405,12 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Gallo
                                         body = Step(
                                             stride = (ctx, idx, ext) -> value(my_i),
                                             chunk = Spike(
-                                                body = Simplify(literal(default(fbr))),
+                                                body = Simplify(Fill(default(fbr))),
                                                 tail = Thunk(
                                                     preamble = quote
                                                         $my_q = ($(ctx(envposition(fbr.env))) - 1) * $(ctx(lvl.I)) + $my_i
                                                     end,
-                                                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode, idxs...),
+                                                    body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=value(my_i, lvl.Ti), parent=fbr.env)), ctx, mode),
                                                 ),
                                             ),
                                             next = (ctx, idx, ext) -> quote
@@ -404,7 +425,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Gallo
                 )
             ),
             Phase(
-                body = (start, step) -> Run(Simplify(literal(default(fbr))))
+                body = (start, step) -> Run(Simplify(Fill(default(fbr))))
             )
         ])
     )
@@ -426,8 +447,8 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Follo
                 $my_q = $(ctx(q)) * $(ctx(lvl.I)) + $(ctx(i))
             end,
             body = Switch([
-                value(:($tbl[$my_q])) => refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tq), index=i, parent=fbr.env)), ctx, mode, idxs...),
-                literal(true) => Simplify(literal(default(fbr)))
+                value(:($tbl[$my_q])) => refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Tp), index=i, parent=fbr.env)), ctx, mode),
+                literal(true) => Simplify(Fill(default(fbr)))
             ])
         )
     )
@@ -452,7 +473,7 @@ function unfurl(fbr::VirtualFiber{VirtualSparseBytemapLevel}, ctx, mode, ::Union
                 $my_guard = true
                 $my_q = ($(ctx(envposition(fbr.env))) - 1) * $(ctx(lvl.I)) + $(ctx(idx))
             end,
-            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode, idxs...),
+            body = refurl(VirtualFiber(lvl.lvl, VirtualEnvironment(position=value(my_q, lvl.Ti), index=idx, guard=my_guard, parent=fbr.env)), ctx, mode),
             epilogue = begin
                 body = quote
                     if !$(lvl.ex).tbl[$my_q]

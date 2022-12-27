@@ -26,11 +26,26 @@ function (spc::Freshen)(tags...)
 end
 
 @kwdef mutable struct LowerJulia
+    algebra = DefaultAlgebra()
     preamble::Vector{Any} = []
     bindings::Dict{Any, Any} = Dict()
     epilogue::Vector{Any} = []
     dims::Dict = Dict()
     freshen::Freshen = Freshen()
+    shash = StaticHash()
+end
+
+struct StaticHash
+    counts::Dict{Any, Int}
+end
+StaticHash() = StaticHash(Dict{Any, Int}())
+
+function (h::StaticHash)(x)
+    if haskey(h.counts, x)
+        return h.counts[x]
+    else
+        return (h.counts[x] = UInt(length(h.counts)))
+    end
 end
 
 (ctx::LowerJulia)(root) = ctx(root, Stylize(root, ctx)(root))
@@ -125,7 +140,9 @@ end
 function (ctx::LowerJulia)(node, ::ThunkStyle)
     contain(ctx) do ctx2
         node = (ThunkVisitor(ctx2))(node)
-        (ctx2)(node)
+        contain(ctx2) do ctx3
+            (ctx3)(node)
+        end
     end
 end
 
@@ -233,11 +250,11 @@ function (ctx::LowerJulia)(root::IndexNode, ::DefaultStyle)
         return ctx(simplify(chunk(
             root.idx,
             resolvedim(ctx.dims[getname(root.idx)]),
-            root.body)
-        ))
+            root.body),
+            ctx))
     elseif root.kind === chunk
         idx_sym = ctx.freshen(getname(root.idx))
-        if simplify((@f $(getlower(root.ext)) >= 1)) == (@f true)  && simplify((@f $(getupper(root.ext)) <= 1)) == (@f true)
+        if simplify((@f $(getlower(root.ext)) >= 1), ctx) == (@f true)  && simplify((@f $(getupper(root.ext)) <= 1), ctx) == (@f true)
             return quote
                 $idx_sym = $(ctx(getstart(root.ext)))
                 $(bind(ctx, getname(root.idx) => idx_sym) do 
@@ -275,7 +292,7 @@ function (ctx::LowerJulia)(root::IndexNode, ::DefaultStyle)
     elseif root.kind === assign
         if root.lhs.kind === access
             @assert root.lhs.mode.kind == updater
-            rhs = ctx(simplify(call(root.op, root.lhs, root.rhs)))
+            rhs = ctx(simplify(call(root.op, root.lhs, root.rhs), ctx))
         else
             rhs = ctx(root.rhs)
         end
@@ -315,8 +332,12 @@ end
 
 function (ctx::ForLoopVisitor)(node::IndexNode)
     if node.kind === access && node.tns isa IndexNode && node.tns.kind === virtual
-        #TODO this is a problem
-        something(unchunk(node.tns.val, ctx), access(node.tns, node.mode, map(ctx, node.idxs)...))
+        tns_2 = unchunk(node.tns.val, ctx)
+        if tns_2 === nothing
+            access(node.tns, node.mode, map(ctx, node.idxs)...)
+        else
+            access(tns_2, node.mode, map(ctx, node.idxs[2:end])...)
+        end
     elseif istree(node)
         similarterm(node, operation(node), map(ctx, arguments(node)))
     else
