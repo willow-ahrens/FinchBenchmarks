@@ -4,9 +4,7 @@ using BenchmarkTools
 using Scratch
 
 using MatrixDepot
-include("TensorMarket.jl")
-using .TensorMarket
-
+using TensorMarket
 
 function spmv_taco(_A, x, key)
     y_ref = fiber(x)
