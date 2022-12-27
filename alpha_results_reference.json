@@ -1,0 +1,562 @@
+[
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "opencv",
+    "time": 0.000416515
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "taco_rle",
+    "time": 0.00017752000000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_sparse",
+    "time": 0.000234004
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_rle",
+    "time": 0.000243754
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "opencv",
+    "time": 0.000416898
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "taco_rle",
+    "time": 0.000230098
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_sparse",
+    "time": 0.000295385
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_rle",
+    "time": 0.000309828
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "opencv",
+    "time": 0.00041623500000000004
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "taco_rle",
+    "time": 0.00026016
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_sparse",
+    "time": 0.000315743
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_rle",
+    "time": 0.00032879
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "opencv",
+    "time": 0.000415975
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "taco_rle",
+    "time": 0.00021088900000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "finch_sparse",
+    "time": 0.000234817
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "finch_rle",
+    "time": 0.000271161
+},
+{
+    "dataset": "humansketches",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "opencv",
+    "time": 0.000415473
+},
+{
+    "dataset": "humansketches",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "taco_rle",
+    "time": 0.000259861
+},
+{
+    "dataset": "humansketches",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "finch_sparse",
+    "time": 0.000330547
+},
+{
+    "dataset": "humansketches",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "finch_rle",
+    "time": 0.00034767
+},
+{
+    "dataset": "humansketches",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "opencv",
+    "time": 0.000415489
+},
+{
+    "dataset": "humansketches",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "taco_rle",
+    "time": 0.000232789
+},
+{
+    "dataset": "humansketches",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "finch_sparse",
+    "time": 0.000297494
+},
+{
+    "dataset": "humansketches",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "finch_rle",
+    "time": 0.000320051
+},
+{
+    "dataset": "humansketches",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "opencv",
+    "time": 0.00041597400000000005
+},
+{
+    "dataset": "humansketches",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "taco_rle",
+    "time": 0.00019151000000000001
+},
+{
+    "dataset": "humansketches",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "finch_sparse",
+    "time": 0.00024533
+},
+{
+    "dataset": "humansketches",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "finch_rle",
+    "time": 0.000235643
+},
+{
+    "dataset": "humansketches",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "opencv",
+    "time": 0.00041514700000000004
+},
+{
+    "dataset": "humansketches",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "taco_rle",
+    "time": 0.00020930700000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "finch_sparse",
+    "time": 0.00025804
+},
+{
+    "dataset": "humansketches",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "finch_rle",
+    "time": 0.000267445
+},
+{
+    "dataset": "humansketches",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "opencv",
+    "time": 0.000416158
+},
+{
+    "dataset": "humansketches",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "taco_rle",
+    "time": 0.00028154300000000004
+},
+{
+    "dataset": "humansketches",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "finch_sparse",
+    "time": 0.000351273
+},
+{
+    "dataset": "humansketches",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "finch_rle",
+    "time": 0.000379533
+},
+{
+    "dataset": "humansketches",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "opencv",
+    "time": 0.00041602200000000005
+},
+{
+    "dataset": "humansketches",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "taco_rle",
+    "time": 0.000202004
+},
+{
+    "dataset": "humansketches",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "finch_sparse",
+    "time": 0.00027991
+},
+{
+    "dataset": "humansketches",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "finch_rle",
+    "time": 0.000261178
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "opencv",
+    "time": 4.064e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "taco_rle",
+    "time": 2.6471e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_sparse",
+    "time": 7.4336e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_rle",
+    "time": 9.584e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "opencv",
+    "time": 4.065e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "taco_rle",
+    "time": 2.5884e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_sparse",
+    "time": 7.4531e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_rle",
+    "time": 9.445e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "opencv",
+    "time": 4.072e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "taco_rle",
+    "time": 2.4673000000000002e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_sparse",
+    "time": 7.4677e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_rle",
+    "time": 9.102e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "opencv",
+    "time": 4.0660000000000005e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "taco_rle",
+    "time": 2.5305000000000003e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "finch_sparse",
+    "time": 7.4559e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "finch_rle",
+    "time": 9.463e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "opencv",
+    "time": 4.055e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "taco_rle",
+    "time": 2.5066e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "finch_sparse",
+    "time": 7.412e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 5,
+    "imageC": 10005,
+    "method": "finch_rle",
+    "time": 9.055e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "opencv",
+    "time": 4.077e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "taco_rle",
+    "time": 2.5281e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "finch_sparse",
+    "time": 7.4436e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 6,
+    "imageC": 10006,
+    "method": "finch_rle",
+    "time": 9.065e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "opencv",
+    "time": 4.0760000000000004e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "taco_rle",
+    "time": 2.5673000000000003e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "finch_sparse",
+    "time": 7.4529e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 7,
+    "imageC": 10007,
+    "method": "finch_rle",
+    "time": 9.929e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "opencv",
+    "time": 4.069e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "taco_rle",
+    "time": 2.5300000000000002e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "finch_sparse",
+    "time": 7.4251e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 8,
+    "imageC": 10008,
+    "method": "finch_rle",
+    "time": 9.423e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "opencv",
+    "time": 4.069e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "taco_rle",
+    "time": 2.5313000000000003e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "finch_sparse",
+    "time": 7.4435e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 9,
+    "imageC": 10009,
+    "method": "finch_rle",
+    "time": 9.934e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "opencv",
+    "time": 4.065e-6
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "taco_rle",
+    "time": 2.5387000000000003e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "finch_sparse",
+    "time": 7.4625e-5
+},
+{
+    "dataset": "omniglot_train",
+    "imageB": 10,
+    "imageC": 10010,
+    "method": "finch_rle",
+    "time": 9.329e-6
+}
+]

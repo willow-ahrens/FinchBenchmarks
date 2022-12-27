@@ -1,4 +1,5 @@
 *.tns
+*.png
 *.ttx
 *.o
 spmv_taco
@@ -10,3 +11,6 @@ alpha_taco_rle
 settings.json
 all_pairs_opencv
 opencv/install
+scratch
+julia-1.8.2
+.julia

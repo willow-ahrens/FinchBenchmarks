@@ -45,7 +45,7 @@ function conv_finch_kernel(C, A, F)
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
 end
 
-function conv_finch_time(A, F)
+function conv_finch_time(A, F, key)
     C = similar(A)
     #A = pattern!(A)
     #F = pattern!(copyto!(@fiber(d(d(e(0.0)))), F))
@@ -76,9 +76,9 @@ function conv_dense_kernel(C, A, F)
     return C
 end
 
-function conv_dense_time(A, F)
-    (m, n) = size(FiberArray(A))
-    A = copyto!(Array{UInt8}(undef, m, n), FiberArray(A))
+function conv_dense_time(A, F, key)
+    (m, n) = size(A)
+    A = copyto!(Array{UInt8}(undef, m, n), A)
     C = Array{UInt8}(undef, m, n)
     time = @belapsed conv_dense_kernel($C, $A, $F)
     return (time, C)
@@ -98,7 +98,9 @@ function conv_opencv_time(A, F, key)
     end
     opencv_time = parse(Int64, String(take!(io))) * 1.0e-9
 
-    C = FiberArray(fsparse(ttread(C_file)...)) .* FiberArray(A)
+    C = Array{Float64}(undef, size(A)...)
+    res = fsparse(ttread(C_file)...)
+    @finch @loop i j C[i, j] = res[i, j] * A[i, j]
 
     return (opencv_time, C)
 end
@@ -111,33 +113,45 @@ function main(result_file)
         println(f, "[")
     end
 
+    comma = false
+
     for p in [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 
-        A = copyto!(@fiber(d(sl(e(0.00)))), pattern!(fsprand((1000, 1000), p)))
+        A = copyto!(@fiber(d(sl(e(0.0)))), pattern!(fsprand((1000, 1000), p)))
+        run = 1
         F = ones(UInt8, 11, 11)
 
-        open(result_file,"a") do f
-            dense_time, dense_C = conv_dense_time(A, F)
-            println("dense", dense_time)
-            opencv_time, opencv_C = conv_opencv_time(A, F, p)
-            #display(Int.(dense_C))
-            #display(Int.(opencv_C))
-            #@assert opencv_C == dense_C
-            println("opencv", opencv_time)
-            finch_time, finch_C = conv_finch_time(A, F)
-            @assert FiberArray(finch_C) == dense_C
-            println("finch", finch_time)
-            JSON.print(f, Dict(
-                "p"=>p,
-                "opencv_time"=>opencv_time,
-                "finch_time"=>finch_time,
-                "dense_time"=>dense_time,
-            ))
-            println(f, ",")
+        time, ref = conv_opencv_time(A, F, p)
+        ref = Array{Float64}(ref)
+
+
+        for (method, timer) in [
+            ("opencv", conv_opencv_time),
+            ("finch_sparse", conv_finch_time)
+        ]
+            time, res = timer(A, F, p)
+            check = Scalar(true)
+            @finch @loop i j check[] &= res[i, j] == ref[i, j]
+            @assert check[]
+            open(result_file,"a") do f
+                if comma
+                    println(f, ",")
+                end
+                print(f, """
+                    {
+                        "p": $(p),
+                        "run": 1,
+                        "method": $(repr(method)),
+                        "time": $time
+                    }""")
+            end
+            @info "conv" p run method time
+            comma = true
         end
     end
 
     open(result_file,"a") do f
+        println()
         println(f, "]")
     end
 end

@@ -29,7 +29,7 @@ function spmv_taco(_A, x, key)
 
     io = IOBuffer()
 
-    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib") do
+    withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"./taco/build/lib", "LD_LIBRARY_PATH" => "./taco/build/lib", "TACO_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
         run(pipeline(`./spmv_taco $y_file $A_file $x_file`, stdout=io))
     end
 

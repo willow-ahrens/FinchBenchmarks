@@ -1,14 +1,13 @@
+#!/bin/bash
 
-# Initialize environment variables
+bash -e spmspv.sh
+bash -e triangle.sh
+bash -e conv.sh
+bash -e alpha.sh
+bash -e all_pairs.sh
 
-export PATH=./julia:$PATH
-export JULIA_PROJECT=.
-export LD_LIBRARY_PATH=./taco/build/lib:$LD_LIBRARY_PATH
-export DYLD_FALLBACK_LIBRARY_PATH=./taco/build/lib:$DYLD_FALLBACK_LIBRARY_PATH
-
-#julia spmv.jl
-#julia spgemm.jl
-#julia spmv2.jl
-#julia spgemm2.jl
-#julia spgemmh.jl
-#julia smttkrp.jl
+bash -e spmspv_plot.sh
+bash -e triangle_plot.sh
+bash -e conv_plot.sh
+bash -e alpha_plot.sh
+bash -e all_pairs_plot.sh

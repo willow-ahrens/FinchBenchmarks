@@ -6,9 +6,10 @@
 #SBATCH -e slurm-%A_%a.err
 #SBATCH -o slurm-%A_%a.out
 
-export SCRATCH=/data/scratch/pahrens
-export PATH="$SCRATCH/julia:$PATH"
-export JULIA_DEPOT_PATH=/data/scratch/pahrens/.julia
-export MATRIXDEPOT_DATA=/data/scratch/pahrens/MatrixData
+if [[ -n $SLURM_JOB_ID ]];  then
+    # check the original location through scontrol and $SLURM_JOB_ID
+    export SCRIPT_DIR=$(scontrol show job $SLURM_JOBID | awk -F= '/Command=/{print $2}')
+    export SCRIPT_DIR=$(dirname $SCRIPT_DIR)
+fi
 
-../julia/julia --project=. conv.jl conv_results.json
+bash -e conv.sh
