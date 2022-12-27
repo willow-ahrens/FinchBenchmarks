@@ -2,7 +2,7 @@
 
 julia_version = "1.8.0"
 manifest_format = "2.0"
-project_hash = "7e00ed827fa390bd204eca7aa594215bb88d0828"
+project_hash = "bc3cd817ce2929d3ef06aeecf8762fc29afb8730"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1650,6 +1650,11 @@ version = "0.1.1"
 deps = ["CSV", "DataFrames", "DelimitedFiles", "Downloads", "GZip", "Images", "LinearAlgebra", "MLDatasets", "MatrixDepot", "Random", "Scratch", "StatsBase", "ZipFile"]
 path = "TensorDepot.jl"
 uuid = "a265fce4-34b0-4e6b-9b08-892587f3fa1f"
+version = "0.1.0"
+
+[[deps.TensorMarket]]
+git-tree-sha1 = "5905ebe3252a18c1949e3cc11fc36bbb7f31d7c9"
+uuid = "8b7d4fe7-0b45-4d0d-9dd8-5cc9b23b4b77"
 version = "0.1.0"
 
 [[deps.Test]]

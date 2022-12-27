@@ -1,0 +1,106 @@
+[
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "opencv",
+    "time": 0.00022567300000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "taco_rle",
+    "time": 0.000131227
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_rle",
+    "time": 0.00026263
+},
+{
+    "dataset": "humansketches",
+    "imageB": 1,
+    "imageC": 10001,
+    "method": "finch_sparse",
+    "time": 0.000359424
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "opencv",
+    "time": 0.00022587800000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "taco_rle",
+    "time": 0.000168755
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_rle",
+    "time": 0.000328131
+},
+{
+    "dataset": "humansketches",
+    "imageB": 2,
+    "imageC": 10002,
+    "method": "finch_sparse",
+    "time": 0.00047189
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "opencv",
+    "time": 0.00024175500000000002
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "taco_rle",
+    "time": 0.00021252400000000001
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_rle",
+    "time": 0.000414832
+},
+{
+    "dataset": "humansketches",
+    "imageB": 3,
+    "imageC": 10003,
+    "method": "finch_sparse",
+    "time": 0.000586173
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "opencv",
+    "time": 0.000267335
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "taco_rle",
+    "time": 0.000172281
+},
+{
+    "dataset": "humansketches",
+    "imageB": 4,
+    "imageC": 10004,
+    "method": "finch_rle",
+    "time": 0.000356515
+}

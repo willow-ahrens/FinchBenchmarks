@@ -1,10 +1,8 @@
 using Finch, SparseArrays, BenchmarkTools, Images, FileIO, FixedPointNumbers, Colors
-using MatrixDepot,TensorDepot
+using MatrixDepot, TensorDepot
 using Scratch
 using Random
-
-include("TensorMarket.jl")
-using .TensorMarket
+using TensorMarket
 
 const MyInt = Int32
 
