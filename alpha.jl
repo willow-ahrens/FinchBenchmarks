@@ -13,6 +13,31 @@ else
     tmp_tensor_dir = get_scratch!(@__MODULE__, "tmp_tensor_dir")
 end
 
+global dummySize=5000000
+global dummyA=[]
+global dummyB=[]
+
+@noinline
+function clear_cache()
+    global dummySize
+    global dummyA
+    global dummyB
+
+    ret = 0.0
+    if length(dummyA) == 0
+        dummyA = Array{Float64}(undef, dummySize)
+        dummyB = Array{Float64}(undef, dummySize)
+    end
+    for i in 1:100 
+        dummyA[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+        dummyB[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+    end
+    for i in 1:dummySize
+        ret += dummyA[i] * dummyB[i];
+    end
+    return ret
+end
+
 function pngwrite(filename, I, V, shape)
     @boundscheck begin
         length(shape) ⊆ 2:3 || error("Grayscale or RGB(A) only")
@@ -146,7 +171,7 @@ function alpha_finch_rle(B, C, alpha)
     B = img_to_repeat(B)
     C = img_to_repeat(C)
     A = similar(B)
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache())
     return (time, A)
 end
 
@@ -159,12 +184,12 @@ function alpha_finch_sparse(B, C, alpha)
 
     A = similar(B)
 
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache())
     return (time, A)
 end
 
 function main(result_file)
-    numSketches = 10
+    numSketches = 100
     humansketchesA = matrixdepot("humansketches", 1:numSketches)
     humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
