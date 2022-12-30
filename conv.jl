@@ -6,6 +6,31 @@ using TensorMarket
 
 const MyInt=Int32
 
+global dummySize=5000000
+global dummyA=[]
+global dummyB=[]
+
+@noinline
+function clear_cache()
+    global dummySize
+    global dummyA
+    global dummyB
+
+    ret = 0.0
+    if length(dummyA) == 0
+        dummyA = Array{Float64}(undef, dummySize)
+        dummyB = Array{Float64}(undef, dummySize)
+    end
+    for i in 1:100 
+        dummyA[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+        dummyB[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+    end
+    for i in 1:dummySize
+        ret += dummyA[i] * dummyB[i];
+    end
+    return ret
+end
+
 function pngwrite(filename, I, V, shape)
     @boundscheck begin
         length(shape) ⊆ 2:3 || error("Grayscale or RGB(A) only")

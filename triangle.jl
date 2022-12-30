@@ -15,6 +15,31 @@ MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
 
 MatrixDepot.init()
 
+global dummySize=5000000
+global dummyA=[]
+global dummyB=[]
+
+@noinline
+function clear_cache()
+    global dummySize
+    global dummyA
+    global dummyB
+
+    ret = 0.0
+    if length(dummyA) == 0
+        dummyA = Array{Float64}(undef, dummySize)
+        dummyB = Array{Float64}(undef, dummySize)
+    end
+    for i in 1:100 
+        dummyA[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+        dummyB[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
+    end
+    for i in 1:dummySize
+        ret += dummyA[i] * dummyB[i];
+    end
+    return ret
+end
+
 function triangle_taco_sparse(A, key)
     c_file = joinpath(mktempdir(prefix="triangle_taco_sparse_$(key)"), "c.ttx")
     persist_dir = joinpath(get_scratch!("Finch-CGO-2023"), "triangle_taco_sparse_$(key)")
