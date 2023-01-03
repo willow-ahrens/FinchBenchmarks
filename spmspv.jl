@@ -232,7 +232,7 @@ hb = [
     ("HB/bcsstk30", "bcsstk30"),
 ]
 
-function main(result_file, short="short")
+function main(result_file, short="long")
     global hb
     open(result_file,"w") do f
         println(f, "[")

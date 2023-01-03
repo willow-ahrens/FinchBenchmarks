@@ -166,7 +166,7 @@ snap = [
     ("SNAP/soc-Pokec", "soc-Pokec"),
 ]
 
-function main(result_file, short="short")
+function main(result_file, short="long")
     global snap
     open(result_file,"w") do f
         println(f, "[")
