@@ -115,7 +115,7 @@ end
 
 function all_pairs_finch_uint8_gallop(A, num_imgs, key)
     A = reshape(permutedims(A[:, :, 1:num_imgs], (3, 1, 2)), num_imgs, :)
-    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))),A)
+    A = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0x00)))),A)
     O = @fiber(d{MyInt}(num_imgs, d{MyInt}(num_imgs, e(0.0))))
     
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
