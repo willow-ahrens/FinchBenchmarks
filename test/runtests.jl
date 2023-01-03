@@ -5,34 +5,28 @@ using Base.Iterators
 
 include("data_matrices.jl")
 
-function diff(name, body)
+function diff(name, res)
     global ARGS
     "nodiff" in ARGS && return true
-    cache_dir = mkpath(joinpath(@__DIR__, "cache"))
-    temp_dir = mkpath(joinpath(@__DIR__, "temp"))
-    cache_file = joinpath(cache_dir, name)
-    temp_file = joinpath(temp_dir, name)
-    open(temp_file, "w") do f
-        println(f, body)
-    end
+    ref_dir = joinpath(@__DIR__, "reference")
+    ref_file = joinpath(ref_dir, name)
     if "overwrite" in ARGS
-        open(cache_file, "w") do f
-            println(f, body)
+        mkpath(ref_dir)
+        open(ref_file, "w") do f
+            println(f, res)
         end
         true
     else
-        if success(`diff --strip-trailing-cr $cache_file $temp_file`)
+        ref = read(ref_file, String)
+        res = sprint(println, res)
+        if ref == res
             return true
         else
             if "verbose" in ARGS
                 println("=== reference ===")
-                open(cache_file, "r") do f
-                    for line in eachline(f)
-                        println(line)
-                    end
-                end
+                println(ref)
                 println("=== test ===")
-                println(body)
+                println(res)
             end
             return false
         end
@@ -74,6 +68,12 @@ isstructequal(a::T, b::T) where {T <: RepeatRLE} =
     a.idx == b.idx &&
     a.val == b.val
 
+isstructequal(a::T, b::T) where {T <: RepeatRLEDiff} =
+    a.I == b.I &&
+    a.pos == b.pos &&
+    a.idx == b.idx &&
+    a.val == b.val
+
 isstructequal(a::T, b::T) where {T <: Dense} =
     a.I == b.I &&
     isstructequal(a.lvl, b.lvl)
@@ -82,6 +82,13 @@ isstructequal(a::T, b::T) where {T <: SparseList} =
     a.I == b.I &&
     a.pos == b.pos &&
     a.idx == b.idx &&
+    isstructequal(a.lvl, b.lvl)
+
+isstructequal(a::T, b::T) where {T <: SparseListDiff} =
+    a.I == b.I &&
+    a.pos == b.pos &&
+    a.idx == b.idx &&
+    a.jdx == b.jdx &&
     isstructequal(a.lvl, b.lvl)
 
 isstructequal(a::T, b::T) where {T <: SparseHash} =
@@ -119,10 +126,10 @@ verbose = "verbose" in ARGS
     include("test_ssa.jl")
     include("test_print.jl")
     #include("test_parse.jl")
-    include("test_merges.jl")
+    include("test_formats.jl")
     include("test_constructors.jl")
     include("test_conversions.jl")
-    include("test_formats.jl")
+    include("test_merges.jl")
     include("test_algebra.jl")
     include("test_repeat.jl")
     include("test_permit.jl")
