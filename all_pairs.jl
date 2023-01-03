@@ -80,7 +80,7 @@ function all_pairs_finch_gallop(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_gallop_kernel($m, $A, $O) setup=(clear_cache())
+    finch_time = @belapsed all_pairs_finch_gallop_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_time, O
 end
@@ -100,7 +100,7 @@ function all_pairs_finch(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache())
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_time, O
 end
@@ -113,7 +113,7 @@ function all_pairs_finch_vbl(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache())
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_time, O
 end
@@ -126,7 +126,7 @@ function all_pairs_finch_rle(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache())
+    finch_time = @belapsed all_pairs_finch_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_time, O
 end
@@ -146,7 +146,7 @@ function all_pairs_finch_uint8_gallop(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_uint8_time = @belapsed all_pairs_finch_uint8_gallop_kernel($m, $A, $O) setup=(clear_cache())
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_gallop_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_uint8_time, O
 end
@@ -166,7 +166,7 @@ function all_pairs_finch_uint8(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache())
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_uint8_time, O
 end
@@ -179,7 +179,7 @@ function all_pairs_finch_uint8_vbl(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache())
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_uint8_time, O
 end
@@ -192,7 +192,7 @@ function all_pairs_finch_uint8_rle(A, num_imgs, key)
     dense_m = [i < j for i in 1:num_imgs, j in 1:num_imgs]
     m = dropdefaults!(@fiber(d{MyInt}(sl{MyInt, MyInt}(p()))), dense_m)
 
-    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache())
+    finch_uint8_time = @belapsed all_pairs_finch_uint8_kernel($m, $A, $O) setup=(clear_cache()) evals=1
 
     return finch_uint8_time, O
 end

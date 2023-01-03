@@ -75,7 +75,7 @@ end
 function triangle_finch_sparse(_A, key)
     A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
     AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
-    time = @belapsed triangle_finch_kernel($A, $AT) setup=(clear_cache())
+    time = @belapsed triangle_finch_kernel($A, $AT) setup=(clear_cache()) evals=1
     c = triangle_finch_kernel(A, AT)
     return time, c
 end
@@ -88,7 +88,7 @@ end
 function triangle_finch_gallop(_A, key)
     A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
     AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
-    time = @belapsed triangle_finch_gallop_kernel($A, $AT) setup=(clear_cache())
+    time = @belapsed triangle_finch_gallop_kernel($A, $AT) setup=(clear_cache()) evals=1
     c = triangle_finch_gallop_kernel(A, AT)
     return (time, c)
 end

@@ -171,7 +171,7 @@ function alpha_finch_rle(B, C, alpha)
     B = img_to_repeat(B)
     C = img_to_repeat(C)
     A = similar(B)
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache())
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache()) evals=1
     return (time, A)
 end
 
@@ -184,7 +184,7 @@ function alpha_finch_sparse(B, C, alpha)
 
     A = similar(B)
 
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache())
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache()) evals=1
     return (time, A)
 end
 
