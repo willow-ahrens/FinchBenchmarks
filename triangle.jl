@@ -8,7 +8,7 @@ using JSON
 using MatrixDepot
 using TensorMarket
 
-const MyInt=Int32
+const MyInt = Int
 
 MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`

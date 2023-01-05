@@ -3,7 +3,7 @@ using TensorDepot, MatrixDepot
 using Finch.IndexNotation:literal_instance
 using TensorMarket
 
-const MyInt = Int32
+const MyInt = Int
 
 using Scratch
 tmp_tensor_dir = ""
