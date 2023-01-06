@@ -4,7 +4,7 @@ using Scratch
 using Random
 using TensorMarket
 
-const MyInt=Int32
+const MyInt = Int
 
 global dummySize=5000000
 global dummyA=[]
