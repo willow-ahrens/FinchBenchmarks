@@ -204,7 +204,7 @@ function alpha_finch_sparse(B, C, alpha)
 end
 
 function main(result_file)
-    numSketches = 100
+    numSketches = 10
     humansketchesA = matrixdepot("humansketches", 1:numSketches)
     humansketchesB = matrixdepot("humansketches", (10_001):(10_000+numSketches))
 
