@@ -1,16 +1,16 @@
 using Pkg
-tempdir = mktempdir()
-Pkg.activate(tempdir)
-Pkg.develop(PackageSpec(path = joinpath(@__DIR__, "..")))
-Pkg.add(["BenchmarkTools", "PkgBenchmark", "MatrixDepot"])
-Pkg.resolve()
+#tempdir = mktempdir()
+#Pkg.activate(tempdir)
+#Pkg.develop(PackageSpec(path = joinpath(@__DIR__, "..")))
+#Pkg.add(["BenchmarkTools", "PkgBenchmark", "MatrixDepot"])
+#Pkg.resolve()
 
 using Finch
 using BenchmarkTools
 using MatrixDepot
 using SparseArrays
 
-const SUITE = BenchmarkGroup()
+SUITE = BenchmarkGroup()
 
 SUITE["compile"] = BenchmarkGroup()
 
@@ -113,27 +113,29 @@ function bfs(edges, source=5)
     edges = pattern!(edges)
 
     @assert n == m
-    F = @fiber sl(n,p())
-    _F = @fiber sl(n,p())
-    @finch @loop source F[source] = true
+    F = @fiber sm(n,p())
+    _F = @fiber sm(n,p())
+    @finch F[source] = true
 
-    V = @fiber d(n, e(0))
-    @finch @loop source V[source] = 1
+    V = @fiber d(n, e(false))
+    @finch V[source] = true
 
     P = @fiber d(n, e(0))
-    @finch @loop source P[source] = source
+    @finch P[source] = source
 
-    level = 2
-    while F.lvl.pos[2] != 1 #TODO this could be cleaner if we could get early exit working.
+    v = Scalar(false)
+
+    while F.lvl.pos[2] > 1 #TODO this could be cleaner if we could get early exit working.
         @finch @loop j k (begin
-            _F[k] = v #Set the frontier vertex
-            @sieve v P[k] = j #Only set the parent for this vertex
+            @sieve v[] begin
+                _F[k] |= true
+                !P[k] <<choose(0)>>= j #Only set the parent for this vertex
+            end
         end) where (
-            v = F[j] && edges[j, k] && !(V[k])
+            v[] = F[j] && edges[j, k] && !(V[k])
         )
-        @finch @loop k !V[k] += ifelse(_F[k], level, 0)
+        @finch @loop k !V[k] |= _F[k]
         (F, _F) = (_F, F)
-        level += 1
     end
     return F
 end
@@ -249,5 +251,37 @@ for mtx in ["SNAP/soc-Epinions1"]#, "SNAP/soc-LiveJournal1"]
     A = fiber(SparseMatrixCSC(matrixdepot(mtx)))
     SUITE["matrices"]["ATA_spgemm_outer"][mtx] = @benchmarkable spgemm_outer($A, $A) 
 end
+
+SUITE["indices"] = BenchmarkGroup()
+
+function spmv32(A, x)
+    y = @fiber d{Int32}(e(0.0))
+    @finch @loop i j y[i] += A[i, j] * x[j]
+    return y
+end
+
+SUITE["indices"]["SpMV_32"] = BenchmarkGroup()
+for mtx in ["SNAP/soc-Epinions1"]#, "SNAP/soc-LiveJournal1"]
+    A = fiber(SparseMatrixCSC(matrixdepot(mtx)))
+    A = copyto!(@fiber(d{Int32}(sl{Int32, Int32}(e(0.0)))), A)
+    x = copyto!(@fiber(d{Int32}(e(0.0))), rand(size(A)[2]))
+    SUITE["indices"]["SpMV_32"][mtx] = @benchmarkable spmv32($A, $x) 
+end
+
+function spmv64(A, x)
+    y = @fiber d{Int64}(e(0.0))
+    @finch @loop i j y[i] += A[i, j] * x[j]
+    return y
+end
+
+SUITE["indices"]["SpMV_64"] = BenchmarkGroup()
+for mtx in ["SNAP/soc-Epinions1"]#, "SNAP/soc-LiveJournal1"]
+    A = fiber(SparseMatrixCSC(matrixdepot(mtx)))
+    A = copyto!(@fiber(d{Int64}(sl{Int64, Int64}(e(0.0)))), A)
+    x = copyto!(@fiber(d{Int64}(e(0.0))), rand(size(A)[2]))
+    SUITE["indices"]["SpMV_64"][mtx] = @benchmarkable spmv64($A, $x) 
+end
+
+SUITE = SUITE["indices"]
 
 foreach(((k, v),) -> BenchmarkTools.warmup(v), SUITE)
