@@ -1,0 +1,266 @@
+[
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.01037917
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.052857113
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.042101071
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.027218372
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.065184923
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_rled",
+    "time": 0.063030853
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.048337174
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.043306773
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.028992242
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.067180119
+},
+{
+    "matrix": "mnist_train",
+    "n": 28,
+    "method": "finch_uint8_rled",
+    "time": 0.058908848
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.01039456
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.081948354
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.064535524
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.036794543
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.09612913
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_rled",
+    "time": 0.094277671
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.073843977
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.067039721
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.039724253
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.099202213
+},
+{
+    "matrix": "emnist_letters_train",
+    "n": 28,
+    "method": "finch_uint8_rled",
+    "time": 0.087932276
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "opencv",
+    "time": 0.010408878
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_sparse",
+    "time": 0.077685323
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_gallop",
+    "time": 0.062896643
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_vbl",
+    "time": 0.035048004
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_rle",
+    "time": 0.093212454
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_rled",
+    "time": 0.09162264
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8",
+    "time": 0.071096218
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_gallop",
+    "time": 0.06552386
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_vbl",
+    "time": 0.038166716
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_rle",
+    "time": 0.096317692
+},
+{
+    "matrix": "emnist_digits_train",
+    "n": 28,
+    "method": "finch_uint8_rled",
+    "time": 0.085806735
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "opencv",
+    "time": 0.043753132
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_sparse",
+    "time": 1.178773205
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_gallop",
+    "time": 1.802876064
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_vbl",
+    "time": 0.495545207
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_rle",
+    "time": 0.080586511
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_rled",
+    "time": 0.084662598
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8",
+    "time": 1.256450742
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_gallop",
+    "time": 1.930135028
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_vbl",
+    "time": 0.579124501
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_rle",
+    "time": 0.086814886
+},
+{
+    "matrix": "omniglot_train",
+    "n": 105,
+    "method": "finch_uint8_rled",
+    "time": 0.084624539
+}
+]

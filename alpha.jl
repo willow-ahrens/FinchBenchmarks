@@ -3,7 +3,7 @@ using TensorDepot, MatrixDepot
 using Finch.IndexNotation:literal_instance
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 using Scratch
 tmp_tensor_dir = ""
@@ -11,31 +11,6 @@ if haskey(ENV, "TMP_TENSOR_DIR")
     tmp_tensor_dir = ENV["TMP_TENSOR_DIR"]
 else
     tmp_tensor_dir = get_scratch!(@__MODULE__, "tmp_tensor_dir")
-end
-
-global dummySize=5000000
-global dummyA=[]
-global dummyB=[]
-
-@noinline
-function clear_cache()
-    global dummySize
-    global dummyA
-    global dummyB
-
-    ret = 0.0
-    if length(dummyA) == 0
-        dummyA = Array{Float64}(undef, dummySize)
-        dummyB = Array{Float64}(undef, dummySize)
-    end
-    for i in 1:100 
-        dummyA[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
-        dummyB[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
-    end
-    for i in 1:dummySize
-        ret += dummyA[i] * dummyB[i];
-    end
-    return ret
 end
 
 function pngwrite(filename, I, V, shape)
@@ -175,7 +150,7 @@ function alpha_finch_rle(B, C, alpha)
     B = img_to_repeat(B)
     C = img_to_repeat(C)
     A = similar(B)
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache()) evals=1
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
     return (time, A)
 end
 
@@ -186,7 +161,7 @@ function alpha_finch_rled(B, C, alpha)
     B = img_to_repeat_diffs(B)
     C = img_to_repeat_diffs(C)
     A = similar(B)
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache()) evals=1
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
     return (time, A)
 end
 
@@ -199,7 +174,7 @@ function alpha_finch_sparse(B, C, alpha)
 
     A = similar(B)
 
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) setup=(clear_cache()) evals=1
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
     return (time, A)
 end
 

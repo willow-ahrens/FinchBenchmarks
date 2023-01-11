@@ -8,38 +8,13 @@ using JSON
 using MatrixDepot
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 function MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-")
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
 end
 
 MatrixDepot.init()
-
-global dummySize=5000000
-global dummyA=[]
-global dummyB=[]
-
-@noinline
-function clear_cache()
-    global dummySize
-    global dummyA
-    global dummyB
-
-    ret = 0.0
-    if length(dummyA) == 0
-        dummyA = Array{Float64}(undef, dummySize)
-        dummyB = Array{Float64}(undef, dummySize)
-    end
-    for i in 1:100 
-        dummyA[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
-        dummyB[rand(1:dummySize)] = rand(Int64)/typemax(Int64)
-    end
-    for i in 1:dummySize
-        ret += dummyA[i] * dummyB[i];
-    end
-    return ret
-end
 
 function spmspv_taco(_A, x, key)
     y_ref = @fiber(d(e(0.0)))
@@ -82,35 +57,35 @@ function spmspv_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j]) setup=(clear_cache()) evals=1
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j]) evals=1
 end
 
 function spmspv_gallop_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j::gallop]) setup=(clear_cache()) evals=1
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j::gallop]) evals=1
 end
 
 function spmspv_lead_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) setup=(clear_cache()) evals=1
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) evals=1
 end
 
 function spmspv_follow_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j::gallop]) setup=(clear_cache()) evals=1
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j::gallop]) evals=1
 end
 
 function spmspv_finch_vbl(_A, x)
     A = copyto!(@fiber(d{MyInt}(sv{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) setup=(clear_cache()) evals=1
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) evals=1
 end
 
 hb_short = [
