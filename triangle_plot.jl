@@ -33,6 +33,7 @@ function main(infile, outfile)
         xlabel="Method",
         ylabel = "Speedup Over TACO"
     )
+    hline!(p, [1])
 
     savefig(p, outfile)
 end

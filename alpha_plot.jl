@@ -38,6 +38,8 @@ function main(infile, outfile)
         ylabel = "Speedup Over OpenCV"
     )
 
+    hline!(p, [1])
+
     savefig(p, outfile)
 end
 
