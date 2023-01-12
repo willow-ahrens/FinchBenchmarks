@@ -6,6 +6,9 @@ using CategoricalArrays
 using Statistics
 #unicodeplots()
 pyplot()
+default(size=(800,600))
+default(dpi=300)
+Plots.scalefontsizes(2.0)
 
 include("plot_labels.jl")
 
@@ -34,11 +37,12 @@ function main(infile, outname)
     p = boxplot(
         CategoricalArray(label.(target.method), levels=label.(interest)),
         target.speedup,
-        xlabel="Method",
+        #xlabel="Method",
+        xtickfontrotation=10,
         ylabel = "Speedup Over TACO",
         legend=false
     )
-    hline!(p, [1])
+    hline!(p, [1], label=false)
 
     savefig(p, "$(outname)_1density.png")
 
@@ -47,11 +51,12 @@ function main(infile, outname)
     p = boxplot(
         CategoricalArray(label.(target.method), levels=label.(interest)),
         target.speedup,
-        xlabel="Method",
+        #xlabel="Method",
+        xtickfontrotation=10,
         ylabel = "Speedup Over TACO",
         legend=false
     )
-    hline!(p, [1])
+    hline!(p, [1], label=false)
 
     savefig(p, "$(outname)_10count.png")
 end

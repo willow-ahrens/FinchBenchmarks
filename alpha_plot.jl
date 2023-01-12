@@ -7,6 +7,10 @@ using Statistics
 #unicodeplots()
 pyplot()
 
+default(size=(800,600))
+default(dpi=300)
+Plots.scalefontsizes(2.0)
+
 include("plot_labels.jl")
 
 function main(infile, outfile)
@@ -34,11 +38,12 @@ function main(infile, outfile)
     p = groupedbar(dataset,
         data.speedup,
         group=group,
-        xlabel="Dataset",
-        ylabel = "Speedup Over OpenCV"
+#        xlabel="Dataset",
+        ylabel = "Speedup Over OpenCV",
+        legend = :topleft
     )
 
-    hline!(p, [1])
+    hline!(p, [1], label=false)
 
     savefig(p, outfile)
 end

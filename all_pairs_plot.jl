@@ -5,6 +5,9 @@ using StatsPlots
 using CategoricalArrays
 #unicodeplots()
 pyplot()
+default(size=(1600,600))
+default(dpi=300)
+Plots.scalefontsizes(2.0)
 
 include("plot_labels.jl")
 
@@ -33,11 +36,11 @@ function main(infile, outfile)
         data.speedup,
         group=group,
         legend=:topleft,
-        xlabel="Dataset",
+        #xlabel="Dataset",
         ylabel = "Speedup Over OpenCV"
     )
 
-    hline!(p, [1])
+    hline!(p, [1], label=false)
 
     savefig(p, outfile)
 end
