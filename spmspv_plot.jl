@@ -38,6 +38,7 @@ function main(infile, outname)
         ylabel = "Speedup Over TACO",
         legend=false
     )
+    hline!(p, [1])
 
     savefig(p, "$(outname)_1density.png")
 
@@ -50,6 +51,7 @@ function main(infile, outname)
         ylabel = "Speedup Over TACO",
         legend=false
     )
+    hline!(p, [1])
 
     savefig(p, "$(outname)_10count.png")
 end
