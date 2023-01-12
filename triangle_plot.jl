@@ -8,7 +8,7 @@ using Statistics
 pyplot()
 default(size=(800,600))
 default(dpi=300)
-Plots.scalefontsizes(2.0)
+Plots.scalefontsizes(3.0)
 
 include("plot_labels.jl")
 

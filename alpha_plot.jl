@@ -7,9 +7,9 @@ using Statistics
 #unicodeplots()
 pyplot()
 
-default(size=(800,600))
+default(size=(800,500))
 default(dpi=300)
-Plots.scalefontsizes(2.0)
+Plots.scalefontsizes(2.5)
 
 include("plot_labels.jl")
 
