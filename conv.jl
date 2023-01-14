@@ -4,7 +4,7 @@ using Scratch
 using Random
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 function pngwrite(filename, I, V, shape)
     @boundscheck begin
@@ -49,7 +49,7 @@ function conv_finch_time(A, F, key)
     #A = pattern!(A)
     #F = pattern!(copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), F))
     F = copyto!(@fiber(d{MyInt}(d{MyInt}(e(0.0)))), F)
-    time = @belapsed conv_finch_kernel($C, $A, $F)
+    time = @belapsed conv_finch_kernel($C, $A, $F) evals=1
     @finch @loop i k j l C[i, k] += (A[i, k] != 0) * coalesce(A[permit[offset[6-i, j]], permit[offset[6-k, l]]::fastwalk], 0) * coalesce(F[permit[j], permit[l]], 0)
     return (time, C)
 end
@@ -79,7 +79,7 @@ function conv_dense_time(A, F, key)
     (m, n) = size(A)
     A = copyto!(Array{UInt8}(undef, m, n), A)
     C = Array{UInt8}(undef, m, n)
-    time = @belapsed conv_dense_kernel($C, $A, $F)
+    time = @belapsed conv_dense_kernel($C, $A, $F) evals=1
     return (time, C)
 end
 

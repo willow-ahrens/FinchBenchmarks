@@ -6,6 +6,9 @@ using CategoricalArrays
 using Statistics
 #unicodeplots()
 pyplot()
+default(size=(800,600))
+default(dpi=300)
+Plots.scalefontsizes(3.0)
 
 include("plot_labels.jl")
 
@@ -30,9 +33,11 @@ function main(infile, outfile)
     p = boxplot(
         group,
         data.speedup,
-        xlabel="Method",
-        ylabel = "Speedup Over TACO"
+        #xlabel="Method",
+        ylabel = "Speedup Over TACO",
+        legend=false
     )
+    hline!(p, [1])
 
     savefig(p, outfile)
 end

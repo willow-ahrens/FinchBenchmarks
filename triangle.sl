@@ -13,4 +13,6 @@ if [[ -n $SLURM_JOB_ID ]];  then
     export SCRIPT_DIR=$(dirname $SCRIPT_DIR)
 fi
 
+cat /sys/devices/system/cpu/intel_pstate/no_turbo
+
 bash -e triangle.sh

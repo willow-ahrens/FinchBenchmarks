@@ -5,6 +5,9 @@ using StatsPlots
 using CategoricalArrays
 #unicodeplots()
 pyplot()
+default(size=(1600,600))
+default(dpi=300)
+Plots.scalefontsizes(3.0)
 
 include("plot_labels.jl")
 
@@ -29,13 +32,15 @@ function main(infile, outfile)
     group = CategoricalArray(label.(data.method), levels=label.(interest))
     matrix = CategoricalArray(label.(data.matrix), levels=label.(["mnist_train", "emnist_letters_train", "emnist_digits_train", "omniglot_train"]))
 
-    p = groupedbar(data.matrix,
+    p = groupedbar(matrix,
         data.speedup,
         group=group,
         legend=:topleft,
-        xlabel="Dataset",
+        #xlabel="Dataset",
         ylabel = "Speedup Over OpenCV"
     )
+
+    hline!(p, [1], label=false)
 
     savefig(p, outfile)
 end

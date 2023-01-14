@@ -6,6 +6,9 @@ using CategoricalArrays
 using Statistics
 #unicodeplots()
 pyplot()
+default(size=(800,500))
+default(dpi=300)
+Plots.scalefontsizes(2.5)
 
 include("plot_labels.jl")
 
@@ -24,7 +27,10 @@ function main(infile, outfile)
         ylabel = "Runtime (s)",
         xscale = :log,
         yscale = :log,
-        xflip = true
+        xticks = 10.0 .^ (1:-1:-2),
+        yticks = 10.0 .^ (-5:-1),
+        xflip = true,
+        legend = :bottomleft,
     )
     for method in interest
         target = data[isequal(method).(data.method), :]

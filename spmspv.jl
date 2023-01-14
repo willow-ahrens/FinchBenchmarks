@@ -8,7 +8,7 @@ using JSON
 using MatrixDepot
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 function MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-")
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
@@ -57,35 +57,35 @@ function spmspv_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j])
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j]) evals=1
 end
 
 function spmspv_gallop_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j::gallop])
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j::gallop]) evals=1
 end
 
 function spmspv_lead_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j])
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) evals=1
 end
 
 function spmspv_follow_finch(_A, x)
     A = copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j::gallop])
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j] * x[j::gallop]) evals=1
 end
 
 function spmspv_finch_vbl(_A, x)
     A = copyto!(@fiber(d{MyInt}(sv{MyInt, MyInt}(e(0.0)))), fiber(_A))
     x = copyto!(@fiber(sl{MyInt, MyInt}(e(0.0))), x)
     y = @fiber(d{MyInt}(e(0.0)))
-    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j])
+    return @belapsed (A = $A; x = $x; y = $y; @finch @loop i j y[i] += A[i, j::gallop] * x[j]) evals=1
 end
 
 hb_short = [
@@ -207,7 +207,7 @@ hb = [
     ("HB/bcsstk30", "bcsstk30"),
 ]
 
-function main(result_file, short="short")
+function main(result_file, short="long")
     global hb
     open(result_file,"w") do f
         println(f, "[")

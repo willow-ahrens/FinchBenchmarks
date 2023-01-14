@@ -1,0 +1,85 @@
+[
+{
+    "p": 0.1,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030689239000000004
+},
+{
+    "p": 0.1,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 0.07177578
+},
+{
+    "p": 0.05,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030716907
+},
+{
+    "p": 0.05,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 0.030803667
+},
+{
+    "p": 0.01,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.029738745
+},
+{
+    "p": 0.01,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 0.003794583
+},
+{
+    "p": 0.005,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030754926000000002
+},
+{
+    "p": 0.005,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 0.00159412
+},
+{
+    "p": 0.001,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030476475000000003
+},
+{
+    "p": 0.001,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 0.000221179
+},
+{
+    "p": 0.0005,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030665178
+},
+{
+    "p": 0.0005,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 9.1746e-5
+},
+{
+    "p": 0.0001,
+    "run": 1,
+    "method": "opencv",
+    "time": 0.030621011000000004
+},
+{
+    "p": 0.0001,
+    "run": 1,
+    "method": "finch_sparse",
+    "time": 1.1e-5
+}]

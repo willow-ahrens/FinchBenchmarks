@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #define TIME_MAX 5.0
 #define TRIAL_MAX 10000
 

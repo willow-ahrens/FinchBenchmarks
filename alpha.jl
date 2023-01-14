@@ -3,7 +3,7 @@ using TensorDepot, MatrixDepot
 using Finch.IndexNotation:literal_instance
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 using Scratch
 tmp_tensor_dir = ""
@@ -53,6 +53,10 @@ end
 
 function img_to_repeat(img)
     return copyto!(@fiber(d{MyInt}(rl{0x0::UInt8, MyInt, MyInt}())), copy(rawview(channelview(img))))
+end
+
+function img_to_repeat_diffs(img)
+    return copyto!(@fiber(d{MyInt}(rld{0x0::UInt8, MyInt, MyInt}())), copy(rawview(channelview(img))))
 end
 
 function alpha_opencv(B, C, alpha)
@@ -114,7 +118,7 @@ function alpha_taco_rle(B, C, alpha)
     mas = Scalar{0.0, Float64}(1- alpha)
 
     Bf = img_to_repeat(B)
-    Cf = img_to_repeat(C)
+    # Cf = img_to_repeat(C)
 
     writeRLETacoTTX(APath, zeros(UInt8, size(Bf)))
     writeRLETacoTTX(BPath, copy(rawview(channelview(B))))
@@ -146,7 +150,18 @@ function alpha_finch_rle(B, C, alpha)
     B = img_to_repeat(B)
     C = img_to_repeat(C)
     A = similar(B)
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
+    return (time, A)
+end
+
+function alpha_finch_rled(B, C, alpha)
+    as = alpha
+    mas = 1 - alpha
+
+    B = img_to_repeat_diffs(B)
+    C = img_to_repeat_diffs(C)
+    A = similar(B)
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
     return (time, A)
 end
 
@@ -159,7 +174,7 @@ function alpha_finch_sparse(B, C, alpha)
 
     A = similar(B)
 
-    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas)
+    time = @belapsed alpha_finch_kernel($A, $B, $C, $as, $mas) evals=1
     return (time, A)
 end
 
@@ -188,6 +203,7 @@ function main(result_file)
                 ("opencv", alpha_opencv),
                 ("taco_rle", alpha_taco_rle),
                 ("finch_rle", alpha_finch_rle),
+                ("finch_rled", alpha_finch_rled),
                 ("finch_sparse", alpha_finch_sparse)
             ]
                 time, result = timer(B, C, 0.5)

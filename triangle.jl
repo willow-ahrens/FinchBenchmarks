@@ -8,7 +8,7 @@ using JSON
 using MatrixDepot
 using TensorMarket
 
-const MyInt = Int
+const MyInt = Int32
 
 MatrixDepot.downloadcommand(url::AbstractString, filename::AbstractString="-") =
     `sh -c 'curl -k "'$url'" -Lso "'$filename'"'`
@@ -50,7 +50,7 @@ end
 function triangle_finch_sparse(_A, key)
     A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
     AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
-    time = @belapsed triangle_finch_kernel($A, $AT)
+    time = @belapsed triangle_finch_kernel($A, $AT) evals=1
     c = triangle_finch_kernel(A, AT)
     return time, c
 end
@@ -63,7 +63,7 @@ end
 function triangle_finch_gallop(_A, key)
     A = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(_A)))
     AT = pattern!(copyto!(@fiber(d{MyInt}(sl{MyInt, MyInt}(e(0.0)))), fiber(permutedims(_A))))
-    time = @belapsed triangle_finch_gallop_kernel($A, $AT)
+    time = @belapsed triangle_finch_gallop_kernel($A, $AT) evals=1
     c = triangle_finch_gallop_kernel(A, AT)
     return (time, c)
 end
@@ -141,7 +141,7 @@ snap = [
     ("SNAP/soc-Pokec", "soc-Pokec"),
 ]
 
-function main(result_file, short="short")
+function main(result_file, short="long")
     global snap
     open(result_file,"w") do f
         println(f, "[")
