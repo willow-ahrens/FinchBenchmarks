@@ -10,16 +10,6 @@ described in the paper. The specific runtimes measured depend on the host
 computer, however we expect the relative performance between Finch, TACO and
 OpenCV to roughly match the results presented in the paper.
 
-Please list all requirements that are needed to build and test your artifact.
-For instance, minimum disk space required, cache size, CPU/GPU, OS version,
-compiler versions, AWS/Azure space requirements, docker support requirements,
-any special hardware, proprietary benchmarks such as SPEC CPU benchmarks, etc.
-The overall idea is to share these details upfront with the AEC so they can
-manage the resources in time to evaluate your artifact.
-
-
-
-
 ## Artifact check-list (meta-information)
 - **Operating System:** We tested on Ubuntu 18 and MacOS 12.5, but we expect it
 to work on most modern mac or linux distributions.
@@ -30,8 +20,8 @@ to work on most modern mac or linux distributions.
   the SNAP network dataset collection, and several image datasets, MNIST, EMNIST,
   Omniglot, and HumanSketches (these are automatically downloaded).
 - **Software:** The artifact requires cmake (we used 3.10), gcc/g++ (we used
-  7.5), python (we used 2.7/3.9), and git (we used 2.17).  We used Julia 1.8.2
-  (which is automatically downloaded). We have several julia dependencies whose
+  7.5), Python (we used 2.7/3.9), and git (we used 2.17).  We used Julia 1.8.2
+  (which is automatically downloaded). We have several Julia dependencies whose
   exact versions are recorded in the Manifest.toml file (these are also
   automatically downloaded).
 - **Hardware:** The artifact requires x86 processor.
@@ -45,12 +35,13 @@ to work on most modern mac or linux distributions.
 - **Publicly available?:** Yes
 - **Code licenses (if publicly available)?:** The code has been released under
   the MIT license. 
-- **Archived?:** After evaluation, we plan to distribute our repo on zenodo.
+- **Archived?:** (Yes)[https://doi.org/10.5281/zenodo.7499790].
 All of the datasets we used are publicly accessible with considerations for
 access in perpetuity.
 
 # How Delivered
-Our artifact is distributed by cloning the repo from
+Our artifact is distributed by (direct
+download)[https://doi.org/10.5281/zenodo.7499790] or by cloning the repo from
 [github](https://github.com/willow-ahrens/FinchBenchmarks/tree/cgo23-artifact).
 using the following command:
 
@@ -62,11 +53,11 @@ Notice that we use the cgo23-artifact branch of the repo.
 
 # Installation
 
-1. First install cmake, gcc, g++, python, python3, and git. Results were
+1. First install cmake, gcc, g++, Python, Python3, and git. Results were
 originally collected using gcc 7.5.0, however a more modern version should work.
 The gcc compiler only affects TACO and OpenCV, not Finch.
 
-2. Run the `build.sh` script to download julia 1.8.2 and build
+2. Run the `build.sh` script to download Julia 1.8.2 and build
 OpenCV and TACO (this uses the included Makefile).
 
 
@@ -87,17 +78,17 @@ The experiments are named as follows:
 Each experiment has several associated scripts that are all prefixed by it's
 name. We use `alpha` as an example.
 
-`alpha.jl` is a julia script that runs the experiments. It can be invoked as
+`alpha.jl` is a Julia script that runs the experiments. It can be invoked as
 
 `julia --project=. alpha.jl RESULT_FILE`
 
 where `RESULT_FILE` is the name of the json output in long format.
 
 `alpha.sh` is a bash script that runs `alpha.jl` after setting appropriate
-environment variables to keep dataset and julia package downloads inside the
+environment variables to keep dataset and Julia package downloads inside the
 toplevel directory. This script produces `alpha_results.json`, the results.
 
-`alpha_plot.jl` is a julia script that reads the results file and generates
+`alpha_plot.jl` is a Julia script that reads the results file and generates
 plots. It can be invoked as 
 
 `julia --project=. alpha_plot.jl RESULT_FILE PLOT_FILE`
@@ -150,5 +141,5 @@ documentation is available at
 Very briefly, any `@finch` macro expression in the benchmark suite is calling
 the Finch compiler and using Looplets to compile sparse kernels. The `@fiber`
 macro sets up level formats with the abbreviations of `d` for a dense level,
-`sl` for a sparse list of nonzeros, `sv` for a vbl level, and `rl` for a
-runlength level.
+`sl` for a sparse list of nonzeros, `sv` for a VBL level, and `rl` for a
+RLE level.
