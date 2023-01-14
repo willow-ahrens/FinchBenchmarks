@@ -4,1196 +4,1195 @@
     "n": 1005,
     "nnz": 25571,
     "method": "taco_sparse",
-    "time": 0.015177978000000002
-},
-{
-    "matrix": "SNAP/email-Eu-core-temporal",
-    "n": 1005,
-    "nnz": 24929,
-    "method": "taco_sparse",
-    "time": 0.014745432000000001
-},
-{
-    "matrix": "SNAP/CollegeMsg",
-    "n": 1899,
-    "nnz": 20296,
-    "method": "taco_sparse",
-    "time": 0.006687974
-},
-{
-    "matrix": "SNAP/soc-sign-bitcoin-alpha",
-    "n": 3783,
-    "nnz": 24186,
-    "method": "taco_sparse",
-    "time": 0.009321361
-},
-{
-    "matrix": "SNAP/ca-GrQc",
-    "n": 5242,
-    "nnz": 28980,
-    "method": "taco_sparse",
-    "time": 0.0045988
-},
-{
-    "matrix": "SNAP/soc-sign-bitcoin-otc",
-    "n": 5881,
-    "nnz": 35592,
-    "method": "taco_sparse",
-    "time": 0.01596822
-},
-{
-    "matrix": "SNAP/p2p-Gnutella08",
-    "n": 6301,
-    "nnz": 20777,
-    "method": "taco_sparse",
-    "time": 0.0007936190000000001
-},
-{
-    "matrix": "SNAP/as-735",
-    "n": 7716,
-    "nnz": 26467,
-    "method": "taco_sparse",
-    "time": 0.015605702
-},
-{
-    "matrix": "SNAP/p2p-Gnutella09",
-    "n": 8114,
-    "nnz": 26013,
-    "method": "taco_sparse",
-    "time": 0.0009389530000000001
-},
-{
-    "matrix": "SNAP/wiki-Vote",
-    "n": 8297,
-    "nnz": 103689,
-    "method": "taco_sparse",
-    "time": 0.023246569
-},
-{
-    "matrix": "SNAP/p2p-Gnutella06",
-    "n": 8717,
-    "nnz": 31525,
-    "method": "taco_sparse",
-    "time": 0.0012072340000000002
-},
-{
-    "matrix": "SNAP/p2p-Gnutella05",
-    "n": 8846,
-    "nnz": 31839,
-    "method": "taco_sparse",
-    "time": 0.001209495
-},
-{
-    "matrix": "SNAP/ca-HepTh",
-    "n": 9877,
-    "nnz": 51971,
-    "method": "taco_sparse",
-    "time": 0.007438236000000001
-},
-{
-    "matrix": "SNAP/p2p-Gnutella04",
-    "n": 10879,
-    "nnz": 39994,
-    "method": "taco_sparse",
-    "time": 0.0015877480000000002
-},
-{
-    "matrix": "SNAP/wiki-RfA",
-    "n": 11380,
-    "nnz": 188077,
-    "method": "taco_sparse",
-    "time": 0.081705976
-},
-{
-    "matrix": "SNAP/Oregon-1",
-    "n": 11492,
-    "nnz": 46818,
-    "method": "taco_sparse",
-    "time": 0.038466875000000005
-},
-{
-    "matrix": "SNAP/Oregon-2",
-    "n": 11806,
-    "nnz": 65460,
-    "method": "taco_sparse",
-    "time": 0.05774876600000001
-},
-{
-    "matrix": "SNAP/ca-HepPh",
-    "n": 12008,
-    "nnz": 237010,
-    "method": "taco_sparse",
-    "time": 0.26480928000000004
-},
-{
-    "matrix": "SNAP/ca-AstroPh",
-    "n": 18772,
-    "nnz": 396160,
-    "method": "taco_sparse",
-    "time": 0.273537907
-},
-{
-    "matrix": "SNAP/p2p-Gnutella25",
-    "n": 22687,
-    "nnz": 54705,
-    "method": "taco_sparse",
-    "time": 0.0018053700000000002
-},
-{
-    "matrix": "SNAP/ca-CondMat",
-    "n": 23133,
-    "nnz": 186936,
-    "method": "taco_sparse",
-    "time": 0.048273665
-},
-{
-    "matrix": "SNAP/sx-mathoverflow",
-    "n": 24818,
-    "nnz": 239978,
-    "method": "taco_sparse",
-    "time": 0.31172772000000004
-},
-{
-    "matrix": "SNAP/p2p-Gnutella24",
-    "n": 26518,
-    "nnz": 65369,
-    "method": "taco_sparse",
-    "time": 0.002314407
-},
-{
-    "matrix": "SNAP/cit-HepTh",
-    "n": 27770,
-    "nnz": 352807,
-    "method": "taco_sparse",
-    "time": 0.045048183000000006
-},
-{
-    "matrix": "SNAP/as-caida",
-    "n": 31379,
-    "nnz": 106762,
-    "method": "taco_sparse",
-    "time": 0.106290402
-},
-{
-    "matrix": "SNAP/cit-HepPh",
-    "n": 34546,
-    "nnz": 421578,
-    "method": "taco_sparse",
-    "time": 0.039697550000000005
-},
-{
-    "matrix": "SNAP/p2p-Gnutella30",
-    "n": 36682,
-    "nnz": 88328,
-    "method": "taco_sparse",
-    "time": 0.0031979720000000003
-},
-{
-    "matrix": "SNAP/email-Enron",
-    "n": 36692,
-    "nnz": 367662,
-    "method": "taco_sparse",
-    "time": 0.39946108300000005
-},
-{
-    "matrix": "SNAP/loc-Brightkite",
-    "n": 58228,
-    "nnz": 428156,
-    "method": "taco_sparse",
-    "time": 0.253473271
-},
-{
-    "matrix": "SNAP/p2p-Gnutella31",
-    "n": 62586,
-    "nnz": 147892,
-    "method": "taco_sparse",
-    "time": 0.005337435000000001
-},
-{
-    "matrix": "SNAP/soc-Epinions1",
-    "n": 75888,
-    "nnz": 508837,
-    "method": "taco_sparse",
-    "time": 0.359765975
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot081106",
-    "n": 77357,
-    "nnz": 516575,
-    "method": "taco_sparse",
-    "time": 0.175210328
-},
-{
-    "matrix": "SNAP/soc-Slashdot0811",
-    "n": 77360,
-    "nnz": 905468,
-    "method": "taco_sparse",
-    "time": 1.060414365
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot090216",
-    "n": 81871,
-    "nnz": 545671,
-    "method": "taco_sparse",
-    "time": 0.17918751200000002
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot090221",
-    "n": 82144,
-    "nnz": 549202,
-    "method": "taco_sparse",
-    "time": 0.18275433200000002
-},
-{
-    "matrix": "SNAP/soc-Slashdot0902",
-    "n": 82168,
-    "nnz": 948464,
-    "method": "taco_sparse",
-    "time": 1.112169734
-},
-{
-    "matrix": "SNAP/soc-sign-epinions",
-    "n": 131828,
-    "nnz": 841372,
-    "method": "taco_sparse",
-    "time": 0.825571982
-},
-{
-    "matrix": "SNAP/sx-askubuntu",
-    "n": 159316,
-    "nnz": 596933,
-    "method": "taco_sparse",
-    "time": 0.6466124710000001
-},
-{
-    "matrix": "SNAP/sx-superuser",
-    "n": 194085,
-    "nnz": 924886,
-    "method": "taco_sparse",
-    "time": 1.358206386
-},
-{
-    "matrix": "SNAP/loc-Gowalla",
-    "n": 196591,
-    "nnz": 1900654,
-    "method": "taco_sparse",
-    "time": 4.682043128
-},
-{
-    "matrix": "SNAP/amazon0302",
-    "n": 262111,
-    "nnz": 1234877,
-    "method": "taco_sparse",
-    "time": 0.086720368
-},
-{
-    "matrix": "SNAP/email-EuAll",
-    "n": 265214,
-    "nnz": 420045,
-    "method": "taco_sparse",
-    "time": 0.12662678900000002
-},
-{
-    "matrix": "SNAP/web-Stanford",
-    "n": 281903,
-    "nnz": 2312497,
-    "method": "taco_sparse",
-    "time": 0.46835564500000004
-},
-{
-    "matrix": "SNAP/com-DBLP",
-    "n": 317080,
-    "nnz": 2099732,
-    "method": "taco_sparse",
-    "time": 0.49962180300000003
-},
-{
-    "matrix": "SNAP/web-NotreDame",
-    "n": 325729,
-    "nnz": 1497134,
-    "method": "taco_sparse",
-    "time": 0.359904041
-},
-{
-    "matrix": "SNAP/com-Amazon",
-    "n": 334863,
-    "nnz": 1851744,
-    "method": "taco_sparse",
-    "time": 0.32615808
-},
-{
-    "matrix": "SNAP/amazon0312",
-    "n": 400727,
-    "nnz": 3200440,
-    "method": "taco_sparse",
-    "time": 0.35580710400000004
-},
-{
-    "matrix": "SNAP/amazon0601",
-    "n": 403394,
-    "nnz": 3387388,
-    "method": "taco_sparse",
-    "time": 0.400181131
-},
-{
-    "matrix": "SNAP/amazon0505",
-    "n": 410236,
-    "nnz": 3356824,
-    "method": "taco_sparse",
-    "time": 0.393806688
-},
-{
-    "matrix": "SNAP/higgs-twitter",
-    "n": 456626,
-    "nnz": 14855842,
-    "method": "taco_sparse",
-    "time": 15.420758451000001
-},
-{
-    "matrix": "SNAP/web-BerkStan",
-    "n": 685230,
-    "nnz": 7600595,
-    "method": "taco_sparse",
-    "time": 1.55591867
-},
-{
-    "matrix": "SNAP/web-Google",
-    "n": 916428,
-    "nnz": 5105039,
-    "method": "taco_sparse",
-    "time": 0.9837579150000001
-},
-{
-    "matrix": "SNAP/roadNet-PA",
-    "n": 1090920,
-    "nnz": 3083796,
-    "method": "taco_sparse",
-    "time": 0.132857646
-},
-{
-    "matrix": "SNAP/com-Youtube",
-    "n": 1134890,
-    "nnz": 5975248,
-    "method": "taco_sparse",
-    "time": 20.60398383
-},
-{
-    "matrix": "SNAP/wiki-talk-temporal",
-    "n": 1140149,
-    "nnz": 3309592,
-    "method": "taco_sparse",
-    "time": 3.92042545
-},
-{
-    "matrix": "SNAP/roadNet-TX",
-    "n": 1393383,
-    "nnz": 3843320,
-    "method": "taco_sparse",
-    "time": 0.161610786
-},
-{
-    "matrix": "SNAP/soc-Pokec",
-    "n": 1632803,
-    "nnz": 30622564,
-    "method": "taco_sparse",
-    "time": 23.744214438
+    "time": 0.015200016
 },
 {
     "matrix": "SNAP/email-Eu-core",
     "n": 1005,
     "nnz": 25571,
     "method": "finch_sparse",
-    "time": 0.021636194
-},
-{
-    "matrix": "SNAP/email-Eu-core-temporal",
-    "n": 1005,
-    "nnz": 24929,
-    "method": "finch_sparse",
-    "time": 0.021897935
-},
-{
-    "matrix": "SNAP/CollegeMsg",
-    "n": 1899,
-    "nnz": 20296,
-    "method": "finch_sparse",
-    "time": 0.009952382
-},
-{
-    "matrix": "SNAP/soc-sign-bitcoin-alpha",
-    "n": 3783,
-    "nnz": 24186,
-    "method": "finch_sparse",
-    "time": 0.012183379
-},
-{
-    "matrix": "SNAP/ca-GrQc",
-    "n": 5242,
-    "nnz": 28980,
-    "method": "finch_sparse",
-    "time": 0.005265243
-},
-{
-    "matrix": "SNAP/soc-sign-bitcoin-otc",
-    "n": 5881,
-    "nnz": 35592,
-    "method": "finch_sparse",
-    "time": 0.019421672
-},
-{
-    "matrix": "SNAP/p2p-Gnutella08",
-    "n": 6301,
-    "nnz": 20777,
-    "method": "finch_sparse",
-    "time": 0.00112793
-},
-{
-    "matrix": "SNAP/as-735",
-    "n": 7716,
-    "nnz": 26467,
-    "method": "finch_sparse",
-    "time": 0.015170764
-},
-{
-    "matrix": "SNAP/p2p-Gnutella09",
-    "n": 8114,
-    "nnz": 26013,
-    "method": "finch_sparse",
-    "time": 0.001322749
-},
-{
-    "matrix": "SNAP/wiki-Vote",
-    "n": 8297,
-    "nnz": 103689,
-    "method": "finch_sparse",
-    "time": 0.028477257
-},
-{
-    "matrix": "SNAP/p2p-Gnutella06",
-    "n": 8717,
-    "nnz": 31525,
-    "method": "finch_sparse",
-    "time": 0.001768092
-},
-{
-    "matrix": "SNAP/p2p-Gnutella05",
-    "n": 8846,
-    "nnz": 31839,
-    "method": "finch_sparse",
-    "time": 0.00176245
-},
-{
-    "matrix": "SNAP/ca-HepTh",
-    "n": 9877,
-    "nnz": 51971,
-    "method": "finch_sparse",
-    "time": 0.01090208
-},
-{
-    "matrix": "SNAP/p2p-Gnutella04",
-    "n": 10879,
-    "nnz": 39994,
-    "method": "finch_sparse",
-    "time": 0.002342359
-},
-{
-    "matrix": "SNAP/wiki-RfA",
-    "n": 11380,
-    "nnz": 188077,
-    "method": "finch_sparse",
-    "time": 0.116117931
-},
-{
-    "matrix": "SNAP/Oregon-1",
-    "n": 11492,
-    "nnz": 46818,
-    "method": "finch_sparse",
-    "time": 0.037433561
-},
-{
-    "matrix": "SNAP/Oregon-2",
-    "n": 11806,
-    "nnz": 65460,
-    "method": "finch_sparse",
-    "time": 0.060893813
-},
-{
-    "matrix": "SNAP/ca-HepPh",
-    "n": 12008,
-    "nnz": 237010,
-    "method": "finch_sparse",
-    "time": 0.26367308
-},
-{
-    "matrix": "SNAP/ca-AstroPh",
-    "n": 18772,
-    "nnz": 396160,
-    "method": "finch_sparse",
-    "time": 0.370573004
-},
-{
-    "matrix": "SNAP/p2p-Gnutella25",
-    "n": 22687,
-    "nnz": 54705,
-    "method": "finch_sparse",
-    "time": 0.002680745
-},
-{
-    "matrix": "SNAP/ca-CondMat",
-    "n": 23133,
-    "nnz": 186936,
-    "method": "finch_sparse",
-    "time": 0.064770147
-},
-{
-    "matrix": "SNAP/sx-mathoverflow",
-    "n": 24818,
-    "nnz": 239978,
-    "method": "finch_sparse",
-    "time": 0.381956675
-},
-{
-    "matrix": "SNAP/p2p-Gnutella24",
-    "n": 26518,
-    "nnz": 65369,
-    "method": "finch_sparse",
-    "time": 0.003417316
-},
-{
-    "matrix": "SNAP/cit-HepTh",
-    "n": 27770,
-    "nnz": 352807,
-    "method": "finch_sparse",
-    "time": 0.043593458
-},
-{
-    "matrix": "SNAP/as-caida",
-    "n": 31379,
-    "nnz": 106762,
-    "method": "finch_sparse",
-    "time": 0.103537233
-},
-{
-    "matrix": "SNAP/cit-HepPh",
-    "n": 34546,
-    "nnz": 421578,
-    "method": "finch_sparse",
-    "time": 0.039919283
-},
-{
-    "matrix": "SNAP/p2p-Gnutella30",
-    "n": 36682,
-    "nnz": 88328,
-    "method": "finch_sparse",
-    "time": 0.004677145
-},
-{
-    "matrix": "SNAP/email-Enron",
-    "n": 36692,
-    "nnz": 367662,
-    "method": "finch_sparse",
-    "time": 0.45784027
-},
-{
-    "matrix": "SNAP/loc-Brightkite",
-    "n": 58228,
-    "nnz": 428156,
-    "method": "finch_sparse",
-    "time": 0.299757513
-},
-{
-    "matrix": "SNAP/p2p-Gnutella31",
-    "n": 62586,
-    "nnz": 147892,
-    "method": "finch_sparse",
-    "time": 0.007357219
-},
-{
-    "matrix": "SNAP/soc-Epinions1",
-    "n": 75888,
-    "nnz": 508837,
-    "method": "finch_sparse",
-    "time": 0.484063363
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot081106",
-    "n": 77357,
-    "nnz": 516575,
-    "method": "finch_sparse",
-    "time": 0.23583908
-},
-{
-    "matrix": "SNAP/soc-Slashdot0811",
-    "n": 77360,
-    "nnz": 905468,
-    "method": "finch_sparse",
-    "time": 1.280455976
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot090216",
-    "n": 81871,
-    "nnz": 545671,
-    "method": "finch_sparse",
-    "time": 0.240678611
-},
-{
-    "matrix": "SNAP/soc-sign-Slashdot090221",
-    "n": 82144,
-    "nnz": 549202,
-    "method": "finch_sparse",
-    "time": 0.246954881
-},
-{
-    "matrix": "SNAP/soc-Slashdot0902",
-    "n": 82168,
-    "nnz": 948464,
-    "method": "finch_sparse",
-    "time": 1.339916795
-},
-{
-    "matrix": "SNAP/soc-sign-epinions",
-    "n": 131828,
-    "nnz": 841372,
-    "method": "finch_sparse",
-    "time": 1.097028752
-},
-{
-    "matrix": "SNAP/sx-askubuntu",
-    "n": 159316,
-    "nnz": 596933,
-    "method": "finch_sparse",
-    "time": 0.697228643
-},
-{
-    "matrix": "SNAP/sx-superuser",
-    "n": 194085,
-    "nnz": 924886,
-    "method": "finch_sparse",
-    "time": 1.465255548
-},
-{
-    "matrix": "SNAP/loc-Gowalla",
-    "n": 196591,
-    "nnz": 1900654,
-    "method": "finch_sparse",
-    "time": 4.683589455
-},
-{
-    "matrix": "SNAP/amazon0302",
-    "n": 262111,
-    "nnz": 1234877,
-    "method": "finch_sparse",
-    "time": 0.112811023
-},
-{
-    "matrix": "SNAP/email-EuAll",
-    "n": 265214,
-    "nnz": 420045,
-    "method": "finch_sparse",
-    "time": 0.146245926
-},
-{
-    "matrix": "SNAP/web-Stanford",
-    "n": 281903,
-    "nnz": 2312497,
-    "method": "finch_sparse",
-    "time": 0.51990121
-},
-{
-    "matrix": "SNAP/com-DBLP",
-    "n": 317080,
-    "nnz": 2099732,
-    "method": "finch_sparse",
-    "time": 0.602374061
-},
-{
-    "matrix": "SNAP/web-NotreDame",
-    "n": 325729,
-    "nnz": 1497134,
-    "method": "finch_sparse",
-    "time": 0.241009462
-},
-{
-    "matrix": "SNAP/com-Amazon",
-    "n": 334863,
-    "nnz": 1851744,
-    "method": "finch_sparse",
-    "time": 0.404235588
-},
-{
-    "matrix": "SNAP/amazon0312",
-    "n": 400727,
-    "nnz": 3200440,
-    "method": "finch_sparse",
-    "time": 0.450275894
-},
-{
-    "matrix": "SNAP/amazon0601",
-    "n": 403394,
-    "nnz": 3387388,
-    "method": "finch_sparse",
-    "time": 0.499252935
-},
-{
-    "matrix": "SNAP/amazon0505",
-    "n": 410236,
-    "nnz": 3356824,
-    "method": "finch_sparse",
-    "time": 0.491015865
-},
-{
-    "matrix": "SNAP/higgs-twitter",
-    "n": 456626,
-    "nnz": 14855842,
-    "method": "finch_sparse",
-    "time": 18.979429303
-},
-{
-    "matrix": "SNAP/web-BerkStan",
-    "n": 685230,
-    "nnz": 7600595,
-    "method": "finch_sparse",
-    "time": 1.219846925
-},
-{
-    "matrix": "SNAP/web-Google",
-    "n": 916428,
-    "nnz": 5105039,
-    "method": "finch_sparse",
-    "time": 1.130240854
-},
-{
-    "matrix": "SNAP/roadNet-PA",
-    "n": 1090920,
-    "nnz": 3083796,
-    "method": "finch_sparse",
-    "time": 0.194144832
-},
-{
-    "matrix": "SNAP/com-Youtube",
-    "n": 1134890,
-    "nnz": 5975248,
-    "method": "finch_sparse",
-    "time": 19.65914374
-},
-{
-    "matrix": "SNAP/wiki-talk-temporal",
-    "n": 1140149,
-    "nnz": 3309592,
-    "method": "finch_sparse",
-    "time": 4.592085507
-},
-{
-    "matrix": "SNAP/roadNet-TX",
-    "n": 1393383,
-    "nnz": 3843320,
-    "method": "finch_sparse",
-    "time": 0.233966001
-},
-{
-    "matrix": "SNAP/soc-Pokec",
-    "n": 1632803,
-    "nnz": 30622564,
-    "method": "finch_sparse",
-    "time": 30.148693671
+    "time": 0.021682906
 },
 {
     "matrix": "SNAP/email-Eu-core",
     "n": 1005,
     "nnz": 25571,
     "method": "finch_gallop",
-    "time": 0.015112722
+    "time": 0.018988626
+},
+{
+    "matrix": "SNAP/email-Eu-core-temporal",
+    "n": 1005,
+    "nnz": 24929,
+    "method": "taco_sparse",
+    "time": 0.014713224
+},
+{
+    "matrix": "SNAP/email-Eu-core-temporal",
+    "n": 1005,
+    "nnz": 24929,
+    "method": "finch_sparse",
+    "time": 0.021831144
 },
 {
     "matrix": "SNAP/email-Eu-core-temporal",
     "n": 1005,
     "nnz": 24929,
     "method": "finch_gallop",
-    "time": 0.015115378
+    "time": 0.019093243
+},
+{
+    "matrix": "SNAP/CollegeMsg",
+    "n": 1899,
+    "nnz": 20296,
+    "method": "taco_sparse",
+    "time": 0.006636263000000001
+},
+{
+    "matrix": "SNAP/CollegeMsg",
+    "n": 1899,
+    "nnz": 20296,
+    "method": "finch_sparse",
+    "time": 0.009932258
 },
 {
     "matrix": "SNAP/CollegeMsg",
     "n": 1899,
     "nnz": 20296,
     "method": "finch_gallop",
-    "time": 0.006345939
+    "time": 0.00749867
+},
+{
+    "matrix": "SNAP/soc-sign-bitcoin-alpha",
+    "n": 3783,
+    "nnz": 24186,
+    "method": "taco_sparse",
+    "time": 0.009259312
+},
+{
+    "matrix": "SNAP/soc-sign-bitcoin-alpha",
+    "n": 3783,
+    "nnz": 24186,
+    "method": "finch_sparse",
+    "time": 0.012186326
 },
 {
     "matrix": "SNAP/soc-sign-bitcoin-alpha",
     "n": 3783,
     "nnz": 24186,
     "method": "finch_gallop",
-    "time": 0.007190694
+    "time": 0.008671968
+},
+{
+    "matrix": "SNAP/ca-GrQc",
+    "n": 5242,
+    "nnz": 28980,
+    "method": "taco_sparse",
+    "time": 0.0045496830000000005
+},
+{
+    "matrix": "SNAP/ca-GrQc",
+    "n": 5242,
+    "nnz": 28980,
+    "method": "finch_sparse",
+    "time": 0.005163561
 },
 {
     "matrix": "SNAP/ca-GrQc",
     "n": 5242,
     "nnz": 28980,
     "method": "finch_gallop",
-    "time": 0.004507361
+    "time": 0.00535373
+},
+{
+    "matrix": "SNAP/soc-sign-bitcoin-otc",
+    "n": 5881,
+    "nnz": 35592,
+    "method": "taco_sparse",
+    "time": 0.015907533
+},
+{
+    "matrix": "SNAP/soc-sign-bitcoin-otc",
+    "n": 5881,
+    "nnz": 35592,
+    "method": "finch_sparse",
+    "time": 0.019769879
 },
 {
     "matrix": "SNAP/soc-sign-bitcoin-otc",
     "n": 5881,
     "nnz": 35592,
     "method": "finch_gallop",
-    "time": 0.010229015
+    "time": 0.012322454
+},
+{
+    "matrix": "SNAP/p2p-Gnutella08",
+    "n": 6301,
+    "nnz": 20777,
+    "method": "taco_sparse",
+    "time": 0.000783308
+},
+{
+    "matrix": "SNAP/p2p-Gnutella08",
+    "n": 6301,
+    "nnz": 20777,
+    "method": "finch_sparse",
+    "time": 0.001131032
 },
 {
     "matrix": "SNAP/p2p-Gnutella08",
     "n": 6301,
     "nnz": 20777,
     "method": "finch_gallop",
-    "time": 0.001021016
+    "time": 0.001096066
+},
+{
+    "matrix": "SNAP/as-735",
+    "n": 7716,
+    "nnz": 26467,
+    "method": "taco_sparse",
+    "time": 0.015516913
+},
+{
+    "matrix": "SNAP/as-735",
+    "n": 7716,
+    "nnz": 26467,
+    "method": "finch_sparse",
+    "time": 0.015754741
 },
 {
     "matrix": "SNAP/as-735",
     "n": 7716,
     "nnz": 26467,
     "method": "finch_gallop",
-    "time": 0.005101876
+    "time": 0.00617514
+},
+{
+    "matrix": "SNAP/p2p-Gnutella09",
+    "n": 8114,
+    "nnz": 26013,
+    "method": "taco_sparse",
+    "time": 0.000926921
+},
+{
+    "matrix": "SNAP/p2p-Gnutella09",
+    "n": 8114,
+    "nnz": 26013,
+    "method": "finch_sparse",
+    "time": 0.001334246
 },
 {
     "matrix": "SNAP/p2p-Gnutella09",
     "n": 8114,
     "nnz": 26013,
     "method": "finch_gallop",
-    "time": 0.001247014
+    "time": 0.001315656
+},
+{
+    "matrix": "SNAP/wiki-Vote",
+    "n": 8297,
+    "nnz": 103689,
+    "method": "taco_sparse",
+    "time": 0.023157979000000002
+},
+{
+    "matrix": "SNAP/wiki-Vote",
+    "n": 8297,
+    "nnz": 103689,
+    "method": "finch_sparse",
+    "time": 0.027304878
 },
 {
     "matrix": "SNAP/wiki-Vote",
     "n": 8297,
     "nnz": 103689,
     "method": "finch_gallop",
-    "time": 0.02000662
+    "time": 0.023060251
+},
+{
+    "matrix": "SNAP/p2p-Gnutella06",
+    "n": 8717,
+    "nnz": 31525,
+    "method": "taco_sparse",
+    "time": 0.001194538
+},
+{
+    "matrix": "SNAP/p2p-Gnutella06",
+    "n": 8717,
+    "nnz": 31525,
+    "method": "finch_sparse",
+    "time": 0.001751898
 },
 {
     "matrix": "SNAP/p2p-Gnutella06",
     "n": 8717,
     "nnz": 31525,
     "method": "finch_gallop",
-    "time": 0.001606178
+    "time": 0.00170113
+},
+{
+    "matrix": "SNAP/p2p-Gnutella05",
+    "n": 8846,
+    "nnz": 31839,
+    "method": "taco_sparse",
+    "time": 0.001194472
+},
+{
+    "matrix": "SNAP/p2p-Gnutella05",
+    "n": 8846,
+    "nnz": 31839,
+    "method": "finch_sparse",
+    "time": 0.001752722
 },
 {
     "matrix": "SNAP/p2p-Gnutella05",
     "n": 8846,
     "nnz": 31839,
     "method": "finch_gallop",
-    "time": 0.001608088
+    "time": 0.001695578
+},
+{
+    "matrix": "SNAP/ca-HepTh",
+    "n": 9877,
+    "nnz": 51971,
+    "method": "taco_sparse",
+    "time": 0.007436576
+},
+{
+    "matrix": "SNAP/ca-HepTh",
+    "n": 9877,
+    "nnz": 51971,
+    "method": "finch_sparse",
+    "time": 0.010034905
 },
 {
     "matrix": "SNAP/ca-HepTh",
     "n": 9877,
     "nnz": 51971,
     "method": "finch_gallop",
-    "time": 0.008440803
+    "time": 0.009383028
+},
+{
+    "matrix": "SNAP/p2p-Gnutella04",
+    "n": 10879,
+    "nnz": 39994,
+    "method": "taco_sparse",
+    "time": 0.0015771880000000002
+},
+{
+    "matrix": "SNAP/p2p-Gnutella04",
+    "n": 10879,
+    "nnz": 39994,
+    "method": "finch_sparse",
+    "time": 0.002295032
 },
 {
     "matrix": "SNAP/p2p-Gnutella04",
     "n": 10879,
     "nnz": 39994,
     "method": "finch_gallop",
-    "time": 0.002162629
+    "time": 0.002257412
+},
+{
+    "matrix": "SNAP/wiki-RfA",
+    "n": 11380,
+    "nnz": 188077,
+    "method": "taco_sparse",
+    "time": 0.081104047
+},
+{
+    "matrix": "SNAP/wiki-RfA",
+    "n": 11380,
+    "nnz": 188077,
+    "method": "finch_sparse",
+    "time": 0.111859136
 },
 {
     "matrix": "SNAP/wiki-RfA",
     "n": 11380,
     "nnz": 188077,
     "method": "finch_gallop",
-    "time": 0.075040347
+    "time": 0.088078403
+},
+{
+    "matrix": "SNAP/Oregon-1",
+    "n": 11492,
+    "nnz": 46818,
+    "method": "taco_sparse",
+    "time": 0.038248935000000005
+},
+{
+    "matrix": "SNAP/Oregon-1",
+    "n": 11492,
+    "nnz": 46818,
+    "method": "finch_sparse",
+    "time": 0.038744092
 },
 {
     "matrix": "SNAP/Oregon-1",
     "n": 11492,
     "nnz": 46818,
     "method": "finch_gallop",
-    "time": 0.012074301
+    "time": 0.014305658
+},
+{
+    "matrix": "SNAP/Oregon-2",
+    "n": 11806,
+    "nnz": 65460,
+    "method": "taco_sparse",
+    "time": 0.05748752100000001
+},
+{
+    "matrix": "SNAP/Oregon-2",
+    "n": 11806,
+    "nnz": 65460,
+    "method": "finch_sparse",
+    "time": 0.062092369
 },
 {
     "matrix": "SNAP/Oregon-2",
     "n": 11806,
     "nnz": 65460,
     "method": "finch_gallop",
-    "time": 0.025747911
+    "time": 0.031554372
+},
+{
+    "matrix": "SNAP/ca-HepPh",
+    "n": 12008,
+    "nnz": 237010,
+    "method": "taco_sparse",
+    "time": 0.26415386
+},
+{
+    "matrix": "SNAP/ca-HepPh",
+    "n": 12008,
+    "nnz": 237010,
+    "method": "finch_sparse",
+    "time": 0.285487447
 },
 {
     "matrix": "SNAP/ca-HepPh",
     "n": 12008,
     "nnz": 237010,
     "method": "finch_gallop",
-    "time": 0.235669474
+    "time": 0.294466832
+},
+{
+    "matrix": "SNAP/ca-AstroPh",
+    "n": 18772,
+    "nnz": 396160,
+    "method": "taco_sparse",
+    "time": 0.272346725
+},
+{
+    "matrix": "SNAP/ca-AstroPh",
+    "n": 18772,
+    "nnz": 396160,
+    "method": "finch_sparse",
+    "time": 0.368943921
 },
 {
     "matrix": "SNAP/ca-AstroPh",
     "n": 18772,
     "nnz": 396160,
     "method": "finch_gallop",
-    "time": 0.264142174
+    "time": 0.326589261
+},
+{
+    "matrix": "SNAP/p2p-Gnutella25",
+    "n": 22687,
+    "nnz": 54705,
+    "method": "taco_sparse",
+    "time": 0.001799377
+},
+{
+    "matrix": "SNAP/p2p-Gnutella25",
+    "n": 22687,
+    "nnz": 54705,
+    "method": "finch_sparse",
+    "time": 0.002550829
 },
 {
     "matrix": "SNAP/p2p-Gnutella25",
     "n": 22687,
     "nnz": 54705,
     "method": "finch_gallop",
-    "time": 0.002529247
+    "time": 0.002565732
+},
+{
+    "matrix": "SNAP/ca-CondMat",
+    "n": 23133,
+    "nnz": 186936,
+    "method": "taco_sparse",
+    "time": 0.047659082000000005
+},
+{
+    "matrix": "SNAP/ca-CondMat",
+    "n": 23133,
+    "nnz": 186936,
+    "method": "finch_sparse",
+    "time": 0.062634449
 },
 {
     "matrix": "SNAP/ca-CondMat",
     "n": 23133,
     "nnz": 186936,
     "method": "finch_gallop",
-    "time": 0.046574764
+    "time": 0.05514155
+},
+{
+    "matrix": "SNAP/sx-mathoverflow",
+    "n": 24818,
+    "nnz": 239978,
+    "method": "taco_sparse",
+    "time": 0.30926815
+},
+{
+    "matrix": "SNAP/sx-mathoverflow",
+    "n": 24818,
+    "nnz": 239978,
+    "method": "finch_sparse",
+    "time": 0.384544447
 },
 {
     "matrix": "SNAP/sx-mathoverflow",
     "n": 24818,
     "nnz": 239978,
     "method": "finch_gallop",
-    "time": 0.190258866
+    "time": 0.234686785
+},
+{
+    "matrix": "SNAP/p2p-Gnutella24",
+    "n": 26518,
+    "nnz": 65369,
+    "method": "taco_sparse",
+    "time": 0.00228816
+},
+{
+    "matrix": "SNAP/p2p-Gnutella24",
+    "n": 26518,
+    "nnz": 65369,
+    "method": "finch_sparse",
+    "time": 0.003272603
 },
 {
     "matrix": "SNAP/p2p-Gnutella24",
     "n": 26518,
     "nnz": 65369,
     "method": "finch_gallop",
-    "time": 0.003226882
+    "time": 0.003269342
+},
+{
+    "matrix": "SNAP/cit-HepTh",
+    "n": 27770,
+    "nnz": 352807,
+    "method": "taco_sparse",
+    "time": 0.044683675000000006
+},
+{
+    "matrix": "SNAP/cit-HepTh",
+    "n": 27770,
+    "nnz": 352807,
+    "method": "finch_sparse",
+    "time": 0.044058175
 },
 {
     "matrix": "SNAP/cit-HepTh",
     "n": 27770,
     "nnz": 352807,
     "method": "finch_gallop",
-    "time": 0.036977795
+    "time": 0.036908419
+},
+{
+    "matrix": "SNAP/as-caida",
+    "n": 31379,
+    "nnz": 106762,
+    "method": "taco_sparse",
+    "time": 0.105702903
+},
+{
+    "matrix": "SNAP/as-caida",
+    "n": 31379,
+    "nnz": 106762,
+    "method": "finch_sparse",
+    "time": 0.106699263
 },
 {
     "matrix": "SNAP/as-caida",
     "n": 31379,
     "nnz": 106762,
     "method": "finch_gallop",
-    "time": 0.031824312
+    "time": 0.037433199
+},
+{
+    "matrix": "SNAP/cit-HepPh",
+    "n": 34546,
+    "nnz": 421578,
+    "method": "taco_sparse",
+    "time": 0.039355995000000005
+},
+{
+    "matrix": "SNAP/cit-HepPh",
+    "n": 34546,
+    "nnz": 421578,
+    "method": "finch_sparse",
+    "time": 0.038425648
 },
 {
     "matrix": "SNAP/cit-HepPh",
     "n": 34546,
     "nnz": 421578,
     "method": "finch_gallop",
-    "time": 0.035290345
+    "time": 0.034577285
+},
+{
+    "matrix": "SNAP/p2p-Gnutella30",
+    "n": 36682,
+    "nnz": 88328,
+    "method": "taco_sparse",
+    "time": 0.0031796040000000004
+},
+{
+    "matrix": "SNAP/p2p-Gnutella30",
+    "n": 36682,
+    "nnz": 88328,
+    "method": "finch_sparse",
+    "time": 0.004466754
 },
 {
     "matrix": "SNAP/p2p-Gnutella30",
     "n": 36682,
     "nnz": 88328,
     "method": "finch_gallop",
-    "time": 0.004435991
+    "time": 0.004487413
+},
+{
+    "matrix": "SNAP/email-Enron",
+    "n": 36692,
+    "nnz": 367662,
+    "method": "taco_sparse",
+    "time": 0.39748710400000004
+},
+{
+    "matrix": "SNAP/email-Enron",
+    "n": 36692,
+    "nnz": 367662,
+    "method": "finch_sparse",
+    "time": 0.468973731
 },
 {
     "matrix": "SNAP/email-Enron",
     "n": 36692,
     "nnz": 367662,
     "method": "finch_gallop",
-    "time": 0.258998549
+    "time": 0.31461045
+},
+{
+    "matrix": "SNAP/loc-Brightkite",
+    "n": 58228,
+    "nnz": 428156,
+    "method": "taco_sparse",
+    "time": 0.252000748
+},
+{
+    "matrix": "SNAP/loc-Brightkite",
+    "n": 58228,
+    "nnz": 428156,
+    "method": "finch_sparse",
+    "time": 0.30078818
 },
 {
     "matrix": "SNAP/loc-Brightkite",
     "n": 58228,
     "nnz": 428156,
     "method": "finch_gallop",
-    "time": 0.194427887
+    "time": 0.229319121
+},
+{
+    "matrix": "SNAP/p2p-Gnutella31",
+    "n": 62586,
+    "nnz": 147892,
+    "method": "taco_sparse",
+    "time": 0.00533558
+},
+{
+    "matrix": "SNAP/p2p-Gnutella31",
+    "n": 62586,
+    "nnz": 147892,
+    "method": "finch_sparse",
+    "time": 0.00721607
 },
 {
     "matrix": "SNAP/p2p-Gnutella31",
     "n": 62586,
     "nnz": 147892,
     "method": "finch_gallop",
-    "time": 0.007057054
+    "time": 0.0072703
+},
+{
+    "matrix": "SNAP/soc-Epinions1",
+    "n": 75888,
+    "nnz": 508837,
+    "method": "taco_sparse",
+    "time": 0.35589787
+},
+{
+    "matrix": "SNAP/soc-Epinions1",
+    "n": 75888,
+    "nnz": 508837,
+    "method": "finch_sparse",
+    "time": 0.481105493
 },
 {
     "matrix": "SNAP/soc-Epinions1",
     "n": 75888,
     "nnz": 508837,
     "method": "finch_gallop",
-    "time": 0.2834425
+    "time": 0.333634411
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot081106",
+    "n": 77357,
+    "nnz": 516575,
+    "method": "taco_sparse",
+    "time": 0.173937863
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot081106",
+    "n": 77357,
+    "nnz": 516575,
+    "method": "finch_sparse",
+    "time": 0.236261057
 },
 {
     "matrix": "SNAP/soc-sign-Slashdot081106",
     "n": 77357,
     "nnz": 516575,
     "method": "finch_gallop",
-    "time": 0.147502742
+    "time": 0.168174886
+},
+{
+    "matrix": "SNAP/soc-Slashdot0811",
+    "n": 77360,
+    "nnz": 905468,
+    "method": "taco_sparse",
+    "time": 1.050261643
+},
+{
+    "matrix": "SNAP/soc-Slashdot0811",
+    "n": 77360,
+    "nnz": 905468,
+    "method": "finch_sparse",
+    "time": 1.268836805
 },
 {
     "matrix": "SNAP/soc-Slashdot0811",
     "n": 77360,
     "nnz": 905468,
     "method": "finch_gallop",
-    "time": 0.689168277
+    "time": 0.808509724
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot090216",
+    "n": 81871,
+    "nnz": 545671,
+    "method": "taco_sparse",
+    "time": 0.178877481
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot090216",
+    "n": 81871,
+    "nnz": 545671,
+    "method": "finch_sparse",
+    "time": 0.241966408
 },
 {
     "matrix": "SNAP/soc-sign-Slashdot090216",
     "n": 81871,
     "nnz": 545671,
     "method": "finch_gallop",
-    "time": 0.150563089
+    "time": 0.172383518
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot090221",
+    "n": 82144,
+    "nnz": 549202,
+    "method": "taco_sparse",
+    "time": 0.182285042
+},
+{
+    "matrix": "SNAP/soc-sign-Slashdot090221",
+    "n": 82144,
+    "nnz": 549202,
+    "method": "finch_sparse",
+    "time": 0.246853275
 },
 {
     "matrix": "SNAP/soc-sign-Slashdot090221",
     "n": 82144,
     "nnz": 549202,
     "method": "finch_gallop",
-    "time": 0.154477703
+    "time": 0.175699122
+},
+{
+    "matrix": "SNAP/soc-Slashdot0902",
+    "n": 82168,
+    "nnz": 948464,
+    "method": "taco_sparse",
+    "time": 1.101818463
+},
+{
+    "matrix": "SNAP/soc-Slashdot0902",
+    "n": 82168,
+    "nnz": 948464,
+    "method": "finch_sparse",
+    "time": 1.330673919
 },
 {
     "matrix": "SNAP/soc-Slashdot0902",
     "n": 82168,
     "nnz": 948464,
     "method": "finch_gallop",
-    "time": 0.720698569
+    "time": 0.843940539
+},
+{
+    "matrix": "SNAP/soc-sign-epinions",
+    "n": 131828,
+    "nnz": 841372,
+    "method": "taco_sparse",
+    "time": 0.8240323150000001
+},
+{
+    "matrix": "SNAP/soc-sign-epinions",
+    "n": 131828,
+    "nnz": 841372,
+    "method": "finch_sparse",
+    "time": 1.096176471
 },
 {
     "matrix": "SNAP/soc-sign-epinions",
     "n": 131828,
     "nnz": 841372,
     "method": "finch_gallop",
-    "time": 0.634359308
+    "time": 0.753844007
+},
+{
+    "matrix": "SNAP/sx-askubuntu",
+    "n": 159316,
+    "nnz": 596933,
+    "method": "taco_sparse",
+    "time": 0.6410539350000001
+},
+{
+    "matrix": "SNAP/sx-askubuntu",
+    "n": 159316,
+    "nnz": 596933,
+    "method": "finch_sparse",
+    "time": 0.703455227
 },
 {
     "matrix": "SNAP/sx-askubuntu",
     "n": 159316,
     "nnz": 596933,
     "method": "finch_gallop",
-    "time": 0.247419259
+    "time": 0.284082855
+},
+{
+    "matrix": "SNAP/sx-superuser",
+    "n": 194085,
+    "nnz": 924886,
+    "method": "taco_sparse",
+    "time": 1.345065672
+},
+{
+    "matrix": "SNAP/sx-superuser",
+    "n": 194085,
+    "nnz": 924886,
+    "method": "finch_sparse",
+    "time": 1.46358729
 },
 {
     "matrix": "SNAP/sx-superuser",
     "n": 194085,
     "nnz": 924886,
     "method": "finch_gallop",
-    "time": 0.503656559
+    "time": 0.581561919
+},
+{
+    "matrix": "SNAP/loc-Gowalla",
+    "n": 196591,
+    "nnz": 1900654,
+    "method": "taco_sparse",
+    "time": 4.6482926980000006
+},
+{
+    "matrix": "SNAP/loc-Gowalla",
+    "n": 196591,
+    "nnz": 1900654,
+    "method": "finch_sparse",
+    "time": 4.731730711
 },
 {
     "matrix": "SNAP/loc-Gowalla",
     "n": 196591,
     "nnz": 1900654,
     "method": "finch_gallop",
-    "time": 1.689321547
+    "time": 1.929902741
+},
+{
+    "matrix": "SNAP/amazon0302",
+    "n": 262111,
+    "nnz": 1234877,
+    "method": "taco_sparse",
+    "time": 0.088460039
+},
+{
+    "matrix": "SNAP/amazon0302",
+    "n": 262111,
+    "nnz": 1234877,
+    "method": "finch_sparse",
+    "time": 0.10539658
 },
 {
     "matrix": "SNAP/amazon0302",
     "n": 262111,
     "nnz": 1234877,
     "method": "finch_gallop",
-    "time": 0.10096019
+    "time": 0.110074544
+},
+{
+    "matrix": "SNAP/email-EuAll",
+    "n": 265214,
+    "nnz": 420045,
+    "method": "taco_sparse",
+    "time": 0.125547649
+},
+{
+    "matrix": "SNAP/email-EuAll",
+    "n": 265214,
+    "nnz": 420045,
+    "method": "finch_sparse",
+    "time": 0.141228349
 },
 {
     "matrix": "SNAP/email-EuAll",
     "n": 265214,
     "nnz": 420045,
     "method": "finch_gallop",
-    "time": 0.085492357
+    "time": 0.100435806
+},
+{
+    "matrix": "SNAP/web-Stanford",
+    "n": 281903,
+    "nnz": 2312497,
+    "method": "taco_sparse",
+    "time": 0.47028262800000004
+},
+{
+    "matrix": "SNAP/web-Stanford",
+    "n": 281903,
+    "nnz": 2312497,
+    "method": "finch_sparse",
+    "time": 0.511542303
 },
 {
     "matrix": "SNAP/web-Stanford",
     "n": 281903,
     "nnz": 2312497,
     "method": "finch_gallop",
-    "time": 0.341681841
+    "time": 0.366704438
+},
+{
+    "matrix": "SNAP/com-DBLP",
+    "n": 317080,
+    "nnz": 2099732,
+    "method": "taco_sparse",
+    "time": 0.49753095
+},
+{
+    "matrix": "SNAP/com-DBLP",
+    "n": 317080,
+    "nnz": 2099732,
+    "method": "finch_sparse",
+    "time": 0.589178345
 },
 {
     "matrix": "SNAP/com-DBLP",
     "n": 317080,
     "nnz": 2099732,
     "method": "finch_gallop",
-    "time": 0.447393654
+    "time": 0.51769509
+},
+{
+    "matrix": "SNAP/web-NotreDame",
+    "n": 325729,
+    "nnz": 1497134,
+    "method": "taco_sparse",
+    "time": 0.360579056
+},
+{
+    "matrix": "SNAP/web-NotreDame",
+    "n": 325729,
+    "nnz": 1497134,
+    "method": "finch_sparse",
+    "time": 0.287015597
 },
 {
     "matrix": "SNAP/web-NotreDame",
     "n": 325729,
     "nnz": 1497134,
     "method": "finch_gallop",
-    "time": 0.213597577
+    "time": 0.284022427
+},
+{
+    "matrix": "SNAP/com-Amazon",
+    "n": 334863,
+    "nnz": 1851744,
+    "method": "taco_sparse",
+    "time": 0.32699071300000004
+},
+{
+    "matrix": "SNAP/com-Amazon",
+    "n": 334863,
+    "nnz": 1851744,
+    "method": "finch_sparse",
+    "time": 0.384269168
 },
 {
     "matrix": "SNAP/com-Amazon",
     "n": 334863,
     "nnz": 1851744,
     "method": "finch_gallop",
-    "time": 0.302434899
+    "time": 0.333605329
+},
+{
+    "matrix": "SNAP/amazon0312",
+    "n": 400727,
+    "nnz": 3200440,
+    "method": "taco_sparse",
+    "time": 0.354765949
+},
+{
+    "matrix": "SNAP/amazon0312",
+    "n": 400727,
+    "nnz": 3200440,
+    "method": "finch_sparse",
+    "time": 0.422312739
 },
 {
     "matrix": "SNAP/amazon0312",
     "n": 400727,
     "nnz": 3200440,
     "method": "finch_gallop",
-    "time": 0.378844132
+    "time": 0.411504357
+},
+{
+    "matrix": "SNAP/amazon0601",
+    "n": 403394,
+    "nnz": 3387388,
+    "method": "taco_sparse",
+    "time": 0.396875723
+},
+{
+    "matrix": "SNAP/amazon0601",
+    "n": 403394,
+    "nnz": 3387388,
+    "method": "finch_sparse",
+    "time": 0.475950065
 },
 {
     "matrix": "SNAP/amazon0601",
     "n": 403394,
     "nnz": 3387388,
     "method": "finch_gallop",
-    "time": 0.416369022
+    "time": 0.462930478
+},
+{
+    "matrix": "SNAP/amazon0505",
+    "n": 410236,
+    "nnz": 3356824,
+    "method": "taco_sparse",
+    "time": 0.391223139
+},
+{
+    "matrix": "SNAP/amazon0505",
+    "n": 410236,
+    "nnz": 3356824,
+    "method": "finch_sparse",
+    "time": 0.471682062
 },
 {
     "matrix": "SNAP/amazon0505",
     "n": 410236,
     "nnz": 3356824,
     "method": "finch_gallop",
-    "time": 0.424233147
+    "time": 0.457374163
+},
+{
+    "matrix": "SNAP/higgs-twitter",
+    "n": 456626,
+    "nnz": 14855842,
+    "method": "taco_sparse",
+    "time": 15.336313323
+},
+{
+    "matrix": "SNAP/higgs-twitter",
+    "n": 456626,
+    "nnz": 14855842,
+    "method": "finch_sparse",
+    "time": 18.794370047
 },
 {
     "matrix": "SNAP/higgs-twitter",
     "n": 456626,
     "nnz": 14855842,
     "method": "finch_gallop",
-    "time": 10.482842308
+    "time": 11.738028585
+},
+{
+    "matrix": "SNAP/web-BerkStan",
+    "n": 685230,
+    "nnz": 7600595,
+    "method": "taco_sparse",
+    "time": 1.561487002
+},
+{
+    "matrix": "SNAP/web-BerkStan",
+    "n": 685230,
+    "nnz": 7600595,
+    "method": "finch_sparse",
+    "time": 1.323449616
 },
 {
     "matrix": "SNAP/web-BerkStan",
     "n": 685230,
     "nnz": 7600595,
     "method": "finch_gallop",
-    "time": 0.707386593
+    "time": 0.784085691
+},
+{
+    "matrix": "SNAP/web-Google",
+    "n": 916428,
+    "nnz": 5105039,
+    "method": "taco_sparse",
+    "time": 1.052970446
+},
+{
+    "matrix": "SNAP/web-Google",
+    "n": 916428,
+    "nnz": 5105039,
+    "method": "finch_sparse",
+    "time": 0.934829535
 },
 {
     "matrix": "SNAP/web-Google",
     "n": 916428,
     "nnz": 5105039,
     "method": "finch_gallop",
-    "time": 0.865395718
+    "time": 0.811229472
+},
+{
+    "matrix": "SNAP/roadNet-PA",
+    "n": 1090920,
+    "nnz": 3083796,
+    "method": "taco_sparse",
+    "time": 0.131606163
+},
+{
+    "matrix": "SNAP/roadNet-PA",
+    "n": 1090920,
+    "nnz": 3083796,
+    "method": "finch_sparse",
+    "time": 0.177317713
 },
 {
     "matrix": "SNAP/roadNet-PA",
     "n": 1090920,
     "nnz": 3083796,
     "method": "finch_gallop",
-    "time": 0.174443982
+    "time": 0.176763732
+},
+{
+    "matrix": "SNAP/com-Youtube",
+    "n": 1134890,
+    "nnz": 5975248,
+    "method": "taco_sparse",
+    "time": 20.534328578
+},
+{
+    "matrix": "SNAP/com-Youtube",
+    "n": 1134890,
+    "nnz": 5975248,
+    "method": "finch_sparse",
+    "time": 19.871461713
 },
 {
     "matrix": "SNAP/com-Youtube",
     "n": 1134890,
     "nnz": 5975248,
     "method": "finch_gallop",
-    "time": 5.457086794
+    "time": 5.988485408
+},
+{
+    "matrix": "SNAP/wiki-talk-temporal",
+    "n": 1140149,
+    "nnz": 3309592,
+    "method": "taco_sparse",
+    "time": 3.906002656
+},
+{
+    "matrix": "SNAP/wiki-talk-temporal",
+    "n": 1140149,
+    "nnz": 3309592,
+    "method": "finch_sparse",
+    "time": 5.04583997
 },
 {
     "matrix": "SNAP/wiki-talk-temporal",
     "n": 1140149,
     "nnz": 3309592,
     "method": "finch_gallop",
-    "time": 2.201649208
+    "time": 2.574014861
+},
+{
+    "matrix": "SNAP/roadNet-TX",
+    "n": 1393383,
+    "nnz": 3843320,
+    "method": "taco_sparse",
+    "time": 0.159848913
+},
+{
+    "matrix": "SNAP/roadNet-TX",
+    "n": 1393383,
+    "nnz": 3843320,
+    "method": "finch_sparse",
+    "time": 0.218979234
 },
 {
     "matrix": "SNAP/roadNet-TX",
     "n": 1393383,
     "nnz": 3843320,
     "method": "finch_gallop",
-    "time": 0.210439969
+    "time": 0.218266577
+},
+{
+    "matrix": "SNAP/soc-Pokec",
+    "n": 1632803,
+    "nnz": 30622564,
+    "method": "taco_sparse",
+    "time": 23.700793316000002
+},
+{
+    "matrix": "SNAP/soc-Pokec",
+    "n": 1632803,
+    "nnz": 30622564,
+    "method": "finch_sparse",
+    "time": 27.850951043
 },
 {
     "matrix": "SNAP/soc-Pokec",
     "n": 1632803,
     "nnz": 30622564,
     "method": "finch_gallop",
-    "time": 20.519454459
-}
-]
+    "time": 21.443049886
+}]
