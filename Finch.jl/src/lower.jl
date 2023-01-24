@@ -365,3 +365,7 @@ end
 
 unchunk(node, ctx) = nothing
 unchunk(node::Lookup, ctx::ForLoopVisitor) = node.body(ctx.val)
+
+function Finch.getname(x::Lookup)
+    nothing
+end
