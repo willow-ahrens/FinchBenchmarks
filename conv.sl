@@ -5,6 +5,7 @@
 #SBATCH -t 4-0
 #SBATCH -e slurm-%A_%a.err
 #SBATCH -o slurm-%A_%a.out
+#SBATCH --partition=lanka-v3
 
 if [[ -n $SLURM_JOB_ID ]];  then
     # check the original location through scontrol and $SLURM_JOB_ID

@@ -461,6 +461,14 @@ function Base.show(io::IO, mime::MIME"text/plain", node::IndexNode)
     end
 end
 
+function Base.show(io::IO, node::IndexNode) 
+    if isstateful(node)
+        display_statement(io, MIME"text/plain", node, 0)
+    else
+        display_expression(io, MIME"text/plain", node)
+    end
+end
+
 function display_expression(io, mime, node::IndexNode)
     if get(io, :compact, false)
         print(io, "@finch(…)")
@@ -514,6 +522,7 @@ function display_expression(io, mime, node::IndexNode)
         if !isempty(arguments(node))
             print(arguments(node)[end])
         end
+        print(io, ")")
     else
         error("unimplemented")
     end
