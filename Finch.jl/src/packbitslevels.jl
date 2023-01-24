@@ -274,6 +274,7 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
     my_value = ctx.freshen(tag, :_value_temp)
     my_lookup_index = ctx.freshen(tag, :_lookup_index)
 
+    Ti = lvl.Ti
 
     @assert isempty(idxs)
 
@@ -283,9 +284,9 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
     incr_coord = (i) -> quote
         if $my_hpos < $my_hend
             if $(is_run(:($(lvl.ex).headers[$my_hpos])))
-                $i += $(lvl.ex).headers[$my_hpos] & $(high_bit_mask())
+                $i += $(Ti)($(lvl.ex).headers[$my_hpos] & $(high_bit_mask()))
             else
-                $i += $(lvl.ex).headers[$my_hpos]
+                $i += $(Ti)($(lvl.ex).headers[$my_hpos])
             end
         end
     end
@@ -300,6 +301,7 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
             $my_i = $(lvl.Ti)(1)
             $my_next_i = $(lvl.Ti)(1)
             $(incr_coord(:($my_next_i)))
+            $my_header = $(lvl.Th)(0)
             # $my_hpos +=1
             # println("my_pos: $($my_pos), my_end: $($my_end), my_hpos: $($my_hpos), my_hend: $($my_hend), my_i: $($my_i), my_next_i: $($my_next_i)")
             # println("my_end_next: $($(lvl.ex).pos[$(ctx(envposition(fbr.env))) + 2])")
@@ -318,11 +320,11 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
                     if $(header_is_run())
                         $my_pos += $(lvl.Ti)(1)
                         $my_i = $my_next_i
-                        $my_next_i += $(lvl.ex).headers[$my_hpos] & $(high_bit_mask())
+                        $my_next_i += $(Ti)($(lvl.ex).headers[$my_hpos] & $(high_bit_mask()))
                     else
                         $my_pos += $(high_bit_mask()) & $my_header
                         $my_i = $my_next_i
-                        $my_next_i += $(lvl.ex).headers[$my_hpos]
+                        $my_next_i += $(Ti)($(lvl.ex).headers[$my_hpos])
                     end
                     $my_hpos += $(lvl.Ti)(1)
                 end
@@ -335,7 +337,7 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
                 body = Switch([
                     value(header_is_run()) => Step(
                         # stride = (ctx, idx, ext) -> value(:($my_i + $my_header & $(high_bit_mask()))),
-                        stride = (ctx, idx, ext) -> value(:($my_next_i - 1)),
+                        stride = (ctx, idx, ext) -> value(:($my_next_i - $(Ti)(1))),
                         chunk = # Run(body = Simplify(value(:($(lvl.ex).values[$my_pos]), lvl.Tv))),
                             Thunk(
                                 preamble = :($my_value = $(lvl.ex).values[$my_pos]),
@@ -351,7 +353,7 @@ function unfurl(fbr::VirtualFiber{VirtualPackBitsLevel}, ctx, mode, ::Walk, idx,
                         end
                     ),
                     literal(true) => Step(
-                        stride = (ctx, idx, ext) -> value(:($my_next_i - 1)),
+                        stride = (ctx, idx, ext) -> value(:($my_next_i - $(Ti)(1))),
                         chunk = Lookup(
                             body = (i) -> Thunk(
                                 preamble = quote
