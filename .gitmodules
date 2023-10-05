@@ -1,0 +1,3 @@
+[submodule "deps/SparseRooflineBenchmark"]
+	path = deps/SparseRooflineBenchmark
+	url = https://github.com/SparseRooflineBenchmark/SparseRooflineBenchmark
