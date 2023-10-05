@@ -1,9 +1,9 @@
-#include "../src/benchmark.hpp"
+#include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 #include <sys/stat.h>
 #include <iostream>
 #include <cstdint>
 
-namespace fs = std::filesystem;
+namespace fs = std::__fs::filesystem;
 
 template <typename T, typename I>
 void experiment_spmv_csr(std::string input, std::string output, int verbose);
@@ -54,7 +54,7 @@ void experiment_spmv_csr(std::string input, std::string output, int verbose){
         }
     );
 
-    std::filesystem::create_directory(fs::path(output)/"y.bspnpy");
+    fs::create_directory(fs::path(output)/"y.bspnpy");
     json y_desc;
     y_desc["version"] = 0.5;
     y_desc["format"] = "DVEC";

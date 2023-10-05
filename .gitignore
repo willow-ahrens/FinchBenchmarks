@@ -1,1 +1,4 @@
 *.o
+spmv/spmv
+spmv/spmv_taco
+deps/SparseRooflineBenchmark/build
