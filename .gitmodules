@@ -1,3 +1,6 @@
 [submodule "deps/SparseRooflineBenchmark"]
 	path = deps/SparseRooflineBenchmark
 	url = https://github.com/SparseRooflineBenchmark/SparseRooflineBenchmark
+[submodule "deps/taco"]
+	path = deps/taco
+	url = https://github.com/tensor-compiler/taco
