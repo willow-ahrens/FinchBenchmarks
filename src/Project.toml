@@ -1,0 +1,6 @@
+[deps]
+Finch = "9177782c-1635-4eb9-9bfb-d9dfa25e6bce"
+HDF5 = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
+MatrixDepot = "b51810bb-c9f3-55da-ae3c-350fc1fbce05"
+NPZ = "15e1cf62-19b3-5cfa-8e77-841668bca605"
+TensorMarket = "8b7d4fe7-0b45-4d0d-9dd8-5cc9b23b4b77"
