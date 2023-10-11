@@ -1,23 +1,17 @@
 using Finch
-using MatrixDepot
 using TestImages
-using ImageCore, OpenCV, TestImages, MosaicViews
+using ImageCore, OpenCV, TestImages, MosaicViews, Colors
 using BenchmarkTools
-
-
-# img_orig = testimage("Mandrill")
-# img_raw =  collect(rawview(channelview(img_orig)))
-# img_gray = OpenCV.cvtColor(img_raw, OpenCV.COLOR_RGB2GRAY)
-
+using JSON
 
 function openCVBlur(data)
     img_blur = OpenCV.blur(data, OpenCV.Size(Int32(3), Int32(3)))
     return img_blur
 end
 
-input = Fiber!(Dense(Dense(Dense(Element(UInt8(0))))))
-output = Fiber!(Dense(Dense(Dense(Element(UInt8(0))))))
-tmp = Fiber!(Dense(Dense(Element(UInt8(0)))))
+input = Fiber!(Dense(Dense(Dense(Element(Float64(0))))))
+output = Fiber!(Dense(Dense(Dense(Element(Float64(0))))))
+tmp = Fiber!(Dense(Dense(Element(Float64(0)))))
 
 
 @Finch.finch_kernel function blurSimple(input, output, tmp)
@@ -31,7 +25,7 @@ tmp = Fiber!(Dense(Dense(Element(UInt8(0)))))
         end
         for y = _
             for c = _
-                output[c, x, y] += (coalesce(tmp[~(y-1), c],0) + coalesce(tmp[y, c], 0) + coalesce(tmp[~(y+1), c],0))/3
+                output[c, x, y] += (coalesce(tmp[~(y-1), c],0) + coalesce(tmp[~y, c], 0) + coalesce(tmp[~(y+1), c],0))/3
             end
         end
     end
@@ -39,24 +33,61 @@ end
 
 
 
+@inline function runBlurSimple(input, output, tmp)
+    blurSimple(input, output, tmp)
+end
+
+
 function convertImageToFinch(img)
     (cs, xs, ys) = size(img)
-    inp = Fiber!(Dense(Dense(Dense(Element(UInt8(0))))), img)
-    outBuff = zeros(UInt8, (cs, xs, ys))
-    out = Fiber!(Dense(Dense(Dense(Element(UInt8(0))))), outBuff)
-    tempBuf = zeros(UInt8, (xs, cs))
-    tmp = Fiber!(Dense(Dense(Element(UInt8(0)))), tempBuf)
+    inp = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img)
+    outBuff = zeros(Float64, (cs, xs, ys))
+    out = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), outBuff)
+    tempBuf = zeros(Float64, (xs, cs))
+    tmp = Fiber!(Dense(Dense(Element(Float64(0)))), tempBuf)
     return (inp, out, tmp)
+end
+
+function testCorrect(img1, img2)
+    img2AsDense = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img2)
+    img1AsDense = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img1)
+    return img2AsDense == img1AsDense
 end
 
 
 function runOnImage(filename)
     data = testimage(filename)
-    data_raw = collect(rawview(channelview(data)))
+    data_raw = Array{Float64}((channelview(data)))
     finchData = convertImageToFinch(data_raw)
     data1 = openCVBlur(data_raw)
-    blurSimple(finchData[1], finchData[2], finchData[3])
-    #compare both
-    # unit 8 issue
-    #benchmark
+    runBlurSimple(finchData[1], finchData[2], finchData[3])
+
+    correct = testCorrect(finchData[2], data1)
+
+
+    timeFinch = @belapsed runBlurSimple($(finchData[1]), $(finchData[2]), $(finchData[3])) evals=1
+    timeOpenCV = @belapsed openCVBlur($data_raw) evals=1
+
+
+    result = Dict("imagename"=>filename, "finchTime"=>timeFinch, "openCVtime"=>timeOpenCV,
+        "name"=>"box-blur3x3-Float64",
+        "type"=>"Float64", "sizex"=>3, "sizey"=>3,
+        "correct" => correct)
+    return result
 end
+
+
+function main(resultfile)
+    images = [("Mandrill", Float64)]
+    for img in images
+        ret = runOnImage(img[1]) # extend with float variatio when it works.
+        open(resultfile,"w") do f
+            JSON.print(f, JSON.json(ret))
+        end
+
+    end
+
+end
+
+
+main("test.json")
