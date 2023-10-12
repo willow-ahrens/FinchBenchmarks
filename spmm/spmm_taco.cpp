@@ -13,6 +13,46 @@
 using namespace taco;
 
 void experiment(std::string input, std::string output, int verbose){
+    Tensor<double> A = read(input+".ttx", Format({Dense, Sparse}), true);
+    Tensor<double> B = read(input+"_s.ttx", Format({Dense, Sparse}), true);
+    int m = A.getDimension(0);
+    int mn = A.getDimension(1);
+    int n = B.getDimension(1);
+    Tensor<double> C("C", {m, n}, Format({Dense, Sparse}));
+
+    IndexVar i, j, k;
+
+    C(i, j) += A(i, k) * B(k, j);
+
+    //perform an spmv of the matrix in c++
+
+    C.compile();
+
+    // Assemble output indices and numerically compute the result
+    auto time = benchmark(
+      [&C]() {
+        C.setNeedsAssemble(true);
+        C.setNeedsCompute(true);
+      },
+      [&C]() {
+        C.assemble();
+        C.compute();
+      }
+    );
+
+    //write("C.ttx", C);
+C.printComputeIR(std::cout, true, true);
+
+    json measurements;
+    measurements["time"] = time;
+    measurements["memory"] = 0;
+    std::ofstream measurements_file(output+".json");
+    measurements_file << measurements;
+    measurements_file.close();
+}
+
+/*
+void experiment(std::string input, std::string output, int verbose){
     Tensor<double> A = read(input+"/A.ttx", Format({Dense, Sparse}), true);
     Tensor<double> x = read(input+"/x.ttx", Format({Dense}), true);
     int m = A.getDimension(0);
@@ -47,4 +87,5 @@ void experiment(std::string input, std::string output, int verbose){
     std::ofstream measurements_file(output+"/measurements.json");
     measurements_file << measurements;
     measurements_file.close();
-}
+}*/
+
