@@ -22,7 +22,17 @@ void experiment(std::string input, std::string output, int verbose){
 
     IndexVar i, j, k;
 
-    C(i, j) += A(i, k) * B(k, j);
+    //Gustavson
+    //C(i, j) += A(i, k) * B(k, j);
+    //inner product
+    //C(i, j) += A(i, k) * B(j, k);
+    //outer product
+    C(i, j) += A(k, i) * B(k, j);
+
+    IndexStmt stmt = C.getAssignment().concretize();
+    //stmt = stmt.reorder({i,j,k}); //inner
+    stmt = stmt.reorder({k,i,j}); //outer
+    //stmt = stmt.parallelize(i,ParallelUnit::CPUThread, OutputRaceStrategy::NoRaces);
 
     //perform an spmv of the matrix in c++
 
@@ -41,6 +51,7 @@ void experiment(std::string input, std::string output, int verbose){
     );
 
     //write("C.ttx", C);
+//C.printAssembleIR(std::cout, true, true);
 C.printComputeIR(std::cout, true, true);
 
     json measurements;
