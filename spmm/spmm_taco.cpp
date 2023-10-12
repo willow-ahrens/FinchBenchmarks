@@ -25,6 +25,7 @@ using namespace taco;
 
 void experiment(std::string input, std::string output, int Aformat, int Bformat, int Cformat, int computemode){
 
+	//fprintf(stderr, "OOO: %d %d %d %d\n", Aformat, Bformat, Cformat, computemode);
 	// assume sym (will be lifted)   
     Tensor<double> A;
     Tensor<double> B;
@@ -55,13 +56,40 @@ void experiment(std::string input, std::string output, int Aformat, int Bformat,
     int mn = A.getDimension(1);
     int n = B.getDimension(1);
 
-    Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
-
+    auto cF = Format({Dense,Dense});
+    switch(Cformat) {
+	    case FORMAT_DD:
+		    break;
+	    case FORMAT_DS:
+		    cF = Format({Dense, Sparse});
+		    break;
+	    case FORMAT_SS:
+		    cF = Format({Sparse, Sparse});
+		    break;
+    }
+    Tensor<double> C("C", {m, n}, cF); // cond
 
     //fprintf(stderr, "OOOO\n");
+	//std::cerr<<"OO: "<<cF<<std::endl;
 
     IndexVar i, j, k;
+    IndexStmt stmt;
 
+    switch(computemode) {
+	    case MOD_GUS:
+		    C(i, j) += A(i, k) * B(k, j);
+		    break;
+	    case MOD_INNER:
+		    C(i, j) += A(i, k) * B(j, k);
+		    stmt= C.getAssignment().concretize();
+		    stmt = stmt.reorder({i,j,k}); 
+		    break;
+	    case MOD_OUTER:
+		    C(i, j) += A(k, i) * B(k, j);
+		    stmt= C.getAssignment().concretize();
+		    stmt = stmt.reorder({k,i,j}); 
+		    break;	
+    }
     //Gustavson
     C(i, j) += A(i, k) * B(k, j);
     //inner product
