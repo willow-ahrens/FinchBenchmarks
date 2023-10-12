@@ -44,6 +44,10 @@ clean:
 	rm -rf spmv
 	rm -rf *.o *.dSYM *.trace
 
+
+spmm/spmm_taco: $(SPARSE_BENCH) $(TACO) spmm/spmm_taco.cpp
+	$(CXX) $(TACO_CXXFLAGS) -o $@ spmm/spmm_taco.cpp $(TACO_LDLIBS)
+
 spmv/spmv: $(SPARSE_BENCH) spmv/spmv.cpp
 	$(CXX) $(CXXFLAGS) -o $@ spmv/spmv.cpp $(LDLIBS)
 
