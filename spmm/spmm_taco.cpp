@@ -12,26 +12,66 @@
 
 using namespace taco;
 
-void experiment(std::string input, std::string output, int verbose){
-    Tensor<double> A = read(input+".ttx", Format({Dense, Sparse}), true);
-    Tensor<double> B = read(input+"_s.ttx", Format({Dense, Sparse}), true);
+
+//format = 0: DD, 1:DS, 2:SS
+//computemode = 0:Gustavson, 1:inner proudct, 2:outer product
+
+#define FORMAT_DD (0)
+#define FORMAT_DS (1)
+#define FORMAT_SS (2)
+#define MOD_GUS (0)
+#define MOD_INNER (1)
+#define MOD_OUTER (2)
+
+void experiment(std::string input, std::string output, int Aformat, int Bformat, int Cformat, int computemode){
+
+	// assume sym (will be lifted)   
+    Tensor<double> A;
+    Tensor<double> B;
+    switch(Aformat) {
+	    case FORMAT_DD:
+		    A = read(input+".ttx", Format({Dense, Dense}), true);
+		    break;
+	    case FORMAT_DS:
+		    A = read(input+".ttx", Format({Dense, Sparse}), true);
+		    break;
+	    case FORMAT_SS:
+		    A = read(input+".ttx", Format({Sparse, Sparse}), true);
+		    break;
+    }
+    switch(Bformat) {
+	    case FORMAT_DD:
+		    B = read(input+"_s.ttx", Format({Dense, Dense}), true);
+		    break;
+	    case FORMAT_DS:
+		    B = read(input+"_s.ttx", Format({Dense, Sparse}), true);
+		    break;
+	    case FORMAT_SS:
+		    B = read(input+"_s.ttx", Format({Sparse, Sparse}), true);
+		    break;
+    }
+
     int m = A.getDimension(0);
     int mn = A.getDimension(1);
     int n = B.getDimension(1);
-    Tensor<double> C("C", {m, n}, Format({Dense, Sparse}));
+
+    Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
+
+
+    //fprintf(stderr, "OOOO\n");
 
     IndexVar i, j, k;
 
     //Gustavson
-    //C(i, j) += A(i, k) * B(k, j);
+    C(i, j) += A(i, k) * B(k, j);
     //inner product
     //C(i, j) += A(i, k) * B(j, k);
     //outer product
-    C(i, j) += A(k, i) * B(k, j);
+    //C(i, j) += A(k, i) * B(k, j);
 
-    IndexStmt stmt = C.getAssignment().concretize();
+    //IndexStmt stmt = C.getAssignment().concretize();
     //stmt = stmt.reorder({i,j,k}); //inner
-    stmt = stmt.reorder({k,i,j}); //outer
+    //stmt = stmt.reorder({k,i,j}); //outer
     //stmt = stmt.parallelize(i,ParallelUnit::CPUThread, OutputRaceStrategy::NoRaces);
 
     //perform an spmv of the matrix in c++
@@ -45,7 +85,7 @@ void experiment(std::string input, std::string output, int verbose){
         C.setNeedsCompute(true);
       },
       [&C]() {
-        C.assemble();
+        C.assemble(); //no need for dense ouptut
         C.compute();
       }
     );
