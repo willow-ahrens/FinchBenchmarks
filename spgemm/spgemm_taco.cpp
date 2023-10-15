@@ -8,10 +8,7 @@
 #include <cstdint>
 #include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 
-//namespace fs = std::__fs::filesystem;
-
 using namespace taco;
-
 
 //format = 0: DD, 1:DS, 2:SS
 //computemode = 0:Gustavson, 1:inner proudct, 2:outer product
@@ -23,51 +20,19 @@ using namespace taco;
 #define MOD_INNER (1)
 #define MOD_OUTER (2)
 
-void experiment(std::string input, std::string output, int Aformat, int Bformat, int Cformat, int computemode){
+void experiment(std::string input, std::string output, int verbose){
 
 	//fprintf(stderr, "OOO: %d %d %d %d\n", Aformat, Bformat, Cformat, computemode);
 	// assume sym (will be lifted)   
     Tensor<double> A;
     Tensor<double> B;
-    switch(Aformat) {
-	    case FORMAT_DD:
-		    A = read(input+".ttx", Format({Dense, Dense}), true);
-		    break;
-	    case FORMAT_DS:
-		    A = read(input+".ttx", Format({Dense, Sparse}), true);
-		    break;
-	    case FORMAT_SS:
-		    A = read(input+".ttx", Format({Sparse, Sparse}), true);
-		    break;
-    }
-    switch(Bformat) {
-	    case FORMAT_DD:
-		    B = read(input+"_s.ttx", Format({Dense, Dense}), true);
-		    break;
-	    case FORMAT_DS:
-		    B = read(input+"_s.ttx", Format({Dense, Sparse}), true);
-		    break;
-	    case FORMAT_SS:
-		    B = read(input+"_s.ttx", Format({Sparse, Sparse}), true);
-		    break;
-    }
+    A = read(input+"/A.ttx", Format({Dense, Sparse}), true);
+    B = read(input+"/B.ttx", Format({Dense, Sparse}), true);
 
     int m = A.getDimension(0);
-    int mn = A.getDimension(1);
     int n = B.getDimension(1);
 
-    auto cF = Format({Dense,Dense});
-    switch(Cformat) {
-	    case FORMAT_DD:
-		    break;
-	    case FORMAT_DS:
-		    cF = Format({Dense, Sparse});
-		    break;
-	    case FORMAT_SS:
-		    cF = Format({Sparse, Sparse});
-		    break;
-    }
-    Tensor<double> C("C", {m, n}, cF); // cond
+    Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
 
     //fprintf(stderr, "OOOO\n");
 	//std::cerr<<"OO: "<<cF<<std::endl;
@@ -75,6 +40,7 @@ void experiment(std::string input, std::string output, int Aformat, int Bformat,
     IndexVar i, j, k;
     IndexStmt stmt;
 
+    /*
     switch(computemode) {
 	    case MOD_GUS:
 		    C(i, j) += A(i, k) * B(k, j);
@@ -90,12 +56,10 @@ void experiment(std::string input, std::string output, int Aformat, int Bformat,
 		    stmt = stmt.reorder({k,i,j}); 
 		    break;	
     }
+    */
+
     //Gustavson
     C(i, j) += A(i, k) * B(k, j);
-    //inner product
-    //C(i, j) += A(i, k) * B(j, k);
-    //outer product
-    //C(i, j) += A(k, i) * B(k, j);
 
     //IndexStmt stmt = C.getAssignment().concretize();
     //stmt = stmt.reorder({i,j,k}); //inner
@@ -118,47 +82,9 @@ void experiment(std::string input, std::string output, int Aformat, int Bformat,
       }
     );
 
-    //write("C.ttx", C);
-//C.printAssembleIR(std::cout, true, true);
-C.printComputeIR(std::cout, true, true);
-
-    json measurements;
-    measurements["time"] = time;
-    measurements["memory"] = 0;
-    std::ofstream measurements_file(output+".json");
-    measurements_file << measurements;
-    measurements_file.close();
-}
-
-/*
-void experiment(std::string input, std::string output, int verbose){
-    Tensor<double> A = read(input+"/A.ttx", Format({Dense, Sparse}), true);
-    Tensor<double> x = read(input+"/x.ttx", Format({Dense}), true);
-    int m = A.getDimension(0);
-    int n = A.getDimension(1);
-    Tensor<double> y("y", {n}, Format({Dense}));
-
-    IndexVar i, j;
-
-    y(i) += A(i, j) * x(j);
-
-    //perform an spmv of the matrix in c++
-
-    y.compile();
-
-    // Assemble output indices and numerically compute the result
-    auto time = benchmark(
-      [&y]() {
-        y.setNeedsAssemble(true);
-        y.setNeedsCompute(true);
-      },
-      [&y]() {
-        y.assemble();
-        y.compute();
-      }
-    );
-
-    write("y.ttx", y);
+    write(output+"/C.ttx", C);
+    //C.printAssembleIR(std::cout, true, true);
+    //C.printComputeIR(std::cout, true, true);
 
     json measurements;
     measurements["time"] = time;
@@ -166,5 +92,4 @@ void experiment(std::string input, std::string output, int verbose){
     std::ofstream measurements_file(output+"/measurements.json");
     measurements_file << measurements;
     measurements_file.close();
-}*/
-
+}
