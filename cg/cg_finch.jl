@@ -1,13 +1,6 @@
 using Finch
 using BenchmarkTools
 
-function cg_finch_format(x, A, b)
-    x = Fiber!(Dense(Element(0.0)), x)
-    A = Fiber!(Dense(SparseList(Element(0.0))), A)
-    b = Fiber!(Dense(Element(0.0)), b)
-    (x, A, b)
-end
-
 function ssymv_finch(y, A, x)
     y_j = Scalar(0.0)
     @finch begin
@@ -32,7 +25,7 @@ function ssymv_finch(y, A, x)
     y
 end
 
-function cg_finch(x, A, b, l)
+function cg_finch_kernel(x, A, b, l)
     (n, m) = size(A)
     @assert n == m
 
@@ -80,4 +73,13 @@ function cg_finch(x, A, b, l)
         r2 = _r2
     end
     (x,)
+end
+
+function cg_finch(x, A, b, l)
+    _x = Fiber!(Dense(Element(0.0)), x)
+    _A = Fiber!(Dense(SparseList(Element(0.0))), A)
+    _b = Fiber!(Dense(Element(0.0)), b)
+    x = Ref{Any}()
+    time = @belapsed $x[] = cg_finch_kernel($_x, $_A, $_b, $l)
+    return (;time = time, x = x[])
 end

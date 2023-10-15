@@ -52,28 +52,19 @@ for mtx in datasets[parsed_args["dataset"]]
     b = rand(n)
     x = zeros(n)
     x_ref = nothing
-    for method in [
-        (;
-            key = "iterative_solvers",
-            run = cg_iterative_solvers,
-            format = cg_iterative_solvers_format
-        ),
-        (;
-            key = "finch",
-            run = cg_finch,
-            format = cg_finch_format
-        )
+    for (key, method) in [
+        "iterative_solvers" => cg_iterative_solvers,
+        "finch" => cg_finch
     ] 
-        @info "testing" method.key mtx
-        (_x, _A, _b) = method.format(x, A, b)
-        res = Ref{Any}()
-        time = @belapsed $res[] = $(method.run)($_x, $_A, $_b, $num_iters)
-        x_ref = something(x_ref, res[])
-        res[] == x_ref || @warn("incorrect result")
+        @info "testing" key mtx
+        res = method(x, A, b, num_iters)
+        time = res.time
+        x_ref = something(x_ref, res.x)
+        res.x == x_ref || @warn("incorrect result")
         @info "results" time
         push!(results, OrderedDict(
             "time" => time,
-            "method" => method.key,
+            "method" => key,
             "kernel" => "cg",
             "matrix" => mtx,
             "num_iters" => num_iters, 

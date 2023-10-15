@@ -1,0 +1,20 @@
+[
+    {
+        "time": 0.036313269,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.000630505,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.003348295,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    }
+]
