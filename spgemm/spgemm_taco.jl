@@ -12,9 +12,9 @@ function spgemm_taco(args, A, B)
         run(`./spgemm_taco -i $tmpdir -o $tmpdir $args`)
         end
         C = fread(C_path)
-        time = JSON.read(joinpath(tmpdir, "measurements.json"))["time"]
-        return (;time=time, C=C)
+        time = JSON.parsefile(joinpath(tmpdir, "measurements.json"))["time"]
+        return (;time=time*10^-9, C=C)
     end
 end
 
-spgemm_taco_inner(A, B) = spgemm_taco("", A, B)
+spgemm_taco_gustavson(A, B) = spgemm_taco("", A, B)

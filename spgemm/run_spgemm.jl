@@ -20,7 +20,7 @@ s = ArgParseSettings("Run spgemm experiments.")
     "--output", "-o"
         arg_type = String
         help = "output file path"
-        default = "cg_results.json"
+        default = "spgemm_results.json"
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
@@ -72,7 +72,7 @@ for mtx in datasets[parsed_args["dataset"]]
     B = A
     C_ref = nothing
     for (key, method) in [
-        "spgemm_taco_inner" => spgemm_taco_inner,
+        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,
