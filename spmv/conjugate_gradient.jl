@@ -1,38 +1,34 @@
 using Finch
 using BenchmarkTools
+using IterativeSolvers
+using SparseArrays
 
 n = 1000
-A = Fiber!(Dense(SparseList(Element(0.0))), fsprand((n, n), 0.1))
+sparsity = 0.1
+A = Fiber!(Dense(SparseList(Element(0.0))), fsprand((n, n), sparsity))
 b = Fiber!(Dense(Element(0.0)), rand(n))
 x = Fiber!(Dense(Element(0.0)), zeros(n))
+y = Fiber!(Dense(Element(0.0)), zeros(n))
 
-function spmv(A, x, t)
-    temp2 = Scalar(0.0)
-    @finch begin
-        t .= 0
-        for j = _
-            let temp1 = x[j]
-                temp2 .= 0
-                for i = _
-                    let temp3 = A[i, j]
-                        if uptrimask[i, j]
-                            t[i] += temp1 * temp3
-                        end
-                        if uptrimask[i, j - 1]
-                            temp2[] += temp3 * x[i]
-                        end
+temp2 = Scalar(0.0)
+eval(@finch_kernel function spmv(y, A, x, temp2)
+    for j = _
+        let temp1 = x[j]
+            temp2 .= 0
+            for i = _
+                let temp3 = A[i, j]
+                    if uptrimask[i, j]
+                        y[i] += temp1 * temp3
+                    end
+                    if uptrimask[i, j - 1]
+                        temp2[] += temp3 * x[i]
                     end
                 end
             end
-            t[j] += temp2[]
+            y[j] += temp2[]
         end
     end
-    # @finch begin
-    #     for j = _, i = _
-    #         t[i] += A[i, j] * x[j]
-    #     end
-    # end
-end
+end)
 
 function conjugate_gradient(A, x, b)
     (n, m) = size(A)
@@ -45,7 +41,7 @@ function conjugate_gradient(A, x, b)
     _p = Fiber!(Dense(Element(0.0)), zeros(n))
     _x = Fiber!(Dense(Element(0.0)), zeros(n))
 
-    @finch begin spmv(A, x, temp) end
+    spmv(temp, A, x, temp2)
     # r_0 = b - Ax_0
     @finch for i = _ r[i] = b[i] - temp[i] end
     # p_0 = r_0
@@ -59,7 +55,7 @@ function conjugate_gradient(A, x, b)
         beta = Scalar(0.0)
 
         t = Fiber!(Dense(Element(0.0)), zeros(n))
-        @finch begin spmv(A, p, t) end
+        spmv(t, A, p, temp2)
         @finch begin
             for i = _ 
                 num[] += r[i]^2
@@ -97,5 +93,14 @@ function conjugate_gradient(A, x, b)
     end
 end
 
+AA = sprand(n, n, 0.1)
+xx = zeros(n)
+bb = rand(n)
+function iterative_solvers_cg(AA, xx, bb)
+    cg!(xx, AA, bb; maxiter = 100)
+end
+
 time_finch = @belapsed conjugate_gradient(A, x, b)
-println("Time: ", time_finch)
+time_iterative_solvers = @belapsed iterative_solvers_cg(AA, xx, bb)
+println("Finch time: ", time_finch)
+println("IterativeSolvers time: ", time_iterative_solvers)
