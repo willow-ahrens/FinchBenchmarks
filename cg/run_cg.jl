@@ -74,17 +74,11 @@ for mtx in datasets[parsed_args["dataset"]]
         time = res.time
         x_ref = something(x_ref, res.x)
 
-        n_ref = norm(x_ref)
-        if key == "finch"
-            t = 0.0
-            for i = 1:n
-                t += res.x[1][i]^2
-            end
-            n_res = sqrt(t)
-        else
-            n_res = norm(res.x)
+        err = 0.0
+        for i = 1:n
+            err += (x_ref[1][i] - res.x[1][i])^2
         end
-        diff = (n_res - n_ref) / n_ref 
+        diff = sqrt(err) / norm(x_ref)
         @info "difference" diff
         diff < 0.1 || @warn("incorrect result via norm")
 

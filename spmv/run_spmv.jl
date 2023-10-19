@@ -11,6 +11,8 @@ using ArgParse
 using DataStructures
 using JSON
 using SparseArrays
+using Printf
+using LinearAlgebra
 
 s = ArgParseSettings("Run SPMV experiments.")
 
@@ -65,17 +67,11 @@ for mtx in datasets[parsed_args["dataset"]]
         time = res.time
         y_ref = something(y_ref, res.y)
 
-        n_ref = norm(y_ref)
-        if key == "finch"
-            t = 0.0
-            for i = 1:n
-                t += res.y[1][i]^2
-            end
-            n_res = sqrt(t)
-        else
-            n_res = norm(res.y)
+        err = 0.0
+        for i = 1:n
+            err += (y_ref[1][i] - res.y[1][i])^2
         end
-        diff = (n_res - n_ref) / n_ref 
+        diff = sqrt(err) / norm(y_ref)
         @info "difference" diff
         diff < 0.1 || @warn("incorrect result via norm")
 
