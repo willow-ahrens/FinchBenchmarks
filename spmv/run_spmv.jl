@@ -63,7 +63,7 @@ for mtx in datasets[parsed_args["dataset"]]
         time = res.time
         y_ref = something(y_ref, res.y)
 
-        norm(y - y_ref)/norm(y_ref) < 0.1 || @warn("incorrect result via norm")
+        norm(res.y - y_ref)/norm(y_ref) < 0.1 || @warn("incorrect result via norm")
 
         # res.y == y_ref || @warn("incorrect result")
         @info "results" time

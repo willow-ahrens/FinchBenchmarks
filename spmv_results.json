@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.00132575,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif"
+    },
+    {
+        "time": 0.001112792,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif"
+    }
+]
