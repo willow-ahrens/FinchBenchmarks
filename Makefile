@@ -10,14 +10,21 @@ else
 export NPROC_VAL := $(shell lscpu -p | egrep -v '^\#' | wc -l)
 endif
 
+SPMV = spmv/spmv spmv/spmv_taco
+
+SPGEMM = spgemm/spgemm_taco
+
+all: $(SPMV) $(SPGEMM)
+
 SPARSE_BENCH_DIR = deps/SparseRooflineBenchmark
 SPARSE_BENCH_CLONE = $(SPARSE_BENCH_DIR)/.git
-SPARSE_BENCH = deps/SparseRooflineBenchmark/build
+SPARSE_BENCH = deps/SparseRooflineBenchmark/build/hello
 
 $(SPARSE_BENCH_CLONE): 
 	git submodule update --init $(SPARSE_BENCH_DIR)
 
 $(SPARSE_BENCH): $(SPARSE_BENCH_CLONE) $(SPARSE_BENCH_DIR)/src/*
+	mkpath $(SPARSE_BENCH) ;\
 	touch $(SPARSE_BENCH)
 
 TACO_DIR = deps/taco
@@ -36,17 +43,12 @@ $(TACO): $(TACO_CLONE) $(TACO_DIR)/src/* $(TACO_DIR)/include/*
 	cmake -DPYTHON=false -DCMAKE_BUILD_TYPE=Release .. ;\
 	make taco -j$(NPROC_VAL)
 
-SPMV = spmv/spmv spmv/spmv_taco
-
-all: $(SPMV)
-
 clean:
-	rm -rf spmv
+	rm -f $(SPMV) $(SPGEMM)
 	rm -rf *.o *.dSYM *.trace
 
-
-spmm/spmm_taco: $(SPARSE_BENCH) $(TACO) spmm/spmm_taco.cpp
-	$(CXX) $(TACO_CXXFLAGS) -o $@ spmm/spmm_taco.cpp $(TACO_LDLIBS)
+spgemm/spgemm_taco: $(SPARSE_BENCH) $(TACO) spgemm/spgemm_taco.cpp
+	$(CXX) $(TACO_CXXFLAGS) -o $@ spgemm/spgemm_taco.cpp $(TACO_LDLIBS)
 
 spmv/spmv: $(SPARSE_BENCH) spmv/spmv.cpp
 	$(CXX) $(CXXFLAGS) -o $@ spmv/spmv.cpp $(LDLIBS)

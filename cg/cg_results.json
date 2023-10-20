@@ -1,0 +1,16 @@
+[
+    {
+        "time": 0.068719097,
+        "method": "iterative_solvers",
+        "kernel": "cg",
+        "matrix": "Boeing/ct20stif",
+        "num_iters": 20
+    },
+    {
+        "time": 0.168627968,
+        "method": "finch",
+        "kernel": "cg",
+        "matrix": "Boeing/ct20stif",
+        "num_iters": 20
+    }
+]
