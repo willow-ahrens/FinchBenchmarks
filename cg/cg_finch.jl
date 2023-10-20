@@ -72,7 +72,7 @@ function cg_finch_kernel(x, A, b, l)
         p = _p
         r2 = _r2
     end
-    (x,)
+    x
 end
 
 function cg_finch(x, A, b, l)

@@ -22,7 +22,7 @@ function ssymv_finch_kernel(y, A, x)
             y[j] += y_j[]
         end
     end
-    (y,)
+    y
 end
 
 function spmv_finch(y, A, x) 

@@ -25,10 +25,6 @@ s = ArgParseSettings("Run SPMV experiments.")
         arg_type = String
         help = "dataset keyword"
         default = "oski"
-    "--save_results", "-s"
-        arg_type = Bool
-        help = "save conjugate gradient result to file"
-        default = true
 end
 
 parsed_args = parse_args(ARGS, s)
@@ -56,24 +52,18 @@ for mtx in datasets[parsed_args["dataset"]]
     ] 
         @info "testing" key mtx
         res = method(y, A, x)
-        if parsed_args["save_results"]
+        #=
             rm(key * "_results.txt", force=true)
             open(key * "_results.txt","a") do io
                 for i = 1:n
                     @printf(io,"%f\n", res.y[1][i])
                 end
             end
-        end
+        =#
         time = res.time
         y_ref = something(y_ref, res.y)
 
-        err = 0.0
-        for i = 1:n
-            err += (y_ref[1][i] - res.y[1][i])^2
-        end
-        diff = sqrt(err) / norm(y_ref)
-        @info "difference" diff
-        diff < 0.1 || @warn("incorrect result via norm")
+        norm(y - y_ref)/norm(y_ref) < 0.1 || @warn("incorrect result via norm")
 
         # res.y == y_ref || @warn("incorrect result")
         @info "results" time

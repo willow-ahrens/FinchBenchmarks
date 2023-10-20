@@ -1,6 +1,6 @@
 function spmv_kernel(y, A, x)
     y = A*x
-    (y,)
+    y
 end
 
 function spmv_julia(y, A, x)

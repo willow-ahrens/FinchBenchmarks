@@ -30,10 +30,6 @@ s = ArgParseSettings("Run conjugate gradient experiments.")
         arg_type = Int
         help = "number of iters to run"
         default = 20
-    "--save_results", "-s"
-        arg_type = Bool
-        help = "save conjugate gradient result to file"
-        default = true
 end
 
 parsed_args = parse_args(ARGS, s)
@@ -63,24 +59,18 @@ for mtx in datasets[parsed_args["dataset"]]
     ] 
         @info "testing" key mtx
         res = method(x, A, b, num_iters)
-        if parsed_args["save_results"]
+        #=
             rm(key * "_results.txt", force=true)
             open(key * "_results.txt","a") do io
                 for i = 1:n
                     @printf(io,"%f\n", res.x[1][i])
                 end
             end
-        end
+        =#
         time = res.time
         x_ref = something(x_ref, res.x)
 
-        err = 0.0
-        for i = 1:n
-            err += (x_ref[1][i] - res.x[1][i])^2
-        end
-        diff = sqrt(err) / norm(x_ref)
-        @info "difference" diff
-        diff < 0.1 || @warn("incorrect result via norm")
+        norm(res.x - x_ref)/norm(x_ref) < 0.1 || @warn("incorrect result via norm")
 
         # res.x == x_ref || @warn("incorrect result")
         @info "results" time
