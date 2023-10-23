@@ -56,7 +56,7 @@ for mtx in datasets[parsed_args["dataset"]]
             rm(key * "_results.txt", force=true)
             open(key * "_results.txt","a") do io
                 for i = 1:n
-                    @printf(io,"%f\n", res.y[1][i])
+                    @printf(io,"%f\n", res.y[i])
                 end
             end
         =#
