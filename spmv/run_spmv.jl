@@ -32,7 +32,38 @@ parsed_args = parse_args(ARGS, s)
 datasets = Dict(
     "oski" => [
         "Boeing/ct20stif",
-    ]
+        "Simon/raefsky3",
+        "Simon/olafu",
+        "Boeing/bcsstk35",
+        "Simon/venkat01",
+        "Boeing/crystk02",
+        "Boeing/crystk03",
+        "Nasa/nasasrb",
+        "Rothberg/3dtube",
+        "Simon/raefsky4",
+        "FIDAP/ex11",
+        "Zitney/rdist1",
+        "HB/orani678",
+        "Goodwin/rim",
+        "Hamm/memplus",
+        "HB/gemat11",
+        "Mallya/lhr10",
+        "Grund/bayer02",
+        "Grund/bayer10",
+        "Brethour/coater2",
+        "Mulvey/finan512",
+        "ATandT/onetone2",
+        "Pothen/pwt",
+        "Cote/vibrobox",
+        "Wang/wang4",
+        "HB/lnsp3937",
+        "HB/sherman5",
+        "HB/sherman3",
+        "HB/saylr4",
+        "Shyy/shyy161",
+        "Wang/wang3",
+        "Gupta/gupta1"
+    ],
 )
 
 include("spmv_finch.jl")
