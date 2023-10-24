@@ -58,7 +58,7 @@ function ssymv_finch_kernel_helper(y::Fiber{DenseLevel{Int64, ElementLevel{0.0, 
                         i = phase_stop_2 + 1
                     end
                 end
-                y_lvl_val[y_lvl_q_2] = (+)(d_lvl_2_val, y_lvl_val[y_lvl_q_2], y_j_val)
+                y_lvl_val[y_lvl_q_2] = (+)(y_j_val, y_lvl_val[y_lvl_q_2], (*)(x_lvl_2_val, d_lvl_2_val))
             end
             qos = 1 * A_lvl.shape
             resize!(y_lvl_val, qos)
@@ -80,8 +80,8 @@ function ssymv_finch_kernel(y, A, x, d)
     #                     y_j[] += A_ij * x[i]
     #                 end
     #             end
+    #             y[j] += y_j[] + d[j] * x_j
     #         end
-    #         y[j] += y_j[] + d[j]
     #     end
     # end)
     
@@ -118,7 +118,7 @@ function spmv_finch(y, A, x)
     _A = Fiber!(Dense(SparseList(Element(0.0))))
     _d = Fiber!(Dense(Element(0.0)))
     @finch (_A .= 0; for j = _, i = _; if i < j; _A[i, j] = A[i, j] end end)
-    @finch (_d .= 0; for j = _, i = _; if i == j; _d[i] = A[i, j] * x[i] end end)
+    @finch (_d .= 0; for j = _, i = _; if i == j; _d[i] = A[i, j] end end)
     @info "pruning" nnz(A) nnz(_A)
     
     _x = Fiber!(Dense(Element(0.0)), x)
