@@ -117,8 +117,18 @@ function spmv_finch(y, A, x)
     _y = Fiber!(Dense(Element(0.0)), y)
     _A = Fiber!(Dense(SparseList(Element(0.0))))
     _d = Fiber!(Dense(Element(0.0)))
-    @finch (_A .= 0; for j = _, i = _; if i < j; _A[i, j] = A[i, j] end end)
-    @finch (_d .= 0; for j = _, i = _; if i == j; _d[i] = A[i, j] end end)
+    @finch begin
+        _A .= 0
+        _d .= 0
+        for j = _, i = _
+            if i < j
+                _A[i, j] = A[i, j]
+            end
+            if i == j
+                _d[i] = A[i, j]
+            end
+        end
+    end
     @info "pruning" nnz(A) nnz(_A)
     
     _x = Fiber!(Dense(Element(0.0)), x)

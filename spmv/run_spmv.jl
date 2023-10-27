@@ -43,7 +43,9 @@ datasets = Dict(
         "Pothen/pwt",
         "Cote/vibrobox",
         "HB/saylr4",
-        "Gupta/gupta1"
+        "Gupta/gupta1",
+        "HB/lns_3937",
+        "HB/jpwh_991"
     ],
 )
 
