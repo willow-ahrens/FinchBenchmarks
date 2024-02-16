@@ -12,6 +12,7 @@ using DataStructures
 using JSON
 using SparseArrays
 using LinearAlgebra
+using Printf
 
 #Here is where we use the julia arg parser to collect an input dataset keyword and an output file path
 
@@ -59,16 +60,20 @@ for mtx in datasets[parsed_args["dataset"]]
     ] 
         @info "testing" key mtx
         res = method(x, A, b, num_iters)
+
+        # Uncomment to manually compare results
         #=
             rm(key * "_results.txt", force=true)
             open(key * "_results.txt","a") do io
                 for i = 1:n
-                    @printf(io,"%f\n", res.x[1][i])
+                    @printf(io,"%f\n", res.x[i])
                 end
             end
         =#
+
         time = res.time
         x_ref = something(x_ref, res.x)
+        @info "norm" norm(A * AsArray(res.x) - b)/norm(b)
 
         norm(res.x - x_ref)/norm(x_ref) < 0.1 || @warn("incorrect result via norm")
 
