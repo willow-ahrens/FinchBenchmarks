@@ -1,7 +1,9 @@
 using IterativeSolvers
 
 function cg_iterative_solvers_kernel(x, A, b, l)
-    IterativeSolvers.cg(A, b; abstol = zero(eltype(A)), reltol = zero(eltype(A)), maxiter = l, log = false)
+    x, ch = IterativeSolvers.cg(A, b; abstol = zero(eltype(A)), reltol = zero(eltype(A)), maxiter = l, log = true)
+    # println("IterativeSolvers iterations count: ", ch.iters)
+    x
 end
 
 function cg_iterative_solvers(x, A, b, l)

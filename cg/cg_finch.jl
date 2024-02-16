@@ -30,12 +30,12 @@ function cg_finch_kernel(x, A, b, l)
     (n, m) = size(A)
     @assert n == m
 
-    _x = Tensor(Dense(Element(0.0)), zeros(n))
-    u = Tensor(Dense(Element(0.0)), zeros(n))
-    _u = Tensor(Dense(Element(0.0)), zeros(n))
-    r = Tensor(Dense(Element(0.0)), zeros(n))
-    _r = Tensor(Dense(Element(0.0)), zeros(n))
-    c = Tensor(Dense(Element(0.0)), zeros(n))
+    _x = Tensor(Dense(Element(0.0)), undef, n)
+    u = Tensor(Dense(Element(0.0)), undef, n)
+    _u = Tensor(Dense(Element(0.0)), undef, n)
+    r = Tensor(Dense(Element(0.0)), undef, n)
+    _r = Tensor(Dense(Element(0.0)), undef, n)
+    c = Tensor(Dense(Element(0.0)), undef, n)
 
     ssymv_finch(c, A, x)
     @finch for i = _; r[i] = b[i] - c[i] end
