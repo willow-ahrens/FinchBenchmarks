@@ -10,10 +10,10 @@ function ssymv_finch(y, A, x)
                 y_j .= 0
                 for i = _
                     let A_ij = A[i, j]
-                        if uptrimask[i, j]
-                            y[i] += x_j * A_ij
+                        if i <= j
+                            y[i] += A_ij * x_j
                         end
-                        if uptrimask[i, j - 1]
+                        if i < j
                             y_j[] += A_ij * x[i]
                         end
                     end
@@ -25,60 +25,53 @@ function ssymv_finch(y, A, x)
     y
 end
 
+# Using algorithm from https://github.com/JuliaLinearAlgebra/IterativeSolvers.jl/blob/e5d10e22552916e7dbd73d0a9ece02d873dee375/src/cg.jl
 function cg_finch_kernel(x, A, b, l)
     (n, m) = size(A)
     @assert n == m
 
-    r = Fiber!(Dense(Element(0.0), n))
-    _r = Fiber!(Dense(Element(0.0), n))
-    p = Fiber!(Dense(Element(0.0), n))
-    _p = Fiber!(Dense(Element(0.0), n))
-    _x = Fiber!(Dense(Element(0.0), n))
-    Ap = Fiber!(Dense(Element(0.0), n))
+    _x = Tensor(Dense(Element(0.0)), undef, n)
+    u = Tensor(Dense(Element(0.0)), undef, n)
+    _u = Tensor(Dense(Element(0.0)), undef, n)
+    r = Tensor(Dense(Element(0.0)), undef, n)
+    _r = Tensor(Dense(Element(0.0)), undef, n)
+    c = Tensor(Dense(Element(0.0)), undef, n)
 
-    # r_0 = b - Ax_0
-    ssymv_finch(_r, A, x)
-    @finch for i = _; r[i] = b[i] - _r[i] end
-    # p_0 = r_0
-    @finch for i = _; p[i] = r[i] end
-    # r2 = r_0^Tr_0
-    r2 = Scalar(0.0)
-    @finch (for i = _; r2[] += r[i]^2 end)
+    ssymv_finch(c, A, x)
+    @finch for i = _; r[i] = b[i] - c[i] end
+    residual_sq = Scalar(0.0)
+    @finch (for i = _; residual_sq[] += r[i]^2 end)
+    residual = Scalar((residual_sq[])^(1/2))
 
+    prev_residual = Scalar(1.0)
     for k = 1:l
-        pTAp = Scalar(0.0)
+        β = Scalar(residual[]^2 / prev_residual[]^2)
+        @finch (for i = _; _u[i] = r[i] + β[] * u[i] end)
+        u = _u
+        
+        c = ssymv_finch(c, A, u)
+        uc = Scalar(0.0)
+        @finch (for i = _; uc[] += u[i] * c[i] end)
+        α = Scalar(residual[]^2 / uc[])
 
-        Ap = ssymv_finch(Ap, A, p)
 
-        # alpha_k = r_k^T * r_k / (p_k^T * A * p_k)
-        @finch (pTAp .= 0; for i = _; pTAp[] += p[i] * Ap[i] end)
-
-        alpha = Scalar(r2[] / pTAp[])
-
-        @finch (for i = _; _x[i] = x[i] + alpha[] * p[i] end)
-        @finch (for i = _; _r[i] = r[i] - alpha[] * Ap[i] end)
-
-        _r2 = Scalar(0.0)
-        @finch (for i = _; _r2[] += _r[i]^2 end)
-
-        # beta_k = r_k+1^T * r_k+1 / (r_k^T * r_k)
-        beta = Scalar(_r2[] / r2[])
-
-        # p_k+1 = r_k+1 * beta_k * p_k
-        @finch (for i = _; _p[i] = _r[i] + beta[] * p[i] end)
-
+        @finch (for i = _; _x[i] = x[i] + α[] * u[i] end)
+        @finch (for i = _; _r[i] = r[i] - α[] * c[i] end)
         x = _x
         r = _r
-        p = _p
-        r2 = _r2
+        
+        prev_residual = residual[]
+        residual_sq = Scalar(0.0)
+        @finch (for i = _; residual_sq[] += r[i]^2 end)
+        residual = Scalar((residual_sq[])^(1/2))
     end
     x
 end
 
 function cg_finch(x, A, b, l)
-    _x = Fiber!(Dense(Element(0.0)), x)
-    _A = Fiber!(Dense(SparseList(Element(0.0))), A)
-    _b = Fiber!(Dense(Element(0.0)), b)
+    _x = Tensor(Dense(Element(0.0)), x)
+    _A = Tensor(Dense(SparseList(Element(0.0))), A)
+    _b = Tensor(Dense(Element(0.0)), b)
     x = Ref{Any}()
     time = @belapsed $x[] = cg_finch_kernel($_x, $_A, $_b, $l)
     return (;time = time, x = x[])
