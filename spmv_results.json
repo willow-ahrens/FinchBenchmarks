@@ -1,14 +1,158 @@
 [
     {
-        "time": 0.00132575,
+        "time": 0.002506654,
         "method": "julia",
         "kernel": "spmv",
         "matrix": "Boeing/ct20stif"
     },
     {
-        "time": 0.001112792,
+        "time": 0.001942989,
         "method": "finch",
         "kernel": "spmv",
         "matrix": "Boeing/ct20stif"
+    },
+    {
+        "time": 0.000880061,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu"
+    },
+    {
+        "time": 0.000673892,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu"
+    },
+    {
+        "time": 0.001285744,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35"
+    },
+    {
+        "time": 0.000988764,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35"
+    },
+    {
+        "time": 0.000832821,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02"
+    },
+    {
+        "time": 0.000623293,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02"
+    },
+    {
+        "time": 0.001524937,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03"
+    },
+    {
+        "time": 0.001157643,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03"
+    },
+    {
+        "time": 0.002447045,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb"
+    },
+    {
+        "time": 0.001829761,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb"
+    },
+    {
+        "time": 0.003293673,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube"
+    },
+    {
+        "time": 0.002140059,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube"
+    },
+    {
+        "time": 0.001164823,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4"
+    },
+    {
+        "time": 0.000883617,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4"
+    },
+    {
+        "time": 0.000678161,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512"
+    },
+    {
+        "time": 0.000560874,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512"
+    },
+    {
+        "time": 0.000349955,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt"
+    },
+    {
+        "time": 0.000294184,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt"
+    },
+    {
+        "time": 0.000320166,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox"
+    },
+    {
+        "time": 0.000227676,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox"
+    },
+    {
+        "time": 2.2724e-5,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4"
+    },
+    {
+        "time": 2.4561e-5,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4"
+    },
+    {
+        "time": 0.002271417,
+        "method": "julia",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1"
+    },
+    {
+        "time": 0.001534828,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1"
     }
 ]
