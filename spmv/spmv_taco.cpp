@@ -12,9 +12,10 @@ namespace fs = std::__fs::filesystem;
 
 using namespace taco;
 
-void experiment(std::string input, std::string output, int verbose){
-    Tensor<double> A = read(fs::path(input)/"A.ttx", Format({Dense, Sparse}), true);
-    Tensor<double> x = read(fs::path(input)/"x.ttx", Format({Dense}), true);
+int main(int argc, char **argv){
+    auto params = parse(argc, argv);
+    Tensor<double> A = read(fs::path(params.input)/"A.ttx", Format({Dense, Sparse}), true);
+    Tensor<double> x = read(fs::path(params.input)/"x.ttx", Format({Dense}), true);
     int m = A.getDimension(0);
     int n = A.getDimension(1);
     Tensor<double> y("y", {n}, Format({Dense}));
@@ -44,7 +45,8 @@ void experiment(std::string input, std::string output, int verbose){
     json measurements;
     measurements["time"] = time;
     measurements["memory"] = 0;
-    std::ofstream measurements_file(fs::path(output)/"measurements.json");
+    std::ofstream measurements_file(fs::path(params.output)/"measurements.json");
     measurements_file << measurements;
     measurements_file.close();
+    return 0;
 }

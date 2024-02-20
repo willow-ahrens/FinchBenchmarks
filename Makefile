@@ -10,7 +10,7 @@ else
 export NPROC_VAL := $(shell lscpu -p | egrep -v '^\#' | wc -l)
 endif
 
-SPMV = spmv/spmv spmv/spmv_taco
+SPMV = spmv/spmv_taco
 
 SPGEMM = spgemm/spgemm_taco
 
@@ -24,7 +24,7 @@ $(SPARSE_BENCH_CLONE):
 	git submodule update --init $(SPARSE_BENCH_DIR)
 
 $(SPARSE_BENCH): $(SPARSE_BENCH_CLONE) $(SPARSE_BENCH_DIR)/src/*
-	mkpath $(SPARSE_BENCH) ;\
+	mkdir -p $(SPARSE_BENCH) ;\
 	touch $(SPARSE_BENCH)
 
 TACO_DIR = deps/taco
@@ -49,9 +49,6 @@ clean:
 
 spgemm/spgemm_taco: $(SPARSE_BENCH) $(TACO) spgemm/spgemm_taco.cpp
 	$(CXX) $(TACO_CXXFLAGS) -o $@ spgemm/spgemm_taco.cpp $(TACO_LDLIBS)
-
-spmv/spmv: $(SPARSE_BENCH) spmv/spmv.cpp
-	$(CXX) $(CXXFLAGS) -o $@ spmv/spmv.cpp $(LDLIBS)
 
 spmv/spmv_taco: $(SPARSE_BENCH) $(TACO) spmv/spmv_taco.cpp
 	$(CXX) $(TACO_CXXFLAGS) -o $@ spmv/spmv_taco.cpp $(TACO_LDLIBS)

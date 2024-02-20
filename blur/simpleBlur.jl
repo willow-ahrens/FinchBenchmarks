@@ -9,9 +9,9 @@ function openCVBlur(data)
     return img_blur
 end
 
-input = Fiber!(Dense(Dense(Dense(Element(Float64(0))))))
-output = Fiber!(Dense(Dense(Dense(Element(Float64(0))))))
-tmp = Fiber!(Dense(Dense(Element(Float64(0)))))
+input = Tensor(Dense(Dense(Dense(Element(Float64(0))))))
+output = Tensor(Dense(Dense(Dense(Element(Float64(0))))))
+tmp = Tensor(Dense(Dense(Element(Float64(0)))))
 
 
 @Finch.finch_kernel function blurSimple(input, output, tmp)
@@ -40,17 +40,17 @@ end
 
 function convertImageToFinch(img)
     (cs, xs, ys) = size(img)
-    inp = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img)
+    inp = Tensor(Dense(Dense(Dense(Element(Float64(0))))), img)
     outBuff = zeros(Float64, (cs, xs, ys))
-    out = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), outBuff)
+    out = Tensor(Dense(Dense(Dense(Element(Float64(0))))), outBuff)
     tempBuf = zeros(Float64, (xs, cs))
-    tmp = Fiber!(Dense(Dense(Element(Float64(0)))), tempBuf)
+    tmp = Tensor(Dense(Dense(Element(Float64(0)))), tempBuf)
     return (inp, out, tmp)
 end
 
 function testCorrect(img1, img2)
-    img2AsDense = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img2)
-    img1AsDense = Fiber!(Dense(Dense(Dense(Element(Float64(0))))), img1)
+    img2AsDense = Tensor(Dense(Dense(Dense(Element(Float64(0))))), img2)
+    img1AsDense = Tensor(Dense(Dense(Dense(Element(Float64(0))))), img1)
     return img2AsDense == img1AsDense
 end
 
