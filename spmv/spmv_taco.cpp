@@ -12,8 +12,8 @@ namespace fs = std::__fs::filesystem;
 
 using namespace taco;
 
-void main(int argc, char **argv){
-    auto params = benchmark::parse_args(argc, argv);
+int main(int argc, char **argv){
+    auto params = parse(argc, argv);
     Tensor<double> A = read(fs::path(params.input)/"A.ttx", Format({Dense, Sparse}), true);
     Tensor<double> x = read(fs::path(params.input)/"x.ttx", Format({Dense}), true);
     int m = A.getDimension(0);
@@ -48,4 +48,5 @@ void main(int argc, char **argv){
     std::ofstream measurements_file(fs::path(params.output)/"measurements.json");
     measurements_file << measurements;
     measurements_file.close();
+    return 0;
 }

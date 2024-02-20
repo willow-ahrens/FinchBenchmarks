@@ -20,14 +20,15 @@ using namespace taco;
 #define MOD_INNER (1)
 #define MOD_OUTER (2)
 
-void experiment(std::string input, std::string output, int verbose){
+int main(int argc, char ** argv){
+  auto params = parse(argc, argv);
 
 	//fprintf(stderr, "OOO: %d %d %d %d\n", Aformat, Bformat, Cformat, computemode);
 	// assume sym (will be lifted)   
     Tensor<double> A;
     Tensor<double> B;
-    A = read(input+"/A.ttx", Format({Dense, Sparse}), true);
-    B = read(input+"/B.ttx", Format({Dense, Sparse}), true);
+    A = read(params.input+"/A.ttx", Format({Dense, Sparse}), true);
+    B = read(params.input+"/B.ttx", Format({Dense, Sparse}), true);
 
     int m = A.getDimension(0);
     int n = B.getDimension(1);
@@ -82,14 +83,15 @@ void experiment(std::string input, std::string output, int verbose){
       }
     );
 
-    write(output+"/C.ttx", C);
+    write(params.output+"/C.ttx", C);
     //C.printAssembleIR(std::cout, true, true);
     //C.printComputeIR(std::cout, true, true);
 
     json measurements;
     measurements["time"] = time;
     measurements["memory"] = 0;
-    std::ofstream measurements_file(output+"/measurements.json");
+    std::ofstream measurements_file(params.output+"/measurements.json");
     measurements_file << measurements;
     measurements_file.close();
+    return 0;
 }
