@@ -40,8 +40,8 @@ function spgemm_finch_outer_kernel(A, B)
 end
 
 function spgemm_finch(f, A, B)
-    _A = fiber(A)
-    _B = fiber(B)
+    _A = Tensor(A)
+    _B = Tensor(B)
     C = Ref{Any}()
     time = @belapsed $C[] = $f($_A, $_B)
     return (;time = time, C = C[])

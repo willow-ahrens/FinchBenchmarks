@@ -1,24 +1,24 @@
 [
     {
-        "time": 0.000822013,
+        "time": 0.000571916,
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
         "matrix": "HB/bcspwr07"
     },
     {
-        "time": 0.036096741,
+        "time": 0.03007975,
         "method": "spgemm_finch_inner",
         "kernel": "spgemm",
         "matrix": "HB/bcspwr07"
     },
     {
-        "time": 0.000628342,
+        "time": 0.00059575,
         "method": "spgemm_finch_gustavson",
         "kernel": "spgemm",
         "matrix": "HB/bcspwr07"
     },
     {
-        "time": 0.003264402,
+        "time": 0.002750792,
         "method": "spgemm_finch_outer",
         "kernel": "spgemm",
         "matrix": "HB/bcspwr07"
