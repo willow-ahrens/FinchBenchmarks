@@ -2,3 +2,4 @@
 spmv/spmv
 spmv/spmv_taco
 deps/SparseRooflineBenchmark/build
+.vscode/settings.json
