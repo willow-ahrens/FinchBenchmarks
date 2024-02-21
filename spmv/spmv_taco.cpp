@@ -40,7 +40,7 @@ int main(int argc, char **argv){
       }
     );
 
-    write("y.ttx", y);
+    write(fs::path(params.input)/"y.ttx", y);
 
     json measurements;
     measurements["time"] = time;
