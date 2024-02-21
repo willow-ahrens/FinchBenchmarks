@@ -63,7 +63,7 @@ for mtx in datasets[parsed_args["dataset"]]
     for (key, method) in [
         "julia" => spmv_julia,
         "finch" => spmv_finch,
-        # "taco" => spmv_taco,
+        "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ] 
         @info "testing" key mtx
