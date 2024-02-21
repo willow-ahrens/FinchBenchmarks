@@ -1,7 +1,7 @@
 CC = gcc
 CXX = g++
 LD = ld
-CXXFLAGS += -std=c++11
+CXXFLAGS += -std=c++17
 LDLIBS +=
 
 ifeq ("$(shell uname)","Darwin")
@@ -23,7 +23,7 @@ SPARSE_BENCH = deps/SparseRooflineBenchmark/build/hello
 $(SPARSE_BENCH_CLONE): 
 	git submodule update --init $(SPARSE_BENCH_DIR)
 
-$(SPARSE_BENCH): $(SPARSE_BENCH_CLONE) $(SPARSE_BENCH_DIR)/src/*
+$(SPARSE_BENCH): $(SPARSE_BENCH_CLONE)
 	mkdir -p $(SPARSE_BENCH) ;\
 	touch $(SPARSE_BENCH)
 
@@ -36,7 +36,7 @@ TACO_LDLIBS = $(LDLIBS) -L$(TACO_DIR)/build/lib -ltaco -ldl
 $(TACO_CLONE): 
 	git submodule update --init $(TACO_DIR)
 
-$(TACO): $(TACO_CLONE) $(TACO_DIR)/src/* $(TACO_DIR)/include/*
+$(TACO): $(TACO_CLONE)
 	cd $(TACO_DIR) ;\
 	mkdir -p build ;\
 	cd build ;\
