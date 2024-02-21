@@ -8,7 +8,7 @@
 #include <cstdint>
 #include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 
-namespace fs = std::__fs::filesystem;
+namespace fs = std::filesystem;
 
 using namespace taco;
 
