@@ -80,8 +80,6 @@ function ssymv_finch_kernel(y, A, x, d)
     y
 end
 
-using Cthulhu
-
 function spmv_finch(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseList(Element(0.0))), A)
