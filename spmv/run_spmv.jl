@@ -49,6 +49,8 @@ datasets = Dict(
 
 include("spmv_finch.jl")
 include("spmv_julia.jl")
+include("spmv_taco.jl")
+include("spmv_suite_sparse.jl")
 
 results = []
 
@@ -60,7 +62,9 @@ for mtx in datasets[parsed_args["dataset"]]
     y_ref = nothing
     for (key, method) in [
         "julia" => spmv_julia,
-        "finch" => spmv_finch
+        "finch" => spmv_finch,
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse,
     ] 
         @info "testing" key mtx
         res = method(y, A, x)
