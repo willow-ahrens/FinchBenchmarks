@@ -75,7 +75,7 @@ function convertImageToFinch(img)
 end
 
 function convertImageToFinchRLE(img)
-    img = permutedims(img, 3, 1, 2)
+    img = permutedims(img, (3, 1, 2))
     (ys, cs, xs) = size(img)
     inp = Tensor(Dense(Dense(RepeatRLE(Float64(0)))), img)
     out = Tensor(Dense(Dense(RepeatRLE(Float64(0)))), ys, cs, xs)
@@ -98,7 +98,7 @@ function runOnImage(filename)
     data = testimage(filename)
     data_raw = Array{Float64}((channelview(data)))
     finchData = convertImageToFinch(data_raw)
-    finchRLEData = convertImageToFinch(data_raw)
+    finchRLEData = convertImageToFinchRLE(data_raw)
     println(sizeof(finchData[1]))
     println(sizeof(finchRLEData[1]))
     data1 = openCVBlur(data_raw)
@@ -107,7 +107,7 @@ function runOnImage(filename)
     correct = testCorrect(finchData[2], data1)
 
     timeFinch = @belapsed runBlurSimple($(finchData[1]), $(finchData[2]), $(finchData[3])) evals=1
-    timeFinchRLE = @belapsed runBlurSimple($(finchRLEData[1]), $(finchRLEData[2]), $(finchRLEData[3])) evals=1
+    timeFinchRLE = @belapsed runBlurRLE($(finchRLEData[1]), $(finchRLEData[2]), $(finchRLEData[3])) evals=1
     timeOpenCV = @belapsed openCVBlur($data_raw) evals=1
 
     result = Dict("imagename"=>filename, "finchTime"=>timeFinch, "openCVtime"=>timeOpenCV, "finchRLETime"=>timeFinchRLE, 
