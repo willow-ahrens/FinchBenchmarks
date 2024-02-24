@@ -8,7 +8,7 @@
 #include <cstdint>
 #include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 
-namespace fs = std::__fs::filesystem;
+namespace fs = std::filesystem;
 
 using namespace taco;
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv){
       }
     );
 
-    write("y.ttx", y);
+    write(fs::path(params.input)/"y.ttx", y);
 
     json measurements;
     measurements["time"] = time;

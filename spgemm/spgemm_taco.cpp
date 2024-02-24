@@ -10,16 +10,6 @@
 
 using namespace taco;
 
-// format = 0: DD, 1:DS, 2:SS
-// computemode = 0:Gustavson, 1:inner proudct, 2:outer product
-
-#define FORMAT_DD (0)
-#define FORMAT_DS (1)
-#define FORMAT_SS (2)
-#define MOD_GUS (0)
-#define MOD_INNER (1)
-#define MOD_OUTER (2)
-
 int main(int argc, char **argv) {
   auto params = parse(argc, argv);
 
