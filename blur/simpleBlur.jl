@@ -110,7 +110,8 @@ function runOnImage(filename)
     timeFinchRLE = @belapsed runBlurRLE($(finchRLEData[1]), $(finchRLEData[2]), $(finchRLEData[3])) evals=1
     timeOpenCV = @belapsed openCVBlur($data_raw) evals=1
 
-    result = Dict("imagename"=>filename, "finchTime"=>timeFinch, "openCVtime"=>timeOpenCV, "finchRLETime"=>timeFinchRLE, 
+    result = Dict("imagename"=>filename, "finchTime"=>timeFinch,
+    "openCVtime"=>timeOpenCV, "finchRLETime"=>timeFinchRLE, 
         "name"=>"box-blur3x3-Float64",
         "type"=>"Float64", "sizex"=>3, "sizey"=>3,
         "correct" => correct)
