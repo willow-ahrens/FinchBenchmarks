@@ -64,6 +64,8 @@ datasets = Dict(
 
 include("spgemm_finch.jl")
 include("spgemm_taco.jl")
+include("spgemm_finch_par.jl")
+
 
 results = []
 
@@ -72,6 +74,7 @@ for mtx in datasets[parsed_args["dataset"]]
     B = A
     C_ref = nothing
     for (key, method) in [
+        "spgemm_finch_gustavson_parallel" => spgemm_finch_gustavson_parallel,
         "spgemm_taco_inner" => spgemm_taco_inner,
         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
         "spgemm_taco_outer" => spgemm_taco_outer,
