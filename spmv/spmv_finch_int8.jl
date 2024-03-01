@@ -1,7 +1,7 @@
 using Finch
 using BenchmarkTools
 
-function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}, x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, diag::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, y_j::Scalar{0.0, Float64})
+function ssymv_finch_int8_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, ElementLevel{0, Int8, Int64, Vector{Int8}}}}}, x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, diag::Tensor{DenseLevel{Int64, ElementLevel{0, Int8, Int64, Vector{Int8}}}}, y_j::Scalar{0.0, Float64})
     @inbounds begin
             y_lvl = y.lvl
             y_lvl_2 = y_lvl.lvl
@@ -75,19 +75,19 @@ function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
         end
 end
 
-function ssymv_finch_kernel(y, A, x, d)
+function ssymv_finch_int8_kernel(y, A, x, d)
     y_j = Scalar(0.0)
-    ssymv_finch_kernel_helper(y, A, x, d, y_j)
+    ssymv_finch_int8_kernel_helper(y, A, x, d, y_j)
     y
 end
 
-function spmv_finch(y, A, x) 
+function spmv_finch_int8(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
-    _A = Tensor(Dense(SparseList(Element(0.0))), A)
-    _d = Tensor(Dense(Element(0.0)))
+    _A = Tensor(Dense(SparseList(Element(Int8(0)))), A)
+    _d = Tensor(Dense(Element(Int8(0))))
     @finch begin
-        _A .= 0
-        _d .= 0
+        _A .= Int8(0)
+        _d .= Int8(0)
         for j = _, i = _
             if i < j
                 _A[i, j] = A[i, j]
@@ -102,6 +102,6 @@ function spmv_finch(y, A, x)
 
     _x = Tensor(Dense(Element(0.0)), x)
     y = Ref{Any}()
-    time = @belapsed $y[] = ssymv_finch_kernel($_y, $_A, $_x, $_d)
+    time = @belapsed $y[] = ssymv_finch_int8_kernel($_y, $_A, $_x, $_d)
     return (;time = time, y = y[])
 end

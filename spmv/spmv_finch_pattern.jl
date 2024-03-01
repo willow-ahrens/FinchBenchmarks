@@ -1,7 +1,4 @@
-using Finch
-using BenchmarkTools
-
-function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}, x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, diag::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, y_j::Scalar{0.0, Float64})
+function ssymv_finch_pattern_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, PatternLevel{Int64}}}}, x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, diag::Tensor{DenseLevel{Int64, PatternLevel{Int64}}}, y_j::Scalar{0.0, Float64})
     @inbounds begin
             y_lvl = y.lvl
             y_lvl_2 = y_lvl.lvl
@@ -10,11 +7,9 @@ function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
             A_lvl_2 = A_lvl.lvl
             A_lvl_ptr = A_lvl_2.ptr
             A_lvl_idx = A_lvl_2.idx
-            A_lvl_2_val = A_lvl_2.lvl.val
             x_lvl = x.lvl
             x_lvl_val = x_lvl.lvl.val
             diag_lvl = diag.lvl
-            diag_lvl_val = diag_lvl.lvl.val
             A_lvl.shape == x_lvl.shape || throw(DimensionMismatch("mismatched dimension limits ($(A_lvl.shape) != $(x_lvl.shape))"))
             x_lvl.shape == A_lvl_2.shape || throw(DimensionMismatch("mismatched dimension limits ($(x_lvl.shape) != $(A_lvl_2.shape))"))
             A_lvl.shape == diag_lvl.shape || throw(DimensionMismatch("mismatched dimension limits ($(A_lvl.shape) != $(diag_lvl.shape))"))
@@ -26,9 +21,7 @@ function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                 x_lvl_q = (1 - 1) * x_lvl.shape + j_6
                 A_lvl_q = (1 - 1) * A_lvl.shape + j_6
                 y_lvl_q_2 = (1 - 1) * A_lvl.shape + j_6
-                diag_lvl_q = (1 - 1) * diag_lvl.shape + j_6
                 x_lvl_2_val = x_lvl_val[x_lvl_q]
-                diag_lvl_2_val = diag_lvl_val[diag_lvl_q]
                 y_j_val = 0
                 A_lvl_2_q = A_lvl_ptr[A_lvl_q]
                 A_lvl_2_q_stop = A_lvl_ptr[A_lvl_q + 1]
@@ -45,22 +38,20 @@ function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                     while true
                         A_lvl_2_i = A_lvl_idx[A_lvl_2_q]
                         if A_lvl_2_i < phase_stop
-                            A_lvl_3_val = A_lvl_2_val[A_lvl_2_q]
                             y_lvl_q = (1 - 1) * A_lvl.shape + A_lvl_2_i
                             x_lvl_q_2 = (1 - 1) * x_lvl.shape + A_lvl_2_i
                             x_lvl_2_val_2 = x_lvl_val[x_lvl_q_2]
-                            y_lvl_val[y_lvl_q] = A_lvl_3_val * x_lvl_2_val + y_lvl_val[y_lvl_q]
-                            y_j_val = A_lvl_3_val * x_lvl_2_val_2 + y_j_val
+                            y_lvl_val[y_lvl_q] = x_lvl_2_val + y_lvl_val[y_lvl_q]
+                            y_j_val = x_lvl_2_val_2 + y_j_val
                             A_lvl_2_q += 1
                         else
                             phase_stop_3 = min(A_lvl_2_i, phase_stop)
                             if A_lvl_2_i == phase_stop_3
-                                A_lvl_3_val = A_lvl_2_val[A_lvl_2_q]
                                 y_lvl_q = (1 - 1) * A_lvl.shape + phase_stop_3
                                 x_lvl_q_2 = (1 - 1) * x_lvl.shape + phase_stop_3
                                 x_lvl_2_val_3 = x_lvl_val[x_lvl_q_2]
-                                y_lvl_val[y_lvl_q] = A_lvl_3_val * x_lvl_2_val + y_lvl_val[y_lvl_q]
-                                y_j_val += A_lvl_3_val * x_lvl_2_val_3
+                                y_lvl_val[y_lvl_q] = x_lvl_2_val + y_lvl_val[y_lvl_q]
+                                y_j_val += x_lvl_2_val_3
                                 A_lvl_2_q += 1
                             end
                             break
@@ -68,22 +59,23 @@ function ssymv_finch_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                     end
                 end
                 y_j.val = y_j_val
-                y_lvl_val[y_lvl_q_2] = y_j_val + y_lvl_val[y_lvl_q_2] + x_lvl_2_val * diag_lvl_2_val
+                y_lvl_val[y_lvl_q_2] = x_lvl_2_val + y_lvl_val[y_lvl_q_2] + y_j_val
             end
             resize!(y_lvl_val, A_lvl.shape)
             result = (y = Tensor((DenseLevel){Int64}(y_lvl_2, A_lvl.shape)),)
         end
 end
 
-function ssymv_finch_kernel(y, A, x, d)
+
+function ssymv_finch_pattern_kernel(y, A, x, d)
     y_j = Scalar(0.0)
-    ssymv_finch_kernel_helper(y, A, x, d, y_j)
+    ssymv_finch_pattern_kernel_helper(y, A, x, d, y_j)
     y
 end
 
-function spmv_finch(y, A, x) 
+function spmv_finch_pattern(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
-    _A = Tensor(Dense(SparseList(Element(0.0))), A)
+    _A = Tensor(Dense(SparseList(Element(0.0))))
     _d = Tensor(Dense(Element(0.0)))
     @finch begin
         _A .= 0
@@ -97,11 +89,14 @@ function spmv_finch(y, A, x)
             end
         end
     end
-    # @info "pruning" nnz(A) nnz(_A)
-    @info "memory footprint" Base.summarysize(_A)
 
+    A_pattern = pattern!(_A)
+    d_pattern = pattern!(_d)
+    # @info "pruning" nnz(A) nnz(_A)
+    @info "memory footprint" Base.summarysize(A_pattern)
+    
     _x = Tensor(Dense(Element(0.0)), x)
     y = Ref{Any}()
-    time = @belapsed $y[] = ssymv_finch_kernel($_y, $_A, $_x, $_d)
+    time = @belapsed $y[] = ssymv_finch_pattern_kernel($_y, $A_pattern, $_x, $d_pattern)
     return (;time = time, y = y[])
 end
