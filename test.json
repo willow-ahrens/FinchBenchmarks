@@ -1,11 +1,14 @@
-{
-    "name": "box-blur3x3-Float64",
-    "sizex": 3,
-    "correct": false,
-    "openCVtime": 0.000999708,
-    "finchRLETime": 0.005526041,
-    "sizey": 3,
-    "imagename": "mandrill.tiff",
-    "finchTime": 0.0027255,
-    "type": "Float64"
-}
+[
+    {
+        "method": "opencv",
+        "time": 0.001023084,
+        "mem": 6291504,
+        "imagename": "mandrill.tiff"
+    },
+    {
+        "method": "finch",
+        "time": 0.002727083,
+        "mem": 6291608,
+        "imagename": "mandrill.tiff"
+    }
+]

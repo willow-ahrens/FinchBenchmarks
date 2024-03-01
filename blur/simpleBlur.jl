@@ -9,20 +9,22 @@ using Finch
 using TestImages
 using ImageCore, OpenCV, TestImages, MosaicViews, Colors
 using BenchmarkTools
+using LinearAlgebra
 using JSON
+using Base: summarysize
 
+blur_opencv_kernel(data) = OpenCV.blur(data, OpenCV.Size(Int32(3), Int32(3)))
 
-
-function openCVBlur(data)
-    img_blur = OpenCV.blur(data, OpenCV.Size(Int32(3), Int32(3)))
-    return img_blur
+function blur_opencv(input)
+    time = @belapsed blur_opencv_kernel($input) evals=1
+    return (; time = time, mem = summarysize(input), output = blur_opencv_kernel(input))
 end
 
 input = Tensor(Dense(Dense(Dense(Element(Float64(0))))))
 output = Tensor(Dense(Dense(Dense(Element(Float64(0))))))
 tmp = Tensor(Dense(Dense(Element(Float64(0)))))
 
-eval(Finch.@finch_kernel function blurSimple(input, output, tmp)
+eval(Finch.@finch_kernel function blur_finch_kernel(output, input, tmp)
     output .= 0
     for y = _
         tmp .= 0
@@ -39,15 +41,20 @@ eval(Finch.@finch_kernel function blurSimple(input, output, tmp)
     end
 end)
 
-function runBlurSimple(input, output, tmp)
-    blurSimple(input, output, tmp)
+function blur_finch(img)
+    (cs, xs, ys) = size(img)
+    input = Tensor(Dense(Dense(Dense(Element(Float64(0))))), img)
+    output = Tensor(Dense(Dense(Dense(Element(Float64(0))))), undef, cs, xs, ys)
+    tmp = Tensor(Dense(Dense(Element(Float64(0)))), undef, cs, xs)
+    time = @belapsed blur_finch_kernel($output, $input, $tmp) evals=1
+    return (;time=time, mem = summarysize(input), output=output)
 end
 
-input = Tensor(Dense(Dense(RepeatRLE(Float64(0)))))
-output = Tensor(Dense(Dense(RepeatRLE(Float64(0)))))
-tmp = Tensor(Dense(RepeatRLE(Float64(0))))
+input = Tensor(Dense(Dense(DenseRLE(Element(Float64(0))))))
+output = Tensor(Dense(Dense(DenseRLE(Element(Float64(0)), merge=false))))
+tmp = Tensor(Dense(DenseRLE(Element(Float64(0)), merge=false)))
 
-eval(Finch.@finch_kernel function blurRLE(input, output, tmp)
+eval(Finch.@finch_kernel function blur_finch_rle_kernel(output, input, tmp)
     output .= 0
     for x = _
         tmp .= 0
@@ -64,23 +71,14 @@ eval(Finch.@finch_kernel function blurRLE(input, output, tmp)
     end
 end)
 
-function convertImageToFinch(img)
-    (cs, xs, ys) = size(img)
-    inp = Tensor(Dense(Dense(Dense(Element(Float64(0))))), img)
-    outBuff = zeros(Float64, (cs, xs, ys))
-    out = Tensor(Dense(Dense(Dense(Element(Float64(0))))), outBuff)
-    tempBuf = zeros(Float64, (xs, cs))
-    tmp = Tensor(Dense(Dense(Element(Float64(0)))), tempBuf)
-    return (inp, out, tmp)
-end
-
-function convertImageToFinchRLE(img)
+function blur_finch_rle(img)
     img = permutedims(img, (3, 1, 2))
     (ys, cs, xs) = size(img)
-    inp = Tensor(Dense(Dense(RepeatRLE(Float64(0)))), img)
-    out = Tensor(Dense(Dense(RepeatRLE(Float64(0)))), ys, cs, xs)
-    tmp = Tensor(Dense(RepeatRLE(Float64(0))), ys, cs)
-    return (inp, out, tmp)
+    input = Tensor(Dense(Dense(DenseRLE(Element(Float64(0))))), img)
+    output = Tensor(Dense(Dense(DenseRLE(Element(Float64(0)), merge=false))), ys, cs, xs)
+    tmp = Tensor(Dense(DenseRLE(Element(Float64(0)), merge=false)), ys, cs)
+    time = @belapsed blur_finch_rle_kernel($output, $input, $tmp) evals=1
+    return (;time=time, mem = summarysize(input), output=permutedims(output, invperm((3, 1, 2))))
 end
 
 function testCorrect(img1, img2)
@@ -93,40 +91,38 @@ function runBlurRLE(input, output, tmp)
     blurRLE(input, output, tmp)
 end
 
-
-function runOnImage(filename)
-    data = testimage(filename)
-    data_raw = Array{Float64}((channelview(data)))
-    finchData = convertImageToFinch(data_raw)
-    finchRLEData = convertImageToFinchRLE(data_raw)
-    println(sizeof(finchData[1]))
-    println(sizeof(finchRLEData[1]))
-    data1 = openCVBlur(data_raw)
-    runBlurSimple(finchData[1], finchData[2], finchData[3])
-
-    correct = testCorrect(finchData[2], data1)
-
-    timeFinch = @belapsed runBlurSimple($(finchData[1]), $(finchData[2]), $(finchData[3])) evals=1
-    timeFinchRLE = @belapsed runBlurRLE($(finchRLEData[1]), $(finchRLEData[2]), $(finchRLEData[3])) evals=1
-    timeOpenCV = @belapsed openCVBlur($data_raw) evals=1
-
-    result = Dict("imagename"=>filename, "finchTime"=>timeFinch,
-    "openCVtime"=>timeOpenCV, "finchRLETime"=>timeFinchRLE, 
-        "name"=>"box-blur3x3-Float64",
-        "type"=>"Float64", "sizex"=>3, "sizey"=>3,
-        "correct" => correct)
-    return result
-end
-
-
 function main(resultfile)
-    images = [("mandrill.tiff", Float64)]
-    for img in images
-        ret = runOnImage(img[1]) # extend with float variatio when it works.
-        write(resultfile, JSON.json(ret, 4))
+    results = []
+
+    for (filename, T) in [
+        ("mandrill.tiff", Float64)
+    ]
+
+        data = testimage(filename)
+        data_raw = Array{Float64}((channelview(data)))
+
+        reference = nothing
+
+        for kernel in [
+            (method = "opencv", fn = blur_opencv),
+            (method = "finch", fn = blur_finch),
+            (method = "finch_rle", fn = blur_finch_rle),
+        ]
+
+            result = kernel.fn(data_raw)
+
+            reference = something(reference, result.output)
+            println(norm(reference .- result.output))
+            #@assert reference == result.output
+
+            println("$(kernel.method) time: ", result.time, "mem: ", result.mem)
+
+            push!(results, Dict("imagename"=>filename, "method"=> kernel.method, "mem" => result.mem, "time"=>result.time))
+            write(resultfile, JSON.json(results, 4))
+        end
     end
 
+    return results
 end
-
 
 main("test.json")
