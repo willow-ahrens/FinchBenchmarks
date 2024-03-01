@@ -7,7 +7,7 @@ end
 
 using Finch
 using TestImages
-using ImageCore, OpenCV, TestImages, MosaicViews, Colors
+using ImageCore, OpenCV, TestImages, MosaicViews, Colors, Images, FileIO
 using BenchmarkTools
 using LinearAlgebra
 using JSON
@@ -99,7 +99,8 @@ function main(resultfile)
     ]
 
         data = testimage(filename)
-        data_raw = Array{Float64}((channelview(data)))
+        data_raw = Array((channelview(data)))
+        println(eltype(data_raw))
 
         reference = nothing
 
@@ -110,6 +111,8 @@ function main(resultfile)
         ]
 
             result = kernel.fn(data_raw)
+
+            save("$(kernel.method).png", colorview(result.output))
 
             reference = something(reference, result.output)
             println(norm(reference .- result.output))

@@ -1,0 +1,44 @@
+[
+    {
+        "nnz": 784,
+        "method": "opencv",
+        "time": 3.75e-6,
+        "mem": 832,
+        "imagename": "mnist[1]"
+    },
+    {
+        "nnz": 784,
+        "method": "finch",
+        "time": 3.75e-7,
+        "mem": 896,
+        "imagename": "mnist[1]"
+    },
+    {
+        "nnz": 72,
+        "method": "finch_rle",
+        "time": 1.708e-6,
+        "mem": 1192,
+        "imagename": "mnist[1]"
+    },
+    {
+        "nnz": 11025,
+        "method": "opencv",
+        "time": 6.041e-6,
+        "mem": 11073,
+        "imagename": "omniglot[1]"
+    },
+    {
+        "nnz": 11025,
+        "method": "finch",
+        "time": 1.791e-6,
+        "mem": 11137,
+        "imagename": "omniglot[1]"
+    },
+    {
+        "nnz": 287,
+        "method": "finch_rle",
+        "time": 6.292e-6,
+        "mem": 3743,
+        "imagename": "omniglot[1]"
+    }
+]

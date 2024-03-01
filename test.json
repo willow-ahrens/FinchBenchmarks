@@ -1,14 +1,8 @@
 [
     {
         "method": "opencv",
-        "time": 0.001023084,
+        "time": 0.001032584,
         "mem": 6291504,
-        "imagename": "mandrill.tiff"
-    },
-    {
-        "method": "finch",
-        "time": 0.002727083,
-        "mem": 6291608,
         "imagename": "mandrill.tiff"
     }
 ]
