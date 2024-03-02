@@ -299,6 +299,62 @@ function erode_finch(img)
     return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
 end
 
+input = Tensor(Dense(Dense(Element(UInt(0)))))
+output = Tensor(Dense(Dense(Element(UInt(0)))))
+tmp = Tensor(Dense(Dense(Element(UInt(0)))))
+
+eval(Finch.@finch_kernel function erode_finch_bits_kernel(output, input, tmp)
+    tmp .= 0
+    for y = _
+        for x = _
+            tmp[x, y] = coalesce(input[x, ~(y-1)], ~(UInt(0))) & input[x, y] & coalesce(input[x, ~(y+1)], ~(UInt(0)))
+        end
+    end
+    output .= 0
+    for y = _
+        for x = _
+            let tl = coalesce(tmp[~(x-1), y], ~(UInt(0))), t = tmp[x, y], tr = coalesce(tmp[~(x+1), y], ~(UInt(0)))
+                output[x, y] = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) & t & ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
+            end
+        end
+    end
+end)
+
+function pack_bits(img)
+    xs, ys = size(img)
+    xb = cld(xs + 1, 64)
+    imgb = fill(UInt(0), xb, ys)
+    for y in 1:ys
+        for x in 1:xs
+            imgb[fld1(x, 64), y] |= UInt(Bool(img[x, y])) << (mod1(x, 64) - 1)
+        end
+    end
+    imgb
+end
+
+function unpack_bits(imgb, xs, ys)
+    img = zeros(UInt8, xs, ys)
+    for y in 1:ys
+        for x in 1:xs
+            img[x, y] = UInt8((imgb[fld1(x, 64), y] >> (mod1(x, 64) - 1)) & 0x01)
+        end
+    end
+    img
+end
+
+function erode_finch_bits(img)
+    (xs, ys) = size(img)
+    imgb = .~(pack_bits(img .== 0x00))
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
+    outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    tmpb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    time = @belapsed erode_finch_bits_kernel($outputb, $inputb, $tmpb) evals=1
+    output = unpack_bits(outputb, xs, ys)
+    return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
+end
+
 input = Tensor(Dense(SparseRLE(Pattern())))
 output = Tensor(Dense(SparseRLE(Pattern(), merge=false)))
 tmp = Tensor(SparseRLE(Pattern(), merge=false))
@@ -316,12 +372,6 @@ eval(Finch.@finch_kernel function erode_finch_rle_kernel(output, input, tmp)
     end
 end)
 
-#=
-
-a = A[i, j]
-b = A[i + 1, j]
-c = a & (a << 1 | b >> 63) & (a << 2 | b >> 62)
-=#
 
 function erode_finch_rle(img)
     (xs, ys) = size(img)
@@ -366,12 +416,12 @@ function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
+        ("mnist", mnist_train, 1:1, (img) -> Array{UInt8}(img .> 0x02))
         ("willow", willow_gen(100), 1:1, identity)
         ("willow", willow_gen(200), 1:1, identity)
         ("willow", willow_gen(400), 1:1, identity)
         ("willow", willow_gen(800), 1:1, identity)
         ("willow", willow_gen(1600), 1:1, identity)
-        ("mnist", mnist_train, 1:1, (img) -> Array{UInt8}(img .> 0x02))
         ("omniglot", omniglot_train, 1:10, (img) -> Array{UInt8}(img .!= 0x00))
         ("humansketches", humansketches, 1:10, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0))
     ]
@@ -386,11 +436,16 @@ function main(resultfile)
                 (method = "finch", fn = erode_finch),
                 (method = "finch_rle", fn = erode_finch_rle),
                 (method = "finch_sparse", fn = erode_finch_sparse),
+                (method = "finch_bits", fn = erode_finch_bits),
             ]
 
                 result = kernel.fn(input)
 
                 reference = something(reference, result.output)
+                if reference != result.output
+                    display(Array{Bool}(reference))
+                    display(Array{Bool}(result.output))
+                end
                 @assert reference == result.output
 
                 println("$dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
