@@ -16,6 +16,85 @@ using Base: summarysize
 
 download_cache = joinpath(@__DIR__, "../cache")
 
+using ZipFile
+using Images
+using MLDatasets
+using Downloads
+using DelimitedFiles
+using GZip
+using CSV
+using DataFrames
+
+function unzip(file,exdir="",flatten=false)
+    fileFullPath = isabspath(file) ?  file : joinpath(pwd(),file)
+    basePath = dirname(fileFullPath)
+    outPath = (exdir == "" ? basePath : (isabspath(exdir) ? exdir : joinpath(pwd(),exdir)))
+    isdir(outPath) ? "" : mkdir(outPath)
+    zarchive = ZipFile.Reader(fileFullPath)
+    for f in zarchive.files
+        fullFilePath = joinpath(outPath,f.name)
+        if flatten 
+            if !(endswith(f.name,"/") || endswith(f.name,"\\"))
+                write(joinpath(outPath,basename(fullFilePath)), read(f))
+            end
+        else
+            if (endswith(f.name,"/") || endswith(f.name,"\\"))
+                mkdir(fullFilePath)
+            else
+                write(fullFilePath, read(f))
+            end
+        end
+    end
+    close(zarchive)
+end
+
+function download_dataset(url, name)
+    path = joinpath(download_cache, name)
+    fname = joinpath(path, basename(url))
+    if !isfile(fname)
+        mkpath(path)
+        Downloads.download(url, fname)
+        return fname, true
+    else
+        return fname, false
+    end
+end
+
+function download_humansketches()
+    sketches_link = "https://cybertron.cg.tu-berlin.de/eitz/projects/classifysketch/sketches_png.zip"
+    loc, unpack = download_dataset(sketches_link, "sketches")
+    unzip_path = joinpath(dirname(loc), "pngs")
+    if unpack
+        unzip(loc, unzip_path, true)
+    end
+    return unzip_path
+end
+
+"""
+humansketches dataset tensor
+========================
+humansketches([idxs])
+
+Return a 3-tensor A[sketch number, vertical pixel position, horizontal pixel
+position], measured from image upper left. Pixel values are stored using 8-bit
+grayscale values. `idxs` is an optional list specifying which sketch images to
+load. The sketches number from 1:20_000.
+"""
+function humansketches(idxs = 1:100)
+    @boundscheck begin
+        extrema(idxs) ⊆ 1:20_000 || throw(BoundsError("humansketches", idxs))
+    end
+
+    path = download_humansketches()
+
+    out = Array{Gray{N0f8}, 3}(undef, 1111,1111, length(idxs))
+
+    for (n, i) in enumerate(idxs)
+        out[:, :, n] = load(joinpath(path, "$i.png"))
+    end
+    return out
+end
+
 """
 mnist_train dataset tensor
 ========================
@@ -229,29 +308,72 @@ eval(Finch.@finch_kernel function erode_finch_rle_kernel(output, input, tmp)
     for y = _
         tmp .= false
         for x = _
-            tmp[x, y] = coalesce(input[x, ~(y-1)], true) & input[x, y] & coalesce(input[x, ~(y+1)], true)
+            tmp[x] = coalesce(input[x, ~(y-1)], true) & input[x, y] & coalesce(input[x, ~(y+1)], true)
         end
         for x = _
-            output[x, y] = coalesce(tmp[~(x-1), y], true) & tmp[x, y] & coalesce(tmp[~(x+1), y], true)
+            output[x, y] = coalesce(tmp[~(x-1)], true) & tmp[x] & coalesce(tmp[~(x+1)], true)
         end
     end
 end)
+
+#=
+
+a = A[i, j]
+b = A[i + 1, j]
+c = a & (a << 1 | b >> 63) & (a << 2 | b >> 62)
+=#
 
 function erode_finch_rle(img)
     (xs, ys) = size(img)
     input = Tensor(Dense(SparseRLE(Pattern())), Array{Bool}(img))
     output = Tensor(Dense(SparseRLE(Pattern(), merge=false)), undef, xs, ys)
-    tmp = Tensor(SparseRLE(Pattern(), merge=false), undef, xs, ys)
+    tmp = Tensor(SparseRLE(Pattern(), merge=false), undef, xs)
     time = @belapsed erode_finch_rle_kernel($output, $input, $tmp) evals=1
     return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
+end
+
+input = Tensor(Dense(SparseList(Pattern())))
+output = Tensor(Dense(SparseList(Pattern())))
+tmp = Tensor(SparseList(Pattern()))
+
+eval(Finch.@finch_kernel function erode_finch_sparse_kernel(output, input, tmp)
+    output .= false
+    for y = _
+        tmp .= false
+        for x = _
+            tmp[x] = coalesce(input[x, ~(y-1)], true) & input[x, y] & coalesce(input[x, ~(y+1)], true)
+        end
+        for x = _
+            output[x, y] = coalesce(tmp[~(x-1)], true) & tmp[x] & coalesce(tmp[~(x+1)], true)
+        end
+    end
+end)
+
+function erode_finch_sparse(img)
+    (xs, ys) = size(img)
+    input = Tensor(Dense(SparseList(Pattern())), Array{Bool}(img))
+    output = Tensor(Dense(SparseList(Pattern())), undef, xs, ys)
+    tmp = Tensor(SparseList(Pattern()), undef, xs)
+    time = @belapsed erode_finch_sparse_kernel($output, $input, $tmp) evals=1
+    return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
+end
+
+function willow_gen(n)
+    () -> [UInt8((i - n/2)^2 + (j - n/2)^2 < (n/4)^2) for i in 1:n, j in 1:n, k = 1:1]
 end
 
 function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
+        ("willow", willow_gen(100), 1:1, identity)
+        ("willow", willow_gen(200), 1:1, identity)
+        ("willow", willow_gen(400), 1:1, identity)
+        ("willow", willow_gen(800), 1:1, identity)
+        ("willow", willow_gen(1600), 1:1, identity)
         ("mnist", mnist_train, 1:1, (img) -> Array{UInt8}(img .> 0x02))
-        ("omniglot", omniglot_train, 1:1, (img) -> Array{UInt8}(img .> 0x00))
+        ("omniglot", omniglot_train, 1:10, (img) -> Array{UInt8}(img .!= 0x00))
+        ("humansketches", humansketches, 1:10, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0))
     ]
         data = getdata()
         for i in I
@@ -263,6 +385,7 @@ function main(resultfile)
                 (method = "opencv", fn = erode_opencv),
                 (method = "finch", fn = erode_finch),
                 (method = "finch_rle", fn = erode_finch_rle),
+                (method = "finch_sparse", fn = erode_finch_sparse),
             ]
 
                 result = kernel.fn(input)
@@ -270,7 +393,7 @@ function main(resultfile)
                 reference = something(reference, result.output)
                 @assert reference == result.output
 
-                println("$(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
+                println("$dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
 
                 push!(results, Dict("imagename"=>"$dataset[$i]", "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
                 write(resultfile, JSON.json(results, 4))
