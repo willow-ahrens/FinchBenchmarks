@@ -389,6 +389,47 @@ function erode_finch_bits_sparse(img)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
 
+input = Tensor(Dense(Dense(Element(UInt(0)))))
+mask = Tensor(Dense(SparseList(Pattern())))
+output = Tensor(Dense(Dense(Element(UInt(0)))))
+tmp = Tensor(Dense(Dense(Element(UInt(0)))))
+
+eval(Finch.@finch_kernel function erode_finch_bits_mask_kernel(output, input, tmp, mask)
+    tmp .= 0
+    for y = _
+        for x = _
+            if mask[x, y]
+                tmp[x, y] = coalesce(input[x, ~(y-1)], ~(UInt(0))) & input[x, y] & coalesce(input[x, ~(y+1)], ~(UInt(0)))
+            end
+        end
+    end
+    output .= 0
+    for y = _
+        for x = _
+            if mask[x, y]
+                let tl = coalesce(tmp[~(x-1), y], ~(UInt(0))), t = tmp[x, y], tr = coalesce(tmp[~(x+1), y], ~(UInt(0)))
+                    output[x, y] = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) & t & ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
+                end
+            end
+        end
+    end
+end)
+
+function erode_finch_bits_mask(img)
+    (xs, ys) = size(img)
+    imgb = .~(pack_bits(img .== 0x00))
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
+    maskb = Tensor(Dense(SparseList(Pattern())), imgb .!= 0)
+    outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    tmpb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    time = @belapsed erode_finch_bits_mask_kernel($outputb, $inputb, $tmpb, $maskb) evals=1
+    output = unpack_bits(outputb, xs, ys)
+    return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
+end
+
+
 input = Tensor(Dense(SparseRLE(Pattern())))
 output = Tensor(Dense(SparseRLE(Pattern(), merge=false)))
 tmp = Tensor(SparseRLE(Pattern(), merge=false))
@@ -471,7 +512,8 @@ function main(resultfile)
                 (method = "finch_rle", fn = erode_finch_rle),
                 (method = "finch_sparse", fn = erode_finch_sparse),
                 (method = "finch_bits", fn = erode_finch_bits),
-                #(method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
+                (method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
+                (method = "finch_bits_mask", fn = erode_finch_bits_mask),
             ]
 
                 result = kernel.fn(input)
