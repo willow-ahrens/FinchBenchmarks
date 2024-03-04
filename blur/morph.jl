@@ -389,6 +389,42 @@ function erode_finch_bits_sparse(img)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
 
+input = Tensor(Dense(DenseRLE(Element(UInt(0)))))
+output = Tensor(Dense(DenseRLE(Element(UInt(0)), merge=false)))
+tmp = Tensor(Dense(DenseRLE(Element(UInt(0)), merge=false)))
+
+eval(Finch.@finch_kernel function erode_finch_bits_rle_kernel(output, input, tmp)
+    tmp .= 0
+    for y = _
+        for x = _
+            tmp[x, y] = coalesce(input[x, ~(y-1)], ~(UInt(0))) & input[x, y] & coalesce(input[x, ~(y+1)], ~(UInt(0)))
+        end
+    end
+    output .= 0
+    for y = _
+        for x = _
+            let tl = coalesce(tmp[~(x-1), y], ~(UInt(0))), t = tmp[x, y], tr = coalesce(tmp[~(x+1), y], ~(UInt(0)))
+                output[x, y] = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) & t & ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
+            end
+        end
+    end
+    return output
+end)
+
+function erode_finch_bits_rle(img)
+    (xs, ys) = size(img)
+    imgb = .~(pack_bits(img .== 0x00))
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    inputb = Tensor(Dense(DenseRLE(Element(UInt(0)))), imgb)
+    outputb = Tensor(Dense(DenseRLE(Element(UInt(0)), merge=false)), undef, xb, ys)
+    tmpb = Tensor(Dense(DenseRLE(Element(UInt(0)), merge=false)), undef, xb, ys)
+    time = @belapsed erode_finch_bits_rle_kernel($outputb, $inputb, $tmpb) evals=1
+    outputb = erode_finch_bits_rle_kernel(outputb, inputb, tmpb).output
+    output = unpack_bits(outputb, xs, ys)
+    return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
+end
+
 input = Tensor(Dense(Dense(Element(UInt(0)))))
 mask = Tensor(Dense(SparseList(Pattern())))
 output = Tensor(Dense(Dense(Element(UInt(0)))))
@@ -492,11 +528,13 @@ function main(resultfile)
 
     for (dataset, getdata, I, f) in [
         ("mnist", mnist_train, 1:1, (img) -> Array{UInt8}(img .> 0x02))
-        ("willow", willow_gen(100), 1:1, identity)
-        ("willow", willow_gen(200), 1:1, identity)
-        ("willow", willow_gen(400), 1:1, identity)
-        ("willow", willow_gen(800), 1:1, identity)
-        ("willow", willow_gen(1600), 1:1, identity)
+        ("willow100", willow_gen(100), 1:1, identity)
+        ("willow200", willow_gen(200), 1:1, identity)
+        ("willow400", willow_gen(400), 1:1, identity)
+        ("willow800", willow_gen(800), 1:1, identity)
+        ("willow1600", willow_gen(1600), 1:1, identity)
+        ("willow3200", willow_gen(3200), 1:1, identity)
+        ("willow6400", willow_gen(6400), 1:1, identity)
         ("omniglot", omniglot_train, 1:10, (img) -> Array{UInt8}(img .!= 0x00))
         ("humansketches", humansketches, 1:10, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0))
     ]
@@ -514,6 +552,7 @@ function main(resultfile)
                 (method = "finch_bits", fn = erode_finch_bits),
                 (method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
                 (method = "finch_bits_mask", fn = erode_finch_bits_mask),
+                (method = "finch_bits_rle", fn = erode_finch_bits_rle),
             ]
 
                 result = kernel.fn(input)
