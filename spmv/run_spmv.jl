@@ -79,12 +79,41 @@ datasets = Dict(
         "Norris/heart3",
         "Rajat/rajat26",
         "TSOPF/TSOPF_RS_b678_c1"
+    ],
+    "permutation" => [
+        "permutation_synthetic"
+    ], 
+    "graph_symmetric" => [
+        "SNAP/email-Enron", 
+        "SNAP/as-735",
+        "SNAP/Oregon-1",
+        "Newman/as-22july06",
+        "SNAP/loc-Brightkite",
+        "SNAP/as-Skitter"
+    ],
+    "graph_unsymmetric" => [
+        "SNAP/soc-Epinions1",
+        "SNAP/wiki-Vote",
+        "SNAP/email-EuAll",
+        "SNAP/cit-HepPh",
+        "SNAP/web-NotreDame",
+        "SNAP/amazon0302",
+        "SNAP/p2p-Gnutella08",
+        "SNAP/email-Eu-core",
+    ]
+    "banded" => [
+        "small_band_synthetic",
+        "medium_band_synthetic",
+        "large_band_synthetic",
+        "SNAP/cit-HepTh"
     ]
 )
 
+include("synthetic.jl")
 include("spmv_finch.jl")
 include("spmv_finch_int8.jl")
 include("spmv_finch_pattern.jl")
+include("spmv_finch_pattern_unsym.jl")
 include("spmv_finch_unsym.jl")
 include("spmv_finch_vbl.jl")
 include("spmv_finch_vbl_int8.jl")
@@ -92,6 +121,7 @@ include("spmv_finch_vbl_pattern.jl")
 include("spmv_finch_vbl_unsym.jl")
 include("spmv_finch_band.jl")
 include("spmv_finch_band_unsym.jl")
+include("spmv_finch_point.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
 include("spmv_suite_sparse.jl")
@@ -101,17 +131,21 @@ dataset_tags = Dict(
     "vuduc_unsymmetric" => "unsymmetric",
     "willow_symmetric" => "symmetric",
     "willow_unsymmetric" => "unsymmetric",
+    "permutation" => "permutation",
+    "banded" => "banded",
+    "graph_symmetric" => "symmetric_pattern",
+    "graph_unsymmetric" => "unsymmetric_pattern",
 )
 
 methods = Dict(
     "symmetric" => [
         "julia" => spmv_julia,
-        "finch_sym" => spmv_finch,
+        "finch" => spmv_finch,
         "finch_unsym" => spmv_finch_unsym,
         "finch_vbl" => spmv_finch_vbl,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
-        # "finch_band" => spmv_finch_band,
-        # "finch_band_unsym" => spmv_finch_band_unsym,
+        "finch_band" => spmv_finch_band,
+        "finch_band_unsym" => spmv_finch_band_unsym,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -119,14 +153,19 @@ methods = Dict(
         "julia" => spmv_julia,
         "finch_unsym" => spmv_finch_unsym,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
-        # "finch_band_unsym" => spmv_finch_band_unsym,
+        "finch_band_unsym" => spmv_finch_band_unsym,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "symmetric_pattern" => [
         "julia" => spmv_julia,
         "finch_pattern" => spmv_finch_pattern,
-        "finch_vbl_pattern" => spmv_finch_vbl_pattern,
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse,
+    ],
+    "unsymmetric_pattern" => [
+        "julia" => spmv_julia,
+        "finch_pattern_unsym" => spmv_finch_pattern_unsym,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -134,6 +173,20 @@ methods = Dict(
         "julia" => spmv_julia,
         "finch_int8" => spmv_finch_int8,
         "finch_vbl_int8" => spmv_finch_vbl_int8,
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse,
+    ],
+    "permutation" => [
+        "julia" => spmv_julia,
+        "finch_point" => spmv_finch_point,
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse,
+    ],
+    "banded" => [
+        "julia" => spmv_julia,
+        "finch" => spmv_finch,
+        "finch_band" => spmv_finch_band,
+        "finch_band_unsym" => spmv_finch_band_unsym,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ]
@@ -146,7 +199,20 @@ int(val) = mod(floor(Int, val), Int8)
 for (dataset, mtxs) in datasets
     tag = dataset_tags[dataset]
     for mtx in mtxs
-        A = SparseMatrixCSC(matrixdepot(mtx))
+        if dataset == "permutation"
+            A = SparseMatrixCSC(random_permutation_matrix(200000))
+        elseif dataset == "banded"
+            if mtx == "small_band_synthetic"
+                A = SparseMatrixCSC(banded_matrix(10000, 5))
+            elseif mtx == "medium_band_synthetic"
+                A = SparseMatrixCSC(banded_matrix(10000, 30))
+            elseif mtx == "large_band_synthetic"
+                A = SparseMatrixCSC(banded_matrix(10000, 100))
+            end
+        else
+            A = SparseMatrixCSC(matrixdepot(mtx))
+        end
+
         # A = map((val) -> int(val), A)
         (n, n) = size(A)
         x = rand(n)
