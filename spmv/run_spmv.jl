@@ -100,7 +100,7 @@ datasets = Dict(
         "SNAP/amazon0302",
         "SNAP/p2p-Gnutella08",
         "SNAP/email-Eu-core",
-    ]
+    ],
     "banded" => [
         "small_band_synthetic",
         "medium_band_synthetic",
