@@ -2,7 +2,7 @@
     {
         "nnz": 784,
         "method": "opencv",
-        "time": 3.916e-6,
+        "time": 4.0e-6,
         "mem": 832,
         "imagename": "mnist[1]"
     },
@@ -23,280 +23,280 @@
     {
         "nnz": 161,
         "method": "finch_sparse",
-        "time": 7.92e-7,
+        "time": 7.91e-7,
         "mem": 1688,
         "imagename": "mnist[1]"
     },
     {
         "nnz": 28,
         "method": "finch_bits",
-        "time": 8.3e-8,
+        "time": 1.25e-7,
         "mem": 336,
         "imagename": "mnist[1]"
     },
     {
         "nnz": 28,
         "method": "finch_bits_sparse",
-        "time": 2.91e-7,
+        "time": 3.75e-7,
         "mem": 920,
         "imagename": "mnist[1]"
     },
     {
         "nnz": 28,
         "method": "finch_bits_mask",
-        "time": 8.4e-8,
+        "time": 1.66e-7,
         "mem": 336,
         "imagename": "mnist[1]"
     },
     {
         "nnz": 28,
         "method": "finch_bits_rle",
-        "time": 3.33e-7,
+        "time": 5.0e-7,
         "mem": 992,
         "imagename": "mnist[1]"
     },
     {
-        "nnz": 10000,
+        "nnz": 784,
         "method": "opencv",
-        "time": 6.0e-6,
-        "mem": 10048,
-        "imagename": "willow100[1]"
+        "time": 4.042e-6,
+        "mem": 832,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 10000,
+        "nnz": 784,
         "method": "finch",
-        "time": 1.666e-6,
-        "mem": 10112,
-        "imagename": "willow100[1]"
+        "time": 3.75e-7,
+        "mem": 896,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 49,
+        "nnz": 30,
         "method": "finch_rle",
-        "time": 1.083e-6,
-        "mem": 1824,
-        "imagename": "willow100[1]"
+        "time": 5.84e-7,
+        "mem": 944,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 1941,
+        "nnz": 176,
         "method": "finch_sparse",
-        "time": 8.625e-6,
-        "mem": 16504,
-        "imagename": "willow100[1]"
+        "time": 1.041e-6,
+        "mem": 1808,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 200,
+        "nnz": 28,
         "method": "finch_bits",
-        "time": 4.58e-7,
-        "mem": 1712,
-        "imagename": "willow100[1]"
+        "time": 1.25e-7,
+        "mem": 336,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 149,
+        "nnz": 28,
         "method": "finch_bits_sparse",
-        "time": 1.708e-6,
-        "mem": 3432,
-        "imagename": "willow100[1]"
+        "time": 3.75e-7,
+        "mem": 920,
+        "imagename": "mnist[2]"
     },
     {
-        "nnz": 200,
+        "nnz": 28,
         "method": "finch_bits_mask",
+        "time": 1.25e-7,
+        "mem": 336,
+        "imagename": "mnist[2]"
+    },
+    {
+        "nnz": 28,
+        "method": "finch_bits_rle",
+        "time": 5.0e-7,
+        "mem": 992,
+        "imagename": "mnist[2]"
+    },
+    {
+        "nnz": 784,
+        "method": "opencv",
+        "time": 4.042e-6,
+        "mem": 832,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 784,
+        "method": "finch",
+        "time": 3.34e-7,
+        "mem": 896,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 30,
+        "method": "finch_rle",
+        "time": 5.83e-7,
+        "mem": 944,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 119,
+        "method": "finch_sparse",
+        "time": 8.33e-7,
+        "mem": 1352,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 28,
+        "method": "finch_bits",
+        "time": 1.25e-7,
+        "mem": 336,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 28,
+        "method": "finch_bits_sparse",
+        "time": 3.75e-7,
+        "mem": 920,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 28,
+        "method": "finch_bits_mask",
+        "time": 1.66e-7,
+        "mem": 336,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 28,
+        "method": "finch_bits_rle",
+        "time": 5.0e-7,
+        "mem": 992,
+        "imagename": "mnist[3]"
+    },
+    {
+        "nnz": 784,
+        "method": "opencv",
+        "time": 4.042e-6,
+        "mem": 832,
+        "imagename": "mnist[4]"
+    },
+    {
+        "nnz": 784,
+        "method": "finch",
+        "time": 3.75e-7,
+        "mem": 896,
+        "imagename": "mnist[4]"
+    },
+    {
+        "nnz": 20,
+        "method": "finch_rle",
+        "time": 3.75e-7,
+        "mem": 784,
+        "imagename": "mnist[4]"
+    },
+    {
+        "nnz": 96,
+        "method": "finch_sparse",
         "time": 6.25e-7,
-        "mem": 1712,
-        "imagename": "willow100[1]"
+        "mem": 1168,
+        "imagename": "mnist[4]"
     },
     {
-        "nnz": 200,
-        "method": "finch_bits_rle",
-        "time": 2.0e-6,
-        "mem": 4320,
-        "imagename": "willow100[1]"
-    },
-    {
-        "nnz": 40000,
-        "method": "opencv",
-        "time": 1.0167e-5,
-        "mem": 40048,
-        "imagename": "willow200[1]"
-    },
-    {
-        "nnz": 40000,
-        "method": "finch",
-        "time": 4.458e-6,
-        "mem": 40112,
-        "imagename": "willow200[1]"
-    },
-    {
-        "nnz": 99,
-        "method": "finch_rle",
-        "time": 2.25e-6,
-        "mem": 3424,
-        "imagename": "willow200[1]"
-    },
-    {
-        "nnz": 7825,
-        "method": "finch_sparse",
-        "time": 3.2333e-5,
-        "mem": 64376,
-        "imagename": "willow200[1]"
-    },
-    {
-        "nnz": 800,
+        "nnz": 28,
         "method": "finch_bits",
-        "time": 1.584e-6,
-        "mem": 6512,
-        "imagename": "willow200[1]"
+        "time": 8.3e-8,
+        "mem": 336,
+        "imagename": "mnist[4]"
     },
     {
-        "nnz": 449,
+        "nnz": 28,
         "method": "finch_bits_sparse",
-        "time": 5.417e-6,
-        "mem": 9032,
-        "imagename": "willow200[1]"
+        "time": 3.75e-7,
+        "mem": 920,
+        "imagename": "mnist[4]"
     },
     {
-        "nnz": 800,
+        "nnz": 28,
         "method": "finch_bits_mask",
-        "time": 1.708e-6,
-        "mem": 6512,
-        "imagename": "willow200[1]"
+        "time": 1.66e-7,
+        "mem": 336,
+        "imagename": "mnist[4]"
     },
     {
-        "nnz": 598,
+        "nnz": 28,
         "method": "finch_bits_rle",
-        "time": 6.042e-6,
-        "mem": 11488,
-        "imagename": "willow200[1]"
-    },
-    {
-        "nnz": 160000,
-        "method": "opencv",
-        "time": 2.3042e-5,
-        "mem": 160048,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 160000,
-        "method": "finch",
-        "time": 1.4208e-5,
-        "mem": 160112,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 199,
-        "method": "finch_rle",
-        "time": 4.416e-6,
-        "mem": 6624,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 31397,
-        "method": "finch_sparse",
-        "time": 0.000116875,
-        "mem": 254552,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 2800,
-        "method": "finch_bits",
-        "time": 4.541e-6,
-        "mem": 22512,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 1102,
-        "method": "finch_bits_sparse",
-        "time": 1.3166e-5,
-        "mem": 21080,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 2800,
-        "method": "finch_bits_mask",
-        "time": 3.916e-6,
-        "mem": 22512,
-        "imagename": "willow400[1]"
-    },
-    {
-        "nnz": 1560,
-        "method": "finch_bits_rle",
-        "time": 1.5375e-5,
-        "mem": 28480,
-        "imagename": "willow400[1]"
+        "time": 5.0e-7,
+        "mem": 992,
+        "imagename": "mnist[4]"
     },
     {
         "nnz": 640000,
         "method": "opencv",
-        "time": 6.8708e-5,
+        "time": 6.4916e-5,
         "mem": 640048,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 640000,
         "method": "finch",
-        "time": 4.875e-5,
+        "time": 4.9292e-5,
         "mem": 640112,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 399,
         "method": "finch_rle",
-        "time": 8.75e-6,
+        "time": 8.875e-6,
         "mem": 13024,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 125609,
         "method": "finch_sparse",
-        "time": 0.000433125,
+        "time": 0.000432541,
         "mem": 1011448,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 10400,
         "method": "finch_bits",
-        "time": 1.1875e-5,
+        "time": 1.2417e-5,
         "mem": 83312,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 3147,
         "method": "finch_bits_sparse",
-        "time": 3.0041e-5,
+        "time": 3.5666e-5,
         "mem": 57000,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 10400,
         "method": "finch_bits_mask",
-        "time": 1.0458e-5,
+        "time": 1.0791e-5,
         "mem": 83312,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 3180,
         "method": "finch_bits_rle",
-        "time": 3.3708e-5,
+        "time": 5.025e-5,
         "mem": 57600,
         "imagename": "willow800[1]"
     },
     {
         "nnz": 2560000,
         "method": "opencv",
-        "time": 0.00021575,
+        "time": 0.000334042,
         "mem": 2560048,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 2560000,
         "method": "finch",
-        "time": 0.000188125,
+        "time": 0.000187875,
         "mem": 2560112,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 799,
         "method": "finch_rle",
-        "time": 1.7416e-5,
+        "time": 1.75e-5,
         "mem": 25824,
         "imagename": "willow1600[1]"
     },
@@ -310,701 +310,589 @@
     {
         "nnz": 41600,
         "method": "finch_bits",
-        "time": 3.6875e-5,
+        "time": 3.5042e-5,
         "mem": 332912,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 10201,
         "method": "finch_bits_sparse",
-        "time": 7.8125e-5,
+        "time": 9.4708e-5,
         "mem": 176264,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 41600,
         "method": "finch_bits_mask",
-        "time": 2.9958e-5,
+        "time": 2.9375e-5,
         "mem": 332912,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 6376,
         "method": "finch_bits_rle",
-        "time": 6.8959e-5,
+        "time": 9.8958e-5,
         "mem": 115136,
         "imagename": "willow1600[1]"
     },
     {
         "nnz": 10240000,
         "method": "opencv",
-        "time": 0.00082175,
+        "time": 0.00134875,
         "mem": 10240048,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 10240000,
         "method": "finch",
-        "time": 0.000748875,
+        "time": 0.000793458,
         "mem": 10240112,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 1599,
         "method": "finch_rle",
-        "time": 3.5375e-5,
+        "time": 3.5084e-5,
         "mem": 51424,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 2010553,
         "method": "finch_sparse",
-        "time": 0.006788667,
+        "time": 0.006791792,
         "mem": 16110200,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 163200,
         "method": "finch_bits",
-        "time": 0.000128708,
+        "time": 0.000124334,
         "mem": 1305712,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 36266,
         "method": "finch_bits_sparse",
-        "time": 0.00023,
+        "time": 0.000263916,
         "mem": 606104,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 163200,
         "method": "finch_bits_mask",
-        "time": 9.9791e-5,
+        "time": 9.0667e-5,
         "mem": 1305712,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 12750,
         "method": "finch_bits_rle",
-        "time": 0.000137875,
+        "time": 0.000201042,
         "mem": 229920,
         "imagename": "willow3200[1]"
     },
     {
         "nnz": 40960000,
         "method": "opencv",
-        "time": 0.005881584,
+        "time": 0.005961416,
         "mem": 40960048,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 40960000,
         "method": "finch",
-        "time": 0.004051959,
+        "time": 0.004040125,
         "mem": 40960112,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 3199,
         "method": "finch_rle",
-        "time": 6.9583e-5,
+        "time": 7.075e-5,
         "mem": 102624,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 8042329,
         "method": "finch_sparse",
-        "time": 0.0270385,
+        "time": 0.027345208,
         "mem": 64390008,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 646400,
         "method": "finch_bits",
-        "time": 0.00047775,
+        "time": 0.000442584,
         "mem": 5171312,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 134840,
         "method": "finch_bits_sparse",
-        "time": 0.000797458,
+        "time": 0.000829625,
         "mem": 2208888,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 646400,
         "method": "finch_bits_mask",
-        "time": 0.000355375,
+        "time": 0.000320625,
         "mem": 5171312,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 25399,
         "method": "finch_bits_rle",
-        "time": 0.000276458,
+        "time": 0.000400958,
         "mem": 457904,
         "imagename": "willow6400[1]"
     },
     {
         "nnz": 11025,
         "method": "opencv",
-        "time": 6.208e-6,
+        "time": 6.292e-6,
         "mem": 11073,
         "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.792e-6,
-        "mem": 11137,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 196,
-        "method": "finch_rle",
-        "time": 4.917e-6,
-        "mem": 4216,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 10108,
-        "method": "finch_sparse",
-        "time": 4.3208e-5,
-        "mem": 81880,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 4.58e-7,
-        "mem": 1792,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.0e-6,
-        "mem": 4448,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.66e-7,
-        "mem": 1792,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 150,
-        "method": "finch_bits_rle",
-        "time": 1.958e-6,
-        "mem": 3560,
-        "imagename": "omniglot[1]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.208e-6,
-        "mem": 11073,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 171,
-        "method": "finch_rle",
-        "time": 4.084e-6,
-        "mem": 3816,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 10152,
-        "method": "finch_sparse",
-        "time": 4.3167e-5,
-        "mem": 82232,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 5.0e-7,
-        "mem": 1792,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.25e-7,
-        "mem": 1792,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 138,
-        "method": "finch_bits_rle",
-        "time": 1.958e-6,
-        "mem": 3368,
-        "imagename": "omniglot[2]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.208e-6,
-        "mem": 11073,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 166,
-        "method": "finch_rle",
-        "time": 4.166e-6,
-        "mem": 3736,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 10310,
-        "method": "finch_sparse",
-        "time": 4.2917e-5,
-        "mem": 83496,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 5.0e-7,
-        "mem": 1792,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.66e-7,
-        "mem": 1792,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 138,
-        "method": "finch_bits_rle",
-        "time": 1.958e-6,
-        "mem": 3368,
-        "imagename": "omniglot[3]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.208e-6,
-        "mem": 11073,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 186,
-        "method": "finch_rle",
-        "time": 4.792e-6,
-        "mem": 4056,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 10098,
-        "method": "finch_sparse",
-        "time": 4.4458e-5,
-        "mem": 81800,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 4.58e-7,
-        "mem": 1792,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.66e-7,
-        "mem": 1792,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 148,
-        "method": "finch_bits_rle",
-        "time": 1.958e-6,
-        "mem": 3528,
-        "imagename": "omniglot[4]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.208e-6,
-        "mem": 11073,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 172,
-        "method": "finch_rle",
-        "time": 4.25e-6,
-        "mem": 3832,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 10227,
-        "method": "finch_sparse",
-        "time": 4.4e-5,
-        "mem": 82832,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 5.0e-7,
-        "mem": 1792,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.66e-7,
-        "mem": 1792,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 141,
-        "method": "finch_bits_rle",
-        "time": 1.917e-6,
-        "mem": 3416,
-        "imagename": "omniglot[5]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.167e-6,
-        "mem": 11073,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 11025,
-        "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 171,
-        "method": "finch_rle",
-        "time": 4.167e-6,
-        "mem": 3816,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 10223,
-        "method": "finch_sparse",
-        "time": 4.3625e-5,
-        "mem": 82800,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits",
-        "time": 5.0e-7,
-        "mem": 1792,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 210,
-        "method": "finch_bits_mask",
-        "time": 6.25e-7,
-        "mem": 1792,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 136,
-        "method": "finch_bits_rle",
-        "time": 1.958e-6,
-        "mem": 3336,
-        "imagename": "omniglot[6]"
-    },
-    {
-        "nnz": 11025,
-        "method": "opencv",
-        "time": 6.208e-6,
-        "mem": 11073,
-        "imagename": "omniglot[7]"
     },
     {
         "nnz": 11025,
         "method": "finch",
         "time": 1.875e-6,
         "mem": 11137,
-        "imagename": "omniglot[7]"
+        "imagename": "omniglot[1]"
     },
     {
-        "nnz": 190,
+        "nnz": 196,
         "method": "finch_rle",
-        "time": 4.875e-6,
-        "mem": 4120,
-        "imagename": "omniglot[7]"
+        "time": 4.916e-6,
+        "mem": 4216,
+        "imagename": "omniglot[1]"
     },
     {
-        "nnz": 10067,
+        "nnz": 10108,
         "method": "finch_sparse",
-        "time": 4.4292e-5,
-        "mem": 81552,
-        "imagename": "omniglot[7]"
+        "time": 4.3709e-5,
+        "mem": 81880,
+        "imagename": "omniglot[1]"
     },
     {
         "nnz": 210,
         "method": "finch_bits",
-        "time": 5.0e-7,
+        "time": 6.25e-7,
         "mem": 1792,
-        "imagename": "omniglot[7]"
+        "imagename": "omniglot[1]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_sparse",
-        "time": 2.041e-6,
+        "time": 2.416e-6,
         "mem": 4448,
-        "imagename": "omniglot[7]"
+        "imagename": "omniglot[1]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_mask",
-        "time": 6.25e-7,
+        "time": 8.33e-7,
         "mem": 1792,
-        "imagename": "omniglot[7]"
+        "imagename": "omniglot[1]"
     },
     {
         "nnz": 150,
         "method": "finch_bits_rle",
-        "time": 1.958e-6,
+        "time": 2.708e-6,
         "mem": 3560,
-        "imagename": "omniglot[7]"
+        "imagename": "omniglot[1]"
     },
     {
         "nnz": 11025,
         "method": "opencv",
-        "time": 6.208e-6,
+        "time": 6.333e-6,
         "mem": 11073,
-        "imagename": "omniglot[8]"
+        "imagename": "omniglot[2]"
     },
     {
         "nnz": 11025,
         "method": "finch",
-        "time": 1.833e-6,
+        "time": 1.834e-6,
         "mem": 11137,
-        "imagename": "omniglot[8]"
+        "imagename": "omniglot[2]"
     },
     {
-        "nnz": 195,
+        "nnz": 171,
         "method": "finch_rle",
-        "time": 4.875e-6,
-        "mem": 4200,
-        "imagename": "omniglot[8]"
+        "time": 4.166e-6,
+        "mem": 3816,
+        "imagename": "omniglot[2]"
     },
     {
-        "nnz": 10107,
+        "nnz": 10152,
         "method": "finch_sparse",
-        "time": 4.2792e-5,
-        "mem": 81872,
-        "imagename": "omniglot[8]"
+        "time": 4.3083e-5,
+        "mem": 82232,
+        "imagename": "omniglot[2]"
     },
     {
         "nnz": 210,
         "method": "finch_bits",
-        "time": 4.58e-7,
+        "time": 6.25e-7,
         "mem": 1792,
-        "imagename": "omniglot[8]"
+        "imagename": "omniglot[2]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_sparse",
-        "time": 2.0e-6,
+        "time": 2.458e-6,
         "mem": 4448,
-        "imagename": "omniglot[8]"
+        "imagename": "omniglot[2]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_mask",
-        "time": 6.25e-7,
+        "time": 7.92e-7,
         "mem": 1792,
-        "imagename": "omniglot[8]"
+        "imagename": "omniglot[2]"
     },
     {
-        "nnz": 152,
+        "nnz": 138,
         "method": "finch_bits_rle",
-        "time": 2.0e-6,
-        "mem": 3592,
-        "imagename": "omniglot[8]"
+        "time": 2.583e-6,
+        "mem": 3368,
+        "imagename": "omniglot[2]"
     },
     {
         "nnz": 11025,
         "method": "opencv",
-        "time": 6.25e-6,
+        "time": 6.292e-6,
         "mem": 11073,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[3]"
     },
     {
         "nnz": 11025,
         "method": "finch",
-        "time": 1.833e-6,
+        "time": 1.875e-6,
         "mem": 11137,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[3]"
     },
     {
-        "nnz": 189,
+        "nnz": 166,
         "method": "finch_rle",
-        "time": 4.833e-6,
-        "mem": 4104,
-        "imagename": "omniglot[9]"
+        "time": 4.125e-6,
+        "mem": 3736,
+        "imagename": "omniglot[3]"
     },
     {
-        "nnz": 9977,
+        "nnz": 10310,
         "method": "finch_sparse",
-        "time": 4.3333e-5,
-        "mem": 80832,
-        "imagename": "omniglot[9]"
+        "time": 4.3625e-5,
+        "mem": 83496,
+        "imagename": "omniglot[3]"
     },
     {
         "nnz": 210,
         "method": "finch_bits",
-        "time": 5.0e-7,
+        "time": 6.25e-7,
         "mem": 1792,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[3]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_sparse",
-        "time": 2.042e-6,
+        "time": 2.375e-6,
         "mem": 4448,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[3]"
     },
     {
         "nnz": 210,
         "method": "finch_bits_mask",
+        "time": 8.33e-7,
+        "mem": 1792,
+        "imagename": "omniglot[3]"
+    },
+    {
+        "nnz": 138,
+        "method": "finch_bits_rle",
+        "time": 2.625e-6,
+        "mem": 3368,
+        "imagename": "omniglot[3]"
+    },
+    {
+        "nnz": 11025,
+        "method": "opencv",
+        "time": 6.291e-6,
+        "mem": 11073,
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 11025,
+        "method": "finch",
+        "time": 1.875e-6,
+        "mem": 11137,
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 186,
+        "method": "finch_rle",
+        "time": 4.791e-6,
+        "mem": 4056,
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 10098,
+        "method": "finch_sparse",
+        "time": 4.4375e-5,
+        "mem": 81800,
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 210,
+        "method": "finch_bits",
         "time": 6.25e-7,
         "mem": 1792,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 210,
+        "method": "finch_bits_sparse",
+        "time": 2.416e-6,
+        "mem": 4448,
+        "imagename": "omniglot[4]"
+    },
+    {
+        "nnz": 210,
+        "method": "finch_bits_mask",
+        "time": 8.33e-7,
+        "mem": 1792,
+        "imagename": "omniglot[4]"
     },
     {
         "nnz": 148,
         "method": "finch_bits_rle",
-        "time": 1.958e-6,
+        "time": 2.666e-6,
         "mem": 3528,
-        "imagename": "omniglot[9]"
+        "imagename": "omniglot[4]"
     },
     {
-        "nnz": 11025,
+        "nnz": 1234321,
         "method": "opencv",
-        "time": 6.25e-6,
-        "mem": 11073,
-        "imagename": "omniglot[10]"
+        "time": 0.000149709,
+        "mem": 1234369,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 11025,
+        "nnz": 1234321,
         "method": "finch",
-        "time": 1.833e-6,
-        "mem": 11137,
-        "imagename": "omniglot[10]"
+        "time": 9.8e-5,
+        "mem": 1234433,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 194,
+        "nnz": 2995,
         "method": "finch_rle",
-        "time": 5.041e-6,
-        "mem": 4184,
-        "imagename": "omniglot[10]"
+        "time": 7.4875e-5,
+        "mem": 57048,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 10147,
+        "nnz": 24692,
         "method": "finch_sparse",
-        "time": 4.4292e-5,
-        "mem": 82192,
-        "imagename": "omniglot[10]"
+        "time": 0.000165708,
+        "mem": 206600,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 210,
+        "nnz": 19998,
         "method": "finch_bits",
-        "time": 4.58e-7,
-        "mem": 1792,
-        "imagename": "omniglot[10]"
+        "time": 1.9958e-5,
+        "mem": 160096,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 210,
+        "nnz": 4004,
         "method": "finch_bits_sparse",
-        "time": 2.041e-6,
-        "mem": 4448,
-        "imagename": "omniglot[10]"
+        "time": 6.6208e-5,
+        "mem": 73200,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 210,
+        "nnz": 19998,
         "method": "finch_bits_mask",
-        "time": 6.25e-7,
-        "mem": 1792,
-        "imagename": "omniglot[10]"
+        "time": 1.5542e-5,
+        "mem": 160096,
+        "imagename": "humansketches[1]"
     },
     {
-        "nnz": 152,
+        "nnz": 7183,
         "method": "finch_bits_rle",
-        "time": 2.0e-6,
-        "mem": 3592,
-        "imagename": "omniglot[10]"
+        "time": 9.7125e-5,
+        "mem": 124136,
+        "imagename": "humansketches[1]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000141,
+        "mem": 1234369,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 9.8083e-5,
+        "mem": 1234433,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 2870,
+        "method": "finch_rle",
+        "time": 6.7875e-5,
+        "mem": 55048,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 17230,
+        "method": "finch_sparse",
+        "time": 0.000116208,
+        "mem": 146904,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 2.0042e-5,
+        "mem": 160096,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 3715,
+        "method": "finch_bits_sparse",
+        "time": 5.5375e-5,
+        "mem": 68576,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 1.4875e-5,
+        "mem": 160096,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 6236,
+        "method": "finch_bits_rle",
+        "time": 8.025e-5,
+        "mem": 108984,
+        "imagename": "humansketches[2]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000125166,
+        "mem": 1234369,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 9.8375e-5,
+        "mem": 1234433,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 3532,
+        "method": "finch_rle",
+        "time": 9.1208e-5,
+        "mem": 65640,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 23537,
+        "method": "finch_sparse",
+        "time": 0.000166958,
+        "mem": 197360,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 1.9959e-5,
+        "mem": 160096,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 4379,
+        "method": "finch_bits_sparse",
+        "time": 6.2916e-5,
+        "mem": 79200,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 1.5833e-5,
+        "mem": 160096,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 6958,
+        "method": "finch_bits_rle",
+        "time": 8.7416e-5,
+        "mem": 120536,
+        "imagename": "humansketches[3]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000134125,
+        "mem": 1234369,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 9.6916e-5,
+        "mem": 1234433,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 1918,
+        "method": "finch_rle",
+        "time": 5.2083e-5,
+        "mem": 39816,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 19160,
+        "method": "finch_sparse",
+        "time": 0.00011225,
+        "mem": 162344,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 1.9541e-5,
+        "mem": 160096,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 2988,
+        "method": "finch_bits_sparse",
+        "time": 5.0916e-5,
+        "mem": 56944,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 1.4292e-5,
+        "mem": 160096,
+        "imagename": "humansketches[4]"
+    },
+    {
+        "nnz": 5174,
+        "method": "finch_bits_rle",
+        "time": 7.3333e-5,
+        "mem": 91992,
+        "imagename": "humansketches[4]"
     }
 ]
