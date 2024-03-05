@@ -10,8 +10,19 @@
 
 using namespace taco;
 
+extern int optind;
+
 int main(int argc, char **argv) {
   auto params = parse(argc, argv);
+
+  char *buf[100], *temp;
+  temp = strtok(params.argv[0]," ");
+  int buf_size=1;
+  while (temp != NULL)
+  {
+    buf[buf_size++] = temp;
+    temp = strtok(NULL, " ");
+  }
 
   static struct option long_options[] = {
     {"help", no_argument, 0, 'h'},
@@ -28,7 +39,8 @@ int main(int argc, char **argv) {
   // Parse the options
   int option_index = 0;
   int c;
-  while ((c = getopt_long(params.argc, params.argv, "hs:a:b", long_options, &option_index)) != -1) {
+  optind = 1;
+  while ((c = getopt_long(buf_size, buf, "hs:a:b:", long_options, &option_index)) != -1) {
     switch (c) {
       case 'h':
         std::cout << "Options:" << std::endl;
@@ -88,8 +100,6 @@ int main(int argc, char **argv) {
 
   Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
 
-  //fprintf(stderr, "OOOO\n");
-	//std::cerr<<"OO: "<<cF<<std::endl;
 
   IndexVar i, j, k;
   IndexStmt stmt;
