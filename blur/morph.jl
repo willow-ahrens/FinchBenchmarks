@@ -188,7 +188,7 @@ function main(resultfile)
             for (op, kernels) in [
                 ("erode", [
                     (method = "opencv", fn = erode_opencv),
-                    #(method = "finch", fn = erode_finch),
+                    (method = "finch", fn = erode_finch),
                     (method = "finch_rle", fn = erode_finch_rle),
                     #(method = "finch_sparse", fn = erode_finch_sparse),
                     (method = "finch_bits", fn = erode_finch_bits),
