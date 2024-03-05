@@ -139,7 +139,7 @@ dataset_tags = Dict(
 
 methods = Dict(
     "symmetric" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch" => spmv_finch,
         "finch_unsym" => spmv_finch_unsym,
         "finch_vbl" => spmv_finch_vbl,
@@ -150,7 +150,7 @@ methods = Dict(
         "suite_sparse" => spmv_suite_sparse,
     ],
     "unsymmetric" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch_unsym" => spmv_finch_unsym,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         "finch_band_unsym" => spmv_finch_band_unsym,
@@ -158,32 +158,32 @@ methods = Dict(
         "suite_sparse" => spmv_suite_sparse,
     ],
     "symmetric_pattern" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch_pattern" => spmv_finch_pattern,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "unsymmetric_pattern" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch_pattern_unsym" => spmv_finch_pattern_unsym,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "symmetric_quantized" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch_int8" => spmv_finch_int8,
         "finch_vbl_int8" => spmv_finch_vbl_int8,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "permutation" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch_point" => spmv_finch_point,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "banded" => [
-        "julia" => spmv_julia,
+        "julia_stdlib" => spmv_julia,
         "finch" => spmv_finch,
         "finch_band" => spmv_finch_band,
         "finch_band_unsym" => spmv_finch_band_unsym,
