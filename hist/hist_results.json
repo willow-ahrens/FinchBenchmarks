@@ -1,0 +1,9 @@
+[
+    {
+        "time": 0.000101708,
+        "method": "opencv",
+        "kernel": "hist",
+        "num_threads": 1,
+        "image": "Mandrill"
+    }
+]
