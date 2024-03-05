@@ -1,0 +1,38 @@
+[
+    {
+        "time": 0.004857125,
+        "method": "Graphs.jl",
+        "operation": "pagerank",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.01683175,
+        "method": "Finch",
+        "operation": "pagerank",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.001892084,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.0027015,
+        "method": "Finch",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.006165958,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.003583708,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    }
+]
