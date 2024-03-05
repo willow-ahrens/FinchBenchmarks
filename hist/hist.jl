@@ -12,8 +12,8 @@ function finch_hist_serial_kernel(result, img, mask)
         result .= 0 
         for x=_
             for y=_
-                if mask[1, x,y] > UInt8(0)
-                    result[div(img[1, x,y], 16) + 1] += 1
+                if mask[1, y, x] > UInt8(0)
+                    result[div(img[1, y, x], 16) + 1] += 1
                 end
             end
         end
