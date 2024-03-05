@@ -139,10 +139,9 @@ function erode_finch_bits_mask(img)
     (xb, ys) = size(imgb)
     inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
     maskb = Tensor(Dense(SparseList(Pattern())), imgb .!= 0)
-    maskbout = Tensor(Dense(SparseList(Pattern())))
     outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
     tmpb = Tensor(Dense(Element(UInt(0))), undef, xb)
-    time = @belapsed erode_finch_bits_mask_kernel($outputb, $inputb, $tmpb, $maskb, $maskbout) evals=1
+    time = @belapsed erode_finch_bits_mask_kernel($outputb, $inputb, $tmpb, $maskb) evals=1
     output = unpack_bits(outputb, xs, ys)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
@@ -165,36 +164,41 @@ function erode_finch_sparse(img)
     return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
 end
 
+sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.sobel()[2]))
+
 function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
-        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02))
-        ("willow800", willow_gen(800), 1:1, identity)
-        ("willow1600", willow_gen(1600), 1:1, identity)
-        ("willow3200", willow_gen(3200), 1:1, identity)
-        ("willow6400", willow_gen(6400), 1:1, identity)
-        ("omniglot", omniglot_train, 1:4, (img) -> Array{UInt8}(img .!= 0x00))
-        ("humansketches", humansketches, 1:4, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0))
+        ("testimage_dip3e", testimage_dip3e, ["Fig0534(a)(ellipse_and_circle).tif", "Fig0539(a)(vertical_rectangle).tif"], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
+        ("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
+        #("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02))
+        ("testimage_edge", testimage, ["airplaneF16.tiff", "fabio_color_512.png"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
+        ("willow", willow_gen, [800, 1600, 3200], identity),
+        ("humansketches", humansketches, 1:4, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
+        ("omniglot", omniglot_train, 1:4, (img) -> Array{UInt8}(img .!= 0x00)),
+        #("mnist_edge", mnist_train, 1:4, (img) -> Array{UInt8}(sobel(img) .> 90)),
+        #("mnist_edge", mnist_train, 1:4, (img) -> Array{UInt8}(sobel(img) .> 90)),
+        ("omniglot_edge", omniglot_train, 1:4, (img) -> Array{UInt8}(sobel(img) .> 0.1)),
+        ("humansketches_edge", humansketches, 1:4, (img) -> Array{UInt8}(sobel(img) .> 0.1)),
     ]
-        data = getdata()
         for i in I
-            input = f(data[:, :, i])
+            input = f(getdata(i))
 
             for (op, kernels) in [
                 ("erode", [
                     (method = "opencv", fn = erode_opencv),
-                    (method = "finch", fn = erode_finch),
+                    #(method = "finch", fn = erode_finch),
                     (method = "finch_rle", fn = erode_finch_rle),
-                    (method = "finch_sparse", fn = erode_finch_sparse),
+                    #(method = "finch_sparse", fn = erode_finch_sparse),
                     (method = "finch_bits", fn = erode_finch_bits),
-                    (method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
+                    #(method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
                     (method = "finch_bits_mask", fn = erode_finch_bits_mask),
-                    (method = "finch_bits_rle", fn = erode_finch_bits_rle),
+                    #(method = "finch_bits_rle", fn = erode_finch_bits_rle),
                 ]),
                 ("dilate", [
                     (method = "opencv", fn = dilate_opencv),
-                    (method = "finch", fn = dilate_finch),
+                    #(method = "finch", fn = dilate_finch),
                     (method = "finch_bits", fn = dilate_finch_bits),
                 ])
             ]
@@ -205,10 +209,6 @@ function main(resultfile)
                     result = kernel.fn(input)
 
                     reference = something(reference, result.output)
-                    if reference != result.output
-                        display(Array{Bool}(reference))
-                        display(Array{Bool}(result.output))
-                    end
                     @assert reference == result.output
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
