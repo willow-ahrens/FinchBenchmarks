@@ -29,12 +29,31 @@ function erode_opencv(img)
     return (; time = time, mem = summarysize(input), nnz = length(input), output = output)
 end
 
+dilate_opencv_kernel(data, filter) = OpenCV.dilate(data, filter)
+
+function dilate_opencv(img)
+    input = reshape(img, 1, size(img)...)
+    filter = ones(Int8, 1, 3, 3)
+    time = @belapsed dilate_opencv_kernel($input, $filter) evals=1
+    output = dropdims(Array(dilate_opencv_kernel(input, filter)), dims=1)
+    return (; time = time, mem = summarysize(input), nnz = length(input), output = output)
+end
+
 function erode_finch(img)
     (xs, ys) = size(img)
     input = Tensor(Dense(Dense(Element(false))), img)
     output = Tensor(Dense(Dense(Element(false))), undef, xs, ys)
     tmp = Tensor(Dense(Element(false)), undef, xs)
     time = @belapsed erode_finch_kernel($output, $input, $tmp) evals=1
+    return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
+end
+
+function dilate_finch(img)
+    (xs, ys) = size(img)
+    input = Tensor(Dense(Dense(Element(false))), img)
+    output = Tensor(Dense(Dense(Element(false))), undef, xs, ys)
+    tmp = Tensor(Dense(Element(false)), undef, xs)
+    time = @belapsed dilate_finch_kernel($output, $input, $tmp) evals=1
     return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
 end
 
@@ -73,6 +92,19 @@ function erode_finch_bits(img)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
 
+function dilate_finch_bits(img)
+    (xs, ys) = size(img)
+    imgb = pack_bits(img .!= 0x00)
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
+    outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    tmpb = Tensor(Dense(Element(UInt(0))), undef, xb)
+    time = @belapsed dilate_finch_bits_kernel($outputb, $inputb, $tmpb) evals=1
+    output = unpack_bits(outputb, xs, ys)
+    return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
+end
+
 function erode_finch_bits_sparse(img)
     (xs, ys) = size(img)
     imgb = .~(pack_bits(img .== 0x00))
@@ -107,9 +139,10 @@ function erode_finch_bits_mask(img)
     (xb, ys) = size(imgb)
     inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
     maskb = Tensor(Dense(SparseList(Pattern())), imgb .!= 0)
+    maskbout = Tensor(Dense(SparseList(Pattern())))
     outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
     tmpb = Tensor(Dense(Element(UInt(0))), undef, xb)
-    time = @belapsed erode_finch_bits_mask_kernel($outputb, $inputb, $tmpb, $maskb) evals=1
+    time = @belapsed erode_finch_bits_mask_kernel($outputb, $inputb, $tmpb, $maskb, $maskbout) evals=1
     output = unpack_bits(outputb, xs, ys)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
@@ -148,32 +181,41 @@ function main(resultfile)
         for i in I
             input = f(data[:, :, i])
 
-            reference = nothing
-
-            for kernel in [
-                (method = "opencv", fn = erode_opencv),
-                (method = "finch", fn = erode_finch),
-                (method = "finch_rle", fn = erode_finch_rle),
-                (method = "finch_sparse", fn = erode_finch_sparse),
-                (method = "finch_bits", fn = erode_finch_bits),
-                (method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
-                (method = "finch_bits_mask", fn = erode_finch_bits_mask),
-                (method = "finch_bits_rle", fn = erode_finch_bits_rle),
+            for (op, kernels) in [
+                ("erode", [
+                    (method = "opencv", fn = erode_opencv),
+                    (method = "finch", fn = erode_finch),
+                    (method = "finch_rle", fn = erode_finch_rle),
+                    (method = "finch_sparse", fn = erode_finch_sparse),
+                    (method = "finch_bits", fn = erode_finch_bits),
+                    (method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
+                    (method = "finch_bits_mask", fn = erode_finch_bits_mask),
+                    (method = "finch_bits_rle", fn = erode_finch_bits_rle),
+                ]),
+                ("dilate", [
+                    (method = "opencv", fn = dilate_opencv),
+                    (method = "finch", fn = dilate_finch),
+                    (method = "finch_bits", fn = dilate_finch_bits),
+                ])
             ]
 
-                result = kernel.fn(input)
+                reference = nothing
 
-                reference = something(reference, result.output)
-                if reference != result.output
-                    display(Array{Bool}(reference))
-                    display(Array{Bool}(result.output))
+                for kernel in kernels
+                    result = kernel.fn(input)
+
+                    reference = something(reference, result.output)
+                    if reference != result.output
+                        display(Array{Bool}(reference))
+                        display(Array{Bool}(result.output))
+                    end
+                    @assert reference == result.output
+
+                    println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
+
+                    push!(results, Dict("op" => op, "imagename"=>"$dataset[$i]", "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
+                    write(resultfile, JSON.json(results, 4))
                 end
-                @assert reference == result.output
-
-                println("$dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
-
-                push!(results, Dict("imagename"=>"$dataset[$i]", "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
-                write(resultfile, JSON.json(results, 4))
             end
         end
     end
