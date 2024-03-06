@@ -5,8 +5,8 @@ import json
 import math
 from collections import defaultdict
 
-RESULTS_FILE_PATH = "spmv_results_saved.json"
-CHARTS_DIRECTORY = "spmv/charts/"
+RESULTS_FILE_PATH = "spmv_results_lanka.json"
+CHARTS_DIRECTORY = "spmv/charts_lanka2/"
 
 def all_formats_chart():
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
@@ -25,7 +25,7 @@ def all_formats_chart():
         method = "finch" if "finch" in method else method
         data[method].append(result["time"])
 
-    methods = ["julia", "finch", "taco", "suite_sparse"]
+    methods = ["julia_stdlib", "finch", "taco", "suite_sparse"]
     ref_data = data["taco"]
     for method in methods:
         method_data = data[method]
@@ -113,10 +113,15 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
 
 
 all_formats_chart()
-method_to_ref_comparison_chart("finch_sym", "taco", title="Finch SparseList Symmetric SpMV Performance")
+method_to_ref_comparison_chart("finch", "taco", title="Finch SparseList Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
 method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
+method_to_ref_comparison_chart("finch_band", "taco", title="Finch SparseBand Symmetric SpMV Performance")
+method_to_ref_comparison_chart("finch_band_unsym", "taco", title="Finch SparseBand SpMV Performance")
+method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList Pattern Symmetric SpMV Performance")
+method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
+method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
 
 
 
