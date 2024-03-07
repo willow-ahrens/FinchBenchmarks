@@ -44,3 +44,36 @@ function bfs_finch_kernel(edges, source=5)
     end
     return P
 end
+
+#pull is row-major
+#push is col-major
+
+function finch_bfs_push(_F, F, A, V)
+    @finch begin
+        _F .= false
+        for j=_, k=_
+            if F[j] && A[k, j] && !(V[k])
+                _F[k] |= true
+                P[k] <<choose(0)>>= j #Only set the parent for this vertex
+            end
+        end
+    end
+end
+
+function finch_bfs_pull(_F, F, AT, V)
+    f = ShortCircuitScalar{false, Bool, true}()
+    @finch begin
+        _F .= false
+        for k=_
+            if !V[k]
+                f .= false
+                for j=_
+                    if F[j] && AT[j, k]
+                        f[] |= true
+                        P[k] <<choose(0)>>= j #Only set the parent for this vertex
+                    end
+                end
+            end
+        end
+    end
+end
