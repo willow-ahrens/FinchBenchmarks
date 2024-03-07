@@ -1,15 +1,25 @@
 using Finch
 using BenchmarkTools
 
-function spgemm_finch_inner_kernel(A, B)
+eval(@finch_kernel function spgemm_finch_inner_kernel (C, A, B)
+    C .= 0
+    for j=_, i=_, k=_
+        C[i, j] += AT[k, i] * B[k, j]
+    end
+    return C
+end)
+
+function spgemm_finch_inner_measure(A, B)
     z = default(A) * default(B) + false
     C = Tensor(Dense(SparseList(Element(z))))
     w = Tensor(SparseHash{2}(Element(z)))
     AT = Tensor(Dense(SparseList(Element(z))))
     @finch mode=fastfinch (w .= 0; for k=_, i=_; w[k, i] = A[i, k] end)
     @finch mode=fastfinch (AT .= 0; for i=_, k=_; AT[k, i] = w[k, i] end)
+    time = @belapsed spgemm_finch_inner_kernel($C, $AT, $B)
+    C = spgemm_finch_inner_kernel(C, AT, B)
     @finch (C .= 0; for j=_, i=_, k=_; C[i, j] += AT[k, i] * B[k, j] end)
-    return C
+    return (time = time; C = C)
 end
 
 function spgemm_finch_gustavson_kernel(A, B)
