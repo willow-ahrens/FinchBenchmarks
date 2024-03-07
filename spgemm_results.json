@@ -1,0 +1,32 @@
+[
+    {
+        "time": 0.015400375000000001,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.000527875,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.02775375,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.000560667,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    },
+    {
+        "time": 0.002719083,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "HB/bcspwr07"
+    }
+]

@@ -19,6 +19,6 @@ function spgemm_taco(args, A, B)
     end
 end
 
-spgemm_taco_inner(A, B) = spgemm_taco("--schedule inner", A, B)
-spgemm_taco_outer(A, B) = spgemm_taco("--schedule outer", A, B)
-spgemm_taco_gustavson(A, B) = spgemm_taco("--schedule gustavson", A, B)
+spgemm_taco_inner(A, B) = spgemm_taco(`--schedule inner`, A, B)
+spgemm_taco_outer(A, B) = spgemm_taco(`--schedule outer`, A, B)
+spgemm_taco_gustavson(A, B) = spgemm_taco(`--schedule gustavson`, A, B)
