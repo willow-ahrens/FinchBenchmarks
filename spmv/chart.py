@@ -33,6 +33,9 @@ def all_formats_chart():
 
     make_grouped_bar_chart(methods, mtxs, data, labeled_groups=["finch"], title="SpMV Performance")
 
+    for mtx in mtxs:
+        all_formats_for_matrix_chart(mtx)
+
 
 def get_best_finch_format():
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
@@ -71,6 +74,7 @@ def order_speedups(speedups):
     ordered = [(mtx, time) for mtx, time in speedups.items()]
     return sorted(ordered, key=lambda x: x[1], reverse=True)
 
+
 def method_to_ref_comparison_chart(method, ref, title=""):
     method_results = get_method_results(method)
     ref_results = get_method_results("taco")
@@ -84,6 +88,32 @@ def method_to_ref_comparison_chart(method, ref, title=""):
         data[ref].append(1)
 
     make_grouped_bar_chart([method, ref], x_axis, data, labeled_groups=[method], title=title)
+
+
+def all_formats_for_matrix_chart(matrix):
+    results = json.load(open(RESULTS_FILE_PATH, 'r'))
+    data = {}
+    for result in results:
+        if result["matrix"] == matrix:
+            data[result["method"]] = result["time"]
+    
+    formats = []
+    speedups = []
+    bar_colors = []
+    for format, time in data.items():
+        formats.append(format)
+        speedups.append(data["taco"] / time)
+        bar_colors.append("orange" if "finch" in format else "green")
+    
+    fig, ax = plt.subplots()
+    ax.bar(formats, speedups, width = 0.2, color = bar_colors)
+    ax.set_ylabel("Speedup")
+    ax.set_title(matrix + " Performance")
+    ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
+
+    fig_file = matrix.lower().replace("/", "_") + ".png"
+    plt.savefig(CHARTS_DIRECTORY + "/matrices/" + fig_file, dpi=200, bbox_inches="tight")
+    plt.close() 
 
 
 def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = ""):
@@ -110,18 +140,20 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
 
     fig_file = title.lower().replace(" ", "_") + ".png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200, bbox_inches="tight")
-
+    plt.close()
+    
 
 all_formats_chart()
 method_to_ref_comparison_chart("finch", "taco", title="Finch SparseList Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
+method_to_ref_comparison_chart("finch_unsym_row_maj", "taco", title="Finch SparseList Row Major SpMV Performance")
 method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
+method_to_ref_comparison_chart("finch_vbl_unsym_row_maj", "taco", title="Finch SparseVBL Row Major SpMV Performance")
 method_to_ref_comparison_chart("finch_band", "taco", title="Finch SparseBand Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_band_unsym", "taco", title="Finch SparseBand SpMV Performance")
+method_to_ref_comparison_chart("finch_band_unsym_row_maj", "taco", title="Finch SparseBand Row Major SpMV Performance")
 method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList Pattern Symmetric SpMV Performance")
 method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
+method_to_ref_comparison_chart("finch_pattern_unsym_row_maj", "taco", title="Finch SparseList Pattern Row Major SpMV Performance")
 method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
-
-
-

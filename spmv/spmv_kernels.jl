@@ -7,6 +7,7 @@ A_vbl_int8 = Tensor(Dense(SparseVBLLevel(Element(Int8(0)))))
 A_vbl_pattern = Tensor(Dense(SparseVBLLevel(Pattern())))
 A_band = Tensor(Dense(SparseBand(Element(0.0))))
 A_point = Tensor(Dense(SparsePoint(Element(0.0))))
+A_point_pattern = Tensor(Dense(SparsePoint(Pattern())))
 x = Tensor(Dense(Element(0.0)))
 diag = Tensor(Dense(Element(0.0)))
 diag_int8 = Tensor(Dense(Element(Int8(0))))
@@ -270,6 +271,14 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_kernel_helper_row
     y .= 0
     for j = _, i = _
         y[j] += A_point[i, j] * x[i]
+    end
+    return y
+end)
+
+println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_helper(y, A_point_pattern, x)
+    y .= 0
+    for j = _, i = _
+        y[i] += A_point_pattern[i, j] * x[j]
     end
     return y
 end)
