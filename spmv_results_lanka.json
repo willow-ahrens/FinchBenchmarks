@@ -1,39 +1,4 @@
 [{
-        "time": 0.001394041,
-        "method": "julia_stdlib",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    },
-    {
-        "time": 0.001161522,
-        "method": "finch_point",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    },
-    {
-        "time": 0.001118859,
-        "method": "finch_point_row_maj",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    },
-    {
-        "time": 0.000864549,
-        "method": "taco",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    },
-    {
-        "time": 0.019734405,
-        "method": "suite_sparse",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    },
-    {
         "time": 0.004665799,
         "method": "julia_stdlib",
         "kernel": "spmv",
@@ -3107,4 +3072,47 @@
         "kernel": "spmv",
         "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
         "dataset": "willow_symmetric"
-    }]
+    }, {
+        "time": 0.000773087,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.00066688,
+        "method": "finch_point",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000651464,
+        "method": "finch_point_row_maj",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000632112,
+        "method": "finch_point_pattern",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000603092,
+        "method": "finch_point_pattern_row_maj",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.00047327500000000005,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.013787067,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }
+]
