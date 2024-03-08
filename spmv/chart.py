@@ -7,56 +7,82 @@ from collections import defaultdict
 
 RESULTS_FILE_PATH = "spmv_results_lanka.json"
 CHARTS_DIRECTORY = "spmv/charts_lanka2/"
-
-def sorted_idx_order(list):
-    return sorted(range(len(list)), key=lambda i: list[i], reverse=True)
-
-def rearrange_by_idx_order(list, idxs):
-    return sorted(list, key=lambda x: idxs.index(list.index(x)))
-
-def find_first_idx_below_value(reverse_sorted_list, value):
-    for i in range(len(reverse_sorted_list)):
-        if reverse_sorted_list[i] < value:
-            return i
-    return -1
+FORMAT_ORDER = {
+    "finch": -1,
+    "finch_unsym": -2,
+    "finch_unsym_row_maj": -3,
+    "finch_vbl": -4,
+    "finch_vbl_unsym": -5,
+    "finch_vbl_unsym_row_maj": -6,
+    "finch_band": -7,
+    "finch_band_unsym": -8,
+    "finch_band_unsym_row_maj": -9,
+    "finch_pattern": -10,
+    "finch_pattern_unsym": -11,
+    "finch_pattern_unsym_row_maj": -12,
+    "finch_point": -13,
+    "finch_point_row_maj": -14,
+    "finch_point_pattern": -15,
+    "finch_point_pattern_row_maj": -16,
+}
+FORMAT_LABELS = {
+    "finch": "Symmetric SparseList",
+    "finch_unsym": "SparseList",
+    "finch_unsym_row_maj": "SparseList (Row-Major)",
+    "finch_vbl": "Symmetric SparseVBL",
+    "finch_vbl_unsym": "SparseVBL",
+    "finch_vbl_unsym_row_maj": "SparseVBL (Row-Major)",
+    "finch_band": "Symmetric SparseBand",
+    "finch_band_unsym": "SparseBand",
+    "finch_band_unsym_row_maj": "SparseBand (Row-Major)",
+    "finch_pattern": "Symmetric Pattern",
+    "finch_pattern_unsym": "Pattern",
+    "finch_pattern_unsym_row_maj": "Pattern (Row-Major)",
+    "finch_point": "SparsePoint",
+    "finch_point_row_maj": "SparsePoint (Row-Major)",
+    "finch_point_pattern": "SparsePoint Pattern",
+    "finch_point_pattern_row_maj": "SparsePoint Pattern (Row-Major)",
+}
 
 def all_formats_chart():
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
-    mtxs = []
-    data = defaultdict(list)
+    data = defaultdict(lambda: defaultdict(int))
     finch_formats = get_best_finch_format()
 
     for result in results:
         mtx = result["matrix"]
         method = result["method"]
-        if mtx not in mtxs:
-            mtxs.append(mtx)
 
         if "finch" in method and finch_formats[mtx] != method:
             continue
         method = "finch" if "finch" in method else method
-        data[method].append(result["time"])
+        data[mtx][method] = result["time"]
 
-    methods = ["julia_stdlib", "finch", "taco", "suite_sparse"]
-    ref_data = data["taco"]
-    for method in methods:
-        method_data = data[method]
-        data[method] = [ref_data[i] / method_data[i] for i in range(len(ref_data))] 
+    for mtx, times in data.items():
+        ref_time = times["taco"]
+        for method, time in times.items():
+            times[method] = ref_time / time
 
+    ordered_data = sorted(data.items(), key = lambda mtx_results: mtx_results[1]["finch"], reverse=True)
+    # ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
     faster_data = defaultdict(list)
     slower_data = defaultdict(list)
-    idx_order = sorted_idx_order(data["finch"])
-    order_speedups = rearrange_by_idx_order(data["finch"], idx_order)
-    splice_idx = find_first_idx_below_value(order_speedups, 1.0)
-    for method in methods:
-        method_data = data[method]
-        method_data = rearrange_by_idx_order(method_data, idx_order)
-        faster_data[method] = method_data[:splice_idx]
-        slower_data[method] = method_data[splice_idx:]
+    splice_idx = 0
+    for i, (mtx, times) in enumerate(ordered_data):
+        for method, time in times.items():
+            if times["finch"] > 1.0:
+                splice_idx = max(splice_idx, i + 1)
+                faster_data[method].append(time)
+            else:
+                slower_data[method].append(time)
 
-    mtxs = rearrange_by_idx_order(mtxs, idx_order)
-    make_grouped_bar_chart(methods, mtxs[:splice_idx], faster_data, labeled_groups=["finch"], title="SpMV Performance (Faster than TACO)")
-    make_grouped_bar_chart(methods, mtxs[splice_idx:], slower_data, labeled_groups=["finch"], title="SpMV Performance (Slower than TACO)")
+    ordered_mtxs = [mtx for mtx, _ in ordered_data]
+    labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
+    methods = ["finch", "taco", "julia_stdlib", "suite_sparse"]        
+    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], title="SpMV Performance Sorted (Faster than TACO)")
+    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], title="SpMV Performance Sorted (Slower than TACO)")
+    # make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO)")
+    # make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO)")
 
     # for mtx in mtxs:
         # all_formats_for_matrix_chart(mtx)
@@ -141,7 +167,7 @@ def all_formats_for_matrix_chart(matrix):
     plt.close() 
 
 
-def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = ""):
+def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}):
     x = np.arange(len(data[labels[0]]))
     width = 0.2 
     multiplier = 0
@@ -152,8 +178,8 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
         max_height = max(max_height, max(label_data))
         offset = width * multiplier
         rects = ax.bar(x + offset, label_data, width, label=label)
-        bar_labels = [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
-        # ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5)
+        bar_labels = bar_labels_dict[label] if (label in bar_labels_dict) else [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
+        ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5, rotation=90)
         multiplier += 1
 
     ax.set_ylabel(y_label)
