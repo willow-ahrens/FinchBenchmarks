@@ -1780,127 +1780,127 @@
         "time": 0.0001459,
         "method": "julia_stdlib",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000145713,
         "method": "finch",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000172277,
         "method": "finch_band",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000183167,
         "method": "finch_band_unsym",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000170159,
         "method": "finch_band_unsym_row_maj",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000175651,
         "method": "taco",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000260557,
         "method": "suite_sparse",
         "kernel": "spmv",
-        "matrix": "small_band_synthetic",
+        "matrix": "toeplitz_small_band",
         "dataset": "banded"
     }, {
         "time": 0.000713575,
         "method": "julia_stdlib",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.000580156,
         "method": "finch",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.000681118,
         "method": "finch_band",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.000468663,
         "method": "finch_band_unsym",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.000733507,
         "method": "finch_band_unsym_row_maj",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.0007646080000000001,
         "method": "taco",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.001557326,
         "method": "suite_sparse",
         "kernel": "spmv",
-        "matrix": "medium_band_synthetic",
+        "matrix": "toeplitz_medium_band",
         "dataset": "banded"
     }, {
         "time": 0.003176709,
         "method": "julia_stdlib",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.001905001,
         "method": "finch",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.002206943,
         "method": "finch_band",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.00129484,
         "method": "finch_band_unsym",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.002541142,
         "method": "finch_band_unsym_row_maj",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.002574298,
         "method": "taco",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.004937181,
         "method": "suite_sparse",
         "kernel": "spmv",
-        "matrix": "large_band_synthetic",
+        "matrix": "toeplitz_large_band",
         "dataset": "banded"
     }, {
         "time": 0.001900083,

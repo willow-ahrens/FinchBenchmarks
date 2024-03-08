@@ -17,7 +17,7 @@ function banded_matrix(n, b)
     banded = zeros(n, n)
     for i in 1:n
         for j in max(1, i - b):min(n, i + b)
-            banded[i, j] = i + j  # Adjust values as needed
+            banded[i, j] = j - i + 1 
         end
     end
     return banded

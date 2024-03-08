@@ -102,9 +102,9 @@ datasets = Dict(
         "SNAP/email-Eu-core",
     ],
     "banded" => [
-        "small_band_synthetic",
-        "medium_band_synthetic",
-        "large_band_synthetic",
+        "toeplitz_small_band",
+        "toeplitz_medium_band",
+        "toeplitz_large_band",
     ]
 )
 
@@ -206,7 +206,7 @@ methods = Dict(
         "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
-    ]
+    ],
 )
 
 results = []
@@ -219,11 +219,11 @@ for (dataset, mtxs) in datasets
         if dataset == "permutation"
             A = SparseMatrixCSC(reverse_permutation_matrix(200000))
         elseif dataset == "banded"
-            if mtx == "small_band_synthetic"
+            if mtx == "toeplitz_small_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 5))
-            elseif mtx == "medium_band_synthetic"
+            elseif mtx == "toeplitz_medium_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 30))
-            elseif mtx == "large_band_synthetic"
+            elseif mtx == "toeplitz_large_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 100))
             end
         else
