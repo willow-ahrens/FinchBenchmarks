@@ -79,8 +79,8 @@ def all_formats_chart():
     ordered_mtxs = [mtx for mtx, _ in ordered_data]
     labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
     methods = ["finch", "taco", "julia_stdlib", "suite_sparse"]        
-    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], title="SpMV Performance Sorted (Faster than TACO)")
-    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], title="SpMV Performance Sorted (Slower than TACO)")
+    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, title="SpMV Performance Sorted (Faster than TACO)")
+    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, title="SpMV Performance Sorted (Slower than TACO)")
     # make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO)")
     # make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO)")
 
