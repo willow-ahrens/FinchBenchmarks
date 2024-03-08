@@ -8,7 +8,9 @@ function random_permutation_matrix(n)
 end
 
 function reverse_permutation_matrix(n)
-    return [i == j ? 0 : (i+j == n+1 ? 1 : 0) for i in 1:n, j in 1:n]
+    perm = reverse([i for i in 1:n])
+    P = I(n) 
+    return P[perm, :]
 end
 
 function banded_matrix(n, b)
