@@ -282,3 +282,11 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_he
     end
     return y
 end)
+
+println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_helper_row_maj(y, A_point_pattern, x)
+    y .= 0
+    for j = _, i = _
+        y[j] += A_point_pattern[i, j] * x[i]
+    end
+    return y
+end)

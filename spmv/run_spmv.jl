@@ -30,21 +30,21 @@ end
 parsed_args = parse_args(ARGS, s)
 
 datasets = Dict(
-    "vuduc_symmetric" => [
-        "Boeing/ct20stif",
-        "Simon/olafu",
-        "Boeing/bcsstk35",
-        "Boeing/crystk02",
-        "Boeing/crystk03",
-        "Nasa/nasasrb",
-        "Rothberg/3dtube",
-        "Simon/raefsky4",
-        "Mulvey/finan512",
-        "Pothen/pwt",
-        "Cote/vibrobox",
-        "HB/saylr4",
-        "Gupta/gupta1"
-    ],
+    # "vuduc_symmetric" => [
+    #     "Boeing/ct20stif",
+    #     "Simon/olafu",
+    #     "Boeing/bcsstk35",
+    #     "Boeing/crystk02",
+    #     "Boeing/crystk03",
+    #     "Nasa/nasasrb",
+    #     "Rothberg/3dtube",
+    #     "Simon/raefsky4",
+    #     "Mulvey/finan512",
+    #     "Pothen/pwt",
+    #     "Cote/vibrobox",
+    #     "HB/saylr4",
+    #     "Gupta/gupta1"
+    # ],
     "vuduc_unsymmetric" => [
         "Simon/raefsky3",
         "Simon/venkat01",
@@ -66,46 +66,46 @@ datasets = Dict(
         "Shyy/shyy161",
         "Wang/wang3",
     ],
-    "willow_symmetric" => [
-        "GHS_indef/exdata_1",
-        # "Janna/Emilia_923",
-        # "Janna/Geo_1438",
-        "TAMU_SmartGridCenter/ACTIVSg70K"
-    ],
-    "willow_unsymmetric" => [
-        "Goodwin/Goodwin_071",
-        # "Hamm/scircuit",
-        # "LPnetlib/lpi_gran",
-        "Norris/heart3",
-        "Rajat/rajat26",
-        "TSOPF/TSOPF_RS_b678_c1"
-    ],
-    "permutation" => [
-        "permutation_synthetic"
-    ], 
-    "graph_symmetric" => [
-        "SNAP/email-Enron", 
-        "SNAP/as-735",
-        "SNAP/Oregon-1",
-        "Newman/as-22july06",
-        "SNAP/loc-Brightkite",
-        "SNAP/as-Skitter"
-    ],
-    "graph_unsymmetric" => [
-        "SNAP/soc-Epinions1",
-        "SNAP/wiki-Vote",
-        "SNAP/email-EuAll",
-        "SNAP/cit-HepPh",
-        "SNAP/web-NotreDame",
-        "SNAP/amazon0302",
-        "SNAP/p2p-Gnutella08",
-        "SNAP/email-Eu-core",
-    ],
-    "banded" => [
-        "small_band_synthetic",
-        "medium_band_synthetic",
-        "large_band_synthetic",
-    ]
+    # "willow_symmetric" => [
+    #     "GHS_indef/exdata_1",
+    #     # "Janna/Emilia_923",
+    #     # "Janna/Geo_1438",
+    #     "TAMU_SmartGridCenter/ACTIVSg70K"
+    # ],
+    # "willow_unsymmetric" => [
+    #     "Goodwin/Goodwin_071",
+    #     # "Hamm/scircuit",
+    #     # "LPnetlib/lpi_gran",
+    #     "Norris/heart3",
+    #     "Rajat/rajat26",
+    #     "TSOPF/TSOPF_RS_b678_c1"
+    # ],
+    # "permutation" => [
+    #     "permutation_synthetic"
+    # ], 
+    # "graph_symmetric" => [
+    #     "SNAP/email-Enron", 
+    #     "SNAP/as-735",
+    #     "SNAP/Oregon-1",
+    #     "Newman/as-22july06",
+    #     "SNAP/loc-Brightkite",
+    #     "SNAP/as-Skitter"
+    # ],
+    # "graph_unsymmetric" => [
+    #     "SNAP/soc-Epinions1",
+    #     "SNAP/wiki-Vote",
+    #     "SNAP/email-EuAll",
+    #     "SNAP/cit-HepPh",
+    #     "SNAP/web-NotreDame",
+    #     "SNAP/amazon0302",
+    #     "SNAP/p2p-Gnutella08",
+    #     "SNAP/email-Eu-core",
+    # ],
+    # "banded" => [
+    #     "small_band_synthetic",
+    #     "medium_band_synthetic",
+    #     "large_band_synthetic",
+    # ]
 )
 
 include("synthetic.jl")
@@ -126,6 +126,8 @@ include("spmv_finch_band_unsym.jl")
 include("spmv_finch_band_unsym_row_maj.jl")
 include("spmv_finch_point.jl")
 include("spmv_finch_point_row_maj.jl")
+include("spmv_finch_point_pattern.jl")
+include("spmv_finch_point_pattern_row_maj.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
 include("spmv_suite_sparse.jl")
@@ -165,7 +167,7 @@ methods = Dict(
         "finch_band_unsym" => spmv_finch_band_unsym,
         "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
-        "suite_sparse" => spmv_suite_sparse,
+        "suite_sparse" => spmv_suite_sparse,    
     ],
     "symmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
@@ -191,6 +193,8 @@ methods = Dict(
         "julia_stdlib" => spmv_julia,
         "finch_point" => spmv_finch_point,
         "finch_point_row_maj" => spmv_finch_point_row_maj,
+        "finch_point_pattern" => spmv_finch_point_pattern,
+        "finch_point_pattern_row_maj" => spmv_finch_point_pattern_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -213,7 +217,7 @@ for (dataset, mtxs) in datasets
     tag = dataset_tags[dataset]
     for mtx in mtxs
         if dataset == "permutation"
-            A = SparseMatrixCSC(random_permutation_matrix(200000))
+            A = SparseMatrixCSC(reverse_permutation_matrix(200000))
         elseif dataset == "banded"
             if mtx == "small_band_synthetic"
                 A = SparseMatrixCSC(banded_matrix(10000, 5))

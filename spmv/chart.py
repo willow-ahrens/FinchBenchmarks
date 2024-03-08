@@ -157,3 +157,4 @@ method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList 
 method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
 method_to_ref_comparison_chart("finch_pattern_unsym_row_maj", "taco", title="Finch SparseList Pattern Row Major SpMV Performance")
 method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
+method_to_ref_comparison_chart("finch_point_row_maj", "taco", title="Finch SparsePoint Row Major SpMV Performance")
