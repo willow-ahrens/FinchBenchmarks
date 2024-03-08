@@ -105,6 +105,18 @@ datasets = Dict(
         "toeplitz_small_band",
         "toeplitz_medium_band",
         "toeplitz_large_band",
+    ],
+    "taco_symmetric" => [
+        "HB/bcsstk17",
+        "Williams/pdb1HYS",
+        "Williams/cant",
+        "Williams/consph",
+        "Williams/cop20k_A",
+        "DNVS/shipsec1",
+        "Boeing/pwtk",
+    ],
+    "taco_unsymmetric" => [
+        "Bova/rma10"
     ]
 )
 
@@ -141,6 +153,8 @@ dataset_tags = Dict(
     "banded" => "banded",
     "graph_symmetric" => "symmetric_pattern",
     "graph_unsymmetric" => "unsymmetric_pattern",
+    "taco_symmetric" => "symmetric",
+    "taco_unsymmetric" => "unsymmetric",
 )
 
 methods = Dict(
