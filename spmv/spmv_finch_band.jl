@@ -32,17 +32,18 @@ function ssymv_finch_band_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel
                 diag_lvl_2_val = diag_lvl_val[diag_lvl_q]
                 y_j_val = 0
                 A_lvl_2_r = A_lvl_ptr[A_lvl_q]
-                A_lvl_2_r_stop = A_lvl_ptr[A_lvl_q + 1]
-                if A_lvl_2_r < A_lvl_2_r_stop
+                A_lvl_2_r_stop = A_lvl_ptr[A_lvl_q + 1] - 1
+                if A_lvl_2_r <= A_lvl_2_r_stop
                     A_lvl_2_i1 = A_lvl_idx[A_lvl_2_r]
                     A_lvl_2_q_stop = A_lvl_ofs[A_lvl_2_r + 1]
-                    A_lvl_2_i_2 = A_lvl_2_i - (A_lvl_2_q_stop - A_lvl_ofs[A_lvl_2_r])
+                    A_lvl_2_i_2 = A_lvl_2_i1 - ((A_lvl_2_q_stop - A_lvl_ofs[A_lvl_2_r]) - 1)
                     A_lvl_2_q_ofs = (A_lvl_2_q_stop - A_lvl_2_i1) - 1
                 else
-                    A_lvl_2_i_2 = 0
+                    A_lvl_2_i_2 = 1
+                    A_lvl_2_i1 = 0
                 end
                 phase_start_2 = max(1, A_lvl_2_i_2)
-                phase_stop_2 = x_lvl.shape
+                phase_stop_2 = min(x_lvl.shape, A_lvl_2_i1)
                 if phase_stop_2 >= phase_start_2
                     for i_8 = phase_start_2:phase_stop_2
                         A_lvl_2_q = A_lvl_2_q_ofs + i_8
