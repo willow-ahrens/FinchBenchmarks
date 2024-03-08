@@ -1,38 +1,14 @@
 [
     {
-        "time": 0.004857125,
-        "method": "Graphs.jl",
-        "operation": "pagerank",
-        "matrix": "SNAP/soc-Epinions1"
-    },
-    {
-        "time": 0.01683175,
-        "method": "Finch",
-        "operation": "pagerank",
-        "matrix": "SNAP/soc-Epinions1"
-    },
-    {
-        "time": 0.001892084,
+        "time": 0.006798292,
         "method": "Graphs.jl",
         "operation": "bfs",
-        "matrix": "SNAP/soc-Epinions1"
+        "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 0.0027015,
+        "time": 0.000913542,
         "method": "Finch",
         "operation": "bfs",
-        "matrix": "SNAP/soc-Epinions1"
-    },
-    {
-        "time": 0.006165958,
-        "method": "Graphs.jl",
-        "operation": "bellmanford",
-        "matrix": "SNAP/soc-Epinions1"
-    },
-    {
-        "time": 0.003583708,
-        "method": "Finch",
-        "operation": "bellmanford",
-        "matrix": "SNAP/soc-Epinions1"
+        "matrix": "DIMACS10/kron_g500-logn16"
     }
 ]
