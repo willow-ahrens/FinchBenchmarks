@@ -1,6 +1,6 @@
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.2"
 manifest_format = "2.0"
 project_hash = "d0e71bdc2791d24786ad2102082c0364b1e94879"
 
@@ -119,9 +119,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.Finch]]
 deps = ["AbstractTrees", "CIndices", "Compat", "DataStructures", "JSON", "LinearAlgebra", "PrecompileTools", "Random", "Requires", "RewriteTools", "SyntaxInterface"]
-git-tree-sha1 = "4d5830c670170b3d5faf0047191585eee0edac92"
+path = "/Users/willow/Projects/Finch.jl/"
 uuid = "9177782c-1635-4eb9-9bfb-d9dfa25e6bce"
-version = "0.6.14"
+version = "0.6.16"
 
     [deps.Finch.extensions]
     HDF5Ext = "HDF5"

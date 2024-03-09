@@ -11,12 +11,13 @@ function bellmanford_finch_kernel(edges, source=1)
     (n, m) = size(edges)
     @assert n == m
 
-    dists_prev = Tensor(Dense(Element((Inf, 0))), n)
-    dists_prev[source] = (0.0, 0)
-    dists = Tensor(Dense(Element((Inf, 0))), n)
+    dists_prev = Tensor(Dense(Element(Inf)), n)
+    dists_prev[source] = 0
+    dists = Tensor(Dense(Element(Inf)), n)
     active_prev = Tensor(SparseByteMap(Pattern()), n)
     active_prev[source] = true
     active = Tensor(SparseByteMap(Pattern()), n)
+    parents = Tensor(Dense(Element(0)), n)
 
     for iter = 1:n  
         @finch for j=_; if active_prev[j] dists[j] <<minby>>= dists_prev[j] end end
@@ -26,8 +27,8 @@ function bellmanford_finch_kernel(edges, source=1)
             for j = _
                 if active_prev[j]
                     for i = _
-                        let d = first(dists_prev[j]) + edges[i, j]
-                            dists[i] <<minby>>= (d, j)
+                        let d = dists_prev[j] + edges[i, j]
+                            dists[i] <<min>>= d
                             active[i] |= d < first(dists_prev[i])
                         end
                     end
@@ -35,12 +36,24 @@ function bellmanford_finch_kernel(edges, source=1)
             end
         end
 
-        if !any(active)
-            return dists
+        if countstored(active) == 0
+            break
         end
         dists_prev, dists = dists, dists_prev
         active_prev, active = active, active_prev
     end
 
-    return dists_prev
+    @finch begin
+        for j = _
+            for i = _
+                let d = edges[i, j]
+                    if d < typemax(eltype(edges)) && dists[j] + d <= dists[i]
+                        parents[i] <<choose(0)>>= j
+                    end
+                end
+            end
+        end
+    end
+
+    return (dists=dists, parents=parents)
 end

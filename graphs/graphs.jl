@@ -37,30 +37,22 @@ end
 parsed_args = parse_args(ARGS, s)
 
 include("datasets.jl")
-include("pagerank.jl")
 include("shortest_paths.jl")
 include("bfs.jl")
-include("triangle_counting.jl")
 
-function pagerank_finch(mtx)
-    A = pattern!(Tensor(SparseMatrixCSC(mtx)))
-    time = @belapsed pagerank_finch_kernel($A, nsteps=20, damp = 0.85)
-    output = pagerank_finch_kernel(A)
-    return (; time = time, mem = summarysize(A), output = Array(output))
-end
-
-function pagerank_graphs(mtx)
-    A = Graphs.SimpleDiGraph(transpose(mtx))
-    time = @belapsed Graphs.pagerank($A, 0.85, 20)
-    output = Graphs.pagerank(A, 0.85, 20)
-    return (; time = time, mem = summarysize(A), output = output)
-end
-
-function bfs_finch(mtx)
+function bfs_finch_push_pull(mtx)
     A = pattern!(Tensor(SparseMatrixCSC(mtx)))
     AT = pattern!(Tensor(permutedims(SparseMatrixCSC(mtx))))
     time = @belapsed bfs_finch_kernel($A, $AT, 1)
     output = bfs_finch_kernel(A, AT, 1)
+    return (; time = time, mem = summarysize(A), output = output)
+end
+
+function bfs_finch_push_only(mtx)
+    A = pattern!(Tensor(SparseMatrixCSC(mtx)))
+    AT = pattern!(Tensor(permutedims(SparseMatrixCSC(mtx))))
+    time = @belapsed bfs_finch_kernel($A, $AT, 1, 0)
+    output = bfs_finch_kernel(A, AT, 1, 0)
     return (; time = time, mem = summarysize(A), output = output)
 end
 
@@ -82,48 +74,69 @@ function bellmanford_graphs(mtx)
     A = SimpleWeightedDiGraph(transpose(SparseMatrixCSC{Float64}(mtx)))
     time = @belapsed Graphs.bellman_ford_shortest_paths($A, 1)
     output = Graphs.bellman_ford_shortest_paths(A, 1)
-    return (; time = time, mem = summarysize(A), output = collect(zip(output.dists, output.parents)))
+    return (; time = time, mem = summarysize(A), output = output)
+end
+
+function check_bfs(A, src, res_parent, ref_parent)
+    g = SimpleDiGraph(transpose(A))
+    ref_levels = gdistances(g, src)
+    for i in 1:nv(g)
+        if ref_parent[i] == 0
+            @assert res_parent[i] == 0
+        elseif ref_parent[i] == i
+            @assert res_parent[i] == i
+        else
+            @assert ref_levels[res_parent[i]] == ref_levels[i] - 1
+        end
+    end
+    return true
+end
+
+function check_bellman(A, src, res, ref)
+    n = length(ref.dists)
+    for i in 1:n
+        if ref.dists[i] != res.dists[i]
+            @info "dists" i res.dists[i] ref.dists[i]
+        end
+        if ref.parents[i] != 0
+            @assert A[res.parents[i], i] + ref.dists[res.parents[i]] == ref.dists[i]
+        end
+    end
+    return true
 end
 
 results = []
 
-for mtx in datasets[parsed_args["dataset"]]
-    A = SparseMatrixCSC(matrixdepot(mtx))
-    (n, n) = size(A)
-    for (op_name, check, methods) in [
-        #=
-        ("pagerank",
-            (x, y) -> norm(x - y)/norm(y) < 0.1,
-            [
-                "Graphs.jl" => pagerank_graphs,
-                "Finch" => pagerank_finch,
-            ]
-        ),
-        =#
-        ("bfs",
-            (==),
-            [
-                "Graphs.jl" => bfs_graphs,
-                "Finch" => bfs_finch,
-            ]
-        ),
-        ("bellmanford",
-            (==),
-            [
-                "Graphs.jl" => bellmanford_graphs,
-                "Finch" => bellmanford_finch,
-            ]
-        ),
-    ]
+for (op_name, check, methods) in [
+    ("bfs",
+        check_bfs,
+        [
+            "Graphs.jl" => bfs_graphs,
+            "finch_push_pull" => bfs_finch_push_pull,
+            "finch_push_only" => bfs_finch_push_only,
+        ]
+    ),
+    ("bellmanford",
+        check_bellman,
+        [
+            "Graphs.jl" => bellmanford_graphs,
+            "Finch" => bellmanford_finch,
+        ]
+    ),
+]
+    for mtx in datasets[parsed_args["dataset"]]
+        A = SparseMatrixCSC(matrixdepot(mtx))
+        (n, n) = size(A)
         @info "testing" op_name mtx
         reference = nothing
         for (key, method) in methods
+            display(A)
             result = method(A)
 
             time = result.time
             reference = something(reference, result.output)
 
-            #check(reference, result.output) || @warn("incorrect result")
+            check(A, 1, result.output, reference) || @warn("incorrect result")
 
             # res.y == y_ref || @warn("incorrect result")
             @info "results" key result.time result.mem

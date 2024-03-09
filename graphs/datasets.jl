@@ -8,6 +8,7 @@ const datasets = Dict(
         "SNAP/com-Orkut",
         "SNAP/roadNet-CA",
         "SNAP/roadNet-CA",
-        "DIMACS10/road_usa"
+        "DIMACS10/road_usa",
+        "SNAP/soc-Epinions1",
     ]
 )
