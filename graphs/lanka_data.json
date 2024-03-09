@@ -1,0 +1,92 @@
+[
+    {
+        "time": 0.018772467,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.00232136,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.019211713,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.19042422,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.08133869,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 1.196027343,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.408569342,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 1.175538936,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.236641462,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.490737723,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.278371065,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.199847031,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 6.398490174,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 2.001648658,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.37439677,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    }
+]
