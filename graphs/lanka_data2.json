@@ -1,0 +1,74 @@
+[
+    {
+        "time": 0.003934838,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.003032275,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.004927682,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.015554861,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.012094737,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 1.598651633,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 0.261798012,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 3.51946577,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 8.235240232,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 6.738490507,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 11.321332397,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.273249203,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    }
+]
