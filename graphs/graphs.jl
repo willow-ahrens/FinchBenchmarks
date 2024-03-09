@@ -19,7 +19,6 @@ using MatrixDepot
 using Finch
 using Graphs
 using SimpleWeightedGraphs
-using Base: summarysize
 
 s = ArgParseSettings("Run graph experiments.")
 
@@ -45,7 +44,7 @@ function bfs_finch_push_pull(mtx)
     AT = pattern!(Tensor(permutedims(SparseMatrixCSC(mtx))))
     time = @belapsed bfs_finch_kernel($A, $AT, 1)
     output = bfs_finch_kernel(A, AT, 1)
-    return (; time = time, mem = summarysize(A), output = output)
+    return (; time = time, mem = 0, output = output)
 end
 
 function bfs_finch_push_only(mtx)
@@ -53,28 +52,28 @@ function bfs_finch_push_only(mtx)
     AT = pattern!(Tensor(permutedims(SparseMatrixCSC(mtx))))
     time = @belapsed bfs_finch_kernel($A, $AT, 1, 0)
     output = bfs_finch_kernel(A, AT, 1, 0)
-    return (; time = time, mem = summarysize(A), output = output)
+    return (; time = time, mem = 0, output = output)
 end
 
 function bfs_graphs(mtx)
     A = SimpleDiGraph(transpose(mtx))
     time = @belapsed Graphs.bfs_parents($A, 1)
     output = Graphs.bfs_parents(A, 1)
-    return (; time = time, mem = summarysize(A), output = output)
+    return (; time = time, mem = 0, output = output)
 end
 
 function bellmanford_finch(mtx)
     A = redefault!(Tensor(SparseMatrixCSC{Float64}(mtx)), Inf)
     time = @belapsed bellmanford_finch_kernel($A, 1)
     output = bellmanford_finch_kernel(A, 1)
-    return (; time = time, mem = summarysize(A), output = output)
+    return (; time = time, mem = 0, output = output)
 end
 
 function bellmanford_graphs(mtx)
     A = SimpleWeightedDiGraph(transpose(SparseMatrixCSC{Float64}(mtx)))
     time = @belapsed Graphs.bellman_ford_shortest_paths($A, 1)
     output = Graphs.bellman_ford_shortest_paths(A, 1)
-    return (; time = time, mem = summarysize(A), output = output)
+    return (; time = time, mem = 0, output = output)
 end
 
 function check_bfs(A, src, res_parent, ref_parent)
