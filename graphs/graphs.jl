@@ -64,7 +64,7 @@ function bfs_graphs(mtx)
 end
 
 function bellmanford_finch(mtx)
-    A = redefault!(Tensor(Dense(SparseList(Element(0.0))), SparseMatrixCSC{Float64}(mtx)), Inf)
+    A = redefault!(Tensor(SparseMatrixCSC{Float64}(mtx)), Inf)
     time = @belapsed bellmanford_finch_kernel($A, 1)
     output = bellmanford_finch_kernel(A, 1)
     return (; time = time, mem = summarysize(A), output = output)
