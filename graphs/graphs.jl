@@ -107,26 +107,27 @@ end
 
 results = []
 
-for (op_name, check, methods) in [
-    ("bfs",
-        check_bfs,
-        [
-            "Graphs.jl" => bfs_graphs,
-            "finch_push_pull" => bfs_finch_push_pull,
-            "finch_push_only" => bfs_finch_push_only,
-        ]
-    ),
-    ("bellmanford",
-        check_bellman,
-        [
-            "Graphs.jl" => bellmanford_graphs,
-            "Finch" => bellmanford_finch,
-        ]
-    ),
-]
-    for mtx in datasets[parsed_args["dataset"]]
-        A = SparseMatrixCSC(matrixdepot(mtx))
-        (n, n) = size(A)
+
+for mtx in datasets[parsed_args["dataset"]]
+    A = SparseMatrixCSC(matrixdepot(mtx))
+    (n, n) = size(A)
+    for (op_name, check, methods) in [
+        ("bfs",
+            check_bfs,
+            [
+                "Graphs.jl" => bfs_graphs,
+                "finch_push_pull" => bfs_finch_push_pull,
+                "finch_push_only" => bfs_finch_push_only,
+            ]
+        ),
+        ("bellmanford",
+            check_bellman,
+            [
+                "Graphs.jl" => bellmanford_graphs,
+                "Finch" => bellmanford_finch,
+            ]
+        ),
+    ]
         @info "testing" op_name mtx
         reference = nothing
         for (key, method) in methods
