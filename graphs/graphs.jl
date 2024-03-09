@@ -64,7 +64,7 @@ function bfs_graphs(mtx)
 end
 
 function bellmanford_finch(mtx)
-    A = redefault!(Tensor(Dense(SparseList(Element(0.0))), mtx), Inf)
+    A = redefault!(Tensor(Dense(SparseList(Element(0.0))), SparseMatrixCSC{Float64}(mtx)), Inf)
     time = @belapsed bellmanford_finch_kernel($A, 1)
     output = bellmanford_finch_kernel(A, 1)
     return (; time = time, mem = summarysize(A), output = output)
@@ -99,7 +99,7 @@ function check_bellman(A, src, res, ref)
             @info "dists" i res.dists[i] ref.dists[i]
         end
         if ref.parents[i] != 0
-            @assert A[res.parents[i], i] + ref.dists[res.parents[i]] == ref.dists[i]
+            @assert A[i, res.parents[i]] + ref.dists[res.parents[i]] == ref.dists[i]
         end
     end
     return true
@@ -130,7 +130,6 @@ for (op_name, check, methods) in [
         @info "testing" op_name mtx
         reference = nothing
         for (key, method) in methods
-            display(A)
             result = method(A)
 
             time = result.time

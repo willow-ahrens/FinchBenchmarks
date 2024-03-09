@@ -47,7 +47,7 @@ function bellmanford_finch_kernel(edges, source=1)
         for j = _
             for i = _
                 let d = edges[i, j]
-                    if d < typemax(eltype(edges)) && dists[j] + d <= dists[i]
+                    if d < Inf && dists[j] + d <= dists[i]
                         parents[i] <<choose(0)>>= j
                     end
                 end
