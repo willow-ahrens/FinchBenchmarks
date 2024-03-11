@@ -7,11 +7,17 @@ function random_permutation_matrix(n)
     return P[perm, :]
 end
 
+function reverse_permutation_matrix(n)
+    perm = reverse([i for i in 1:n])
+    P = I(n) 
+    return P[perm, :]
+end
+
 function banded_matrix(n, b)
     banded = zeros(n, n)
     for i in 1:n
         for j in max(1, i - b):min(n, i + b)
-            banded[i, j] = i + j  # Adjust values as needed
+            banded[i, j] = j - i + 1 
         end
     end
     return banded

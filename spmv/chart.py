@@ -5,33 +5,87 @@ import json
 import math
 from collections import defaultdict
 
-RESULTS_FILE_PATH = "spmv_results_saved.json"
-CHARTS_DIRECTORY = "spmv/charts/"
+RESULTS_FILE_PATH = "spmv_results_lanka.json"
+CHARTS_DIRECTORY = "spmv/charts_lanka2/"
+FORMAT_ORDER = {
+    "finch": -1,
+    "finch_unsym": -2,
+    "finch_unsym_row_maj": -3,
+    "finch_vbl": -4,
+    "finch_vbl_unsym": -5,
+    "finch_vbl_unsym_row_maj": -6,
+    "finch_band": -7,
+    "finch_band_unsym": -8,
+    "finch_band_unsym_row_maj": -9,
+    "finch_pattern": -10,
+    "finch_pattern_unsym": -11,
+    "finch_pattern_unsym_row_maj": -12,
+    "finch_point": -13,
+    "finch_point_row_maj": -14,
+    "finch_point_pattern": -15,
+    "finch_point_pattern_row_maj": -16,
+}
+FORMAT_LABELS = {
+    "finch": "Symmetric SparseList",
+    "finch_unsym": "SparseList",
+    "finch_unsym_row_maj": "SparseList (Row-Major)",
+    "finch_vbl": "Symmetric SparseVBL",
+    "finch_vbl_unsym": "SparseVBL",
+    "finch_vbl_unsym_row_maj": "SparseVBL (Row-Major)",
+    "finch_band": "Symmetric SparseBand",
+    "finch_band_unsym": "SparseBand",
+    "finch_band_unsym_row_maj": "SparseBand (Row-Major)",
+    "finch_pattern": "Symmetric Pattern",
+    "finch_pattern_unsym": "Pattern",
+    "finch_pattern_unsym_row_maj": "Pattern (Row-Major)",
+    "finch_point": "SparsePoint",
+    "finch_point_row_maj": "SparsePoint (Row-Major)",
+    "finch_point_pattern": "SparsePoint Pattern",
+    "finch_point_pattern_row_maj": "SparsePoint Pattern (Row-Major)",
+}
 
 def all_formats_chart():
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
-    mtxs = []
-    data = defaultdict(list)
+    data = defaultdict(lambda: defaultdict(int))
     finch_formats = get_best_finch_format()
 
     for result in results:
         mtx = result["matrix"]
         method = result["method"]
-        if mtx not in mtxs:
-            mtxs.append(mtx)
 
         if "finch" in method and finch_formats[mtx] != method:
             continue
         method = "finch" if "finch" in method else method
-        data[method].append(result["time"])
+        data[mtx][method] = result["time"]
 
-    methods = ["julia", "finch", "taco", "suite_sparse"]
-    ref_data = data["taco"]
-    for method in methods:
-        method_data = data[method]
-        data[method] = [ref_data[i] / method_data[i] for i in range(len(ref_data))] 
+    for mtx, times in data.items():
+        ref_time = times["taco"]
+        for method, time in times.items():
+            times[method] = ref_time / time
 
-    make_grouped_bar_chart(methods, mtxs, data, labeled_groups=["finch"], title="SpMV Performance")
+    ordered_data = sorted(data.items(), key = lambda mtx_results: mtx_results[1]["finch"], reverse=True)
+    # ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
+    faster_data = defaultdict(list)
+    slower_data = defaultdict(list)
+    splice_idx = 0
+    for i, (mtx, times) in enumerate(ordered_data):
+        for method, time in times.items():
+            if times["finch"] > 1.0:
+                splice_idx = max(splice_idx, i + 1)
+                faster_data[method].append(time)
+            else:
+                slower_data[method].append(time)
+
+    ordered_mtxs = [mtx for mtx, _ in ordered_data]
+    labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
+    methods = ["finch", "taco", "julia_stdlib", "suite_sparse"]        
+    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, title="SpMV Performance Sorted (Faster than TACO)")
+    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, title="SpMV Performance Sorted (Slower than TACO)")
+    # make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO)")
+    # make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO)")
+
+    # for mtx in mtxs:
+        # all_formats_for_matrix_chart(mtx)
 
 
 def get_best_finch_format():
@@ -71,6 +125,7 @@ def order_speedups(speedups):
     ordered = [(mtx, time) for mtx, time in speedups.items()]
     return sorted(ordered, key=lambda x: x[1], reverse=True)
 
+
 def method_to_ref_comparison_chart(method, ref, title=""):
     method_results = get_method_results(method)
     ref_results = get_method_results("taco")
@@ -86,7 +141,33 @@ def method_to_ref_comparison_chart(method, ref, title=""):
     make_grouped_bar_chart([method, ref], x_axis, data, labeled_groups=[method], title=title)
 
 
-def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = ""):
+def all_formats_for_matrix_chart(matrix):
+    results = json.load(open(RESULTS_FILE_PATH, 'r'))
+    data = {}
+    for result in results:
+        if result["matrix"] == matrix:
+            data[result["method"]] = result["time"]
+    
+    formats = []
+    speedups = []
+    bar_colors = []
+    for format, time in data.items():
+        formats.append(format)
+        speedups.append(data["taco"] / time)
+        bar_colors.append("orange" if "finch" in format else "green")
+    
+    fig, ax = plt.subplots()
+    ax.bar(formats, speedups, width = 0.2, color = bar_colors)
+    ax.set_ylabel("Speedup")
+    ax.set_title(matrix + " Performance")
+    ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
+
+    fig_file = matrix.lower().replace("/", "_") + ".png"
+    plt.savefig(CHARTS_DIRECTORY + "/matrices/" + fig_file, dpi=200, bbox_inches="tight")
+    plt.close() 
+
+
+def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}):
     x = np.arange(len(data[labels[0]]))
     width = 0.2 
     multiplier = 0
@@ -97,8 +178,8 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
         max_height = max(max_height, max(label_data))
         offset = width * multiplier
         rects = ax.bar(x + offset, label_data, width, label=label)
-        bar_labels = [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
-        ax.bar_label(rects, padding=3, labels=bar_labels, fontsize=6)
+        bar_labels = bar_labels_dict[label] if (label in bar_labels_dict) else [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
+        ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5, rotation=90)
         multiplier += 1
 
     ax.set_ylabel(y_label)
@@ -106,17 +187,27 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
     ax.set_xticks(x + width * (len(labels) - 1)/2, x_axis)
     ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
     ax.legend(loc='upper left', ncols=4)
-    ax.set_ylim(0, math.ceil(max_height) + 1)
+    ax.set_ylim(0, max_height + 0.5)
 
     fig_file = title.lower().replace(" ", "_") + ".png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200, bbox_inches="tight")
-
+    plt.close()
+    
 
 all_formats_chart()
-method_to_ref_comparison_chart("finch_sym", "taco", title="Finch SparseList Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
-method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
-
-
-
+# method_to_ref_comparison_chart("finch", "taco", title="Finch SparseList Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
+# method_to_ref_comparison_chart("finch_unsym_row_maj", "taco", title="Finch SparseList Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl_unsym_row_maj", "taco", title="Finch SparseVBL Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_band", "taco", title="Finch SparseBand Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_band_unsym", "taco", title="Finch SparseBand SpMV Performance")
+# method_to_ref_comparison_chart("finch_band_unsym_row_maj", "taco", title="Finch SparseBand Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList Pattern Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern_unsym_row_maj", "taco", title="Finch SparseList Pattern Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_row_maj", "taco", title="Finch SparsePoint Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_pattern", "taco", title="Finch SparsePoint Pattern SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_pattern_row_maj", "taco", title="Finch SparsePoint Pattern Row Major SpMV Performance")
