@@ -10,11 +10,11 @@ using Serialization
 
 function generate(kernels_file)
     kernels = []
-    for (img, mask, bins) in [
+    for (bins, img, mask) in [
         [
+            Tensor(Dense(Element(0)))
             Tensor(Dense(Dense(Element(UInt8(0)))))
-            Tensor(Dense(Dense(Element(UInt8(0)))))
-            Tensor(Dense(Element(false)))
+            Tensor(Dense(Dense(Element(false))))
         ],
     ]
         push!(kernels, @finch_kernel function hist_finch_kernel(bins, img, mask)

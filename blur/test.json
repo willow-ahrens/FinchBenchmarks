@@ -1,450 +1,272 @@
 [
     {
-        "nnz": 204304,
+        "nnz": 627445,
         "method": "opencv",
-        "time": 2.7833e-5,
-        "mem": 204352,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "erode"
+        "time": 0.000220625,
+        "mem": 627485,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 204304,
+        "nnz": 627445,
         "method": "finch",
-        "time": 1.7916e-5,
-        "mem": 204416,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "erode"
+        "time": 0.000277166,
+        "mem": 627557,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 127,
-        "method": "finch_rle",
-        "time": 4.0e-6,
-        "mem": 5888,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 3616,
-        "method": "finch_bits",
-        "time": 5.0e-6,
-        "mem": 29040,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 3616,
-        "method": "finch_bits_mask",
-        "time": 4.333e-6,
-        "mem": 29040,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 204304,
+        "nnz": 627445,
         "method": "opencv",
-        "time": 2.8583e-5,
-        "mem": 204352,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "dilate"
+        "time": 7.4e-5,
+        "mem": 627493,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 3616,
-        "method": "finch_bits",
-        "time": 4.792e-6,
-        "mem": 29040,
-        "imagename": "testimage_dip3e[Fig0534(a)(ellipse_and_circle).tif]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 360000,
-        "method": "opencv",
-        "time": 4.55e-5,
-        "mem": 360048,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 360000,
+        "nnz": 627445,
         "method": "finch",
-        "time": 2.9208e-5,
-        "mem": 360112,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "erode"
+        "time": 4.5583e-5,
+        "mem": 627557,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 121,
+        "nnz": 1737,
         "method": "finch_rle",
-        "time": 4.791e-6,
-        "mem": 6976,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "erode"
+        "time": 3.7333e-5,
+        "mem": 33128,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 6000,
+        "nnz": 10192,
         "method": "finch_bits",
-        "time": 7.958e-6,
-        "mem": 48112,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "erode"
+        "time": 9.417e-6,
+        "mem": 81648,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 6000,
+        "nnz": 10192,
         "method": "finch_bits_mask",
-        "time": 6.833e-6,
-        "mem": 48112,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "erode"
+        "time": 1.1666e-5,
+        "mem": 81648,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 360000,
+        "nnz": 866852,
         "method": "opencv",
-        "time": 4.2166e-5,
-        "mem": 360048,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "dilate"
+        "time": 0.00029475,
+        "mem": 866892,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 6000,
-        "method": "finch_bits",
-        "time": 7.75e-6,
-        "mem": 48112,
-        "imagename": "testimage_dip3e[Fig0539(a)(vertical_rectangle).tif]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 1146840,
-        "method": "opencv",
-        "time": 0.000131959,
-        "mem": 1146888,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 1146840,
+        "nnz": 866852,
         "method": "finch",
-        "time": 8.9208e-5,
-        "mem": 1146952,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "erode"
+        "time": 0.0003595,
+        "mem": 866964,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 17504,
-        "method": "finch_rle",
-        "time": 0.0006385,
-        "mem": 289424,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 18240,
-        "method": "finch_bits",
-        "time": 1.7542e-5,
-        "mem": 146032,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 18240,
-        "method": "finch_bits_mask",
-        "time": 1.8125e-5,
-        "mem": 146032,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "erode"
-    },
-    {
-        "nnz": 1146840,
+        "nnz": 866852,
         "method": "opencv",
-        "time": 0.000133666,
-        "mem": 1146888,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "dilate"
+        "time": 8.85e-5,
+        "mem": 866900,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 18240,
-        "method": "finch_bits",
-        "time": 1.7416e-5,
-        "mem": 146032,
-        "imagename": "testimage_dip3e_edge[FigP1039.tif]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 262144,
-        "method": "opencv",
-        "time": 4.1833e-5,
-        "mem": 262192,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "erode"
-    },
-    {
-        "nnz": 262144,
+        "nnz": 866852,
         "method": "finch",
-        "time": 2.1084e-5,
-        "mem": 262256,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "erode"
+        "time": 5.9917e-5,
+        "mem": 866964,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 7559,
+        "nnz": 2708,
         "method": "finch_rle",
-        "time": 0.000226542,
-        "mem": 125280,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "erode"
+        "time": 6.0375e-5,
+        "mem": 49536,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 4608,
+        "nnz": 14174,
         "method": "finch_bits",
-        "time": 6.5e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "erode"
+        "time": 1.3541e-5,
+        "mem": 113504,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 4608,
+        "nnz": 14174,
         "method": "finch_bits_mask",
-        "time": 7.625e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "erode"
+        "time": 1.3667e-5,
+        "mem": 113504,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0106(b)(PET_image)"
     },
     {
-        "nnz": 262144,
+        "nnz": 169818,
         "method": "opencv",
-        "time": 3.2583e-5,
-        "mem": 262192,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "dilate"
+        "time": 6.9958e-5,
+        "mem": 169858,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 4608,
-        "method": "finch_bits",
-        "time": 6.375e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[airplaneF16.tiff]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 262144,
-        "method": "opencv",
-        "time": 4.2083e-5,
-        "mem": 262192,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "erode"
-    },
-    {
-        "nnz": 262144,
+        "nnz": 169818,
         "method": "finch",
-        "time": 2.1375e-5,
-        "mem": 262256,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "erode"
+        "time": 8.8042e-5,
+        "mem": 169930,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 1756,
-        "method": "finch_rle",
-        "time": 2.9458e-5,
-        "mem": 32432,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "erode"
-    },
-    {
-        "nnz": 4608,
-        "method": "finch_bits",
-        "time": 6.541e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "erode"
-    },
-    {
-        "nnz": 4608,
-        "method": "finch_bits_mask",
-        "time": 6.375e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "erode"
-    },
-    {
-        "nnz": 262144,
+        "nnz": 169818,
         "method": "opencv",
-        "time": 3.325e-5,
-        "mem": 262192,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "dilate"
+        "time": 2.6958e-5,
+        "mem": 169866,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 4608,
-        "method": "finch_bits",
-        "time": 6.375e-6,
-        "mem": 36976,
-        "imagename": "testimage_edge[fabio_color_512.png]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 640000,
-        "method": "opencv",
-        "time": 9.1209e-5,
-        "mem": 640048,
-        "imagename": "willow[800]",
-        "op": "erode"
-    },
-    {
-        "nnz": 640000,
+        "nnz": 169818,
         "method": "finch",
-        "time": 4.8208e-5,
-        "mem": 640112,
-        "imagename": "willow[800]",
-        "op": "erode"
+        "time": 1.6167e-5,
+        "mem": 169930,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 399,
+        "nnz": 563,
         "method": "finch_rle",
-        "time": 8.791e-6,
-        "mem": 13024,
-        "imagename": "willow[800]",
-        "op": "erode"
+        "time": 1.2e-5,
+        "mem": 13232,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 10400,
+        "nnz": 2988,
         "method": "finch_bits",
-        "time": 1.2125e-5,
-        "mem": 83312,
-        "imagename": "willow[800]",
-        "op": "erode"
+        "time": 5.417e-6,
+        "mem": 24016,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 10400,
+        "nnz": 2988,
         "method": "finch_bits_mask",
-        "time": 1.0541e-5,
-        "mem": 83312,
-        "imagename": "willow[800]",
-        "op": "erode"
+        "time": 5.958e-6,
+        "mem": 24016,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0114(c)(bottles)"
     },
     {
-        "nnz": 640000,
+        "nnz": 1310720,
         "method": "opencv",
-        "time": 9.2e-5,
-        "mem": 640048,
-        "imagename": "willow[800]",
-        "op": "dilate"
+        "time": 0.0004165,
+        "mem": 1310760,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 10400,
-        "method": "finch_bits",
-        "time": 1.1916e-5,
-        "mem": 83312,
-        "imagename": "willow[800]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 2560000,
-        "method": "opencv",
-        "time": 0.000332542,
-        "mem": 2560048,
-        "imagename": "willow[1600]",
-        "op": "erode"
-    },
-    {
-        "nnz": 2560000,
+        "nnz": 1310720,
         "method": "finch",
-        "time": 0.000184041,
-        "mem": 2560112,
-        "imagename": "willow[1600]",
-        "op": "erode"
+        "time": 0.000510625,
+        "mem": 1310832,
+        "op": "hist",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 799,
-        "method": "finch_rle",
-        "time": 1.7416e-5,
-        "mem": 25824,
-        "imagename": "willow[1600]",
-        "op": "erode"
-    },
-    {
-        "nnz": 41600,
-        "method": "finch_bits",
-        "time": 3.525e-5,
-        "mem": 332912,
-        "imagename": "willow[1600]",
-        "op": "erode"
-    },
-    {
-        "nnz": 41600,
-        "method": "finch_bits_mask",
-        "time": 2.8792e-5,
-        "mem": 332912,
-        "imagename": "willow[1600]",
-        "op": "erode"
-    },
-    {
-        "nnz": 2560000,
+        "nnz": 1310720,
         "method": "opencv",
-        "time": 0.000335458,
-        "mem": 2560048,
-        "imagename": "willow[1600]",
-        "op": "dilate"
+        "time": 0.000123583,
+        "mem": 1310768,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 41600,
-        "method": "finch_bits",
-        "time": 3.4875e-5,
-        "mem": 332912,
-        "imagename": "willow[1600]",
-        "op": "dilate"
-    },
-    {
-        "nnz": 10240000,
-        "method": "opencv",
-        "time": 0.001318916,
-        "mem": 10240048,
-        "imagename": "willow[3200]",
-        "op": "erode"
-    },
-    {
-        "nnz": 10240000,
+        "nnz": 1310720,
         "method": "finch",
-        "time": 0.000747459,
-        "mem": 10240112,
-        "imagename": "willow[3200]",
-        "op": "erode"
+        "time": 9.4916e-5,
+        "mem": 1310832,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 1599,
+        "nnz": 3306,
         "method": "finch_rle",
-        "time": 3.5083e-5,
-        "mem": 51424,
-        "imagename": "willow[3200]",
-        "op": "erode"
+        "time": 9.6292e-5,
+        "mem": 63376,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 163200,
+        "nnz": 21760,
         "method": "finch_bits",
-        "time": 0.000122,
-        "mem": 1305712,
-        "imagename": "willow[3200]",
-        "op": "erode"
+        "time": 2.075e-5,
+        "mem": 174192,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 163200,
+        "nnz": 21760,
         "method": "finch_bits_mask",
-        "time": 9.2791e-5,
-        "mem": 1305712,
-        "imagename": "willow[3200]",
-        "op": "erode"
+        "time": 1.8667e-5,
+        "mem": 174192,
+        "op": "erode",
+        "dataset": "testimage_dip3e",
+        "i": "Fig0122(c)(skull)"
     },
     {
-        "nnz": 10240000,
+        "nnz": 160625920,
         "method": "opencv",
-        "time": 0.00077875,
-        "mem": 10240048,
-        "imagename": "willow[3200]",
-        "op": "dilate"
+        "time": 0.055288083,
+        "mem": 160625960,
+        "op": "hist",
+        "dataset": "testimage_dip3e_magnify",
+        "i": "Fig0102(1922 digital image)"
     },
     {
-        "nnz": 163200,
-        "method": "finch_bits",
-        "time": 0.000123291,
-        "mem": 1305712,
-        "imagename": "willow[3200]",
-        "op": "dilate"
+        "nnz": 160625920,
+        "method": "finch",
+        "time": 0.066287042,
+        "mem": 160626032,
+        "op": "hist",
+        "dataset": "testimage_dip3e_magnify",
+        "i": "Fig0102(1922 digital image)"
     }
 ]

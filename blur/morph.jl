@@ -116,6 +116,9 @@ function main(resultfile)
                     result = kernel.fn(input)
 
                     reference = something(reference, result.output)
+                    if reference != result.output
+                        @info "oops" reference result.output
+                    end
                     @assert reference == result.output
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
