@@ -5,7 +5,7 @@ spmv/spmv_taco
 deps/SparseRooflineBenchmark/build
 .vscode/settings.json
 cache/*
-blur/kernels.jls
+*.jls
 graphs/lib
 graphs/bin
 graphs/share

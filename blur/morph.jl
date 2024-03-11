@@ -21,7 +21,6 @@ for kernel in Serialization.deserialize(joinpath(@__DIR__, "kernels.jls"))
     eval(kernel)
 end
 
-
 function pack_bits(img)
     xs, ys = size(img)
     xb = cld(xs + 1, 64)
@@ -51,9 +50,20 @@ sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.
 
 using LinearAlgebra
 
+MAG_FACTOR = 16
 magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
 
+function flip(img)
+    if sum(img) > length(img) / 2
+        return .~(img)
+    else
+        return img
+    end
+end
+
 function main(resultfile)
+    OpenCV.setNumThreads(1)
+
     results = []
 
     for (dataset, getdata, I, f) in [
@@ -74,13 +84,14 @@ function main(resultfile)
     ]
         for i in I
             input = f(getdata(i))
+            rand_data = rand(UInt8, size(input)...)
 
             for (op, kernels) in [
-                #("hist", [
-                #    (method = "opencv", fn = hist_opencv),
-                #    (method = "finch", fn = hist_finch),
+                ("hist", [
+                    (method = "opencv", fn = hist_opencv(rand_data)),
+                    (method = "finch", fn = hist_finch(rand_data)),
                 #    (method = "finch_bits", fn = hist_finch_bits),
-                #])
+                ]),
                 ("erode", [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
@@ -109,7 +120,7 @@ function main(resultfile)
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
 
-                    push!(results, Dict("op" => op, "dataset"=>dataset "i" => i, "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
+                    push!(results, Dict("op" => op, "dataset"=>dataset, "i" => i, "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
                     write(resultfile, JSON.json(results, 4))
                 end
             end
