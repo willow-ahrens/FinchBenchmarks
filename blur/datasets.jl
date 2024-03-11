@@ -580,6 +580,102 @@ const remotefiles_dip3e = [
     "Figp0917.tif",
 ]
 
+#=
+function list_files_without_extensions(directory)
+    filenames = readdir(directory)
+    filenames_without_extensions = [splitext(filename)[1] for filename in filenames]
+    return filenames_without_extensions
+end
+=#
+dip3e_masks = [
+    "Fig0102(1922 digital image)",
+    "Fig0106(b)(PET_image)",
+    "Fig0114(c)(bottles)",
+    "Fig0122(c)(skull)",
+    "Fig0219(rose1024)",
+    "Fig0220(a)(chronometer 3692x2812  2pt25 inch 1250 dpi)",
+    "Fig0227(a)(washington_infrared)",
+    "Fig0230(b)(dental_xray_mask)",
+    "Fig0236(a)(letter_T)",
+    "Fig0305(a)(DFT_no_log)",
+    "Fig0338(a)(blurry_moon)",
+    "Fig0424(a)(rectangle)",
+    "Fig0425(a)(translated_rectangle)",
+    "Fig0431(d)(blown_ic_crop)",
+    "Fig0432(a)(square_original)",
+    "Fig0458(a)(blurry_moon)",
+    "Fig0462(a)(PET_image)",
+    "Fig0503 (original_pattern)",
+    "Fig0524(a)(impulse)",
+    "Fig0524(b)(blurred-impulse)",
+    "Fig0533(a)(circle)",
+    "Fig0534(a)(ellipse_and_circle)",
+    "Fig0539(a)(vertical_rectangle)",
+    "Fig0539(c)(shepp-logan_phantom)",
+    "Fig0627(d)(WashingtonDC Band4)",
+    "Fig0628(a)(jupiter-moon.-Io)",
+    "Fig0645(a)(RGB1-red)",
+    "Fig0645(g)(RGB2_blue)",
+    "Fig0918(a)(Chickenfilet with bones)",
+    "Fig1001(b)(edge_image)",
+    "Fig1008(a)(step edge)",
+    "Fig1008(c)(roof_edge)",
+    "Fig1043(a)(yeast_USC)",
+    "Fig1048(a)(yeast_USC)",
+    "Fig1059(a)(AbsADI)",
+    "Fig1059(b)(PosADI)",
+    "Fig1059(c)(NegADI)",
+    "Fig1111(a)(triangle)",
+    "Fig1111(b)(square)",
+    "Fig1130(b)(sinusoidal)",
+    "Fig1137(a)(painting_original_padded)",
+    "Fig1137(b)(painting_translated_padded)",
+    "Fig1137(c)(painting_halfsize_padded)",
+    "Fig1137(d)(painting_mirrored_padded)",
+    "Fig1137(e)(painting_rot45deg)",
+    "Fig1137(f)(painting_rot90deg_padded)",
+    "Fig1213(e)(Mask_B1_without_numbers)",
+    "Fig1213(e)(Mask_B2_without_numbers)",
+    "Fig1213(e)(Mask_B3_without_numbers)",
+    "Fig1213(e)(Mask_Composite_without_numbers)",
+    "Fig1218(airplanes)",
+    "FigP0302(a)",
+    "FigP0302(b)",
+    "FigP0302(c)",
+    "FigP0311",
+    "FigP0314(a)",
+    "FigP0321(a)",
+    "FigP0321(b)",
+    "FigP0321(c)",
+    "FigP0433(a)",
+    "FigP0433(b)",
+    "FigP0501",
+    "FigP0528(a)(single_dot)",
+    "FigP0528(b)(two_dots)",
+    "FigP0528(c)(doughnut)",
+    "FigP0528(c)",
+    "FigP0606(color_bars)",
+    "FigP0606",
+    "FigP0616(a)",
+    "FigP0616(b)",
+    "FigP0616(c)",
+    "FigP0905(U)",
+    "FigP0905(a)",
+    "FigP0905(b)",
+    "FigP0905(c)",
+    "FigP0905(d)",
+    "FigP0905(top)",
+    "FigP0917(noisy_rectangle)",
+    "FigP0918(b)",
+    "FigP0918(c)",
+    "FigP0919(UTK)",
+    "FigP0919(a)",
+    "FigP1012",
+    "FigP1110",
+    "FigP1126",
+    "Figp0917"
+]
+
 """
 humansketches(idx)
 
@@ -746,4 +842,3 @@ Generates a pattern based on the input `n` and returns it as a single image. The
 function willow_gen(n)
     return [UInt8((i - n/2)^2 + (j - n/2)^2 < (n/4)^2) for i in 1:n, j in 1:n]
 end
-
