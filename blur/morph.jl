@@ -166,10 +166,13 @@ end
 
 sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.sobel()[2]))
 
+using LinearAlgebra
+
 function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
+        ("testimage_dip3e_expand", testimage_dip3e, ["Fig0534(a)(ellipse_and_circle).tif", "Fig0539(a)(vertical_rectangle).tif"], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), ones(UInt8, 16, 16))),
         ("testimage_dip3e", testimage_dip3e, ["Fig0534(a)(ellipse_and_circle).tif", "Fig0539(a)(vertical_rectangle).tif"], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
         ("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02))
