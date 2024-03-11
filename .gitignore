@@ -6,3 +6,7 @@ deps/SparseRooflineBenchmark/build
 .vscode/settings.json
 cache/*
 blur/kernels.jls
+graphs/lib
+graphs/bin
+graphs/share
+graphs/pyvenv.cfg
