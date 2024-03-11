@@ -1,92 +1,170 @@
 [
     {
-        "time": 0.018772467,
+        "time": 0.018864972,
         "method": "Graphs.jl",
         "operation": "bfs",
         "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 0.00232136,
+        "time": 0.002370819,
         "method": "finch_push_pull",
         "operation": "bfs",
         "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 0.019211713,
+        "time": 0.023426347,
         "method": "finch_push_only",
         "operation": "bfs",
         "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 0.19042422,
+        "time": 0.184390194,
         "method": "Graphs.jl",
         "operation": "bellmanford",
         "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 0.08133869,
+        "time": 0.080553875,
         "method": "Finch",
         "operation": "bellmanford",
         "matrix": "DIMACS10/kron_g500-logn16"
     },
     {
-        "time": 1.196027343,
+        "time": 1.175387759,
         "method": "Graphs.jl",
         "operation": "bfs",
         "matrix": "SNAP/com-LiveJournal"
     },
     {
-        "time": 0.408569342,
+        "time": 0.40810873,
         "method": "finch_push_pull",
         "operation": "bfs",
         "matrix": "SNAP/com-LiveJournal"
     },
     {
-        "time": 1.175538936,
+        "time": 1.008659756,
         "method": "finch_push_only",
         "operation": "bfs",
         "matrix": "SNAP/com-LiveJournal"
     },
     {
-        "time": 2.236641462,
+        "time": 2.295936765,
         "method": "Graphs.jl",
         "operation": "bellmanford",
         "matrix": "SNAP/com-LiveJournal"
     },
     {
-        "time": 2.490737723,
+        "time": 2.487095721,
         "method": "Finch",
         "operation": "bellmanford",
         "matrix": "SNAP/com-LiveJournal"
     },
     {
-        "time": 0.278371065,
+        "time": 0.277270039,
         "method": "Graphs.jl",
         "operation": "bfs",
         "matrix": "SNAP/roadNet-CA"
     },
     {
-        "time": 0.199847031,
+        "time": 0.200039142,
         "method": "finch_push_pull",
         "operation": "bfs",
         "matrix": "SNAP/roadNet-CA"
     },
     {
-        "time": 6.398490174,
+        "time": 0.199707777,
         "method": "finch_push_only",
         "operation": "bfs",
         "matrix": "SNAP/roadNet-CA"
     },
     {
-        "time": 2.001648658,
+        "time": 2.003055148,
         "method": "Graphs.jl",
         "operation": "bellmanford",
         "matrix": "SNAP/roadNet-CA"
     },
     {
-        "time": 0.37439677,
+        "time": 0.383142245,
         "method": "Finch",
         "operation": "bellmanford",
         "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.003816563,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.003032308,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.005306974,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.014665457,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.012385225,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 1.700433135,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 0.26273514,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 1.686059373,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 7.623562617,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 6.821631683,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 11.396328544,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.270432528,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.220379402,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
     }
 ]
