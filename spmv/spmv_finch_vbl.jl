@@ -2,7 +2,7 @@ using Finch
 using BenchmarkTools
 
 function ssymv_finch_vbl_kernel_helper(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, A::Tensor{DenseLevel{Int64, SparseVBLLevel{Int64, Vector{Int64}, Vector{Int64}, Vector{Int64}, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}, x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, diag::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, y_j::Scalar{0.0, Float64})
-    @inbounds begin
+    @inbounds @fastmath begin
             y_lvl = y.lvl
             y_lvl_2 = y_lvl.lvl
             y_lvl_val = y_lvl.lvl.val

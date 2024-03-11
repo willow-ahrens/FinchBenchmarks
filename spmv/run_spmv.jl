@@ -74,7 +74,7 @@ datasets = Dict(
     ],
     "willow_unsymmetric" => [
         "Goodwin/Goodwin_071",
-        "Hamm/scircuit",
+        # "Hamm/scircuit",
         # "LPnetlib/lpi_gran",
         "Norris/heart3",
         "Rajat/rajat26",
@@ -102,10 +102,21 @@ datasets = Dict(
         "SNAP/email-Eu-core",
     ],
     "banded" => [
-        "small_band_synthetic",
-        "medium_band_synthetic",
-        "large_band_synthetic",
-        "SNAP/cit-HepTh"
+        "toeplitz_small_band",
+        "toeplitz_medium_band",
+        "toeplitz_large_band",
+    ],
+    "taco_symmetric" => [
+        "HB/bcsstk17",
+        "Williams/pdb1HYS",
+        "Williams/cant",
+        "Williams/consph",
+        "Williams/cop20k_A",
+        "DNVS/shipsec1",
+        "Boeing/pwtk",
+    ],
+    "taco_unsymmetric" => [
+        "Bova/rma10"
     ]
 )
 
@@ -114,14 +125,21 @@ include("spmv_finch.jl")
 include("spmv_finch_int8.jl")
 include("spmv_finch_pattern.jl")
 include("spmv_finch_pattern_unsym.jl")
+include("spmv_finch_pattern_unsym_row_maj.jl")
 include("spmv_finch_unsym.jl")
+include("spmv_finch_unsym_row_maj.jl")
 include("spmv_finch_vbl.jl")
 include("spmv_finch_vbl_int8.jl")
 include("spmv_finch_vbl_pattern.jl")
 include("spmv_finch_vbl_unsym.jl")
+include("spmv_finch_vbl_unsym_row_maj.jl")
 include("spmv_finch_band.jl")
 include("spmv_finch_band_unsym.jl")
+include("spmv_finch_band_unsym_row_maj.jl")
 include("spmv_finch_point.jl")
+include("spmv_finch_point_row_maj.jl")
+include("spmv_finch_point_pattern.jl")
+include("spmv_finch_point_pattern_row_maj.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
 include("spmv_suite_sparse.jl")
@@ -135,6 +153,8 @@ dataset_tags = Dict(
     "banded" => "banded",
     "graph_symmetric" => "symmetric_pattern",
     "graph_unsymmetric" => "unsymmetric_pattern",
+    "taco_symmetric" => "symmetric",
+    "taco_unsymmetric" => "unsymmetric",
 )
 
 methods = Dict(
@@ -142,20 +162,26 @@ methods = Dict(
         "julia_stdlib" => spmv_julia,
         "finch" => spmv_finch,
         "finch_unsym" => spmv_finch_unsym,
+        "finch_unsym_row_maj" => spmv_finch_unsym_row_maj,
         "finch_vbl" => spmv_finch_vbl,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
+        "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
         "finch_band" => spmv_finch_band,
         "finch_band_unsym" => spmv_finch_band_unsym,
+        "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "unsymmetric" => [
         "julia_stdlib" => spmv_julia,
         "finch_unsym" => spmv_finch_unsym,
+        "finch_unsym_row_maj" => spmv_finch_unsym_row_maj,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
+        "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
         "finch_band_unsym" => spmv_finch_band_unsym,
+        "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
-        "suite_sparse" => spmv_suite_sparse,
+        "suite_sparse" => spmv_suite_sparse,    
     ],
     "symmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
@@ -166,6 +192,7 @@ methods = Dict(
     "unsymmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
         "finch_pattern_unsym" => spmv_finch_pattern_unsym,
+        "finch_pattern_unsym_row_maj" => spmv_finch_pattern_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -179,6 +206,9 @@ methods = Dict(
     "permutation" => [
         "julia_stdlib" => spmv_julia,
         "finch_point" => spmv_finch_point,
+        "finch_point_row_maj" => spmv_finch_point_row_maj,
+        "finch_point_pattern" => spmv_finch_point_pattern,
+        "finch_point_pattern_row_maj" => spmv_finch_point_pattern_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -187,9 +217,10 @@ methods = Dict(
         "finch" => spmv_finch,
         "finch_band" => spmv_finch_band,
         "finch_band_unsym" => spmv_finch_band_unsym,
+        "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
-    ]
+    ],
 )
 
 results = []
@@ -200,13 +231,13 @@ for (dataset, mtxs) in datasets
     tag = dataset_tags[dataset]
     for mtx in mtxs
         if dataset == "permutation"
-            A = SparseMatrixCSC(random_permutation_matrix(200000))
+            A = SparseMatrixCSC(reverse_permutation_matrix(200000))
         elseif dataset == "banded"
-            if mtx == "small_band_synthetic"
+            if mtx == "toeplitz_small_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 5))
-            elseif mtx == "medium_band_synthetic"
+            elseif mtx == "toeplitz_medium_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 30))
-            elseif mtx == "large_band_synthetic"
+            elseif mtx == "toeplitz_large_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 100))
             end
         else
