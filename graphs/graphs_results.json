@@ -1,0 +1,44 @@
+[
+    {
+        "time": 0.006920959,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.00139625,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.008095167,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.077866083,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.034699583,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.4862815,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.154796875,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    }
+]
