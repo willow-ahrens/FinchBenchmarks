@@ -47,7 +47,7 @@ function generate(kernels_file)
             Tensor(Dense(Element(false))),
         ],
         [
-            Tensor(Dense(SparseRLE(Pattern(), merge=false)))
+            Tensor(Dense(SparseRLE(Pattern())))
             Tensor(Dense(SparseRLE(Pattern())))
             Tensor(Dense(SparseRLE(Pattern())))
             Tensor(SparseRLE(Pattern(), merge=false))

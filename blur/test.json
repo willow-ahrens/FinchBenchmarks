@@ -1,74 +1,11 @@
 [
     {
-        "nnz": 784,
-        "method": "opencv",
-        "time": 0.001436042,
-        "mem": 824,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.206841625,
+        "mem": 1234433,
         "op": "fill",
-        "dataset": "mnist",
+        "dataset": "humansketches",
         "i": 1
-    },
-    {
-        "nnz": 784,
-        "method": "finch",
-        "time": 1.834e-6,
-        "mem": 896,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 1
-    },
-    {
-        "nnz": 784,
-        "method": "opencv",
-        "time": 0.001405042,
-        "mem": 824,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 2
-    },
-    {
-        "nnz": 784,
-        "method": "finch",
-        "time": 1.875e-6,
-        "mem": 896,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 2
-    },
-    {
-        "nnz": 784,
-        "method": "opencv",
-        "time": 0.001441542,
-        "mem": 824,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 3
-    },
-    {
-        "nnz": 784,
-        "method": "finch",
-        "time": 1.917e-6,
-        "mem": 896,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 3
-    },
-    {
-        "nnz": 784,
-        "method": "opencv",
-        "time": 0.001376375,
-        "mem": 824,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 4
-    },
-    {
-        "nnz": 784,
-        "method": "finch",
-        "time": 1.916e-6,
-        "mem": 896,
-        "op": "fill",
-        "dataset": "mnist",
-        "i": 4
     }
 ]

@@ -691,7 +691,7 @@ function humansketches(idx)
 
     path = download_humansketches()
 
-    Array{Gray{N0f8}, 3}(load(joinpath(path, "$idx.png")))
+    Array{Gray{N0f8}, 2}(load(joinpath(path, "$idx.png")))
 end
 
 """

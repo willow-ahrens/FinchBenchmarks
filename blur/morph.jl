@@ -61,11 +61,11 @@ end
 
 function prep_fill(img)
     (m, n) = size(img)
-    x = rand(1:m)
-    y = rand(1:n)
-    if img[x, y] == 0
-        img = flip(img)
-    end
+    pos = [(x, y) for x in 1:m for y in 1:n if img[x, y] != 0x00]
+    (x, y) = pos[rand(1:end)]
+    #if img[x, y] == 0
+    #    img = Array{UInt8}(img .== 0x00)
+    #end
     (img, x, y)
 end
 
@@ -75,14 +75,14 @@ function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
-        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
-        ("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
-        ("testimage_dip3e", testimage_dip3e, dip3e_masks[1:4], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
-        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
+        #("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
+        #("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
+        #("testimage_dip3e", testimage_dip3e, dip3e_masks[1:4], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
         ("humansketches", humansketches, 1:4, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
-        ("humansketches_magnify", humansketches, 1:4, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
         ("omniglot", omniglot_train, 1:4, (img) -> Array{UInt8}(img .!= 0x00)),
         ("omniglot_magnify", omniglot_train, 1:4, (img) -> kron(Array{UInt8}(img .!= 0x00), magnifying_lens)),
+        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
+        ("humansketches_magnify", humansketches, 1:4, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
         #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("testimage_edge", testimage, ["airplaneF16.tiff", "fabio_color_512.png"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("willow", willow_gen, [800, 1600, 3200], identity),
@@ -95,8 +95,10 @@ function main(resultfile)
 
             for (op, prep, kernels) in [
                 ("fill", prep_fill, [
-                    (method = "opencv", fn = fill_opencv),
+                    #(method = "opencv", fn = fill_opencv),
                     (method = "finch", fn = fill_finch),
+                    (method = "finch_rle", fn = fill_finch_rle),
+                    #(method = "finch_rle2", fn = fill_finch_rle2),
                 ]),
                 #=
                 ("hist", (img) -> (img, rand(UInt8, size(input)...)), [
@@ -142,12 +144,9 @@ function main(resultfile)
                     result = kernel.fn(input)
 
                     if reference == nothing
-                        Images.save("output/$(dataset)_$(op).png", Array{Gray}(result.output))
+                        Images.save("output/$(dataset)_$(op)_$(i).png", Array{Gray}(Array(result.output)))
                     end
                     reference = something(reference, result.output)
-                    if reference != result.output
-                        @info "oops" reference AsArray(result.output)
-                    end
                     @assert reference == result.output
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)

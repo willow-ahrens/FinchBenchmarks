@@ -23,8 +23,8 @@ end
 
 function fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
     @finch begin
-        data .= 0
-        data[x, y] = 1
+        data .= false
+        data[x, y] = true
     end
     fill_finch_kernel(data2, data, mask, tmp, tmp2)
     while data2 != data
@@ -45,3 +45,71 @@ function fill_finch((img, x, y),)
     output = fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
     return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
 end
+
+#=
+function fill_finch_bits_kernel2(data2, data, mask, tmp, tmp2, x, y)
+    @finch begin
+        data .= false
+        data[x, y] = true
+    end
+    fill_finch_bits_kernel(data2, data, mask, tmp, tmp2)
+    while data2 != data
+        (data, data2) = (data2, data)
+        fill_finch_bits_kernel(data2, data, mask, tmp, tmp2)
+    end
+    return data2
+end
+
+function dilate_finch_bits(img)
+    (xs, ys) = size(img)
+    imgb = pack_bits(img .!= 0x00)
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
+    outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    tmpb = Tensor(Dense(Element(UInt(0))), undef, xb)
+    time = @belapsed dilate_finch_bits_kernel($outputb, $inputb, $tmpb) evals=1
+    output = unpack_bits(outputb, xs, ys)
+    return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
+end
+function fill_finch_bits((img, x, y),)
+    (xs, ys) = size(img)
+    imgb = pack_bits(img .!= 0x00)
+    @assert img == unpack_bits(imgb, xs, ys)
+    (xb, ys) = size(imgb)
+    mask = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
+    data = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    data2 = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
+    tmp = Tensor(Dense(Element(UInt(0))), undef, xb)
+    tmp2 = Tensor(Dense(Element(UInt(0))), undef, xb)
+    time = @belapsed fill_finch_kernel2($data2, $data, $mask, $tmp, $tmp2, $x, $y) evals=1
+    output = fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
+    return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
+end
+=#
+
+function fill_finch_rle((img, x, y),)
+    (xs, ys) = size(img)
+    mask = Tensor(Dense(SparseRLE(Pattern())), img .!= 0x00)
+    data = Tensor(Dense(SparseRLE(Pattern())), undef, xs, ys)
+    data2 = Tensor(Dense(SparseRLE(Pattern())), undef, xs, ys)
+    tmp = Tensor(SparseRLE(Pattern(), merge=false), undef, xs)
+    tmp2 = Tensor(SparseRLE(Pattern(), merge=false), undef, xs)
+    time = @belapsed fill_finch_kernel2($data2, $data, $mask, $tmp, $tmp2, $x, $y) evals=1
+    output = fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
+    return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
+end
+
+#=
+function fill_finch_rle2((img, x, y),)
+    (xs, ys) = size(img)
+    mask = Tensor(SparseList(SparseRLE(Pattern())), img .!= 0x00)
+    data = Tensor(SparseList(SparseRLE(Pattern())), undef, xs, ys)
+    data2 = Tensor(SparseList(SparseRLE(Pattern())), undef, xs, ys)
+    tmp = Tensor(SparseList(SparseRLE(Pattern(), merge=false)), undef, xs)
+    tmp2 = Tensor(SparseRLE(Pattern(), merge=false), undef, xs)
+    time = @belapsed fill_finch_kernel2($data2, $data, $mask, $tmp, $tmp2, $x, $y) evals=1
+    output = fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
+    return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
+end
+=#
