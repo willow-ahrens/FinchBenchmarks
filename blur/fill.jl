@@ -13,6 +13,16 @@ function fill_opencv_kernel(mask, filter, x, y)
     return data_2
 end
 
+#=
+function fill_opencv_kernel(mask, filter, x, y)
+    seed_point = OpenCV.Point(Int32(x), Int32(y))
+    (c, h, w) = size(mask)
+    flood_mask = zeros(UInt8, 1, h + 2, w + 2)
+    OpenCV.floodFill(copy(mask), flood_mask, seed_point, (0x02,))
+    return flood_mask[1, 2:end-1, 2:end-1]
+end
+=#
+
 function fill_opencv((img, x, y),)
     mask = Array{UInt8}(reshape(img .!= 0, 1, size(img)...))
     filter = ones(Int8, 1, 3, 3)

@@ -73,10 +73,9 @@ function main(resultfile)
     OpenCV.setNumThreads(1)
 
     results = []
-    N = 10
+    N = 4
 
     for (dataset, getdata, I, f) in [
-        ("mnist_magnify", mnist_train, 1:N, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         ("mnist", mnist_train, 1:N, (img) -> Array{UInt8}(img .> 0x02)),
         ("omniglot", omniglot_train, 1:N, (img) -> Array{UInt8}(img .== 0x00)),
         ("humansketches", humansketches, 1:N, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
@@ -98,6 +97,12 @@ function main(resultfile)
             input = f(getdata(i))
 
             for (op, prep, kernels) in [
+                ("fill", prep_fill, [
+                    (method = "opencv", fn = fill_opencv),
+                    (method = "finch", fn = fill_finch),
+                    (method = "finch_rle", fn = fill_finch_rle),
+                    #(method = "finch_rle2", fn = fill_finch_rle2),
+                ]),
                 ("erode4", (img) -> (img, 4), [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
@@ -111,12 +116,6 @@ function main(resultfile)
                     (method = "finch_rle", fn = erode_finch_rle),
                     (method = "finch_bits", fn = erode_finch_bits),
                     (method = "finch_bits_mask", fn = erode_finch_bits_mask),
-                ]),
-                ("fill", prep_fill, [
-                    (method = "opencv", fn = fill_opencv),
-                    (method = "finch", fn = fill_finch),
-                    (method = "finch_rle", fn = fill_finch_rle),
-                    #(method = "finch_rle2", fn = fill_finch_rle2),
                 ]),
                 ("hist", (img) -> (rand(UInt8, size(input)...), img), [
                     (method = "opencv", fn = hist_opencv),
@@ -151,7 +150,7 @@ function main(resultfile)
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
 
-                    push!(results, Dict("op" => op, "dataset"=>dataset, "i" => i, "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
+                    push!(results, Dict("operation" => op, "dataset"=>dataset, "label" => i, "method"=> kernel.method, "mem" => result.mem, "nnz" => result.nnz, "time"=>result.time))
                     write(resultfile, JSON.json(results, 4))
                 end
             end
