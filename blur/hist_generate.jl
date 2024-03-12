@@ -16,6 +16,11 @@ function generate(kernels_file)
             Tensor(Dense(Dense(Element(UInt8(0)))))
             Tensor(Dense(Dense(Element(false))))
         ],
+        [
+            Tensor(Dense(Element(0)))
+            Tensor(Dense(Dense(Element(UInt8(0)))))
+            Tensor(Dense(SparseRLE(Pattern())))
+        ],
     ]
         push!(kernels, @finch_kernel function hist_finch_kernel(bins, img, mask)
             bins .= 0 
@@ -60,6 +65,39 @@ function generate(kernels_file)
                 end
             end
             return output
+        end)
+    end
+
+    for (bins, img, tmp, mask) in [
+        [
+            Tensor(Dense(Element(0)))
+            Tensor(Dense(Dense(Element(UInt8(0)))))
+            Tensor(Dense(Element(0)))
+            Tensor(Dense(Dense(Element(false))))
+        ],
+        [
+            Tensor(Dense(Element(0)))
+            Tensor(Dense(Dense(Element(UInt8(0)))))
+            Tensor(Dense(Element(0)))
+            Tensor(Dense(SparseRLE(Pattern())))
+        ],
+    ]
+        push!(kernels, @finch_kernel function histblur_finch_kernel(bins, img, tmp, mask)
+            bins .= 0 
+            for y = _
+                tmp .= false
+                for x = _
+                    tmp[x] = UInt(coalesce(img[x, ~(y-1)], 0)) + UInt(img[x, y]) + UInt(coalesce(img[x, ~(y+1)], 0))
+                end
+                for x = _
+                    if mask[x, y]
+                        let t = unsafe_trunc(UInt8, round((UInt(coalesce(tmp[~(x-1)], 0)) + tmp[x] + UInt(coalesce(tmp[~(x+1)], 0)))/9))
+                            bins[div(t, 16) + 1] += 1
+                        end
+                    end
+                end
+            end
+            return bins
         end)
     end
 

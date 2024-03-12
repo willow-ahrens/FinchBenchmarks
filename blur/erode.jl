@@ -1,3 +1,7 @@
+for kernel in Serialization.deserialize(joinpath(@__DIR__, "erode_kernels.jls"))
+    eval(kernel)
+end
+
 erode_opencv_kernel(data, filter) = OpenCV.erode(data, filter)
 
 function erode_opencv(img)

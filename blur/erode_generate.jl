@@ -138,4 +138,4 @@ function generate(kernels_file)
     Serialization.serialize(kernels_file, kernels)
 end
 
-generate(joinpath(@__DIR__, "kernels.jls"))
+generate(joinpath(@__DIR__, "erode_kernels.jls"))

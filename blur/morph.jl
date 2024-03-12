@@ -17,9 +17,6 @@ using JSON
 using Base: summarysize
 
 include(joinpath(@__DIR__, "datasets.jl"))
-for kernel in Serialization.deserialize(joinpath(@__DIR__, "kernels.jls"))
-    eval(kernel)
-end
 
 function pack_bits(img)
     xs, ys = size(img)
@@ -87,17 +84,24 @@ function main(resultfile)
             rand_data = rand(UInt8, size(input)...)
 
             for (op, kernels) in [
+                #=
+                ("histblur", [
+                    (method = "opencv", fn = histblur_opencv(rand_data)),
+                    (method = "finch", fn = histblur_finch(rand_data)),
+                    (method = "finch_rle", fn = histblur_finch_rle(rand_data)),
+                ]),
                 ("blur", [
                     (method = "opencv", fn = blur_opencv(rand_data)),
                     (method = "finch", fn = blur_finch(rand_data)),
                     (method = "finch_rle", fn = blur_finch_rle(rand_data)),
                 ]),
-                #=
+                =#
                 ("hist", [
                     (method = "opencv", fn = hist_opencv(rand_data)),
                     (method = "finch", fn = hist_finch(rand_data)),
-                #    (method = "finch_bits", fn = hist_finch_bits),
+                    (method = "finch_rle", fn = hist_finch_rle(rand_data)),
                 ]),
+                #=
                 ("erode", [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
