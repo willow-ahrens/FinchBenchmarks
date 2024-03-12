@@ -3457,23 +3457,5 @@
         "kernel": "spmv",
         "matrix": "DNVS/shipsec1",
         "dataset": "taco_symmetric"
-    }, {
-        "time": 0.01985411,
-        "method": "julia_stdlib",
-        "kernel": "spmv",
-        "matrix": "Boeing/pwtk",
-        "dataset": "taco_symmetric"
-    }, {
-        "time": 0.014476144,
-        "method": "finch",
-        "kernel": "spmv",
-        "matrix": "Boeing/pwtk",
-        "dataset": "taco_symmetric"
-    }, {
-        "time": 0.025214567,
-        "method": "finch_unsym",
-        "kernel": "spmv",
-        "matrix": "Boeing/pwtk",
-        "dataset": "taco_symmetric"
     }
 ]

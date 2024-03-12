@@ -250,14 +250,14 @@ for (dataset, mtxs) in datasets
         for (key, method) in methods[tag]
             @info "testing" key mtx
             res = method(y, A, x)
-            ##=
+            #=
                 rm(key * "_results.txt", force=true)
                 open(key * "_results.txt","a") do io
                     for i = 1:n
                         @printf(io,"%f\n", res.y[i])
                     end
                 end
-            # =#
+            =#
             time = res.time
             y_ref = something(y_ref, res.y)
 
