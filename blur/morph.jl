@@ -73,7 +73,7 @@ function main(resultfile)
     OpenCV.setNumThreads(1)
 
     results = []
-    N = 4
+    N = 10
 
     for (dataset, getdata, I, f) in [
         ("mnist_magnify", mnist_train, 1:N, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
@@ -84,7 +84,7 @@ function main(resultfile)
         ("mnist_magnify", mnist_train, 1:N, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         ("omniglot_magnify", omniglot_train, 1:N, (img) -> kron(Array{UInt8}(img .== 0x00), magnifying_lens)),
         ("humansketches_magnify", humansketches, 1:N, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
-        #("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:N], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
+        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:N], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
 
         #("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
         #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
@@ -99,6 +99,13 @@ function main(resultfile)
 
             for (op, prep, kernels) in [
                 ("erode4", (img) -> (img, 4), [
+                    (method = "opencv", fn = erode_opencv),
+                    (method = "finch", fn = erode_finch),
+                    (method = "finch_rle", fn = erode_finch_rle),
+                    (method = "finch_bits", fn = erode_finch_bits),
+                    (method = "finch_bits_mask", fn = erode_finch_bits_mask),
+                ]),
+                ("erode32", (img) -> (img, 32), [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
                     (method = "finch_rle", fn = erode_finch_rle),

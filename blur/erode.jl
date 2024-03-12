@@ -67,13 +67,28 @@ function erode_finch_rle((img, niters),)
     return (;time=time, mem = summarysize(input), nnz = countstored(input), output=output)
 end
 
-erode_finch_bits_mask_kernel2(output, input, tmp, mask, niters) = begin
-    (output, input) = (input, output)
-    for i in 1:niters
-        (output, input) = (input, output)
-        output = erode_finch_bits_mask_kernel(output, input, tmp,  mask).output
+erode_finch_bits_mask_kernel2(output, input, tmp, niters) = begin
+    i = 0
+    while i < niters
+        mask = Tensor(Dense(SparseList(Pattern())))
+        @finch begin
+            mask .= false
+            for j = _, i = _
+                if input[i, j] != 0
+                    mask[i, j] = true
+                end
+            end
+        end
+        for _ = 1:8
+            output = erode_finch_bits_mask_kernel(output, input, tmp, mask).output
+            (output, input) = (input, output)
+            i += 1
+            if i == niters
+                break
+            end
+        end
     end
-    return output
+    return input
 end
 
 function erode_finch_bits_mask((img, niters),)
@@ -82,12 +97,12 @@ function erode_finch_bits_mask((img, niters),)
     @assert img == unpack_bits(imgb, xs, ys)
     (xb, ys) = size(imgb)
     inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
-    maskb = Tensor(Dense(SparseList(Pattern())), imgb .!= 0)
+    #maskb = Tensor(Dense(SparseList(Pattern())), imgb .!= 0)
     outputb = Tensor(Dense(Dense(Element(UInt(0)))), undef, xb, ys)
     tmpb = Tensor(Dense(Element(UInt(0))), undef, xb)
-    time = @belapsed erode_finch_bits_mask_kernel2($outputb, $inputb, $tmpb, $maskb, $niters) evals=1
+    time = @belapsed erode_finch_bits_mask_kernel2($outputb, $inputb, $tmpb, $niters) evals=1
     inputb = Tensor(Dense(Dense(Element(UInt(0)))), imgb)
-    outputb = erode_finch_bits_mask_kernel2(outputb, inputb, tmpb, maskb, niters)
+    outputb = erode_finch_bits_mask_kernel2(outputb, inputb, tmpb, niters)
     output = unpack_bits(outputb, xs, ys)
     return (;time=time, mem = summarysize(inputb), nnz = countstored(inputb), output=output)
 end
