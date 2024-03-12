@@ -30,6 +30,39 @@ function generate(kernels_file)
         end)
     end
 
+    for (output, input, tmp, mask) in [
+        [
+            Tensor(Dense(Dense(Element(UInt8(0))))),
+            Tensor(Dense(Dense(Element(UInt8(0))))),
+            Tensor(Dense(Element(UInt(0)))),
+            Tensor(Dense(SparseRLE(Pattern()))),
+        ],
+        [
+            Tensor(Dense(Dense(Element(UInt8(0))))),
+            Tensor(Dense(Dense(Element(UInt8(0))))),
+            Tensor(Dense(Element(UInt(0)))),
+            Tensor(Dense(Dense(Element(false)))),
+        ],
+    ]
+        push!(kernels, Finch.@finch_kernel function blur_finch_kernel(output, input, tmp, mask)
+            output .= false
+            for y = _
+                tmp .= false
+                for x = _
+                    if coalesce(mask[~(x - 1), y], false) || mask[x, y] || coalesce(mask[~(x + 1), y], false)
+                        tmp[x] = UInt(coalesce(input[x, ~(y-1)], 0)) + UInt(input[x, y]) + UInt(coalesce(input[x, ~(y+1)], 0))
+                    end
+                end
+                for x = _
+                    if mask[x, y]
+                        output[x, y] = unsafe_trunc(UInt8, round((UInt(coalesce(tmp[~(x-1)], 0)) + tmp[x] + UInt(coalesce(tmp[~(x+1)], 0)))/9))
+                    end
+                end
+            end
+            return output
+        end)
+    end
+
     Serialization.serialize(kernels_file, kernels)
 end
 
