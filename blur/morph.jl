@@ -67,14 +67,14 @@ function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
-        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
-        ("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         ("testimage_dip3e", testimage_dip3e, dip3e_masks[1:4], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
         ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
         ("humansketches", humansketches, 1:4, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
         ("humansketches_magnify", humansketches, 1:4, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
         ("omniglot", omniglot_train, 1:4, (img) -> Array{UInt8}(img .!= 0x00)),
         ("omniglot_magnify", omniglot_train, 1:4, (img) -> kron(Array{UInt8}(img .!= 0x00), magnifying_lens)),
+        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
+        ("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("testimage_edge", testimage, ["airplaneF16.tiff", "fabio_color_512.png"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("willow", willow_gen, [800, 1600, 3200], identity),
@@ -90,8 +90,9 @@ function main(resultfile)
                 ("blur", [
                     (method = "opencv", fn = blur_opencv(rand_data)),
                     (method = "finch", fn = blur_finch(rand_data)),
-                #    (method = "finch_bits", fn = hist_finch_bits),
+                    (method = "finch_rle", fn = blur_finch_rle(rand_data)),
                 ]),
+                #=
                 ("hist", [
                     (method = "opencv", fn = hist_opencv(rand_data)),
                     (method = "finch", fn = hist_finch(rand_data)),
@@ -107,6 +108,7 @@ function main(resultfile)
                     (method = "finch_bits_mask", fn = erode_finch_bits_mask),
                     #(method = "finch_bits_rle", fn = erode_finch_bits_rle),
                 ]),
+                =#
                 #("dilate", [
                 #    (method = "opencv", fn = dilate_opencv),
                 #    (method = "finch_rle", fn = dilate_finch_rle),

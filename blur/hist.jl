@@ -41,16 +41,29 @@ function blur_finch(image)
     end
 end
 
-blur_opencv_kernel(image, kernelSize) = begin
-    OpenCV.blur(reshape(image, 1, size(image)...), kernelSize)
+function blur_finch_rle(image)
+    return (mask) -> begin
+        output = Tensor(Dense(Dense(Element(UInt8(0)))))
+        image = Tensor(Dense(Dense(Element(UInt8(0)))), image)
+        tmp = Tensor(Dense(Element(UInt(0))))
+        mask = Tensor(Dense(SparseRLE(Pattern())), mask .!= 0)
+        time = @belapsed blur_finch_kernel($output, $image, $tmp, $mask)
+        blurry = blur_finch_kernel(output, image, tmp, mask).output
+        (;time=time, output=blurry, mem = summarysize(image), nnz = countstored(image))
+    end
+end
+
+const blur_opencv_kernelSize = OpenCV.Size(Int32(3), Int32(3))
+blur_opencv_kernel(image) = begin
+    OpenCV.blur(reshape(image, 1, size(image)...), blur_opencv_kernelSize; borderType=OpenCV.BORDER_CONSTANT)
 end
 
 function blur_opencv(image)
     return (mask) -> begin
-        kernelSize = OpenCV.Size(Int32(3), Int32(3))
 
-        time = @belapsed blur_opencv_kernel($image, $kernelSize)
-        blurry = blur_opencv_kernel(image, kernelSize)
+
+        time = @belapsed blur_opencv_kernel($image)
+        blurry = blur_opencv_kernel(image)
         (;time=time, output=reshape(Array(blurry), size(image)) .* mask, mem = summarysize(image), nnz = length(image))
     end
 end
