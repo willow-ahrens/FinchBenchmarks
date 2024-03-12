@@ -35,6 +35,7 @@ function generate(kernels_file)
         end)
     end
 
+    #=
     for (output, input, tmp, mask) in [
         [
             Tensor(Dense(Dense(Element(UInt8(0))))),
@@ -100,6 +101,7 @@ function generate(kernels_file)
             return bins
         end)
     end
+    =#
 
     Serialization.serialize(kernels_file, kernels)
 end

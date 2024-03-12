@@ -16,16 +16,6 @@ function generate(kernels_file)
             Tensor(Dense(Dense(Element(UInt(0))))),
             Tensor(Dense(Element(UInt(0))))
         ],
-        [
-            Tensor(Dense(SparseList(Element(UInt(0))))),
-            Tensor(Dense(SparseList(Element(UInt(0))))),
-            Tensor(SparseList(Element(UInt(0))))
-        ],
-        [
-            Tensor(Dense(DenseRLE(Element(UInt(0))))),
-            Tensor(Dense(DenseRLE(Element(UInt(0)), merge=false))),
-            Tensor(DenseRLE(Element(UInt(0)), merge=false))
-        ],
     ]
         push!(kernels, Finch.@finch_kernel function erode_finch_bits_kernel(output, input, tmp)
             output .= 0
@@ -37,21 +27,6 @@ function generate(kernels_file)
                 for x = _
                     let tl = coalesce(tmp[~(x-1)], ~(UInt(0))), t = tmp[x], tr = coalesce(tmp[~(x+1)], ~(UInt(0)))
                         output[x, y] = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) & t & ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
-                    end
-                end
-            end
-            return output
-        end)
-        push!(kernels, Finch.@finch_kernel function dilate_finch_bits_kernel(output, input, tmp)
-            output .= 0
-            for y = _
-                tmp .= 0
-                for x = _
-                    tmp[x] = coalesce(input[x, ~(y-1)], UInt(0)) | input[x, y] | coalesce(input[x, ~(y+1)], UInt(0))
-                end
-                for x = _
-                    let tl = coalesce(tmp[~(x-1)], UInt(0)), t = tmp[x], tr = coalesce(tmp[~(x+1)], UInt(0))
-                        output[x, y] = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) | t | ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
                     end
                 end
             end
@@ -97,13 +72,8 @@ function generate(kernels_file)
             Tensor(Dense(Element(false))),
         ],
         [
-            Tensor(Dense(SparseList(Pattern()))),
-            Tensor(Dense(SparseList(Pattern()))),
-            Tensor(SparseList(Pattern()))
-        ],
-        [
             Tensor(Dense(SparseRLE(Pattern())))
-            Tensor(Dense(SparseRLE(Pattern(), merge=false)))
+            Tensor(Dense(SparseRLE(Pattern())))
             Tensor(SparseRLE(Pattern(), merge=false))
         ],
     ]
@@ -116,19 +86,6 @@ function generate(kernels_file)
                 end
                 for x = _
                     output[x, y] = coalesce(tmp[~(x-1)], true) & tmp[x] & coalesce(tmp[~(x+1)], true)
-                end
-            end
-            return output
-        end)
-        push!(kernels, Finch.@finch_kernel function dilate_finch_kernel(output, input, tmp)
-            output .= false
-            for y = _
-                tmp .= false
-                for x = _
-                    tmp[x] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
-                end
-                for x = _
-                    output[x, y] = coalesce(tmp[~(x-1)], false) | tmp[x] | coalesce(tmp[~(x+1)], false)
                 end
             end
             return output

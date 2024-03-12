@@ -100,16 +100,14 @@ function fill_finch_rle((img, x, y),)
     return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
 end
 
-#=
 function fill_finch_rle2((img, x, y),)
     (xs, ys) = size(img)
-    mask = Tensor(SparseList(SparseRLE(Pattern())), img .!= 0x00)
-    data = Tensor(SparseList(SparseRLE(Pattern())), undef, xs, ys)
     data2 = Tensor(SparseList(SparseRLE(Pattern())), undef, xs, ys)
-    tmp = Tensor(SparseList(SparseRLE(Pattern(), merge=false)), undef, xs)
+    data = Tensor(SparseList(SparseRLE(Pattern())), undef, xs, ys)
+    mask = Tensor(Dense(SparseRLE(Pattern())), img .!= 0x00)
+    tmp = Tensor(SparseList(SparseRLE(Pattern(), merge=false)), undef, xs, ys)
     tmp2 = Tensor(SparseRLE(Pattern(), merge=false), undef, xs)
     time = @belapsed fill_finch_kernel2($data2, $data, $mask, $tmp, $tmp2, $x, $y) evals=1
     output = fill_finch_kernel2(data2, data, mask, tmp, tmp2, x, y)
     return (;time=time, mem = summarysize(output), nnz = countstored(output), output=output)
 end
-=#

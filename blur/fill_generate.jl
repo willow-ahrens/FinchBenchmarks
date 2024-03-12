@@ -35,7 +35,6 @@ function generate(kernels_file)
             end
             return output
         end)
-        println("hi")
     end
 
     for (output, input, mask, tmp, tmp2) in [
@@ -71,12 +70,11 @@ function generate(kernels_file)
             end
             return output
         end)
-        println("hi")
     end
 
     for (output, input, mask, tmp, tmp2) in [
         [
-            Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
+            Tensor(SparseList(SparseRLE(Pattern())))
             Tensor(SparseList(SparseRLE(Pattern())))
             Tensor(Dense(SparseRLE(Pattern())))
             Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
@@ -87,7 +85,7 @@ function generate(kernels_file)
             tmp .= false
             for y = _
                 for x = _
-                    tmp[y, x] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
+                    tmp[x, y] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
                 end
             end
             output .= false
@@ -102,7 +100,6 @@ function generate(kernels_file)
             end
             return output
         end)
-        println("hi")
     end
 
     Serialization.serialize(kernels_file, kernels)
