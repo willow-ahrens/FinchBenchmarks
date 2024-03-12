@@ -22,3 +22,7 @@ function banded_matrix(n, b)
     end
     return banded
 end
+
+function blocked_matrix(n, b)
+    return kron(sprand(n, n, 0.01), ones(b, b))
+end

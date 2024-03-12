@@ -73,12 +73,12 @@ datasets = Dict(
         "TAMU_SmartGridCenter/ACTIVSg70K"
     ],
     "willow_unsymmetric" => [
-        "Goodwin/Goodwin_071",
-        # "Hamm/scircuit",
+        "Goodwin/Goodwin_071", # b = 4, 4.4x slowdown
+        "Hamm/scircuit", # b = 3, 4.8x slowdown
         # "LPnetlib/lpi_gran",
-        "Norris/heart3",
-        "Rajat/rajat26",
-        "TSOPF/TSOPF_RS_b678_c1"
+        "Norris/heart3", # b = 8, 1.6x slowdown
+        "Rajat/rajat26", # b = 2, 4.0x slowdown
+        "TSOPF/TSOPF_RS_b678_c1" # b = 5, 1.2x slowdown
     ],
     "permutation" => [
         "permutation_synthetic"
@@ -117,6 +117,9 @@ datasets = Dict(
     ],
     "taco_unsymmetric" => [
         "Bova/rma10"
+    ],
+    "blocked" => [
+        "blocked_4x4"
     ]
 )
 
@@ -156,6 +159,7 @@ dataset_tags = Dict(
     "graph_unsymmetric" => "unsymmetric_pattern",
     "taco_symmetric" => "symmetric",
     "taco_unsymmetric" => "unsymmetric",
+    "blocked" => "blocked",
 )
 
 methods = Dict(
@@ -178,7 +182,7 @@ methods = Dict(
         "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,  
-        # "blocked" => spmv_finch_blocked,  
+        "blocked" => spmv_finch_blocked,  
     ],
     "symmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
@@ -218,6 +222,13 @@ methods = Dict(
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
+    "blocked" => [
+        "julia_stdlib" => spmv_julia,
+        "finch_unsym" => spmv_finch_unsym,
+        "blocked" => spmv_finch_blocked,  
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse, 
+    ],
 )
 
 results = []
@@ -237,6 +248,8 @@ for (dataset, mtxs) in datasets
             elseif mtx == "toeplitz_large_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 100))
             end
+        elseif dataset == "blocked"
+            A = SparseMatrixCSC(blocked_matrix(10000, 8))
         else
             A = SparseMatrixCSC(matrixdepot(mtx))
         end
