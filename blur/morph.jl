@@ -42,6 +42,7 @@ end
 
 include("erode.jl")
 include("hist.jl")
+include("fill.jl")
 
 sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.sobel()[2]))
 
@@ -52,10 +53,20 @@ magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
 
 function flip(img)
     if sum(img) > length(img) / 2
-        return .~(img)
+        return Array{UInt8}(img .== 0)
     else
         return img
     end
+end
+
+function prep_fill(img)
+    (m, n) = size(img)
+    x = rand(1:m)
+    y = rand(1:n)
+    if img[x, y] == 0
+        img = flip(img)
+    end
+    (img, x, y)
 end
 
 function main(resultfile)
@@ -64,14 +75,14 @@ function main(resultfile)
     results = []
 
     for (dataset, getdata, I, f) in [
+        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
+        ("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         ("testimage_dip3e", testimage_dip3e, dip3e_masks[1:4], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
         ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
         ("humansketches", humansketches, 1:4, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
         ("humansketches_magnify", humansketches, 1:4, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
         ("omniglot", omniglot_train, 1:4, (img) -> Array{UInt8}(img .!= 0x00)),
         ("omniglot_magnify", omniglot_train, 1:4, (img) -> kron(Array{UInt8}(img .!= 0x00), magnifying_lens)),
-        ("mnist", mnist_train, 1:4, (img) -> Array{UInt8}(img .> 0x02)),
-        ("mnist_magnify", mnist_train, 1:4, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
         #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("testimage_edge", testimage, ["airplaneF16.tiff", "fabio_color_512.png"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
         #("willow", willow_gen, [800, 1600, 3200], identity),
@@ -81,9 +92,29 @@ function main(resultfile)
     ]
         for i in I
             input = f(getdata(i))
-            rand_data = rand(UInt8, size(input)...)
 
-            for (op, kernels) in [
+            for (op, prep, kernels) in [
+                ("fill", prep_fill, [
+                    (method = "opencv", fn = fill_opencv),
+                    (method = "finch", fn = fill_finch),
+                ]),
+                #=
+                ("hist", (img) -> (img, rand(UInt8, size(input)...)), [
+                    (method = "opencv", fn = hist_opencv(rand_data)),
+                    (method = "finch", fn = hist_finch(rand_data)),
+                    (method = "finch_rle", fn = hist_finch_rle(rand_data)),
+                ]),
+                ("erode", identity, [
+                    (method = "opencv", fn = erode_opencv),
+                    (method = "finch", fn = erode_finch),
+                    (method = "finch_rle", fn = erode_finch_rle),
+                    #(method = "finch_sparse", fn = erode_finch_sparse),
+                    (method = "finch_bits", fn = erode_finch_bits),
+                    #(method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
+                    (method = "finch_bits_mask", fn = erode_finch_bits_mask),
+                    #(method = "finch_bits_rle", fn = erode_finch_bits_rle),
+                ]),
+                =#
                 #=
                 ("histblur", [
                     (method = "opencv", fn = histblur_opencv(rand_data)),
@@ -95,37 +126,24 @@ function main(resultfile)
                     (method = "finch", fn = blur_finch(rand_data)),
                     (method = "finch_rle", fn = blur_finch_rle(rand_data)),
                 ]),
+                ("dilate", identity, [
+                    (method = "opencv", fn = dilate_opencv),
+                    (method = "finch_rle", fn = dilate_finch_rle),
+                    (method = "finch", fn = dilate_finch),
+                    (method = "finch_bits", fn = dilate_finch_bits),
+                ])
                 =#
-                ("hist", [
-                    (method = "opencv", fn = hist_opencv(rand_data)),
-                    (method = "finch", fn = hist_finch(rand_data)),
-                    (method = "finch_rle", fn = hist_finch_rle(rand_data)),
-                ]),
-                #=
-                ("erode", [
-                    (method = "opencv", fn = erode_opencv),
-                    (method = "finch", fn = erode_finch),
-                    (method = "finch_rle", fn = erode_finch_rle),
-                    #(method = "finch_sparse", fn = erode_finch_sparse),
-                    (method = "finch_bits", fn = erode_finch_bits),
-                    #(method = "finch_bits_sparse", fn = erode_finch_bits_sparse),
-                    (method = "finch_bits_mask", fn = erode_finch_bits_mask),
-                    #(method = "finch_bits_rle", fn = erode_finch_bits_rle),
-                ]),
-                =#
-                #("dilate", [
-                #    (method = "opencv", fn = dilate_opencv),
-                #    (method = "finch_rle", fn = dilate_finch_rle),
-                #    (method = "finch", fn = dilate_finch),
-                #    (method = "finch_bits", fn = dilate_finch_bits),
-                #])
             ]
+                input = prep(input)
 
                 reference = nothing
 
                 for kernel in kernels
                     result = kernel.fn(input)
 
+                    if reference == nothing
+                        Images.save("output/$(dataset)_$(op).png", Array{Gray}(result.output))
+                    end
                     reference = something(reference, result.output)
                     if reference != result.output
                         @info "oops" reference AsArray(result.output)

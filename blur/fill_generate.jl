@@ -35,13 +35,15 @@ function generate(kernels_file)
             end
             return output
         end)
+        println("hi")
     end
 
-    for (output, input, mask, tmp) in [
+    for (output, input, mask, tmp, tmp2) in [
         [
             Tensor(Dense(Dense(Element(false)))),
             Tensor(Dense(Dense(Element(false)))),
             Tensor(Dense(Dense(Element(false)))),
+            Tensor(Dense(Element(false))),
             Tensor(Dense(Element(false))),
         ],
         [
@@ -49,29 +51,58 @@ function generate(kernels_file)
             Tensor(Dense(SparseRLE(Pattern())))
             Tensor(Dense(SparseRLE(Pattern())))
             Tensor(SparseRLE(Pattern(), merge=false))
-        ],
-        [
-            Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
-            Tensor(SparseList(SparseRLE(Pattern())))
-            Tensor(Dense(SparseRLE(Pattern())))
             Tensor(SparseRLE(Pattern(), merge=false))
         ],
     ]
-        push!(kernels, Finch.@finch_kernel function fill_finch_kernel(output, input, mask, tmp)
+        push!(kernels, Finch.@finch_kernel function fill_finch_kernel(output, input, mask, tmp, tmp2)
             output .= false
             for y = _
                 tmp .= false
                 for x = _
                     tmp[x] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
                 end
+                tmp2 .= false
                 for x = _
-                    let t2 = coalesce(tmp[~(x-1)], false) | tmp[x] | coalesce(tmp[~(x+1)], false)
-                        output[x, y] = mask & t2
-                    end
+                    tmp2[x] = coalesce(tmp[~(x-1)], false) | tmp[x] | coalesce(tmp[~(x+1)], false)
+                end
+                for x = _
+                    output[x, y] = tmp2[x] & mask[x, y]
                 end
             end
             return output
         end)
+        println("hi")
+    end
+
+    for (output, input, mask, tmp, tmp2) in [
+        [
+            Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
+            Tensor(SparseList(SparseRLE(Pattern())))
+            Tensor(Dense(SparseRLE(Pattern())))
+            Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
+            Tensor(SparseRLE(Pattern(), merge=false))
+        ],
+    ]
+        push!(kernels, Finch.@finch_kernel function fill_finch_kernel(output, input, mask, tmp, tmp2)
+            tmp .= false
+            for y = _
+                for x = _
+                    tmp[y, x] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
+                end
+            end
+            output .= false
+            for y = _
+                tmp2 .= false
+                for x = _
+                    tmp2[x] = coalesce(tmp[~(x-1), y], false) | tmp[x, y] | coalesce(tmp[~(x+1), y], false)
+                end
+                for x = _
+                    output[x, y] = tmp2[x] & mask[x, y]
+                end
+            end
+            return output
+        end)
+        println("hi")
     end
 
     Serialization.serialize(kernels_file, kernels)

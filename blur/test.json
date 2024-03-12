@@ -1,218 +1,74 @@
 [
     {
-        "nnz": 627445,
+        "nnz": 784,
         "method": "opencv",
-        "time": 0.00023325,
-        "mem": 627485,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0102(1922 digital image)"
+        "time": 0.001436042,
+        "mem": 824,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 1
     },
     {
-        "nnz": 627445,
+        "nnz": 784,
         "method": "finch",
-        "time": 0.000293958,
-        "mem": 627557,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0102(1922 digital image)"
+        "time": 1.834e-6,
+        "mem": 896,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 1
     },
     {
-        "nnz": 627445,
-        "method": "finch_rle",
-        "time": 9.7625e-5,
-        "mem": 627557,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0102(1922 digital image)"
-    },
-    {
-        "nnz": 866852,
+        "nnz": 784,
         "method": "opencv",
-        "time": 0.000312709,
-        "mem": 866892,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0106(b)(PET_image)"
+        "time": 0.001405042,
+        "mem": 824,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 2
     },
     {
-        "nnz": 866852,
+        "nnz": 784,
         "method": "finch",
-        "time": 0.000383292,
-        "mem": 866964,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0106(b)(PET_image)"
+        "time": 1.875e-6,
+        "mem": 896,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 2
     },
     {
-        "nnz": 866852,
-        "method": "finch_rle",
-        "time": 0.00011025,
-        "mem": 866964,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0106(b)(PET_image)"
-    },
-    {
-        "nnz": 169818,
+        "nnz": 784,
         "method": "opencv",
-        "time": 7.3834e-5,
-        "mem": 169858,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0114(c)(bottles)"
+        "time": 0.001441542,
+        "mem": 824,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 3
     },
     {
-        "nnz": 169818,
+        "nnz": 784,
         "method": "finch",
-        "time": 9.5041e-5,
-        "mem": 169930,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0114(c)(bottles)"
+        "time": 1.917e-6,
+        "mem": 896,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 3
     },
     {
-        "nnz": 169818,
-        "method": "finch_rle",
-        "time": 5.5084e-5,
-        "mem": 169930,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0114(c)(bottles)"
-    },
-    {
-        "nnz": 1310720,
+        "nnz": 784,
         "method": "opencv",
-        "time": 0.000440916,
-        "mem": 1310760,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0122(c)(skull)"
+        "time": 0.001376375,
+        "mem": 824,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 4
     },
     {
-        "nnz": 1310720,
+        "nnz": 784,
         "method": "finch",
-        "time": 0.000541167,
-        "mem": 1310832,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0122(c)(skull)"
-    },
-    {
-        "nnz": 1310720,
-        "method": "finch_rle",
-        "time": 0.000136916,
-        "mem": 1310832,
-        "op": "hist",
-        "dataset": "testimage_dip3e",
-        "i": "Fig0122(c)(skull)"
-    },
-    {
-        "nnz": 160625920,
-        "method": "opencv",
-        "time": 0.055879875,
-        "mem": 160625960,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0102(1922 digital image)"
-    },
-    {
-        "nnz": 160625920,
-        "method": "finch",
-        "time": 0.067777792,
-        "mem": 160626032,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0102(1922 digital image)"
-    },
-    {
-        "nnz": 160625920,
-        "method": "finch_rle",
-        "time": 0.023841875,
-        "mem": 160626032,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0102(1922 digital image)"
-    },
-    {
-        "nnz": 221914112,
-        "method": "opencv",
-        "time": 0.074908041,
-        "mem": 221914152,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0106(b)(PET_image)"
-    },
-    {
-        "nnz": 221914112,
-        "method": "finch",
-        "time": 0.088906292,
-        "mem": 221914224,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0106(b)(PET_image)"
-    },
-    {
-        "nnz": 221914112,
-        "method": "finch_rle",
-        "time": 0.025919417,
-        "mem": 221914224,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0106(b)(PET_image)"
-    },
-    {
-        "nnz": 43473408,
-        "method": "opencv",
-        "time": 0.016927167,
-        "mem": 43473448,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0114(c)(bottles)"
-    },
-    {
-        "nnz": 43473408,
-        "method": "finch",
-        "time": 0.023227041,
-        "mem": 43473520,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0114(c)(bottles)"
-    },
-    {
-        "nnz": 43473408,
-        "method": "finch_rle",
-        "time": 0.013774416,
-        "mem": 43473520,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0114(c)(bottles)"
-    },
-    {
-        "nnz": 335544320,
-        "method": "opencv",
-        "time": 0.111377667,
-        "mem": 335544360,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0122(c)(skull)"
-    },
-    {
-        "nnz": 335544320,
-        "method": "finch",
-        "time": 0.127891666,
-        "mem": 335544432,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0122(c)(skull)"
-    },
-    {
-        "nnz": 335544320,
-        "method": "finch_rle",
-        "time": 0.032362291,
-        "mem": 335544432,
-        "op": "hist",
-        "dataset": "testimage_dip3e_magnify",
-        "i": "Fig0122(c)(skull)"
+        "time": 1.916e-6,
+        "mem": 896,
+        "op": "fill",
+        "dataset": "mnist",
+        "i": 4
     }
 ]
