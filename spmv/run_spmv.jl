@@ -111,7 +111,7 @@ datasets = Dict(
         "Williams/pdb1HYS",
         "Williams/cant",
         "Williams/consph",
-        "Williams/cop20k_A",
+        # "Williams/cop20k_A",
         "DNVS/shipsec1",
         "Boeing/pwtk",
     ],
@@ -140,6 +140,7 @@ include("spmv_finch_point.jl")
 include("spmv_finch_point_row_maj.jl")
 include("spmv_finch_point_pattern.jl")
 include("spmv_finch_point_pattern_row_maj.jl")
+include("spmv_finch_blocked.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
 include("spmv_suite_sparse.jl")
@@ -181,7 +182,8 @@ methods = Dict(
         "finch_band_unsym" => spmv_finch_band_unsym,
         "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
-        "suite_sparse" => spmv_suite_sparse,    
+        "suite_sparse" => spmv_suite_sparse,  
+        # "blocked" => spmv_finch_blocked,  
     ],
     "symmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
@@ -253,14 +255,14 @@ for (dataset, mtxs) in datasets
         for (key, method) in methods[tag]
             @info "testing" key mtx
             res = method(y, A, x)
-            #=
+            ##=
                 rm(key * "_results.txt", force=true)
                 open(key * "_results.txt","a") do io
                     for i = 1:n
                         @printf(io,"%f\n", res.y[i])
                     end
                 end
-            =#
+            # =#
             time = res.time
             y_ref = something(y_ref, res.y)
 
