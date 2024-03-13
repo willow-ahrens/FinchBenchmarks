@@ -73,7 +73,7 @@ function spmv_finch_band(y, A, x)
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseBand(Element(0.0))), A)
     _d = Tensor(Dense(Element(0.0)))
-    @finch begin
+    @finch mode=fastfinch begin
         _A .= 0
         _d .= 0
         for j = _, i = _

@@ -64,7 +64,7 @@ end
 function spmv_finch_pattern_unsym_row_maj(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseList(Element(0.0))))
-    @finch begin
+    @finch mode=fastfinch begin
         _A .= 0
         for j=_, i=_
             _A[i, j] = A[j, i]

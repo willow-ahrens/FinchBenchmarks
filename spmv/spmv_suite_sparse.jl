@@ -1,10 +1,12 @@
 using SuiteSparseGraphBLAS
 
 function spmv_suite_sparse_kernel(y, A, x)
-    mul!(y, A, x)
+    y .= 0
+    mul!(y, A, x; accum=+)
 end
 
 function spmv_suite_sparse(y, A, x)
+    gbset(:nthreads, 1)
     _y = GBVector(y)
     _A = GBMatrix(A)
     _x = GBVector(x)

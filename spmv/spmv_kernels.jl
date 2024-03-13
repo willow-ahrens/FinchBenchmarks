@@ -290,3 +290,18 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_he
     end
     return y
 end)
+
+print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_8x8(y, block_A, block_x)
+    y .= 0
+    for J = _
+        for I = _
+            for j = 1:8
+                for i = 1:8
+                    let _i = (I - 1) * 8 + i
+                        y[_i] += block_A[i, j, I, J] * block_x[j, J]
+                    end
+                end
+            end
+        end
+    end
+end)

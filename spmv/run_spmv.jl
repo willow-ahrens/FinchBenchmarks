@@ -73,12 +73,12 @@ datasets = Dict(
         "TAMU_SmartGridCenter/ACTIVSg70K"
     ],
     "willow_unsymmetric" => [
-        "Goodwin/Goodwin_071",
-        # "Hamm/scircuit",
+        "Goodwin/Goodwin_071", # b = 4, 4.4x slowdown
+        "Hamm/scircuit", # b = 3, 4.8x slowdown
         # "LPnetlib/lpi_gran",
-        "Norris/heart3",
-        "Rajat/rajat26",
-        "TSOPF/TSOPF_RS_b678_c1"
+        "Norris/heart3", # b = 8, 1.6x slowdown
+        "Rajat/rajat26", # b = 2, 4.0x slowdown
+        "TSOPF/TSOPF_RS_b678_c1" # b = 5, 1.2x slowdown
     ],
     "permutation" => [
         "permutation_synthetic"
@@ -111,12 +111,15 @@ datasets = Dict(
         "Williams/pdb1HYS",
         "Williams/cant",
         "Williams/consph",
-        "Williams/cop20k_A",
+        # "Williams/cop20k_A",
         "DNVS/shipsec1",
         "Boeing/pwtk",
     ],
     "taco_unsymmetric" => [
         "Bova/rma10"
+    ],
+    "blocked" => [
+        "blocked_8x8"
     ]
 )
 
@@ -140,6 +143,7 @@ include("spmv_finch_point.jl")
 include("spmv_finch_point_row_maj.jl")
 include("spmv_finch_point_pattern.jl")
 include("spmv_finch_point_pattern_row_maj.jl")
+include("spmv_finch_blocked.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
 include("spmv_suite_sparse.jl")
@@ -155,6 +159,7 @@ dataset_tags = Dict(
     "graph_unsymmetric" => "unsymmetric_pattern",
     "taco_symmetric" => "symmetric",
     "taco_unsymmetric" => "unsymmetric",
+    "blocked" => "blocked",
 )
 
 methods = Dict(
@@ -166,9 +171,6 @@ methods = Dict(
         "finch_vbl" => spmv_finch_vbl,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
-        "finch_band" => spmv_finch_band,
-        "finch_band_unsym" => spmv_finch_band_unsym,
-        "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
@@ -178,10 +180,9 @@ methods = Dict(
         "finch_unsym_row_maj" => spmv_finch_unsym_row_maj,
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
-        "finch_band_unsym" => spmv_finch_band_unsym,
-        "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
-        "suite_sparse" => spmv_suite_sparse,    
+        "suite_sparse" => spmv_suite_sparse,  
+        "blocked" => spmv_finch_blocked,  
     ],
     "symmetric_pattern" => [
         "julia_stdlib" => spmv_julia,
@@ -221,6 +222,13 @@ methods = Dict(
         "taco" => spmv_taco,
         "suite_sparse" => spmv_suite_sparse,
     ],
+    "blocked" => [
+        "julia_stdlib" => spmv_julia,
+        "finch_unsym" => spmv_finch_unsym,
+        "blocked" => spmv_finch_blocked,  
+        "taco" => spmv_taco,
+        "suite_sparse" => spmv_suite_sparse, 
+    ],
 )
 
 results = []
@@ -240,6 +248,8 @@ for (dataset, mtxs) in datasets
             elseif mtx == "toeplitz_large_band"
                 A = SparseMatrixCSC(banded_matrix(10000, 100))
             end
+        elseif dataset == "blocked"
+            A = SparseMatrixCSC(blocked_matrix(10000, 8))
         else
             A = SparseMatrixCSC(matrixdepot(mtx))
         end
