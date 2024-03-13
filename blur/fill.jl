@@ -3,31 +3,18 @@ for kernel in Serialization.deserialize(joinpath(@__DIR__, "fill_kernels.jls"))
 end
 
 function fill_opencv_kernel(mask, filter, x, y)
-    data = zeros(UInt8, size(mask)...)
-    data[1, x, y] = 0x01
-    data_2 = OpenCV.multiply(OpenCV.dilate(data, filter), mask)
-    while data_2 != data
-        data = data_2
-        data_2 = OpenCV.multiply(OpenCV.dilate(data, filter), mask)
-    end
-    return data_2
-end
-
-#=
-function fill_opencv_kernel(mask, filter, x, y)
     seed_point = OpenCV.Point(Int32(x), Int32(y))
     (c, h, w) = size(mask)
     flood_mask = zeros(UInt8, 1, h + 2, w + 2)
     OpenCV.floodFill(copy(mask), flood_mask, seed_point, (0x02,))
     return flood_mask[1, 2:end-1, 2:end-1]
 end
-=#
 
 function fill_opencv((img, x, y),)
     mask = Array{UInt8}(reshape(img .!= 0, 1, size(img)...))
     filter = ones(Int8, 1, 3, 3)
     time = @belapsed fill_opencv_kernel($mask, $filter, $x, $y) evals=1
-    output = dropdims(Array(fill_opencv_kernel(mask, filter, x, y)), dims=1)
+    output = Array(fill_opencv_kernel(mask, filter, x, y))
     return (; time = time, mem = summarysize(img), nnz = length(img), output = output)
 end
 
