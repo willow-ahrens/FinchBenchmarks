@@ -91,8 +91,8 @@ function assign_block_x(x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, I
         end
 end
 
-function blocked_spmv_kernel(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, block_A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}}}, block_x::Tensor{DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}, b::Int64)
-    @inbounds begin
+function blocked_spmv_kernel_8x8(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, block_A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}}}, block_x::Tensor{DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}})
+    @inbounds @fastmath begin
             y_lvl = y.lvl
             y_lvl_val = y_lvl.lvl.val
             block_A_lvl = block_A.lvl
@@ -105,7 +105,9 @@ function blocked_spmv_kernel(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float
             block_x_lvl = block_x.lvl
             block_x_lvl_2 = block_x_lvl.lvl
             block_x_lvl_2_val = block_x_lvl_2.lvl.val
-            block_x_lvl_2.shape == block_A_lvl_3.shape || throw(DimensionMismatch("mismatched dimension limits ($(block_x_lvl_2.shape) != $(block_A_lvl_3.shape))"))
+            block_A_lvl_4.shape == 8 || throw(DimensionMismatch("mismatched dimension limits ($(block_A_lvl_4.shape) != $(8))"))
+            8 == block_A_lvl_3.shape || throw(DimensionMismatch("mismatched dimension limits ($(8) != $(block_A_lvl_3.shape))"))
+            8 == block_x_lvl_2.shape || throw(DimensionMismatch("mismatched dimension limits ($(8) != $(block_x_lvl_2.shape))"))
             block_x_lvl.shape == block_A_lvl.shape || throw(DimensionMismatch("mismatched dimension limits ($(block_x_lvl.shape) != $(block_A_lvl.shape))"))
             Finch.resize_if_smaller!(y_lvl_val, y_lvl.shape)
             Finch.fill_range!(y_lvl_val, 0.0, 1, y_lvl.shape)
@@ -127,14 +129,14 @@ function blocked_spmv_kernel(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float
                     while true
                         block_A_lvl_2_i = block_A_lvl_idx[block_A_lvl_2_q]
                         if block_A_lvl_2_i < phase_stop
-                            for j_4 = 1:block_x_lvl_2.shape
+                            for j_4 = 1:8
                                 block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_4
                                 block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_4
                                 block_x_lvl_3_val = block_x_lvl_2_val[block_x_lvl_2_q]
                                 for i_5 = 1:block_A_lvl_4.shape
                                     block_A_lvl_4_q = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_5
                                     block_A_lvl_5_val = block_A_lvl_4_val[block_A_lvl_4_q]
-                                    _i_2 = i_5 + b * (block_A_lvl_2_i + -1)
+                                    _i_2 = i_5 + 8 * (block_A_lvl_2_i + -1)
                                     y_lvl_q = (1 - 1) * y_lvl.shape + _i_2
                                     y_lvl_val[y_lvl_q] += block_A_lvl_5_val * block_x_lvl_3_val
                                 end
@@ -143,14 +145,14 @@ function blocked_spmv_kernel(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float
                         else
                             phase_stop_3 = min(block_A_lvl_2_i, phase_stop)
                             if block_A_lvl_2_i == phase_stop_3
-                                for j_5 = 1:block_x_lvl_2.shape
+                                for j_5 = 1:8
                                     block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_5
                                     block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_5
                                     block_x_lvl_3_val_2 = block_x_lvl_2_val[block_x_lvl_2_q]
                                     for i_7 = 1:block_A_lvl_4.shape
                                         block_A_lvl_4_q_2 = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_7
                                         block_A_lvl_5_val_2 = block_A_lvl_4_val[block_A_lvl_4_q_2]
-                                        _i_4 = i_7 + b * (phase_stop_3 + -1)
+                                        _i_4 = i_7 + 8 * (phase_stop_3 + -1)
                                         y_lvl_q = (1 - 1) * y_lvl.shape + _i_4
                                         y_lvl_val[y_lvl_q] += block_A_lvl_5_val_2 * block_x_lvl_3_val_2
                                     end
@@ -168,21 +170,7 @@ function blocked_spmv_kernel(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float
 end
 
 function spmv_finch_blocked_helper(y, block_A, block_x, b)
-    # @finch mode=fastfinch begin
-    #     y .= 0
-    #     for J = _
-    #         for I = _
-    #             for j = _
-    #                 for i = _
-    #                     let _i = (I - 1) * b + i
-    #                         y[_i] += block_A[i, j, I, J] * block_x[j, J]
-    #                     end
-    #                 end
-    #             end
-    #         end
-    #     end
-    # end
-    blocked_spmv_kernel(y, block_A, block_x, b)
+    blocked_spmv_kernel_8x8(y, block_A, block_x)
     y
 end
 

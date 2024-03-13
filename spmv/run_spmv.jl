@@ -119,7 +119,7 @@ datasets = Dict(
         "Bova/rma10"
     ],
     "blocked" => [
-        "blocked_4x4"
+        "blocked_8x8"
     ]
 )
 
