@@ -48,9 +48,6 @@ sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.
 
 using LinearAlgebra
 
-MAG_FACTOR = 16
-magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
-
 function flip(img)
     if sum(img) > length(img) / 2
         return Array{UInt8}(img .== 0)
@@ -69,6 +66,16 @@ function prep_fill(img)
     (img, x, y)
 end
 
+MAG_FACTOR = 16
+magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
+
+function magnify(img, factor)
+    (m, n) = size(img)
+    img = reshape(img, 1, m, n)
+    img = OpenCV.resize(img, OpenCV.Size{Int32}(m * factor, n * factor), interpolation = OpenCV.INTER_CUBIC)
+    img = reshape(img, m * factor, n * factor)
+end
+
 function main(resultfile)
     OpenCV.setNumThreads(1)
 
@@ -80,10 +87,10 @@ function main(resultfile)
         ("omniglot", omniglot_train, 1:N, (img) -> Array{UInt8}(img .== 0x00)),
         ("humansketches", humansketches, 1:N, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
         ("testimage_dip3e", testimage_dip3e, dip3e_masks[1:N], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
-        ("mnist_magnify", mnist_train, 1:N, (img) -> kron(Array{UInt8}(img .> 0x02), magnifying_lens)),
-        ("omniglot_magnify", omniglot_train, 1:N, (img) -> kron(Array{UInt8}(img .== 0x00), magnifying_lens)),
-        ("humansketches_magnify", humansketches, 1:N, (img) -> kron(Array{UInt8}(reinterpret(UInt8, img) .< 0xF0), magnifying_lens)),
-        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:N], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
+        ("mnist_magnify", mnist_train, 1:N, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .> 0x02)),
+        ("omniglot_magnify", omniglot_train, 1:N, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .== 0x00)),
+        ("humansketches_magnify", humansketches, 1:N, (img) -> Array{UInt8}(magnify(reinterpret(UInt8, img)) .< 0xF0)),
+        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:N], (img) -> Array{UInt8}(magnify(Array{Gray}(img)) .> 0.1)),
 
         #("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
         #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
