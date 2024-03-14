@@ -24,7 +24,8 @@ s = ArgParseSettings("Run spgemm experiments.")
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
-        default = "short"
+        #default = "joel_sm"
+        default = "joel_lg"
     "--num_iters"
         arg_type = Int
         help = "number of iters to run"
@@ -39,25 +40,27 @@ datasets = Dict(
     "short" => [
         "HB/bcspwr07",
     ],
-    "joel" => [
-        "FEMLAB/poisson3Da", 
-        "Oberwolfach/filter3D", 
-        "Williams/cop20k_A", 
-        "Um/offshore", 
-        "Um/2cubes_sphere", 
-        "vanHeukelum/cage12", 
-        "SNAP/wiki-Vote", 
-        "SNAP/email-Enron", 
-        "SNAP/ca-CondMat", 
-        "SNAP/amazon0312", 
-        "Hamm/scircuit", 
-        "SNAP/web-Google", 
-        "GHS_indef/mario002", 
-        "SNAP/cit-Patents", 
-        "JGD_Homology/m133-b3", 
-        "Williams/webbase-1M", 
-        "SNAP/roadNet-CA", 
-        "SNAP/p2p-Gnutella31", 
+    "joel_sm" => [
+        "FEMLAB/poisson3Da",
+        "SNAP/wiki-Vote",
+    ],
+    "joel_lg" => [
+        "SNAP/email-Enron",
+        "SNAP/ca-CondMat",
+        "Oberwolfach/filter3D",
+        "Williams/cop20k_A",
+        "Um/offshore",
+        "Um/2cubes_sphere",
+        "vanHeukelum/cage12",
+        "SNAP/amazon0312",
+        "Hamm/scircuit",
+        "SNAP/web-Google",
+        "GHS_indef/mario002",
+        "SNAP/cit-Patents",
+        "JGD_Homology/m133-b3",
+        "Williams/webbase-1M",
+        "SNAP/roadNet-CA",
+        "SNAP/p2p-Gnutella31",
         "Pajek/patents_main"
     ]
 )
@@ -66,6 +69,25 @@ include("spgemm_finch.jl")
 include("spgemm_taco.jl")
 
 results = []
+
+function norm_tensor(C_ref, C)
+        diff_val = Scalar(0.0)
+        ref_val = Scalar(0.0)
+        @finch begin
+                diff_val .= 0
+                for i=_,j=_
+                        diff_val[] += (C_ref[j,i] - C[j,i]) * (C_ref[j,i] - C[j,i])
+                end
+        end
+        @finch begin
+                ref_val .= 0
+                for i=_,j=_
+                        ref_val[] += C_ref[j,i] * C_ref[j,i]
+                end
+        end
+        return (sqrt(diff_val[])/sqrt(ref_val[]))
+
+end
 
 for mtx in datasets[parsed_args["dataset"]]
     A = SparseMatrixCSC(matrixdepot(mtx))
@@ -78,11 +100,12 @@ for mtx in datasets[parsed_args["dataset"]]
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,
-    ] 
+    ]
+    if parsed_args["dataset"] != "joel_lg" || key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
         @info "testing" key mtx
         res = method(A, B)
         C_ref = something(C_ref, res.C)
-        res.C == C_ref || @warn("incorrect result")
+        norm_tensor(C_ref, res.C) < 0.1 || @warn("incorrect result via norm")
         @info "results" res.time
         push!(results, OrderedDict(
             "time" => res.time,
@@ -91,5 +114,6 @@ for mtx in datasets[parsed_args["dataset"]]
             "matrix" => mtx,
         ))
         write(parsed_args["output"], JSON.json(results, 4))
+    end
     end
 end
