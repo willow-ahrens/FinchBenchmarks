@@ -11,6 +11,7 @@ using ArgParse
 using DataStructures
 using JSON
 using SparseArrays
+using Finch
 
 #Here is where we use the julia arg parser to collect an input dataset keyword and an output file path
 
@@ -68,6 +69,25 @@ datasets = Dict(
 include("spgemm_finch.jl")
 include("spgemm_taco.jl")
 
+function norm_tensor(C_ref, C)
+        diff_val = Scalar(0.0)
+        ref_val = Scalar(0.0)
+        @finch begin
+                diff_val .= 0
+                for i=_,j=_
+                        diff_val[] += (C_ref[j,i] - C[j,i]) * (C_ref[j,i] - C[j,i])
+                end
+        end
+        @finch begin
+                ref_val .= 0
+                for i=_,j=_
+                        ref_val[] += C_ref[j,i] * C_ref[j,i]
+                end
+        end
+        return (sqrt(diff_val[])/sqrt(ref_val[]))
+
+end
+
 results = []
 
 function norm_tensor(C_ref, C)
@@ -96,7 +116,7 @@ for mtx in datasets[parsed_args["dataset"]]
     for (key, method) in [
         "spgemm_taco_inner" => spgemm_taco_inner,
         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
-        "spgemm_taco_outer" => spgemm_taco_outer,
+        #"spgemm_taco_outer" => spgemm_taco_outer,
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,

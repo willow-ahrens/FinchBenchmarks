@@ -11,6 +11,8 @@
 using namespace taco;
 extern int optind;
 
+extern int optind;
+
 int main(int argc, char **argv) {
   auto params = parse(argc, argv);
 
@@ -90,8 +92,6 @@ int main(int argc, char **argv) {
 
   Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
 
-  //fprintf(stderr, "OOOO\n");
-	//std::cerr<<"OO: "<<cF<<std::endl;
 
   IndexVar i, j, k;
   IndexStmt stmt;
