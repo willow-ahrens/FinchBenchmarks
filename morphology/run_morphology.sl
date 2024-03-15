@@ -8,7 +8,7 @@
 #SBATCH --mem 102400
 #SBATCH --array=1-8
 
-cd /data/scratch/willow/FinchBenchmarks/graphs
+cd /data/scratch/willow/FinchBenchmarks/morphology
 source /afs/csail.mit.edu/u/w/willow/everyone/.bashrc
 
 echo $SCRATCH
@@ -22,4 +22,4 @@ DATASETS=("mnist" "omniglot" "humansketches" "testimage_dip3e" "mnist_magnify" "
 # Get the corresponding dataset for this job index
 DATASET=${DATASETS[$SLURM_ARRAY_TASK_ID - 1]}
 
-julia run_morphology.jl --dataset $DATASET --output morphology_results_$SLURM_ARRAY_TASK_ID.json --num_trials 100
+julia +1.9 run_morphology.jl --dataset $DATASET --output morphology_results_$SLURM_ARRAY_TASK_ID.json --num_trials 100
