@@ -68,7 +68,7 @@ function prep_fill(img)
     (img, x, y)
 end
 
-MAG_FACTOR = 16
+MAG_FACTOR = 8
 magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
 
 function magnify(img, factor)
@@ -118,7 +118,7 @@ datas = Dict(
     "mnist_magnify" => (mnist_train, mnist_i, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .> 0x02)),
     "omniglot_magnify" => (omniglot_train, omniglot_i, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .== 0x00)),
     "humansketches_magnify" => (humansketches, humansketches_i, (img) -> Array{UInt8}(magnify(reinterpret(UInt8, img), MAG_FACTOR) .< 0xF0)),
-    "testimage_dip3e_magnify" => (testimage_dip3e, testimage_dip3e_i, (img) -> Array{UInt8}(magnify(Array{Gray}(img), MAG_FACTOR) .> 0.1)),
+    "testimage_dip3e_magnify" => (testimage_dip3e, testimage_dip3e_i, (img) -> Array{UInt8}(magnify(Array{UInt8}(img*255), MAG_FACTOR) .> 0.1)),
 )
 
 groups = Dict(
