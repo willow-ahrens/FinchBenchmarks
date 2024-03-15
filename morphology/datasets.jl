@@ -583,7 +583,15 @@ const remotefiles_dip3e = [
 function list_files_without_extensions(directory)
     filenames = readdir(directory)
     filenames_without_extensions = [splitext(filename)[1] for filename in filenames]
-    return filenames_without_extensions
+
+    filenames_with_tif = map(filenames_without_extensions) do f
+        if "$f.tif" in remotefiles_dip3e
+            return "$f.tif"
+        else
+            return "$f.TIF"
+        end
+    end
+    return filenames_with_tif
 end
 
 dip3e_masks = list_files_without_extensions(joinpath(@__DIR__, "dip3e_masks"))
