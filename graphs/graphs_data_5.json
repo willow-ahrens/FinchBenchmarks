@@ -1,0 +1,32 @@
+[
+    {
+        "time": 0.003991873,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.003008594,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.005325293,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.014757517,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.012104117,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    }
+]

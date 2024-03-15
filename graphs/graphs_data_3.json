@@ -1,0 +1,32 @@
+[
+    {
+        "time": 0.276481698,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.198948289,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.198791708,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 1.998041693,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.370184209,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    }
+]

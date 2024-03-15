@@ -1,0 +1,14 @@
+[
+    {
+        "time": 11.379907903,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.283687492,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    }
+]

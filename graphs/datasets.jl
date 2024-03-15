@@ -10,11 +10,11 @@ const datasets = Dict(
         "SNAP/soc-Epinions1",
         "SNAP/com-Orkut",
 	"GAP/GAP-road"
-    ]
+    ],
     "yang1" => ["DIMACS10/kron_g500-logn16"],
     "yang2" => ["SNAP/com-LiveJournal"],
     "yang3" => ["SNAP/roadNet-CA"],
-    "yang5" => ["SNAP/soc-Epinions1"],
-    "yang6" => ["SNAP/com-Orkut"],
-    "yang7" => ["GAP/GAP-road"]
+    "yang4" => ["SNAP/soc-Epinions1"],
+    "yang5" => ["SNAP/com-Orkut"],
+    "yang6" => ["GAP/GAP-road"]
 )
