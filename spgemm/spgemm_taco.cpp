@@ -9,6 +9,9 @@
 #include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 
 using namespace taco;
+extern int optind;
+
+extern int optind;
 
 int main(int argc, char **argv) {
   auto params = parse(argc, argv);
@@ -28,7 +31,8 @@ int main(int argc, char **argv) {
   // Parse the options
   int option_index = 0;
   int c;
-  while ((c = getopt_long(params.argc, params.argv, "hs:a:b", long_options, &option_index)) != -1) {
+  optind = 1;
+  while ((c = getopt_long(params.argc, params.argv, "hs:a:b:", long_options, &option_index)) != -1) {
     switch (c) {
       case 'h':
         std::cout << "Options:" << std::endl;
@@ -88,8 +92,6 @@ int main(int argc, char **argv) {
 
   Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
 
-  //fprintf(stderr, "OOOO\n");
-	//std::cerr<<"OO: "<<cF<<std::endl;
 
   IndexVar i, j, k;
   IndexStmt stmt;
@@ -101,9 +103,11 @@ int main(int argc, char **argv) {
     stmt= C.getAssignment().concretize();
     stmt = stmt.reorder({i,j,k}); 
   } else if (schedule == "outer") {
-    C(i, j) += A(k, i) * B(k, j);
-    stmt= C.getAssignment().concretize();
-    stmt = stmt.reorder({k,i,j}); 
+    Tensor<double> D("C", {m, n}, Format({Dense, Dense})); // cond
+    D(i, j) += A(k, i) * B(k, j);
+    stmt = D.getAssignment().concretize();
+    stmt = stmt.reorder({k,i,j});
+    C = D;
   } else {
     std::cerr << "Invalid schedule" << std::endl;
     exit(1);
