@@ -10,5 +10,11 @@
         "method": "finch_push_pull",
         "operation": "bfs",
         "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.325861258,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
     }
 ]
