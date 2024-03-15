@@ -11,3 +11,4 @@ graphs/bin
 graphs/share
 graphs/pyvenv.cfg
 blur/output/*
+*/manifest.toml
