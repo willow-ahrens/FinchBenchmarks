@@ -73,7 +73,7 @@ magnifying_lens = ones(UInt8, MAG_FACTOR, MAG_FACTOR)
 
 function magnify(img, factor)
     (m, n) = size(img)
-    img = reshape(img, 1, m, n)
+    img = Array{UInt8}(reshape(img, 1, m, n))
     img = OpenCV.resize(img, OpenCV.Size{Int32}(m * factor, n * factor), interpolation = OpenCV.INTER_CUBIC)
     img = reshape(img, m * factor, n * factor)
 end
@@ -125,14 +125,14 @@ groups = Dict(
     "all" => ["mnist", "omniglot", "humansketches", "testimage_dip3e", "mnist_magnify", "omniglot_magnify", "humansketches_magnify", "testimage_dip3e_magnify"],
     "standard" => ["mnist", "omniglot", "humansketches", "testimage_dip3e"],
     "magnify" => ["mnist_magnify", "omniglot_magnify", "humansketches_magnify", "testimage_dip3e_magnify"],
-    "mnist" => "mnist",
-    "omniglot" => "omniglot",
-    "humansketches" => "humansketches",
-    "testimage_dip3e" => "testimage_dip3e",
-    "mnist_magnify" => "mnist_magnify",
-    "omniglot_magnify" => "omniglot_magnify",
-    "humansketches_magnify" => "humansketches_magnify",
-    "testimage_dip3e_magnify" => "testimage_dip3e_magnify",
+    "mnist" => ["mnist"],
+    "omniglot" => ["omniglot"],
+    "humansketches" => ["humansketches"],
+    "testimage_dip3e" => ["testimage_dip3e"],
+    "mnist_magnify" => ["mnist_magnify"],
+    "omniglot_magnify" => ["omniglot_magnify"],
+    "humansketches_magnify" => ["humansketches_magnify"],
+    "testimage_dip3e_magnify" => ["testimage_dip3e_magnify"],
 )
 
 for dataset in groups[parsed_args["dataset"]]
@@ -141,11 +141,11 @@ for dataset in groups[parsed_args["dataset"]]
         input = f(getdata(i))
 
         for (op, prep, kernels) in [
-            ("fill", prep_fill, [
-                (method = "opencv", fn = fill_opencv),
-                (method = "finch", fn = fill_finch),
-                (method = "finch_scatter", fn = fill_finch_scatter),
-            ]),
+            #("fill", prep_fill, [
+            #    (method = "opencv", fn = fill_opencv),
+            #    (method = "finch", fn = fill_finch),
+            #    (method = "finch_scatter", fn = fill_finch_scatter),
+            #]),
             ("erode2", (img) -> (img, 2), [
                 (method = "opencv", fn = erode_opencv),
                 (method = "finch", fn = erode_finch),
