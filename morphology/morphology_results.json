@@ -1,0 +1,38 @@
+[
+    {
+        "label": "FigP0616(b)",
+        "nnz": 140481792,
+        "method": "opencv",
+        "time": 0.039090292,
+        "mem": 140481840,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0616(b)",
+        "nnz": 140481792,
+        "method": "finch",
+        "time": 0.035095333,
+        "mem": 140481904,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0616(b)",
+        "nnz": 29908,
+        "method": "finch_rle",
+        "time": 0.0001715,
+        "mem": 575920,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0616(b)",
+        "nnz": 2198064,
+        "method": "finch_bits",
+        "time": 0.003260666,
+        "mem": 17584624,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    }
+]
