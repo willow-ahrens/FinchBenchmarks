@@ -1,8 +1,8 @@
 [
     {
-        "time": 0.503014292,
-        "method": "spgemm_finch_gustavson_parallel",
+        "time": 0.280835192,
+        "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
-        "matrix": "HB/bcspwr07"
+        "matrix": "FEMLAB/poisson3Da"
     }
 ]

@@ -70,7 +70,7 @@ datasets = Dict(
 
 include("spgemm_finch.jl")
 include("spgemm_finch_par.jl")
-# include("spgemm_taco.jl")
+include("spgemm_taco.jl")
 
 function norm_tensor(C_ref, C)
         diff_val = Scalar(0.0)
@@ -117,9 +117,9 @@ for mtx in datasets[parsed_args["dataset"]]
     B = A
     C_ref = nothing
     for (key, method) in [
-        #"spgemm_taco_inner" => spgemm_taco_inner,
-         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
-        # "spgemm_taco_outer" => spgemm_taco_outer,
+        "spgemm_taco_inner" => spgemm_taco_inner,
+        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
+        "spgemm_taco_outer" => spgemm_taco_outer,
         #"spgemm_finch_gustavson_parallel" => spgemm_finch_gustavson_parallel,
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
