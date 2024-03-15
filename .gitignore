@@ -10,5 +10,5 @@ graphs/lib
 graphs/bin
 graphs/share
 graphs/pyvenv.cfg
-blur/output/*
+morphology/output/*
 */manifest.toml
