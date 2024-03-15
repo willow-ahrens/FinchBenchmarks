@@ -47,6 +47,7 @@ include("fill.jl")
 sobel(img) = abs.(imfilter(img, Kernel.sobel()[1])) + abs.(imfilter(img, Kernel.sobel()[2]))
 
 using LinearAlgebra
+using Random
 
 function flip(img)
     if sum(img) > length(img) / 2
@@ -82,23 +83,22 @@ function main(resultfile)
     results = []
     N = 4
 
-    for (dataset, getdata, I, f) in [
-        ("mnist", mnist_train, 1:N, (img) -> Array{UInt8}(img .> 0x02)),
-        ("omniglot", omniglot_train, 1:N, (img) -> Array{UInt8}(img .== 0x00)),
-        ("humansketches", humansketches, 1:N, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
-        ("testimage_dip3e", testimage_dip3e, dip3e_masks[1:N], (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
-        ("mnist_magnify", mnist_train, 1:N, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .> 0x02)),
-        ("omniglot_magnify", omniglot_train, 1:N, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .== 0x00)),
-        ("humansketches_magnify", humansketches, 1:N, (img) -> Array{UInt8}(magnify(reinterpret(UInt8, img)) .< 0xF0)),
-        ("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:N], (img) -> Array{UInt8}(magnify(Array{Gray}(img)) .> 0.1)),
+    sample(r) = r[randperm(end)[1:min(N, end)]]
 
-        #("testimage_dip3e_magnify", testimage_dip3e, dip3e_masks[1:4], (img) -> kron(Array{UInt8}(Array{Gray}(img) .> 0.1), magnifying_lens)),
-        #("testimage_dip3e_edge", testimage_dip3e, ["FigP1039.tif"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
-        #("testimage_edge", testimage, ["airplaneF16.tiff", "fabio_color_512.png"], (img) -> Array{UInt8}(sobel(Array{Gray}(img)) .> 0.1)),
-        #("willow", willow_gen, [800, 1600, 3200], identity),
-        #("mnist_edge", mnist_train, 1:4, (img) -> Array{UInt8}(sobel(img) .> 90)),
-        #("omniglot_edge", omniglot_train, 1:4, (img) -> Array{UInt8}(sobel(img) .> 0.1)),
-        #("humansketches_edge", humansketches, 1:4, (img) -> Array{UInt8}(sobel(img) .> 0.1)),
+    mnist_i = sample(1:mnist_train_length())
+    omniglot_i = sample(1:omniglot_train_length())
+    humansketches_i = sample(1:humansketches_length())
+    testimage_dip3e_i = sample(dip3e_masks)
+
+    for (dataset, getdata, I, f) in [
+        ("mnist", mnist_train, mnist_i, (img) -> Array{UInt8}(img .> 0x02)),
+        ("omniglot", omniglot_train, omniglot_i, (img) -> Array{UInt8}(img .== 0x00)),
+        ("humansketches", humansketches, humansketches_i, (img) -> Array{UInt8}(reinterpret(UInt8, img) .< 0xF0)),
+        ("testimage_dip3e", testimage_dip3e, testimage_dip3e_i, (img) -> Array{UInt8}(Array{Gray}(img) .> 0.1)),
+        ("mnist_magnify", mnist_train, mnist_i, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .> 0x02)),
+        ("omniglot_magnify", omniglot_train, omniglot_i, (img) -> Array{UInt8}(magnify(img, MAG_FACTOR) .== 0x00)),
+        ("humansketches_magnify", humansketches, humansketches_i, (img) -> Array{UInt8}(magnify(reinterpret(UInt8, img), MAG_FACTOR) .< 0xF0)),
+        ("testimage_dip3e_magnify", testimage_dip3e, testimage_dip3e_i, (img) -> Array{UInt8}(magnify(Array{Gray}(img), MAG_FACTOR) .> 0.1)),
     ]
         for i in I
             input = f(getdata(i))
@@ -107,17 +107,16 @@ function main(resultfile)
                 ("fill", prep_fill, [
                     (method = "opencv", fn = fill_opencv),
                     (method = "finch", fn = fill_finch),
-                    (method = "finch_rle", fn = fill_finch_rle),
-                    #(method = "finch_rle2", fn = fill_finch_rle2),
+                    (method = "finch_scatter", fn = fill_finch_scatter),
                 ]),
-                ("erode4", (img) -> (img, 4), [
+                ("erode2", (img) -> (img, 2), [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
                     (method = "finch_rle", fn = erode_finch_rle),
                     (method = "finch_bits", fn = erode_finch_bits),
                     (method = "finch_bits_mask", fn = erode_finch_bits_mask),
                 ]),
-                ("erode32", (img) -> (img, 32), [
+                ("erode4", (img) -> (img, 4), [
                     (method = "opencv", fn = erode_opencv),
                     (method = "finch", fn = erode_finch),
                     (method = "finch_rle", fn = erode_finch_rle),
@@ -153,9 +152,10 @@ function main(resultfile)
                         Images.save("output/$(dataset)_$(op)_$(i).png", Array{Gray}(Array(result.output)))
                     end
                     reference = something(reference, result.output)
-                    if op != "fill"
-                        @assert reference == result.output
+                    if reference != result.output
+                        Images.save("output/$(dataset)_$(op)_$(i)_$(kernel.method).png", Array{Gray}(Array(result.output)))
                     end
+                    @assert reference == result.output
 
                     println("$op, $dataset [$i]: $(kernel.method) time: ", result.time, "\tmem: ", result.mem, "\tnnz: ", result.nnz)
 

@@ -2,7 +2,7 @@
 
 julia_version = "1.9.4"
 manifest_format = "2.0"
-project_hash = "9edba77a9ccce5cd7e37c019181041b15ed03610"
+project_hash = "6f2370b40702a898dabca9ebb9e91377a96b7ffa"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -482,9 +482,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.Finch]]
 deps = ["AbstractTrees", "CIndices", "Compat", "DataStructures", "JSON", "LinearAlgebra", "PrecompileTools", "Random", "Requires", "RewriteTools", "SyntaxInterface"]
-path = "/Users/willow/Projects/Finch.jl/"
+path = "/Users/willow/Projects/Finch.jl"
 uuid = "9177782c-1635-4eb9-9bfb-d9dfa25e6bce"
-version = "0.6.16"
+version = "0.6.17"
 
     [deps.Finch.extensions]
     HDF5Ext = "HDF5"

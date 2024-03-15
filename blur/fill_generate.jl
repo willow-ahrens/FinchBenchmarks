@@ -10,95 +10,86 @@ using Serialization
 
 function generate(kernels_file)
     kernels = []
-    for (output, input, mask, tmp) in [
+    for (frontier_2, frontier, mask, image, tmp) in [
         [
-            Tensor(Dense(Dense(Element(UInt(0))))),
-            Tensor(Dense(Dense(Element(UInt(0))))),
-            Tensor(Dense(Dense(Element(UInt(0))))),
-            Tensor(Dense(Element(UInt(0))))
+            Tensor(Dense(SparseList(Pattern()))),
+            Tensor(Dense(SparseList(Pattern()))),
+            Tensor(Dense(Dense(Element(false)))),
+            Tensor(Dense(Dense(Element(false)))),
+            Tensor(Dense(SparseList(Pattern()))),
+        ],
+        [
+            Tensor(SparseList(SparseList(Pattern()))),
+            Tensor(SparseList(SparseList(Pattern()))),
+            Tensor(Dense(Dense(Element(false)))),
+            Tensor(Dense(Dense(Element(false)))),
+            Tensor(SparseList(SparseList(Pattern()))),
         ],
     ]
-        push!(kernels, Finch.@finch_kernel function fill_finch_bits_kernel(output, input, mask, tmp)
-            output .= 0
+        push!(kernels, Finch.@finch_kernel function fill_finch_step_kernel(frontier_2, frontier, mask, image, tmp)
+            tmp .= false
             for y = _
-                tmp .= 0
                 for x = _
-                    tmp[x] = coalesce(input[x, ~(y-1)], UInt(0)) | input[x, y] | coalesce(input[x, ~(y+1)], UInt(0))
+                    if image[x, y] && !mask[x, y]
+                        tmp[x, y] = coalesce(frontier[x, ~(y-1)], false) || coalesce(frontier[x, ~(y+1)], false)
+                    end
                 end
+            end
+            frontier_2 .= false
+            for y = _
                 for x = _
-                    let tl = coalesce(tmp[~(x-1)], UInt(0)), t = tmp[x], tr = coalesce(tmp[~(x+1)], UInt(0))
-                        let t2 = ((tr << (8 * sizeof(UInt) - 1)) | (t >> 1)) | t | ((t << 1) | (tl >> (8 * sizeof(UInt) - 1)))
-                            output[x, y] = t2 & mask[x, y]
+                    if image[x, y] && !mask[x, y]
+                        frontier_2[x, y] = coalesce(frontier[~(x-1), y], false) || tmp[x, y] || coalesce(frontier[~(x+1), y], false)
+                    end
+                end
+            end
+            for y = _
+                for x = _
+                    mask[x, y] |= frontier_2[x, y]
+                end
+            end
+            return frontier_2
+        end)
+    end
+
+    for (frontier_2, frontier, mask, image, c) in [
+        [
+            Tensor(Dense(SparseByteMap(Pattern()))),
+            Tensor(Dense(SparseByteMap(Pattern()))),
+            Tensor(Dense(Dense(Element(false)))),
+            Tensor(Dense(Dense(Element(false)))),
+            Scalar(0)
+        ],
+    ]
+        push!(kernels, Finch.@finch_kernel function fill_finch_scatter_step_kernel(frontier_2, frontier, mask, image, c)
+            frontier_2 .= false
+            for y = _
+                for x = _
+                    if frontier[x, y]
+                        if image[identity(x - 1), y] && !mask[identity(x - 1), y]
+                            frontier_2[identity(x - 1), y] = true
+                        end
+                        if image[identity(x + 1), y] && !mask[identity(x + 1), y]
+                            frontier_2[identity(x + 1), y] = true
+                        end
+                        if image[x, identity(y - 1)] && !mask[x, identity(y - 1)]
+                            frontier_2[x, identity(y - 1)] = true
+                        end
+                        if image[x, identity(y + 1)] && !mask[x, identity(y + 1)]
+                            frontier_2[x, identity(y + 1)] = true
                         end
                     end
                 end
             end
-            return output
-        end)
-    end
-
-    for (output, input, mask, tmp, tmp2) in [
-        [
-            Tensor(Dense(Dense(Element(false)))),
-            Tensor(Dense(Dense(Element(false)))),
-            Tensor(Dense(Dense(Element(false)))),
-            Tensor(Dense(Element(false))),
-            Tensor(Dense(Element(false))),
-        ],
-        [
-            Tensor(Dense(SparseRLE(Pattern())))
-            Tensor(Dense(SparseRLE(Pattern())))
-            Tensor(Dense(SparseRLE(Pattern())))
-            Tensor(SparseRLE(Pattern(), merge=false))
-            Tensor(SparseRLE(Pattern(), merge=false))
-        ],
-    ]
-        push!(kernels, Finch.@finch_kernel function fill_finch_kernel(output, input, mask, tmp, tmp2)
-            output .= false
-            for y = _
-                tmp .= false
-                for x = _
-                    tmp[x] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
-                end
-                tmp2 .= false
-                for x = _
-                    tmp2[x] = coalesce(tmp[~(x-1)], false) | tmp[x] | coalesce(tmp[~(x+1)], false)
-                end
-                for x = _
-                    output[x, y] = tmp2[x] & mask[x, y]
-                end
-            end
-            return output
-        end)
-    end
-
-    for (output, input, mask, tmp, tmp2) in [
-        [
-            Tensor(SparseList(SparseRLE(Pattern())))
-            Tensor(SparseList(SparseRLE(Pattern())))
-            Tensor(Dense(SparseRLE(Pattern())))
-            Tensor(SparseList(SparseRLE(Pattern(), merge=false)))
-            Tensor(SparseRLE(Pattern(), merge=false))
-        ],
-    ]
-        push!(kernels, Finch.@finch_kernel function fill_finch_kernel(output, input, mask, tmp, tmp2)
-            tmp .= false
             for y = _
                 for x = _
-                    tmp[x, y] = coalesce(input[x, ~(y-1)], false) | input[x, y] | coalesce(input[x, ~(y+1)], false)
+                    let f = frontier_2[x, y]
+                        mask[x, y] |= f
+                        c[] += f
+                    end
                 end
             end
-            output .= false
-            for y = _
-                tmp2 .= false
-                for x = _
-                    tmp2[x] = coalesce(tmp[~(x-1), y], false) | tmp[x, y] | coalesce(tmp[~(x+1), y], false)
-                end
-                for x = _
-                    output[x, y] = tmp2[x] & mask[x, y]
-                end
-            end
-            return output
+            return (frontier_2, c)
         end)
     end
 
