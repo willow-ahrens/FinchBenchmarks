@@ -580,6 +580,14 @@ const remotefiles_dip3e = [
     "Figp0917.tif",
 ]
 
+function list_files_without_extensions(directory)
+    filenames = readdir(directory)
+    filenames_without_extensions = [splitext(filename)[1] for filename in filenames]
+    return filenames_without_extensions
+end
+
+dip3e_masks = list_files_without_extensions(joinpath(@__DIR__, "dip3e_masks"))
+
 """
 humansketches(idx)
 
@@ -595,7 +603,7 @@ function humansketches(idx)
 
     path = download_humansketches()
 
-    Array{Gray{N0f8}, 3}(load(joinpath(path, "$idx.png")))
+    Array{Gray{N0f8}, 2}(load(joinpath(path, "$idx.png")))
 end
 
 """
@@ -738,6 +746,22 @@ function emnist_train(i)
     return EMNIST(:byclass, :train, dir=dir, Tx=UInt8).features[:, :, i]
 end
 
+emnist_train_length() = size(EMNIST(:byclass, :train, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+emnist_test_length() = size(EMNIST(:byclass, :test, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+emnist_letters_train_length() = size(EMNIST(:letters, :train, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+emnist_letters_test_length() = size(EMNIST(:letters, :test, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+emnist_digits_train_length() = size(EMNIST(:digits, :train, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+emnist_digits_test_length() = size(EMNIST(:digits, :test, dir=joinpath(download_cache, "emnist"), Tx=UInt8).features)[3]
+omniglot_train_length() = size(Omniglot(:train, dir=joinpath(download_cache, "omniglot"), Tx=UInt8).features)[3]
+omniglot_test_length() = size(Omniglot(:test, dir=joinpath(download_cache, "omniglot"), Tx=UInt8).features)[3]
+omniglot_small1_length() = size(Omniglot(:small1, dir=joinpath(download_cache, "omniglot"), Tx=UInt8).features)[3]
+omniglot_small2_length() = size(Omniglot(:small2, dir=joinpath(download_cache, "omniglot"), Tx=UInt8).features)[3]
+fashionmnist_train_length() = size(FashionMNIST(:train, dir=joinpath(download_cache, "fashionmnist"), Tx=UInt8).features)[3]
+fashionmnist_test_length() = size(FashionMNIST(:test, dir=joinpath(download_cache, "fashionmnist"), Tx=UInt8).features)[3]
+mnist_train_length() = size(MNIST(:train, dir=joinpath(download_cache, "mnist"), Tx=UInt8).features)[3]
+mnist_test_length() = size(MNIST(:test, dir=joinpath(download_cache, "mnist"), Tx=UInt8).features)[3]
+humansketches_length() = 20_000
+
 """
 `willow_gen(n::Int)`
 
@@ -746,4 +770,3 @@ Generates a pattern based on the input `n` and returns it as a single image. The
 function willow_gen(n)
     return [UInt8((i - n/2)^2 + (j - n/2)^2 < (n/4)^2) for i in 1:n, j in 1:n]
 end
-
