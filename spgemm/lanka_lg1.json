@@ -1,0 +1,134 @@
+[
+    {
+        "time": 2.045949304,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Enron"
+    },
+    {
+        "time": 1.525135086,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Enron"
+    },
+    {
+        "time": 0.21264971100000002,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "time": 0.149484363,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "time": 1.540528833,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "time": 1.158766552,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "time": 1.529533365,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "time": 1.145672564,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "time": 2.2129608370000002,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 1.703948686,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 0.826916105,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "time": 0.615213473,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "time": 1.078612241,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    },
+    {
+        "time": 0.829557497,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    },
+    {
+        "time": 1.280643121,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "time": 1.136215928,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "time": 0.321662936,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    },
+    {
+        "time": 0.250011539,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    },
+    {
+        "time": 3.597607242,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    },
+    {
+        "time": 3.110844585,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    },
+    {
+        "time": 0.404051088,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "time": 0.400327718,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    }
+]

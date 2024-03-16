@@ -47,7 +47,7 @@ datasets = Dict(
         "FEMLAB/poisson3Da",
         "SNAP/wiki-Vote",
     ],
-    "joel_lg" => [
+    "joel_lg1" => [
         "SNAP/email-Enron",
         "SNAP/ca-CondMat",
         "Oberwolfach/filter3D",
@@ -59,6 +59,8 @@ datasets = Dict(
         "Hamm/scircuit",
         "SNAP/web-Google",
         "GHS_indef/mario002",
+    ],
+    "joel_lg2" => [
         "SNAP/cit-Patents",
         "JGD_Homology/m133-b3",
         "Williams/webbase-1M",
