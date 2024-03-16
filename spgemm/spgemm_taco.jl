@@ -2,7 +2,7 @@ using Finch
 using TensorMarket
 using JSON
 function spgemm_taco(args, A, B)
-    mktempdir(@__DIR__, prefix="input_") do tmpdir
+    mktempdir(prefix="input_") do tmpdir
         A_path = joinpath(tmpdir, "A.ttx")
         B_path = joinpath(tmpdir, "B.ttx")
         C_path = joinpath(tmpdir, "C.ttx")
