@@ -1,8 +1,38 @@
 [
     {
-        "time": 0.280835192,
+        "time": 7.833000000000001e-6,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "HB/arc130"
+    },
+    {
+        "time": 8.083e-6,
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
-        "matrix": "FEMLAB/poisson3Da"
+        "matrix": "HB/arc130"
+    },
+    {
+        "time": 6.8330000000000005e-6,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "HB/arc130"
+    },
+    {
+        "time": 2.226829745596869e-7,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "HB/arc130"
+    },
+    {
+        "time": 3.7540487804878047e-7,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "HB/arc130"
+    },
+    {
+        "time": 1.3917e-6,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "HB/arc130"
     }
 ]

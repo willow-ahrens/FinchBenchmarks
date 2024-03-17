@@ -96,12 +96,12 @@ int main(int argc, char **argv) {
   IndexVar i, j, k;
   IndexStmt stmt;
 
-  if (schedule == "gustavson") {
-    C(i, j) += A(i, k) * B(k, j);
-  } else if (schedule == "inner") {
+  if (schedule == "inner") {
     C(i, j) += A(i, k) * B(j, k);
     stmt= C.getAssignment().concretize();
     stmt = stmt.reorder({i,j,k}); 
+  } else if (schedule == "gustavson") {
+    C(i, j) += A(i, k) * B(k, j);
   } else if (schedule == "outer") {
     Tensor<double> D("C", {m, n}, Format({Dense, Dense})); // cond
     D(i, j) += A(k, i) * B(k, j);

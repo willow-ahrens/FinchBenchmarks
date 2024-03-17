@@ -14,6 +14,7 @@ using DataStructures
 using JSON
 using SparseArrays
 using Finch
+using LinearAlgebra
 
 #Here is where we use the julia arg parser to collect an input dataset keyword and an output file path
 
@@ -27,8 +28,15 @@ s = ArgParseSettings("Run spgemm experiments.")
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
-        #default = "joel_sm"
-        default = "joel_lg"
+        default = "joel"
+    "--batch", "-b"
+        arg_type = Int
+        help = "batch number"
+        default = 1
+    "--num_batches", "-B"
+        arg_type = Int
+        help = "number of batches"
+        default = 1
     "--num_iters"
         arg_type = Int
         help = "number of iters to run"
@@ -41,13 +49,13 @@ num_iters = parsed_args["num_iters"]
 
 datasets = Dict(
     "short" => [
-        "HB/bcspwr07",
+        "HB/arc130",
+        #"HB/gre_216b",
+        #"HB/bcspwr07",
     ],
-    "joel_sm" => [
+    "joel" => [
         "FEMLAB/poisson3Da",
         "SNAP/wiki-Vote",
-    ],
-    "joel_lg1" => [
         "SNAP/email-Enron",
         "SNAP/ca-CondMat",
         "Oberwolfach/filter3D",
@@ -59,8 +67,6 @@ datasets = Dict(
         "Hamm/scircuit",
         "SNAP/web-Google",
         "GHS_indef/mario002",
-    ],
-    "joel_lg2" => [
         "SNAP/cit-Patents",
         "JGD_Homology/m133-b3",
         "Williams/webbase-1M",
@@ -74,47 +80,19 @@ include("spgemm_finch.jl")
 include("spgemm_finch_par.jl")
 include("spgemm_taco.jl")
 
-function norm_tensor(C_ref, C)
-        diff_val = Scalar(0.0)
-        ref_val = Scalar(0.0)
-        @finch begin
-                diff_val .= 0
-                for i=_,j=_
-                        diff_val[] += (C_ref[j,i] - C[j,i]) * (C_ref[j,i] - C[j,i])
-                end
-        end
-        @finch begin
-                ref_val .= 0
-                for i=_,j=_
-                        ref_val[] += C_ref[j,i] * C_ref[j,i]
-                end
-        end
-        return (sqrt(diff_val[])/sqrt(ref_val[]))
-
-end
-
 results = []
 
-function norm_tensor(C_ref, C)
-        diff_val = Scalar(0.0)
-        ref_val = Scalar(0.0)
-        @finch begin
-                diff_val .= 0
-                for i=_,j=_
-                        diff_val[] += (C_ref[j,i] - C[j,i]) * (C_ref[j,i] - C[j,i])
-                end
-        end
-        @finch begin
-                ref_val .= 0
-                for i=_,j=_
-                        ref_val[] += C_ref[j,i] * C_ref[j,i]
-                end
-        end
-        return (sqrt(diff_val[])/sqrt(ref_val[]))
-
+batch = let 
+    dataset = datasets[parsed_args["dataset"]]
+    batch_num = parsed_args["batch"]
+    num_batches = parsed_args["num_batches"]
+    N = length(dataset)
+    start_idx = fld1(N * (batch_num - 1) + 1, num_batches)
+    end_idx = fld1(N * batch_num, num_batches)
+    dataset[start_idx:end_idx]
 end
 
-for mtx in datasets[parsed_args["dataset"]]
+for mtx in batch
     A = SparseMatrixCSC(matrixdepot(mtx))
     B = A
     C_ref = nothing
@@ -122,16 +100,15 @@ for mtx in datasets[parsed_args["dataset"]]
         "spgemm_taco_inner" => spgemm_taco_inner,
         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
         "spgemm_taco_outer" => spgemm_taco_outer,
-        #"spgemm_finch_gustavson_parallel" => spgemm_finch_gustavson_parallel,
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,
     ]
-    if parsed_args["dataset"] != "joel_lg" || key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
+    if size(A)[1] * size(A)[2] * size(B)[2] < 15_000^3 || key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
         @info "testing" key mtx
         res = method(A, B)
         C_ref = something(C_ref, res.C)
-        norm_tensor(C_ref, res.C) < 0.1 || @warn("incorrect result via norm")
+        norm(C_ref - res.C)/norm(C_ref) < 0.01 || @warn("incorrect result via norm")
         @info "results" res.time
         push!(results, OrderedDict(
             "time" => res.time,
