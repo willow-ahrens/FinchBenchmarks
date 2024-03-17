@@ -8,7 +8,9 @@ from scipy.stats import gmean
 RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=False):
+def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=False, excluded_datasets=None):
+    if excluded_datasets is None:
+        excluded_datasets = []
     # Load the results from the JSON file
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
 
@@ -18,7 +20,7 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
 
     # Filter results by the specific operation and prepare data
     for result in results:
-        if result["operation"] != operation:
+        if result["operation"] != operation or result["dataset"] in excluded_datasets:
             continue
 
         dataset = result["dataset"]
@@ -30,7 +32,7 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
 
     # Calculate speedup relative to baseline
     for result in results:
-        if result["operation"] != operation:
+        if result["operation"] != operation or result["dataset"] in excluded_datasets:
             continue
 
         dataset = result["dataset"]
@@ -79,6 +81,6 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("erode2", baseline_method="opencv", log_scale=True)
-generate_chart_for_operation("erode4", baseline_method="opencv", log_scale=True)
+generate_chart_for_operation("erode2", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"])
+generate_chart_for_operation("erode4", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"])
 generate_chart_for_operation("hist", baseline_method="opencv", log_scale=True)
