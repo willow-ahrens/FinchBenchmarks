@@ -1,0 +1,219 @@
+[
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.28340624600000003,
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.200062188,
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 1.2628786490000001,
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 1.129225168,
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.320065313,
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.251642327,
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 3.5785003520000003,
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 3.15041726,
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.39790552,
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.393230451,
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.14421704700000001,
+        "kernel": "spgemm",
+        "matrix": "JGD_Homology/m133-b3"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.150914152,
+        "kernel": "spgemm",
+        "matrix": "JGD_Homology/m133-b3"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 2.472163451,
+        "kernel": "spgemm",
+        "matrix": "Williams/webbase-1M"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 2.765336976,
+        "kernel": "spgemm",
+        "matrix": "Williams/webbase-1M"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.773799364,
+        "kernel": "spgemm",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.538210365,
+        "kernel": "spgemm",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.035328963000000005,
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.024325387,
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.17620849100000002,
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.149351734,
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.15433269600000002,
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.112211772,
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 2.0408920260000003,
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Enron"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 1.524088302,
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Enron"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.20998577200000001,
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.149601928,
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 1.5360144260000002,
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 1.161452103,
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 1.517005552,
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 1.192438331,
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 2.20539303,
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 1.692262039,
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 0.827431396,
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.610428948,
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "method": "spgemm_taco_gustavson",
+        "time": 1.0702073440000002,
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    },
+    {
+        "method": "spgemm_finch_gustavson",
+        "time": 0.824769142,
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    }
+]
+

@@ -4,12 +4,11 @@ import json
 from collections import defaultdict
 import os
 
-RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(operation, baseline_method="spgemm_taco_gustavson"):
+def generate_chart_for_operation(path, operation, baseline_method="spgemm_taco_gustavson", log_scale = False):
     # Load the results from the JSON file
-    results = json.load(open(RESULTS_FILE_PATH, 'r'))
+    results = json.load(open(path, 'r'))
 
     mtxs = []
     data = defaultdict(list)
@@ -40,9 +39,9 @@ def generate_chart_for_operation(operation, baseline_method="spgemm_taco_gustavs
             data[method].append(speedup)
 
     methods = list(data.keys())
-    make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}")
+    make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
 
-def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup"):
+def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
     width = 0.15  # Adjust width based on the number of labels
     fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
@@ -50,6 +49,9 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup"):
     for i, label in enumerate(labels):
         offset = width * i
         ax.bar(x + offset, data[label], width, label=label)
+
+    if log_scale:
+        ax.set_yscale('log')
 
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -66,4 +68,5 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("spgemm", baseline_method="spgemm_taco_gustavson")
+generate_chart_for_operation("lanka_joel.json", "spgemm", baseline_method="spgemm_taco_gustavson")
+generate_chart_for_operation("lanka_small.json", "spgemm", baseline_method="spgemm_taco_gustavson", log_scale=True)
