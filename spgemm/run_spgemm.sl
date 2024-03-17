@@ -6,6 +6,7 @@
 #SBATCH --partition=lanka-v3
 #SBATCH --qos=commit-main
 #SBATCH --mem 102400
+#SBATCH --array=1-20%20
 
 cd /data/scratch/willow/FinchBenchmarks/spgemm
 source /afs/csail.mit.edu/u/w/willow/everyone/.bashrc
@@ -17,6 +18,5 @@ echo $PATH
 echo $(pwd)
 export TMPDIR=/tmp
 
-# Call the Julia function with the selected dataset and output file
-julia run_spgemm.jl -d "joel_sm" -o "lanka_sm.json"
-julia run_spgemm.jl -d "joel_lg2" -o "lanka_lg2.json"
+# Use SLURM_ARRAY_TASK_ID for batch number (-b) and set the total number of batches (-B) to 20
+julia run_spgemm.jl -d "joel" -b $SLURM_ARRAY_TASK_ID -B 20
