@@ -1,8 +1,14 @@
 [
     {
-        "time": 1.528667615,
+        "time": 2.20539303,
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
-        "matrix": "Williams/cop20k_A"
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 1.692262039,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
     }
 ]

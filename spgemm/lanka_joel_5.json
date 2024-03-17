@@ -1,14 +1,14 @@
 [
     {
-        "time": 0.21158277800000003,
+        "time": 1.5360144260000002,
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
-        "matrix": "SNAP/ca-CondMat"
+        "matrix": "Oberwolfach/filter3D"
     },
     {
-        "time": 0.151386998,
+        "time": 1.161452103,
         "method": "spgemm_finch_gustavson",
         "kernel": "spgemm",
-        "matrix": "SNAP/ca-CondMat"
+        "matrix": "Oberwolfach/filter3D"
     }
 ]

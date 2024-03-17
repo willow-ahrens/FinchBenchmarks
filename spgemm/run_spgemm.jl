@@ -87,8 +87,8 @@ batch = let
     batch_num = parsed_args["batch"]
     num_batches = parsed_args["num_batches"]
     N = length(dataset)
-    start_idx = fld1(N * (batch_num - 1) + 1, num_batches)
-    end_idx = fld1(N * batch_num, num_batches)
+    start_idx = min(fld1(N * (batch_num - 1) + 1, min(num_batches, N)), N + 1)
+    end_idx = min(fld1(N * batch_num, min(num_batches, N)), N)
     dataset[start_idx:end_idx]
 end
 
@@ -103,8 +103,9 @@ for mtx in batch
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,
+        "spgemm_finch_outer_bytemap" => spgemm_finch_outer_bytemap,
     ]
-    if size(A)[1] * size(A)[2] * size(B)[2] < 15_000^3 || key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
+    if key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
         @info "testing" key mtx
         res = method(A, B)
         C_ref = something(C_ref, res.C)

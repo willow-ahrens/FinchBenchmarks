@@ -1,14 +1,14 @@
 [
     {
-        "time": 1.072616497,
+        "time": 1.2628786490000001,
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
-        "matrix": "vanHeukelum/cage12"
+        "matrix": "SNAP/amazon0312"
     },
     {
-        "time": 0.83198882,
+        "time": 1.129225168,
         "method": "spgemm_finch_gustavson",
         "kernel": "spgemm",
-        "matrix": "vanHeukelum/cage12"
+        "matrix": "SNAP/amazon0312"
     }
 ]
