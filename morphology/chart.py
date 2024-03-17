@@ -5,7 +5,7 @@ from collections import defaultdict
 import os
 from scipy.stats import gmean
 
-RESULTS_FILE_PATH = "test.json"
+RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
 def generate_chart_for_operation(operation, baseline_method="opencv"):
@@ -76,7 +76,6 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("fill", baseline_method="opencv")
+generate_chart_for_operation("erode2", baseline_method="opencv")
 generate_chart_for_operation("erode4", baseline_method="opencv")
-generate_chart_for_operation("erode32", baseline_method="opencv")
 generate_chart_for_operation("hist", baseline_method="opencv")
