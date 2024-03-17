@@ -8,7 +8,7 @@ from scipy.stats import gmean
 RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(operation, baseline_method="opencv"):
+def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=False):
     # Load the results from the JSON file
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
 
@@ -49,9 +49,9 @@ def generate_chart_for_operation(operation, baseline_method="opencv"):
     # Plot
     datasets = sorted(datasets)  # Sort datasets for consistent plotting
     methods = sorted(geomean_data.keys())
-    make_grouped_bar_chart(methods, datasets, geomean_data, title=f"{operation} Speedup over {baseline_method}")
+    make_grouped_bar_chart(methods, datasets, geomean_data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
 
-def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup"):
+def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))  # the label locations
     num_labels = len(labels)
     width = 0.8 / num_labels  # the width of the bars, adjust to fit
@@ -67,6 +67,9 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup"):
     ax.set_xticklabels(x_axis, rotation=45, ha="right")
     ax.legend()
 
+    if log_scale:
+        ax.set_yscale('log')  # Set the y-axis to a logarithmic scale
+
     plt.tight_layout()
     fig_file = f"{title.lower().replace(' ', '_').replace('-', '_').replace('/', '_')}.png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200)
@@ -76,6 +79,6 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("erode2", baseline_method="opencv")
-generate_chart_for_operation("erode4", baseline_method="opencv")
-generate_chart_for_operation("hist", baseline_method="opencv")
+generate_chart_for_operation("erode2", baseline_method="opencv", log_scale=True)
+generate_chart_for_operation("erode4", baseline_method="opencv", log_scale=True)
+generate_chart_for_operation("hist", baseline_method="opencv", log_scale=True)
