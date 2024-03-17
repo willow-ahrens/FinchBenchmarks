@@ -7,7 +7,7 @@ import os
 RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_scale=False):
+def generate_chart_for_operation(operation, baseline_method="spgemm_taco_gustavson"):
     # Load the results from the JSON file
     results = json.load(open(RESULTS_FILE_PATH, 'r'))
 
@@ -17,7 +17,7 @@ def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_sca
 
     # Filter results by the specific operation and prepare data
     for result in results:
-        if result["operation"] != operation:
+        if result["kernel"] != operation:
             continue
 
         mtx = result["matrix"]
@@ -29,7 +29,7 @@ def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_sca
 
     # Calculate speedup relative to baseline
     for result in results:
-        if result["operation"] != operation:
+        if result["kernel"] != operation:
             continue
 
         mtx = result["matrix"]
@@ -40,9 +40,9 @@ def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_sca
             data[method].append(speedup)
 
     methods = list(data.keys())
-    make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
+    make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}")
 
-def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
+def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup"):
     x = np.arange(len(x_axis))
     width = 0.15  # Adjust width based on the number of labels
     fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
@@ -50,9 +50,6 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     for i, label in enumerate(labels):
         offset = width * i
         ax.bar(x + offset, data[label], width, label=label)
-
-    if log_scale:
-        ax.set_yscale('log')
 
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -63,12 +60,10 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     plt.tight_layout()
     fig_file = f"{title.lower().replace(' ', '_').replace('-', '_')}.png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200)
-    plt.show()
 
 # Ensure the charts directory exists or create it
 if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
-# Generate charts for each operation by calling the function with the operation, baseline method, and log scale parameter
-generate_chart_for_operation("bfs", baseline_method="Graphs.jl")
-generate_chart_for_operation("bellmanford", baseline_method="Graphs.jl")
+# Generate charts for each operation by calling the function with the operation and baseline method
+generate_chart_for_operation("spgemm", baseline_method="spgemm_taco_gustavson")
