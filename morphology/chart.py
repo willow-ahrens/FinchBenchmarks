@@ -47,7 +47,7 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
         geomean_data[method] = {dataset: gmean(speedups) for dataset, speedups in datasets.items()}
 
     # Plot
-    datasets = sorted(datasets)  # Sort datasets for consistent plotting
+    #datasets = sorted(datasets)  # Sort datasets for consistent plotting
     methods = sorted(geomean_data.keys())
     make_grouped_bar_chart(methods, datasets, geomean_data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
 
