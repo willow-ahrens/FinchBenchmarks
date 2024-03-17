@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.17620849100000002,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "time": 0.149351734,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    }
+]
