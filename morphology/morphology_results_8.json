@@ -3805,5 +3805,1229 @@
         "mem": 30283312,
         "operation": "erode4",
         "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 14731,
+        "method": "finch_rle",
+        "time": 0.000266544,
+        "mem": 279136,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 475200,
+        "method": "finch_bits",
+        "time": 0.002528548,
+        "mem": 3801712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 475200,
+        "method": "finch_bits_mask",
+        "time": 0.001526025,
+        "mem": 3801712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 30283200,
+        "method": "opencv",
+        "time": 0.022563575,
+        "mem": 30283240,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 30283200,
+        "method": "finch",
+        "time": 0.019755488,
+        "mem": 30283312,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Figp0917.tif",
+        "nnz": 30283200,
+        "method": "finch_rle",
+        "time": 0.006636932,
+        "mem": 30283312,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.008737891,
+        "mem": 22963312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.013568086,
+        "mem": 22963376,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 8170,
+        "method": "finch_rle",
+        "time": 0.000118275,
+        "mem": 169296,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 359400,
+        "method": "finch_bits",
+        "time": 0.001037828,
+        "mem": 2875312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 359400,
+        "method": "finch_bits_mask",
+        "time": 0.00077816,
+        "mem": 2875312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.010338002,
+        "mem": 22963312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.027178533,
+        "mem": 22963376,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 6748,
+        "method": "finch_rle",
+        "time": 0.000236661,
+        "mem": 146544,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 359400,
+        "method": "finch_bits",
+        "time": 0.002075616,
+        "mem": 2875312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 359400,
+        "method": "finch_bits_mask",
+        "time": 0.0012106,
+        "mem": 2875312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.016481223,
+        "mem": 22963304,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.011026546,
+        "mem": 22963376,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(b).tif",
+        "nnz": 22963264,
+        "method": "finch_rle",
+        "time": 0.000815468,
+        "mem": 22963376,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "opencv",
+        "time": 0.007671108,
+        "mem": 23040048,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "finch",
+        "time": 0.013529635,
+        "mem": 23040112,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 980,
+        "method": "finch_rle",
+        "time": 0.000118444,
+        "mem": 54320,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 364800,
+        "method": "finch_bits",
+        "time": 0.001018203,
+        "mem": 2918512,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 364800,
+        "method": "finch_bits_mask",
+        "time": 0.000791726,
+        "mem": 2918512,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "opencv",
+        "time": 0.010740681,
+        "mem": 23040048,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "finch",
+        "time": 0.027401756,
+        "mem": 23040112,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 968,
+        "method": "finch_rle",
+        "time": 0.000236997,
+        "mem": 54128,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 364800,
+        "method": "finch_bits",
+        "time": 0.0020607,
+        "mem": 2918512,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 364800,
+        "method": "finch_bits_mask",
+        "time": 0.001231867,
+        "mem": 2918512,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "opencv",
+        "time": 0.014916438,
+        "mem": 23040040,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "finch",
+        "time": 0.011792497,
+        "mem": 23040112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig0539(a)(vertical_rectangle).tif",
+        "nnz": 23040000,
+        "method": "finch_rle",
+        "time": 0.002099287,
+        "mem": 23040112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.001065427,
+        "mem": 4194352,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.001259444,
+        "mem": 4194416,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 1004,
+        "method": "finch_rle",
+        "time": 5.0385e-5,
+        "mem": 32688,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000238279,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000169835,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.001246755,
+        "mem": 4194352,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.002428431,
+        "mem": 4194416,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 992,
+        "method": "finch_rle",
+        "time": 0.00010062,
+        "mem": 32496,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000475907,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000269791,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.002819966,
+        "mem": 4194344,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.002195763,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP1012.tif",
+        "nnz": 4194304,
+        "method": "finch_rle",
+        "time": 0.000454389,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.000984963,
+        "mem": 4194352,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.001226556,
+        "mem": 4194416,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 838,
+        "method": "finch_rle",
+        "time": 5.0373e-5,
+        "mem": 30032,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000237518,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000169361,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.001246987,
+        "mem": 4194352,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.002444491,
+        "mem": 4194416,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 832,
+        "method": "finch_rle",
+        "time": 0.000100785,
+        "mem": 29936,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000467912,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000269583,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.002807675,
+        "mem": 4194344,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.002180504,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(a)(AbsADI).tif",
+        "nnz": 4194304,
+        "method": "finch_rle",
+        "time": 0.000442444,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.002445103,
+        "mem": 5760048,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.001690378,
+        "mem": 5760112,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 76,
+        "method": "finch_rle",
+        "time": 5.9142e-5,
+        "mem": 20656,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 91200,
+        "method": "finch_bits",
+        "time": 0.000290198,
+        "mem": 729712,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 91200,
+        "method": "finch_bits_mask",
+        "time": 0.000238647,
+        "mem": 729712,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.002426498,
+        "mem": 5760048,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.003403319,
+        "mem": 5760112,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 48,
+        "method": "finch_rle",
+        "time": 0.000118075,
+        "mem": 20208,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 91200,
+        "method": "finch_bits",
+        "time": 0.000620548,
+        "mem": 729712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 91200,
+        "method": "finch_bits_mask",
+        "time": 0.000371536,
+        "mem": 729712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.003612167,
+        "mem": 5760040,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.002548851,
+        "mem": 5760112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(a)(single_dot).tif",
+        "nnz": 5760000,
+        "method": "finch_rle",
+        "time": 7.2865e-6,
+        "mem": 5760112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.002141701,
+        "mem": 5760048,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.001715667,
+        "mem": 5760112,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 1996,
+        "method": "finch_rle",
+        "time": 5.8995e-5,
+        "mem": 51376,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 91200,
+        "method": "finch_bits",
+        "time": 0.0002991,
+        "mem": 729712,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 91200,
+        "method": "finch_bits_mask",
+        "time": 0.000238901,
+        "mem": 729712,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.002426963,
+        "mem": 5760048,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.003275649,
+        "mem": 5760112,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 1996,
+        "method": "finch_rle",
+        "time": 0.000118126,
+        "mem": 51376,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 91200,
+        "method": "finch_bits",
+        "time": 0.000877612,
+        "mem": 729712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 91200,
+        "method": "finch_bits_mask",
+        "time": 0.000372221,
+        "mem": 729712,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "opencv",
+        "time": 0.004170339,
+        "mem": 5760040,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "finch",
+        "time": 0.003809698,
+        "mem": 5760112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c)(doughnut).tif",
+        "nnz": 5760000,
+        "method": "finch_rle",
+        "time": 0.00168841,
+        "mem": 5760112,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "opencv",
+        "time": 0.057768552,
+        "mem": 103271600,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "finch",
+        "time": 0.072589119,
+        "mem": 103271664,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 37202,
+        "method": "finch_rle",
+        "time": 0.000246487,
+        "mem": 675280,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 1616112,
+        "method": "finch_bits",
+        "time": 0.004955909,
+        "mem": 12929008,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 1616112,
+        "method": "finch_bits_mask",
+        "time": 0.003537997,
+        "mem": 12929008,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "opencv",
+        "time": 0.043993797,
+        "mem": 103271600,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "finch",
+        "time": 0.145991879,
+        "mem": 103271664,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 28851,
+        "method": "finch_rle",
+        "time": 0.000492874,
+        "mem": 541664,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 1616112,
+        "method": "finch_bits",
+        "time": 0.009560889,
+        "mem": 12929008,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 1616112,
+        "method": "finch_bits_mask",
+        "time": 0.004893914,
+        "mem": 12929008,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "opencv",
+        "time": 0.075553927,
+        "mem": 103271592,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "finch",
+        "time": 0.06689299,
+        "mem": 103271664,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0917(noisy_rectangle).tif",
+        "nnz": 103271552,
+        "method": "finch_rle",
+        "time": 0.023999605,
+        "mem": 103271664,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "opencv",
+        "time": 0.006303174,
+        "mem": 16777264,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "finch",
+        "time": 0.008032661,
+        "mem": 16777328,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 4808,
+        "method": "finch_rle",
+        "time": 0.000100987,
+        "mem": 109936,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 266240,
+        "method": "finch_bits",
+        "time": 0.000743762,
+        "mem": 2130032,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 266240,
+        "method": "finch_bits_mask",
+        "time": 0.00063789,
+        "mem": 2130032,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "opencv",
+        "time": 0.006292842,
+        "mem": 16777264,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "finch",
+        "time": 0.015669346,
+        "mem": 16777328,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 3760,
+        "method": "finch_rle",
+        "time": 0.000202156,
+        "mem": 93168,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 266240,
+        "method": "finch_bits",
+        "time": 0.001513149,
+        "mem": 2130032,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 266240,
+        "method": "finch_bits_mask",
+        "time": 0.00101088,
+        "mem": 2130032,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "opencv",
+        "time": 0.012267943,
+        "mem": 16777256,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "finch",
+        "time": 0.011638816,
+        "mem": 16777328,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0528(c).tif",
+        "nnz": 16777216,
+        "method": "finch_rle",
+        "time": 0.005474858,
+        "mem": 16777328,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.001064465,
+        "mem": 4194352,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.001265397,
+        "mem": 4194416,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 411,
+        "method": "finch_rle",
+        "time": 5.0381e-5,
+        "mem": 23200,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000238129,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000169004,
+        "mem": 540784,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.001252702,
+        "mem": 4194352,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.002498113,
+        "mem": 4194416,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 401,
+        "method": "finch_rle",
+        "time": 0.000100581,
+        "mem": 23040,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits",
+        "time": 0.000471193,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 67584,
+        "method": "finch_bits_mask",
+        "time": 0.000269694,
+        "mem": 540784,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "opencv",
+        "time": 0.002719418,
+        "mem": 4194344,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "finch",
+        "time": 0.001989739,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "Fig1059(b)(PosADI).tif",
+        "nnz": 4194304,
+        "method": "finch_rle",
+        "time": 0.000183929,
+        "mem": 4194416,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.013524588,
+        "mem": 22963312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.013615881,
+        "mem": 22963376,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 11988,
+        "method": "finch_rle",
+        "time": 0.000118202,
+        "mem": 230384,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 359400,
+        "method": "finch_bits",
+        "time": 0.001039101,
+        "mem": 2875312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 359400,
+        "method": "finch_bits_mask",
+        "time": 0.000777466,
+        "mem": 2875312,
+        "operation": "erode2",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.010288878,
+        "mem": 22963312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.026727999,
+        "mem": 22963376,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 9128,
+        "method": "finch_rle",
+        "time": 0.000236595,
+        "mem": 184624,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 359400,
+        "method": "finch_bits",
+        "time": 0.002042604,
+        "mem": 2875312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 359400,
+        "method": "finch_bits_mask",
+        "time": 0.001210519,
+        "mem": 2875312,
+        "operation": "erode4",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "opencv",
+        "time": 0.017541725,
+        "mem": 22963304,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "finch",
+        "time": 0.016231359,
+        "mem": 22963376,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
+    },
+    {
+        "label": "FigP0905(U).tif",
+        "nnz": 22963264,
+        "method": "finch_rle",
+        "time": 0.00692915,
+        "mem": 22963376,
+        "operation": "hist",
+        "dataset": "testimage_dip3e_magnify"
     }
 ]

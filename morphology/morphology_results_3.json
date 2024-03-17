@@ -9565,5 +9565,2138 @@
         "mem": 160096,
         "operation": "erode4",
         "dataset": "humansketches"
+    },
+    {
+        "label": 14188,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000871808,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 14188,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000599337,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 14188,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 4.1382e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000526883,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000406888,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1082,
+        "method": "finch_rle",
+        "time": 2.7505e-5,
+        "mem": 26440,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0575e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2676e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000609688,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000816526,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 2,
+        "method": "finch_rle",
+        "time": 5.4846e-5,
+        "mem": 9160,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160307,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112665,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000864449,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000588596,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1608,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.517e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.00052416,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407174,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 668,
+        "method": "finch_rle",
+        "time": 2.7529e-5,
+        "mem": 19816,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0965e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.1147e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.0006201,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000831423,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4796e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160803,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000113385,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000862939,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00059258,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12495,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.3726e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000530355,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000416362,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 2690,
+        "method": "finch_rle",
+        "time": 2.7535e-5,
+        "mem": 52168,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0901e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.3409e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000620217,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000838548,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 2,
+        "method": "finch_rle",
+        "time": 5.5109e-5,
+        "mem": 9160,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160765,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112884,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.00090974,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000633074,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 7528,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 6.0842e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000534574,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000415546,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 777,
+        "method": "finch_rle",
+        "time": 2.7555e-5,
+        "mem": 21560,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0886e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.3384e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000619241,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000834405,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 4,
+        "method": "finch_rle",
+        "time": 5.4849e-5,
+        "mem": 9192,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000168262,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112891,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000861393,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000591849,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19304,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.9152e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000536871,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000415368,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 2805,
+        "method": "finch_rle",
+        "time": 2.7588e-5,
+        "mem": 54008,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0902e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.3262e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000619076,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000836037,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 9,
+        "method": "finch_rle",
+        "time": 5.4936e-5,
+        "mem": 9272,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160781,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000113473,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.00089588,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000626583,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1986,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 6.0678e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000534443,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000417001,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1519,
+        "method": "finch_rle",
+        "time": 2.8421e-5,
+        "mem": 33432,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0816e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2801e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000620488,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000833738,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 11,
+        "method": "finch_rle",
+        "time": 5.506e-5,
+        "mem": 9304,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160673,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000113163,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000825858,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00057721,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 17119,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 2.7818e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000530886,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000415873,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 3121,
+        "method": "finch_rle",
+        "time": 2.7506e-5,
+        "mem": 59064,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0512e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2597e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000611812,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000814088,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 347,
+        "method": "finch_rle",
+        "time": 5.4809e-5,
+        "mem": 14680,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160168,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112042,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000895118,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000620074,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18684,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 5.4146e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000571031,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000406974,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1397,
+        "method": "finch_rle",
+        "time": 2.7509e-5,
+        "mem": 31480,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0554e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.1323e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000611839,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00081533,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 2,
+        "method": "finch_rle",
+        "time": 5.5157e-5,
+        "mem": 9160,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160158,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000111393,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000842373,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000600182,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18018,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.9239e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000523179,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407353,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 696,
+        "method": "finch_rle",
+        "time": 2.7522e-5,
+        "mem": 20264,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0538e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.25e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000611048,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000816259,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 4,
+        "method": "finch_rle",
+        "time": 5.4909e-5,
+        "mem": 9192,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000164111,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000110892,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000877348,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00060426,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 19105,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 4.4234e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000522488,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407227,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 753,
+        "method": "finch_rle",
+        "time": 2.7497e-5,
+        "mem": 21176,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0479e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.1426e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000614701,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000813853,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4984e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000168219,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112004,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000882249,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000607958,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 15270,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 4.4907e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000567287,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00041022,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 759,
+        "method": "finch_rle",
+        "time": 2.7579e-5,
+        "mem": 21272,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.7598e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2526e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000614345,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000817899,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4834e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.00016687,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112223,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000847757,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000585222,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 914,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 2.923e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000522169,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000410276,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1057,
+        "method": "finch_rle",
+        "time": 2.7509e-5,
+        "mem": 26040,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.6074e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2535e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000613212,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000814097,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4854e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160228,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112067,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000901837,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000624076,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 12755,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 5.2369e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000533825,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000406828,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1631,
+        "method": "finch_rle",
+        "time": 2.7562e-5,
+        "mem": 35224,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0542e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2692e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000613944,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000816855,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 4,
+        "method": "finch_rle",
+        "time": 5.5036e-5,
+        "mem": 9192,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160243,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112033,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.00088946,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000614689,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 3074,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 4.5741e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000522579,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00040693,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 2620,
+        "method": "finch_rle",
+        "time": 2.7496e-5,
+        "mem": 51048,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0469e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2165e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000613341,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000814917,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.484e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160291,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112176,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000942248,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000661712,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 1714,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 7.8268e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000531729,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407124,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1117,
+        "method": "finch_rle",
+        "time": 2.7502e-5,
+        "mem": 27000,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0536e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2398e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000613192,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000813867,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 11,
+        "method": "finch_rle",
+        "time": 5.4826e-5,
+        "mem": 9304,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160292,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112432,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000820406,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000574672,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 18771,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 2.771e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000521327,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000406951,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 824,
+        "method": "finch_rle",
+        "time": 2.756e-5,
+        "mem": 22312,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.0491e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2362e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.0006141,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000813996,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4915e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160114,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112032,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000866942,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000598823,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16789,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.5568e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000522872,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407178,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1673,
+        "method": "finch_rle",
+        "time": 2.7527e-5,
+        "mem": 35896,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.3879e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2447e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000611455,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000814152,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4893e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160191,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.000112452,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000916761,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.00063472,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 4868,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 6.0987e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000529891,
+        "mem": 1234369,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000407179,
+        "mem": 1234433,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1190,
+        "method": "finch_rle",
+        "time": 2.7471e-5,
+        "mem": 28168,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 8.4159e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 7.2638e-5,
+        "mem": 160096,
+        "operation": "erode2",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000614357,
+        "mem": 1234369,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000814269,
+        "mem": 1234433,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 0,
+        "method": "finch_rle",
+        "time": 5.4811e-5,
+        "mem": 9128,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 19998,
+        "method": "finch_bits",
+        "time": 0.000160295,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 19998,
+        "method": "finch_bits_mask",
+        "time": 0.00011205,
+        "mem": 160096,
+        "operation": "erode4",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "opencv",
+        "time": 0.000869155,
+        "mem": 1234361,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "finch",
+        "time": 0.000593588,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
+    },
+    {
+        "label": 16177,
+        "nnz": 1234321,
+        "method": "finch_rle",
+        "time": 3.78e-5,
+        "mem": 1234433,
+        "operation": "hist",
+        "dataset": "humansketches"
     }
 ]
