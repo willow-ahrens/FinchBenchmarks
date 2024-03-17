@@ -33,13 +33,13 @@ def generate_chart_for_operation(path, operation, baseline_method="spgemm_taco_g
 
         mtx = result["matrix"]
         method = result["method"].replace(".jl", "")
-        if method != baseline_method and mtx in baseline_times:
+        if mtx in baseline_times:
             time = result["time"]
             speedup = baseline_times[mtx] / time if time else 0
             data[method].append(speedup)
 
     methods = list(data.keys())
-    make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
+    make_grouped_bar_chart(methods, mtxs, data, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
 
 def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
