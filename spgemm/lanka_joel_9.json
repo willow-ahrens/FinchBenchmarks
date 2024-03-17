@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.8263254200000001,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "time": 0.609113395,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    }
+]

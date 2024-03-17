@@ -1,0 +1,14 @@
+[
+    {
+        "time": 1.072616497,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    },
+    {
+        "time": 0.83198882,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
+    }
+]
