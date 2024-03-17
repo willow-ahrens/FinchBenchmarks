@@ -41,6 +41,10 @@ s = ArgParseSettings("Run spgemm experiments.")
         arg_type = Int
         help = "number of iters to run"
         default = 20
+    "--kernels"
+        arg_type = String
+        help = "set of kernels to run"
+        default = "gustavson"
 end
 
 parsed_args = parse_args(ARGS, s)
@@ -52,6 +56,20 @@ datasets = Dict(
         "HB/arc130",
         #"HB/gre_216b",
         #"HB/bcspwr07",
+    ],
+    "small" => [
+        "SNAP/email-Eu-core",
+        "SNAP/CollegeMsg",
+        "SNAP/soc-sign-bitcoin-alpha",
+        "SNAP/ca-GrQc",
+        "SNAP/soc-sign-bitcoin-otc",
+        "SNAP/p2p-Gnutella08",
+        "SNAP/as-735",
+        "SNAP/p2p-Gnutella09",
+        "SNAP/wiki-Vote",
+        "SNAP/p2p-Gnutella06",
+        "SNAP/p2p-Gnutella05",
+        "SNAP/ca-HepTh"
     ],
     "joel" => [
         "FEMLAB/poisson3Da",
@@ -80,6 +98,23 @@ include("spgemm_finch.jl")
 include("spgemm_finch_par.jl")
 include("spgemm_taco.jl")
 
+methods = Dict(
+    "all" => [
+        "spgemm_taco_inner" => spgemm_taco_inner,
+        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
+        "spgemm_taco_outer" => spgemm_taco_outer,
+        "spgemm_finch_inner" => spgemm_finch_inner,
+        "spgemm_finch_gustavson" => spgemm_finch_gustavson,
+        "spgemm_finch_outer" => spgemm_finch_outer,
+        "spgemm_finch_outer_bytemap" => spgemm_finch_outer_bytemap,
+        "spgemm_finch_outer_dense" => spgemm_finch_outer_dense,
+    ],
+    "gustavson" => [
+        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
+        "spgemm_finch_gustavson" => spgemm_finch_gustavson,
+    ]
+)
+
 results = []
 
 batch = let 
@@ -96,16 +131,7 @@ for mtx in batch
     A = SparseMatrixCSC(matrixdepot(mtx))
     B = A
     C_ref = nothing
-    for (key, method) in [
-        "spgemm_taco_inner" => spgemm_taco_inner,
-        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
-        "spgemm_taco_outer" => spgemm_taco_outer,
-        "spgemm_finch_inner" => spgemm_finch_inner,
-        "spgemm_finch_gustavson" => spgemm_finch_gustavson,
-        "spgemm_finch_outer" => spgemm_finch_outer,
-        "spgemm_finch_outer_bytemap" => spgemm_finch_outer_bytemap,
-    ]
-    if key == "spgemm_taco_gustavson" || key == "spgemm_finch_gustavson"
+    for (key, method) in methods[parsed_args["kernels"]]
         @info "testing" key mtx
         res = method(A, B)
         C_ref = something(C_ref, res.C)
@@ -118,6 +144,5 @@ for mtx in batch
             "matrix" => mtx,
         ))
         write(parsed_args["output"], JSON.json(results, 4))
-    end
     end
 end

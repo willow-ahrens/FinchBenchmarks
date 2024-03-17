@@ -90,8 +90,16 @@ int main(int argc, char **argv) {
   int m = A.getDimension(0);
   int n = B.getDimension(1);
 
-  Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
+  Tensor<double> C;
 
+  if (schedule == "inner" || schedule == "gustavson") {
+    C = Tensor<double>("C", {m, n}, Format({Dense, Sparse}));
+  } else if (schedule == "outer") {
+    C = Tensor<double>("C", {m, n}, Format({Dense, Dense}));
+  } else {
+    std::cerr << "Invalid schedule" << std::endl;
+    exit(1);
+  }
 
   IndexVar i, j, k;
   IndexStmt stmt;
@@ -103,11 +111,9 @@ int main(int argc, char **argv) {
   } else if (schedule == "gustavson") {
     C(i, j) += A(i, k) * B(k, j);
   } else if (schedule == "outer") {
-    Tensor<double> D("C", {m, n}, Format({Dense, Dense})); // cond
-    D(i, j) += A(k, i) * B(k, j);
-    stmt = D.getAssignment().concretize();
+    C(i, j) += A(k, i) * B(k, j);
+    stmt = C.getAssignment().concretize();
     stmt = stmt.reorder({k,i,j});
-    C = D;
   } else {
     std::cerr << "Invalid schedule" << std::endl;
     exit(1);

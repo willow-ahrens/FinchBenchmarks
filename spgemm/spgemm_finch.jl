@@ -54,6 +54,19 @@ for z0 = (0, 0.0, false)
         end
         return C
     end)
+
+    w = Tensor(Dense(Dense(Element(z))))
+    eval(@finch_kernel function spgemm_finch_outer_kernel(C, w, A, BT)
+        w .= 0
+        for k=_, j=_, i=_
+            w[i, j] += A[i, k] * BT[j, k]
+        end
+        C .= 0
+        for j=_, i=_
+            C[i, j] = w[i, j]
+        end
+        return C
+    end)
 end
 
 function spgemm_finch_inner_measure(A, B)
@@ -98,6 +111,17 @@ function spgemm_finch_outer_bytemap_measure(A, B)
     return (time = time, C = C)
 end
 
+function spgemm_finch_outer_dense_measure(A, B)
+    z = default(A) * default(B) + false
+    C = Tensor(Dense(SparseList(Element(z))))
+    w = Tensor(Dense(Dense(Element(z))))
+    BT = Tensor(Dense(SparseList(Element(z))))
+    BT = copyto!(BT, swizzle(B, 2, 1))
+    time = @belapsed spgemm_finch_outer_kernel($C, $w, $A, $BT)
+    C = spgemm_finch_outer_kernel(C, w, A, BT).C
+    return (time = time, C = C)
+end
+
 function spgemm_finch(f, A, B)
     _A = Tensor(A)
     _B = Tensor(B)
@@ -110,3 +134,4 @@ spgemm_finch_inner(A, B) = spgemm_finch(spgemm_finch_inner_measure, A, B)
 spgemm_finch_gustavson(A, B) = spgemm_finch(spgemm_finch_gustavson_measure, A, B)
 spgemm_finch_outer(A, B) = spgemm_finch(spgemm_finch_outer_measure, A, B)
 spgemm_finch_outer_bytemap(A, B) = spgemm_finch(spgemm_finch_outer_bytemap_measure, A, B)
+spgemm_finch_outer_dense(A, B) = spgemm_finch(spgemm_finch_outer_dense_measure, A, B)
