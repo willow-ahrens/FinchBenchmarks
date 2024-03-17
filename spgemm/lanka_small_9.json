@@ -10,5 +10,41 @@
         "method": "spgemm_taco_gustavson",
         "kernel": "spgemm",
         "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.33507371900000005,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 2.630937413,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.112932492,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.933830915,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.255482547,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.480480559,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
     }
 ]

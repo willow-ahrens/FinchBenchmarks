@@ -40,5 +40,11 @@
         "method": "spgemm_finch_outer_bytemap",
         "kernel": "spgemm",
         "matrix": "SNAP/p2p-Gnutella08"
+    },
+    {
+        "time": 0.249098891,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella08"
     }
 ]
