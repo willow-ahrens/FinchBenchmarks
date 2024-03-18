@@ -146,6 +146,7 @@ include("spmv_finch_point_pattern_row_maj.jl")
 include("spmv_finch_blocked.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
+include("spmv_taco_row_maj.jl")
 include("spmv_suite_sparse.jl")
 
 dataset_tags = Dict(
@@ -172,6 +173,7 @@ methods = Dict(
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "unsymmetric" => [
@@ -181,6 +183,7 @@ methods = Dict(
         "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,  
         "blocked" => spmv_finch_blocked,  
     ],
@@ -188,6 +191,7 @@ methods = Dict(
         "julia_stdlib" => spmv_julia,
         "finch_pattern" => spmv_finch_pattern,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "unsymmetric_pattern" => [
@@ -195,6 +199,7 @@ methods = Dict(
         "finch_pattern_unsym" => spmv_finch_pattern_unsym,
         "finch_pattern_unsym_row_maj" => spmv_finch_pattern_unsym_row_maj,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "symmetric_quantized" => [
@@ -202,6 +207,7 @@ methods = Dict(
         "finch_int8" => spmv_finch_int8,
         "finch_vbl_int8" => spmv_finch_vbl_int8,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "permutation" => [
@@ -211,6 +217,7 @@ methods = Dict(
         "finch_point_pattern" => spmv_finch_point_pattern,
         "finch_point_pattern_row_maj" => spmv_finch_point_pattern_row_maj,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "banded" => [
@@ -220,6 +227,7 @@ methods = Dict(
         "finch_band_unsym" => spmv_finch_band_unsym,
         "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse,
     ],
     "blocked" => [
@@ -227,6 +235,7 @@ methods = Dict(
         "finch_unsym" => spmv_finch_unsym,
         "blocked" => spmv_finch_blocked,  
         "taco" => spmv_taco,
+        "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse, 
     ],
 )
