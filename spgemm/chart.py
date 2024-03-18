@@ -6,12 +6,11 @@ import os
 
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(path, operation, filename, baseline_method="spgemm_taco_gustavson", log_scale=False):
+def generate_chart_for_operation(path, operation, filename, method_order, matrix_order, baseline_method="spgemm_taco_gustavson", log_scale=False):
     # Load the results from the JSON file
     results = json.load(open(path, 'r'))
 
-    mtxs = []
-    data = defaultdict(list)
+    data = defaultdict(lambda: defaultdict(float))
     baseline_times = {}
 
     # Filter results by the specific operation and prepare data
@@ -21,41 +20,46 @@ def generate_chart_for_operation(path, operation, filename, baseline_method="spg
 
         mtx = result["matrix"]
         method = result["method"]
-        if mtx not in mtxs:
-            mtxs.append(mtx)
         if method == baseline_method:
             baseline_times[mtx] = result["time"]
 
-    # Calculate speedup relative to baseline
     for result in results:
         if result["kernel"] != operation:
             continue
 
         mtx = result["matrix"]
-        method = result["method"].replace(".jl", "")
-        if mtx in baseline_times:
+        method = result["method"]
+        if mtx in matrix_order and method in method_order:  # Only include specified matrices and methods
             time = result["time"]
-            speedup = baseline_times[mtx] / time if time else 0
-            data[method].append(speedup)
+            speedup = baseline_times[mtx] / time if mtx in baseline_times and time else 0
+            data[method][mtx] = speedup
 
-    methods = list(data.keys())
-    make_grouped_bar_chart(methods, mtxs, data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
+    filtered_method_order = [method for method in method_order if method in data]
+    filtered_matrix_order = [mtx for mtx in matrix_order if any(mtx in data[method] for method in method_order)]
+    
+    ordered_data = {
+        method: [data[method][mtx] for mtx in filtered_matrix_order if mtx in data[method]]
+        for method in filtered_method_order
+    }
+
+    make_grouped_bar_chart(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
 
 def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
-    width = 0.15  # Adjust width based on the number of labels
+    width = 0.1  # Adjust width based on the number of labels
     fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
 
     for i, label in enumerate(labels):
-        offset = width * i
+        offset = width * (i - len(labels)/2)  # Center bars around the tick
         ax.bar(x + offset, data[label], width, label=label)
+
+    ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
 
     if log_scale:
         ax.set_yscale('log')
-
     ax.set_ylabel(y_label)
     ax.set_title(title)
-    ax.set_xticks(x + width * (len(labels) - 1) / 2)
+    ax.set_xticks(x)
     ax.set_xticklabels(x_axis, rotation=45, ha="right")
     ax.legend()
 
@@ -66,6 +70,55 @@ def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Sp
 if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
-# Example usage, specify the filename when calling the function
-generate_chart_for_operation("lanka_joel.json", "spgemm", "lanka_joel_speedup.png", baseline_method="spgemm_taco_gustavson")
-generate_chart_for_operation("lanka_small.json", "spgemm", "lanka_small_speedup_log_scale.png", baseline_method="spgemm_taco_gustavson", log_scale=True)
+matrix_order = [
+"SNAP/email-Eu-core", 
+"SNAP/CollegeMsg", 
+"SNAP/soc-sign-bitcoin-alpha", 
+"SNAP/ca-GrQc", 
+"SNAP/soc-sign-bitcoin-otc", 
+"SNAP/p2p-Gnutella08", 
+"SNAP/as-735", 
+"SNAP/p2p-Gnutella09", 
+"SNAP/wiki-Vote", 
+"SNAP/p2p-Gnutella06", 
+"SNAP/p2p-Gnutella05", 
+"SNAP/ca-HepTh", 
+"FEMLAB/poisson3Da", 
+"SNAP/ca-CondMat", 
+"SNAP/email-Enron", 
+"SNAP/p2p-Gnutella31", 
+"Um/2cubes_sphere", 
+"Oberwolfach/filter3D", 
+"Williams/cop20k_A", 
+"vanHeukelum/cage12", 
+"Hamm/scircuit", 
+"JGD_Homology/m133-b3", 
+"Pajek/patents_main", 
+"Um/offshore", 
+"GHS_indef/mario002", 
+"SNAP/amazon0312", 
+"SNAP/web-Google", 
+"Williams/webbase-1M", 
+"SNAP/roadNet-CA", 
+"SNAP/cit-Patents"
+]
+
+method_order = [
+    "spgemm_taco_inner",
+    "spgemm_finch_inner",
+    "spgemm_taco_gustavson",
+    "spgemm_finch_gustavson",
+    "spgemm_taco_outer",
+    "spgemm_finch_outer_dense",
+    "spgemm_finch_outer",
+    "spgemm_finch_outer_bytemap",
+]
+
+# Example usage, specifying method and matrix order when calling the function
+generate_chart_for_operation("lanka_joel.json", "spgemm", "lanka_joel_speedup.png", 
+                             method_order, matrix_order,
+                             baseline_method="spgemm_taco_gustavson")
+
+generate_chart_for_operation("lanka_small.json", "spgemm", "lanka_small_speedup_log_scale.png", 
+                             method_order, matrix_order,
+                             baseline_method="spgemm_taco_gustavson", log_scale=True)

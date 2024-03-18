@@ -23,6 +23,21 @@ matrix_names = [
     "Pajek/patents_main"
 ]
 
+matrix_names = [
+    "SNAP/email-Eu-core",
+    "SNAP/CollegeMsg",
+    "SNAP/soc-sign-bitcoin-alpha",
+    "SNAP/ca-GrQc",
+    "SNAP/soc-sign-bitcoin-otc",
+    "SNAP/p2p-Gnutella08",
+    "SNAP/as-735",
+    "SNAP/p2p-Gnutella09",
+    "SNAP/wiki-Vote",
+    "SNAP/p2p-Gnutella06",
+    "SNAP/p2p-Gnutella05",
+    "SNAP/ca-HepTh"
+]
+
 matrices_with_info = []
 for name in matrix_names
     md = SparseMatrixCSC(matrixdepot(name))
