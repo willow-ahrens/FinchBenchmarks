@@ -6,7 +6,7 @@ import os
 
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(path, operation, baseline_method="spgemm_taco_gustavson", log_scale = False):
+def generate_chart_for_operation(path, operation, filename, baseline_method="spgemm_taco_gustavson", log_scale=False):
     # Load the results from the JSON file
     results = json.load(open(path, 'r'))
 
@@ -39,9 +39,9 @@ def generate_chart_for_operation(path, operation, baseline_method="spgemm_taco_g
             data[method].append(speedup)
 
     methods = list(data.keys())
-    make_grouped_bar_chart(methods, mtxs, data, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
+    make_grouped_bar_chart(methods, mtxs, data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
 
-def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
+def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
     width = 0.15  # Adjust width based on the number of labels
     fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
@@ -60,13 +60,12 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     ax.legend()
 
     plt.tight_layout()
-    fig_file = f"{title.lower().replace(' ', '_').replace('-', '_')}.png"
-    plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200)
+    plt.savefig(CHARTS_DIRECTORY + filename, dpi=200)
 
 # Ensure the charts directory exists or create it
 if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
-# Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("lanka_joel.json", "spgemm", baseline_method="spgemm_taco_gustavson")
-generate_chart_for_operation("lanka_small.json", "spgemm", baseline_method="spgemm_taco_gustavson", log_scale=True)
+# Example usage, specify the filename when calling the function
+generate_chart_for_operation("lanka_joel.json", "spgemm", "lanka_joel_speedup.png", baseline_method="spgemm_taco_gustavson")
+generate_chart_for_operation("lanka_small.json", "spgemm", "lanka_small_speedup_log_scale.png", baseline_method="spgemm_taco_gustavson", log_scale=True)
