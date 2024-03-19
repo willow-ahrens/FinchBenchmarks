@@ -30,96 +30,96 @@ end
 parsed_args = parse_args(ARGS, s)
 
 datasets = Dict(
-    "vuduc_symmetric" => [
-        "Boeing/ct20stif",
-        "Simon/olafu",
-        "Boeing/bcsstk35",
-        "Boeing/crystk02",
-        "Boeing/crystk03",
-        "Nasa/nasasrb",
-        "Rothberg/3dtube",
-        "Simon/raefsky4",
-        "Mulvey/finan512",
-        "Pothen/pwt",
-        "Cote/vibrobox",
-        "HB/saylr4",
-        "Gupta/gupta1"
-    ],
-    "vuduc_unsymmetric" => [
-        "Simon/raefsky3",
-        "Simon/venkat01",
-        "FIDAP/ex11",
-        "Zitney/rdist1",
-        "HB/orani678",
-        "Goodwin/rim",
-        "Hamm/memplus",
-        "HB/gemat11",
-        "Mallya/lhr10",
-        "Grund/bayer02",
-        "Grund/bayer10",
-        "Brethour/coater2",
-        "ATandT/onetone2",
-        "Wang/wang4",
-        "HB/lnsp3937",
-        "HB/sherman5",
-        "HB/sherman3",
-        "Shyy/shyy161",
-        "Wang/wang3",
-    ],
-    "willow_symmetric" => [
-        "GHS_indef/exdata_1",
-        # "Janna/Emilia_923",
-        # "Janna/Geo_1438",
-        "TAMU_SmartGridCenter/ACTIVSg70K"
-    ],
-    "willow_unsymmetric" => [
-        "Goodwin/Goodwin_071", # b = 4, 4.4x slowdown
-        "Hamm/scircuit", # b = 3, 4.8x slowdown
-        # "LPnetlib/lpi_gran",
-        "Norris/heart3", # b = 8, 1.6x slowdown
-        "Rajat/rajat26", # b = 2, 4.0x slowdown
-        "TSOPF/TSOPF_RS_b678_c1" # b = 5, 1.2x slowdown
-    ],
-    "permutation" => [
-        "permutation_synthetic"
-    ], 
-    "graph_symmetric" => [
-        "SNAP/email-Enron", 
-        "SNAP/as-735",
-        "SNAP/Oregon-1",
-        "Newman/as-22july06",
-        "SNAP/loc-Brightkite",
-        "SNAP/as-Skitter"
-    ],
-    "graph_unsymmetric" => [
-        "SNAP/soc-Epinions1",
-        "SNAP/wiki-Vote",
-        "SNAP/email-EuAll",
-        "SNAP/cit-HepPh",
-        "SNAP/web-NotreDame",
-        "SNAP/amazon0302",
-        "SNAP/p2p-Gnutella08",
-        "SNAP/email-Eu-core",
-    ],
-    "banded" => [
-        "toeplitz_small_band",
-        "toeplitz_medium_band",
-        "toeplitz_large_band",
-    ],
-    "taco_symmetric" => [
-        "HB/bcsstk17",
-        "Williams/pdb1HYS",
-        "Williams/cant",
-        "Williams/consph",
-        # "Williams/cop20k_A",
-        "DNVS/shipsec1",
-        "Boeing/pwtk",
-    ],
-    "taco_unsymmetric" => [
-        "Bova/rma10"
-    ],
+    # "vuduc_symmetric" => [
+    #     "Boeing/ct20stif",
+    #     "Simon/olafu",
+    #     "Boeing/bcsstk35",
+    #     "Boeing/crystk02",
+    #     "Boeing/crystk03",
+    #     "Nasa/nasasrb",
+    #     "Rothberg/3dtube",
+    #     "Simon/raefsky4",
+    #     "Mulvey/finan512",
+    #     "Pothen/pwt",
+    #     "Cote/vibrobox",
+    #     "HB/saylr4",
+    #     "Gupta/gupta1"
+    # ],
+    # "vuduc_unsymmetric" => [
+    #     "Simon/raefsky3",
+    #     "Simon/venkat01",
+    #     "FIDAP/ex11",
+    #     "Zitney/rdist1",
+    #     "HB/orani678",
+    #     "Goodwin/rim",
+    #     "Hamm/memplus",
+    #     "HB/gemat11",
+    #     "Mallya/lhr10",
+    #     "Grund/bayer02",
+    #     "Grund/bayer10",
+    #     "Brethour/coater2",
+    #     "ATandT/onetone2",
+    #     "Wang/wang4",
+    #     "HB/lnsp3937",
+    #     "HB/sherman5",
+    #     "HB/sherman3",
+    #     "Shyy/shyy161",
+    #     "Wang/wang3",
+    # ],
+    # "willow_symmetric" => [
+    #     "GHS_indef/exdata_1",
+    #     # "Janna/Emilia_923",
+    #     # "Janna/Geo_1438",
+    #     "TAMU_SmartGridCenter/ACTIVSg70K"
+    # ],
+    # "willow_unsymmetric" => [
+    #     "Goodwin/Goodwin_071", # b = 4, 4.4x slowdown
+    #     "Hamm/scircuit", # b = 3, 4.8x slowdown
+    #     # "LPnetlib/lpi_gran",
+    #     "Norris/heart3", # b = 8, 1.6x slowdown
+    #     "Rajat/rajat26", # b = 2, 4.0x slowdown
+    #     "TSOPF/TSOPF_RS_b678_c1" # b = 5, 1.2x slowdown
+    # ],
+    # "permutation" => [
+    #     "permutation_synthetic"
+    # ], 
+    # "graph_symmetric" => [
+    #     "SNAP/email-Enron", 
+    #     "SNAP/as-735",
+    #     "SNAP/Oregon-1",
+    #     "Newman/as-22july06",
+    #     "SNAP/loc-Brightkite",
+    #     "SNAP/as-Skitter"
+    # ],
+    # "graph_unsymmetric" => [
+    #     "SNAP/soc-Epinions1",
+    #     "SNAP/wiki-Vote",
+    #     "SNAP/email-EuAll",
+    #     "SNAP/cit-HepPh",
+    #     "SNAP/web-NotreDame",
+    #     "SNAP/amazon0302",
+    #     "SNAP/p2p-Gnutella08",
+    #     "SNAP/email-Eu-core",
+    # ],
+    # "banded" => [
+    #     "toeplitz_small_band",
+    #     "toeplitz_medium_band",
+    #     "toeplitz_large_band",
+    # ],
+    # "taco_symmetric" => [
+    #     "HB/bcsstk17",
+    #     "Williams/pdb1HYS",
+    #     "Williams/cant",
+    #     "Williams/consph",
+    #     # "Williams/cop20k_A",
+    #     "DNVS/shipsec1",
+    #     "Boeing/pwtk",
+    # ],
+    # "taco_unsymmetric" => [
+    #     "Bova/rma10"
+    # ],
     "blocked" => [
-        "blocked_8x8"
+        "blocked_10x10"
     ]
 )
 
@@ -233,7 +233,8 @@ methods = Dict(
     "blocked" => [
         "julia_stdlib" => spmv_julia,
         "finch_unsym" => spmv_finch_unsym,
-        "blocked" => spmv_finch_blocked,  
+        "finch_vbl_unsym" => spmv_finch_vbl_unsym,
+        "finch_blocked" => spmv_finch_blocked,  
         "taco" => spmv_taco,
         "taco_row_maj" => spmv_taco_row_maj,
         "suite_sparse" => spmv_suite_sparse, 
@@ -258,7 +259,7 @@ for (dataset, mtxs) in datasets
                 A = SparseMatrixCSC(banded_matrix(10000, 100))
             end
         elseif dataset == "blocked"
-            A = SparseMatrixCSC(blocked_matrix(10000, 8))
+            A = SparseMatrixCSC(blocked_matrix(10000, 10))
         else
             A = SparseMatrixCSC(matrixdepot(mtx))
         end

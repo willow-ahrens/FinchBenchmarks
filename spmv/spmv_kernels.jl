@@ -13,6 +13,8 @@ diag = Tensor(Dense(Element(0.0)))
 diag_int8 = Tensor(Dense(Element(Int8(0))))
 diag_pattern = Tensor(Dense(Pattern()))
 y_j = Scalar(0.0)
+block_A = Tensor(Dense(SparseList(Dense(Dense(Element(0.0))))))
+block_x = Tensor(Dense(Dense(Element(0.0))))
 
 # 0.92x slowdown
 println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x, y_j)
@@ -298,6 +300,21 @@ print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_8x8(y, block_A, 
             for j = 1:8
                 for i = 1:8
                     let _i = (I - 1) * 8 + i
+                        y[_i] += block_A[i, j, I, J] * block_x[j, J]
+                    end
+                end
+            end
+        end
+    end
+end)
+
+print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_10x10(y, block_A, block_x)
+    y .= 0
+    for J = _
+        for I = _
+            for j = 1:10
+                for i = 1:10
+                    let _i = (I - 1) * 10 + i
                         y[_i] += block_A[i, j, I, J] * block_x[j, J]
                     end
                 end
