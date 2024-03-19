@@ -17,7 +17,7 @@ function duckdb_triangle_count(A, B, C)
                 Join C on C.k=B.k AND C.i=A.i"
     println("DuckDB Triangle Output: ", DuckDB.execute(dbconn, query_str))
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)
-    return duckdb_time
+    return duckdb_time, only(DuckDB.execute(dbconn, query_str))[:v]
 end
 
 function finch_triangle(e1, e2, e3)
@@ -73,7 +73,7 @@ function duckdb_mm_sum(A, B)
                 FROM A
                 Join B on A.j=B.j"
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)
-    return duckdb_time
+    return duckdb_time, only(DuckDB.execute(dbconn, query_str))[:v]
 end
 
 function finch_mm_sum(e1, e2)
@@ -202,7 +202,7 @@ function finch_mm_proper_inner(e1, e2)
         AT = Tensor(Dense(SparseList(Element(z))))
         @finch mode=fastfinch (w .= 0; for k=_, i=_; w[k, i] = $e1[i, k] end)
         @finch mode=fastfinch (AT .= 0; for i=_, k=_; AT[k, i] = w[k, i] end)
-        @finch (C .= 0; for j=_, i=_, k=_; C[i, j] += AT[k, gallop(i)] * $e2[k, gallop(j)] end)
+        @finch (C .= 0; for j=_, i=_, k=_; C[i, j] += AT[k, i] * $e2[k, j] end)
     end
 end
 
@@ -218,33 +218,26 @@ function duckdb_mm(A, B)
     return duckdb_time
 end
 
-main_edge = Tensor(matrixdepot("SNAP/soc-Epinions1"))
-t_duckdb = duckdb_triangle_count(main_edge, main_edge, main_edge)
-t_finch = finch_triangle(main_edge, main_edge, main_edge)
+main_edge = Tensor(matrixdepot("SNAP/com-LiveJournal"))
+t_duckdb, t_duckdb_count = duckdb_triangle_count(main_edge, main_edge, main_edge)
 t_finch = finch_triangle(main_edge, main_edge, main_edge)
 t_finch_gallop = finch_triangle_gallop(main_edge, main_edge, main_edge)
-t_finch_gallop = finch_triangle_gallop(main_edge, main_edge, main_edge)
-t_finch_dcsc_gallop = finch_triangle_dcsc_gallop(main_edge, main_edge, main_edge)
 t_finch_dcsc_gallop = finch_triangle_dcsc_gallop(main_edge, main_edge, main_edge)
 println("t_duckdb: $(t_duckdb)")
 println("t_finch: $(t_finch)")
 println("t_finch_gallop: $(t_finch_gallop)")
 println("t_finch_dcsc_gallop: $(t_finch_dcsc_gallop)")
 
-mm_duckdb = duckdb_mm_sum(main_edge, main_edge)
-mm_finch = finch_mm_sum(main_edge, main_edge)
-mm_finch = finch_mm_sum(main_edge, main_edge)
-mm_finch_materialize = finch_mm_sum_mat(main_edge, main_edge)
-mm_finch_materialize = finch_mm_sum_mat(main_edge, main_edge)
-println("mmsum_finch: $(mm_finch)")
+mmsum_duckdb, mmsum_duckdb_count = duckdb_mm_sum(main_edge, main_edge)
+mmsum_finch = finch_mm_sum(main_edge, main_edge)
+mmsum_finch_materialize = finch_mm_sum_mat(main_edge, main_edge)
+println("mmsum_duckdb: $(mmsum_duckdb)")
+println("mmsum_finch: $(mmsum_finch)")
 println("mmsum_finch_materialize: $(mm_finch_materialize)")
 
 mm_duckdb = duckdb_mm(main_edge, main_edge)
 mm_finch = finch_mm(main_edge, main_edge)
-mm_finch = finch_mm(main_edge, main_edge)
 mm_finch_gustavsons = finch_mm_gustavsons(main_edge, main_edge)
-mm_finch_gustavsons = finch_mm_gustavsons(main_edge, main_edge)
-mm_finch_dcsc = finch_mm_dcsc(main_edge, main_edge)
 mm_finch_dcsc = finch_mm_dcsc(main_edge, main_edge)
 println("mm_duckdb: $(mm_duckdb)")
 println("mm_finch: $(mm_finch)")
