@@ -81,16 +81,17 @@ def all_formats_chart(ordered_by_format=False):
 
     ordered_mtxs = [mtx for mtx, _ in ordered_data]
     labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
-    methods = ["finch", "taco", "julia_stdlib", "suite_sparse"]
+    methods = ["finch", "julia_stdlib", "suite_sparse"]
+    colors = {"finch": "tab:blue", "julia_stdlib": "tab:orange", "suite_sparse": "tab:green"}
 
     if ordered_by_format:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled")
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, title="SpMV Performance (Faster than TACO)")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, title="SpMV Performance (Slower than TACO)")
+        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
+        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled")
+        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance (Faster than TACO)")
+        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance (Slower than TACO)")
     else:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, title="SpMV Performance Sorted (Faster than TACO)")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, title="SpMV Performance Sorted (Slower than TACO)")
+        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance Sorted (Faster than TACO)")
+        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance Sorted (Slower than TACO)")
     
 
     # for mtx in mtxs:
@@ -176,17 +177,21 @@ def all_formats_for_matrix_chart(matrix):
     plt.close() 
 
 
-def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}):
+def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}):
     x = np.arange(len(data[labels[0]]))
     width = 0.2 
     multiplier = 0
     max_height = 0
 
     fig, ax = plt.subplots()
-    for label, label_data in data.items():
+    for label in labels:
+        label_data = data[label]
         max_height = max(max_height, max(label_data))
         offset = width * multiplier
-        rects = ax.bar(x + offset, label_data, width, label=label)
+        if colors:
+            rects = ax.bar(x + offset, label_data, width, label=label, color=colors[label])
+        else:
+            rects = ax.bar(x + offset, label_data, width, label=label)
         bar_labels = bar_labels_dict[label] if (label in bar_labels_dict) else [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
         ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5, rotation=90)
         multiplier += 1
@@ -197,6 +202,8 @@ def make_grouped_bar_chart(labels, x_axis, data, labeled_groups = [], title = ""
     ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
     ax.legend(loc='upper left', ncols=4)
     ax.set_ylim(0, max_height + 0.5)
+
+    plt.plot([0, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75)
 
     fig_file = title.lower().replace(" ", "_") + ".png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200, bbox_inches="tight")
