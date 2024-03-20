@@ -1,4 +1,5 @@
 *.o
+*.DS_Store
 cache/*
 spmv/spmv
 spmv/spmv_taco
