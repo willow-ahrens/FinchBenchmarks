@@ -24,6 +24,7 @@ FORMAT_ORDER = {
     "finch_point_row_maj": -14,
     "finch_point_pattern": -15,
     "finch_point_pattern_row_maj": -16,
+    "finch_blocked": -17,
 }
 FORMAT_LABELS = {
     "finch": "Symmetric SparseList",
@@ -42,6 +43,7 @@ FORMAT_LABELS = {
     "finch_point_row_maj": "SparsePoint (Row-Major)",
     "finch_point_pattern": "SparsePoint Pattern",
     "finch_point_pattern_row_maj": "SparsePoint Pattern (Row-Major)",
+    "finch_blocked": "4D-Blocked"
 }
 
 def all_formats_chart(ordered_by_format=False):
@@ -203,7 +205,7 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
     ax.legend(loc='upper left', ncols=4)
     ax.set_ylim(0, max_height + 0.5)
 
-    plt.plot([0, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75)
+    plt.plot([-1, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75)
 
     fig_file = title.lower().replace(" ", "_") + ".png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200, bbox_inches="tight")
@@ -212,19 +214,19 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
 
 all_formats_chart()
 all_formats_chart(ordered_by_format=True)
-method_to_ref_comparison_chart("finch", "taco", title="Finch SparseList Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
-method_to_ref_comparison_chart("finch_unsym_row_maj", "taco", title="Finch SparseList Row Major SpMV Performance")
-method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
-method_to_ref_comparison_chart("finch_vbl_unsym_row_maj", "taco", title="Finch SparseVBL Row Major SpMV Performance")
-method_to_ref_comparison_chart("finch_band", "taco", title="Finch SparseBand Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_band_unsym", "taco", title="Finch SparseBand SpMV Performance")
-method_to_ref_comparison_chart("finch_band_unsym_row_maj", "taco", title="Finch SparseBand Row Major SpMV Performance")
-method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList Pattern Symmetric SpMV Performance")
-method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
-method_to_ref_comparison_chart("finch_pattern_unsym_row_maj", "taco", title="Finch SparseList Pattern Row Major SpMV Performance")
-method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
-method_to_ref_comparison_chart("finch_point_row_maj", "taco", title="Finch SparsePoint Row Major SpMV Performance")
-method_to_ref_comparison_chart("finch_point_pattern", "taco", title="Finch SparsePoint Pattern SpMV Performance")
-method_to_ref_comparison_chart("finch_point_pattern_row_maj", "taco", title="Finch SparsePoint Pattern Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch", "taco", title="Finch SparseList Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_unsym", "taco", title="Finch SparseList SpMV Performance")
+# method_to_ref_comparison_chart("finch_unsym_row_maj", "taco", title="Finch SparseList Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl", "taco", title="Finch SparseVBL Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl_unsym", "taco", title="Finch SparseVBL SpMV Performance")
+# method_to_ref_comparison_chart("finch_vbl_unsym_row_maj", "taco", title="Finch SparseVBL Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_band", "taco", title="Finch SparseBand Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_band_unsym", "taco", title="Finch SparseBand SpMV Performance")
+# method_to_ref_comparison_chart("finch_band_unsym_row_maj", "taco", title="Finch SparseBand Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern", "taco", title="Finch SparseList Pattern Symmetric SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern_unsym", "taco", title="Finch SparseList Pattern SpMV Performance")
+# method_to_ref_comparison_chart("finch_pattern_unsym_row_maj", "taco", title="Finch SparseList Pattern Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_point", "taco", title="Finch SparsePoint SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_row_maj", "taco", title="Finch SparsePoint Row Major SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_pattern", "taco", title="Finch SparsePoint Pattern SpMV Performance")
+# method_to_ref_comparison_chart("finch_point_pattern_row_maj", "taco", title="Finch SparsePoint Pattern Row Major SpMV Performance")
