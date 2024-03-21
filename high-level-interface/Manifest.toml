@@ -2,7 +2,7 @@
 
 julia_version = "1.9.2"
 manifest_format = "2.0"
-project_hash = "bf6ce8f8d901cd20b66cb9ee8581c990cd378055"
+project_hash = "b3df4b94fd20e941f2f87f3cd3627e55ac89c306"
 
 [[deps.AbstractTrees]]
 git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
@@ -130,7 +130,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.Finch]]
 deps = ["AbstractTrees", "CIndices", "Compat", "DataStructures", "JSON", "LinearAlgebra", "PrecompileTools", "Random", "Requires", "RewriteTools", "SyntaxInterface"]
-git-tree-sha1 = "1d26f93c5bebc0f272aafd914a6627a649e04d3e"
+git-tree-sha1 = "015c3fabf56ced6389ec364292f77fd48253f680"
+repo-rev = "kbd-remove-hl-materializing"
+repo-url = "https://github.com/willow-ahrens/Finch.jl.git"
 uuid = "9177782c-1635-4eb9-9bfb-d9dfa25e6bce"
 version = "0.6.19"
 
