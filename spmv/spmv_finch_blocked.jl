@@ -133,7 +133,7 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                                 block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_4
                                 block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_4
                                 block_x_lvl_3_val = block_x_lvl_2_val[block_x_lvl_2_q]
-                                for i_5 = 1:block_A_lvl_4.shape
+                                for i_5 = 1:10
                                     block_A_lvl_4_q = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_5
                                     block_A_lvl_5_val = block_A_lvl_4_val[block_A_lvl_4_q]
                                     _i_2 = i_5 + 10 * (block_A_lvl_2_i + -1)
@@ -149,7 +149,7 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                                     block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_5
                                     block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_5
                                     block_x_lvl_3_val_2 = block_x_lvl_2_val[block_x_lvl_2_q]
-                                    for i_7 = 1:block_A_lvl_4.shape
+                                    for i_7 = 1:10
                                         block_A_lvl_4_q_2 = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_7
                                         block_A_lvl_5_val_2 = block_A_lvl_4_val[block_A_lvl_4_q_2]
                                         _i_4 = i_7 + 10 * (phase_stop_3 + -1)
