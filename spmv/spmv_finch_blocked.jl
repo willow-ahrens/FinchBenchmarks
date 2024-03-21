@@ -91,10 +91,11 @@ function assign_block_x(x::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, I
         end
 end
 
-function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}, block_A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}}}, block_x::Tensor{DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}})
+function blocked_spmv_kernel_10x10(block_y::Tensor{DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}, block_A::Tensor{DenseLevel{Int64, SparseListLevel{Int64, Vector{Int64}, Vector{Int64}, DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}}}}, block_x::Tensor{DenseLevel{Int64, DenseLevel{Int64, ElementLevel{0.0, Float64, Int64, Vector{Float64}}}}})
     @inbounds begin
-            y_lvl = y.lvl
-            y_lvl_val = y_lvl.lvl.val
+            block_y_lvl = block_y.lvl
+            block_y_lvl_2 = block_y_lvl.lvl
+            block_y_lvl_2_val = block_y_lvl_2.lvl.val
             block_A_lvl = block_A.lvl
             block_A_lvl_2 = block_A_lvl.lvl
             block_A_lvl_ptr = block_A_lvl_2.ptr
@@ -109,8 +110,9 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
             10 == block_A_lvl_3.shape || throw(DimensionMismatch("mismatched dimension limits ($(10) != $(block_A_lvl_3.shape))"))
             10 == block_x_lvl_2.shape || throw(DimensionMismatch("mismatched dimension limits ($(10) != $(block_x_lvl_2.shape))"))
             block_x_lvl.shape == block_A_lvl.shape || throw(DimensionMismatch("mismatched dimension limits ($(block_x_lvl.shape) != $(block_A_lvl.shape))"))
-            Finch.resize_if_smaller!(y_lvl_val, y_lvl.shape)
-            Finch.fill_range!(y_lvl_val, 0.0, 1, y_lvl.shape)
+            pos_stop = block_A_lvl_4.shape * block_A_lvl_2.shape
+            Finch.resize_if_smaller!(block_y_lvl_2_val, pos_stop)
+            Finch.fill_range!(block_y_lvl_2_val, 0.0, 1, pos_stop)
             for J_4 = 1:block_x_lvl.shape
                 block_x_lvl_q = (1 - 1) * block_x_lvl.shape + J_4
                 block_A_lvl_q = (1 - 1) * block_A_lvl.shape + J_4
@@ -121,7 +123,7 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                 else
                     block_A_lvl_2_i1 = 0
                 end
-                phase_stop = min(block_A_lvl_2_i1, block_A_lvl_2.shape)
+                phase_stop = min(block_A_lvl_2.shape, block_A_lvl_2_i1)
                 if phase_stop >= 1
                     if block_A_lvl_idx[block_A_lvl_2_q] < 1
                         block_A_lvl_2_q = Finch.scansearch(block_A_lvl_idx, 1, block_A_lvl_2_q, block_A_lvl_2_q_stop - 1)
@@ -129,32 +131,32 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                     while true
                         block_A_lvl_2_i = block_A_lvl_idx[block_A_lvl_2_q]
                         if block_A_lvl_2_i < phase_stop
+                            block_y_lvl_q = (1 - 1) * block_A_lvl_2.shape + block_A_lvl_2_i
                             for j_4 = 1:10
                                 block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_4
                                 block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_4
                                 block_x_lvl_3_val = block_x_lvl_2_val[block_x_lvl_2_q]
-                                for i_5 = 1:10
-                                    block_A_lvl_4_q = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_5
+                                for i_4 = 1:10
+                                    block_y_lvl_2_q = (block_y_lvl_q - 1) * block_A_lvl_4.shape + i_4
+                                    block_A_lvl_4_q = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_4
                                     block_A_lvl_5_val = block_A_lvl_4_val[block_A_lvl_4_q]
-                                    _i_2 = i_5 + 10 * (block_A_lvl_2_i + -1)
-                                    y_lvl_q = (1 - 1) * y_lvl.shape + _i_2
-                                    y_lvl_val[y_lvl_q] += block_A_lvl_5_val * block_x_lvl_3_val
+                                    block_y_lvl_2_val[block_y_lvl_2_q] += block_A_lvl_5_val * block_x_lvl_3_val
                                 end
                             end
                             block_A_lvl_2_q += 1
                         else
                             phase_stop_3 = min(block_A_lvl_2_i, phase_stop)
                             if block_A_lvl_2_i == phase_stop_3
+                                block_y_lvl_q = (1 - 1) * block_A_lvl_2.shape + phase_stop_3
                                 for j_5 = 1:10
                                     block_x_lvl_2_q = (block_x_lvl_q - 1) * block_x_lvl_2.shape + j_5
                                     block_A_lvl_3_q = (block_A_lvl_2_q - 1) * block_A_lvl_3.shape + j_5
                                     block_x_lvl_3_val_2 = block_x_lvl_2_val[block_x_lvl_2_q]
-                                    for i_7 = 1:10
-                                        block_A_lvl_4_q_2 = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_7
+                                    for i_5 = 1:10
+                                        block_y_lvl_2_q_2 = (block_y_lvl_q - 1) * block_A_lvl_4.shape + i_5
+                                        block_A_lvl_4_q_2 = (block_A_lvl_3_q - 1) * block_A_lvl_4.shape + i_5
                                         block_A_lvl_5_val_2 = block_A_lvl_4_val[block_A_lvl_4_q_2]
-                                        _i_4 = i_7 + 10 * (phase_stop_3 + -1)
-                                        y_lvl_q = (1 - 1) * y_lvl.shape + _i_4
-                                        y_lvl_val[y_lvl_q] += block_A_lvl_5_val_2 * block_x_lvl_3_val_2
+                                        block_y_lvl_2_val[block_y_lvl_2_q_2] += block_A_lvl_5_val_2 * block_x_lvl_3_val_2
                                     end
                                 end
                                 block_A_lvl_2_q += 1
@@ -164,20 +166,20 @@ function blocked_spmv_kernel_10x10(y::Tensor{DenseLevel{Int64, ElementLevel{0.0,
                     end
                 end
             end
-            resize!(y_lvl_val, y_lvl.shape)
+            resize!(block_y_lvl_2_val, block_A_lvl_4.shape * block_A_lvl_2.shape)
             nothing
         end
 end
 
-function spmv_finch_blocked_helper(y, block_A, block_x, b)
-    blocked_spmv_kernel_10x10(y, block_A, block_x)
-    y
+function spmv_finch_blocked_helper(block_y, block_A, block_x, b)
+    blocked_spmv_kernel_10x10(block_y, block_A, block_x)
+    block_y
 end
 
 function spmv_finch_blocked(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseList(Element(0.0))), A)
-    y = Ref{Any}()
+    # y = Ref{Any}()
 
     b = 10
     (n, m) = size(A)
@@ -203,6 +205,17 @@ function spmv_finch_blocked(y, A, x)
     end
     # assign_block_x(x, block_x, b)
 
-    time = @belapsed $y[] = spmv_finch_blocked_helper($_y, $block_A, $block_x, $b)
-    return (;time = time, y = y[])
+    block_y = Tensor(Dense(Dense(Element(0.0))), b, fld1(n, b))
+    time = @belapsed spmv_finch_blocked_helper($block_y, $block_A, $block_x, $b)
+    y = Tensor(Dense(Element(0.0)), n)
+    @finch mode=fastfinch begin
+        y .= 0
+        for I = _, i = _
+            let _i = (I - 1) * 10 + i
+                y[_i] = block_y[i, I]
+            end
+        end
+    end
+
+    return (;time = time, y = y)
 end
