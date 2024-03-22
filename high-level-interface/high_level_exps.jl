@@ -159,8 +159,11 @@ function hl_elementwise(A, B, C)
 end
 
 function hl_elementwise_unfused(A, B, C)
-    elementwise_time = @belapsed A .+ B .* C
-    return elementwise_time, A .+ B .* C
+    elementwise_time = @belapsed begin res = $A .+ $B; res = res .* $C end seconds=10 samples=3
+    res = A .+ B
+    res = res .* C
+    println(typeof(res))
+    return elementwise_time, res
 end
 
 function duckdb_elementwise(A, B, C)
@@ -168,16 +171,15 @@ function duckdb_elementwise(A, B, C)
     load_to_duck_db(dbconn, A, ["i", "j"], "A")
     load_to_duck_db(dbconn, B, ["i", "j"], "B")
     load_to_duck_db(dbconn, C, ["i", "j"], "C")
-    query_str = "Select AB.v*C.v, C.i, C.j
-                FROM C,
-                (SELECT (A.v + B.v) as v, A.i, A.j
-                    FROM A
-                    Join B on A.j=B.j and A.i = B.i) as AB
-                WHERE AB.i = C.i AND AB.j = C.j"
-
-    duckdb_result = DuckDB.execute(dbconn, query_str)
+    query_str = "Select AB.v * C.v as v, C.i, C.j
+                FROM C
+                INNER JOIN (SELECT COALESCE(A.v, 0) + COALESCE(B.v, 0) as v, COALESCE(A.i, B.i) as i, COALESCE(A.j, B.j) as j
+                            FROM A
+                            FULL OUTER JOIN B on A.j = B.j and A.i = B.i) as AB
+                ON AB.i = C.i AND AB.j = C.j"
+    duckdb_count = only(DuckDB.execute(dbconn, "SELECT COUNT(*) as c FROM ($query_str) where v != 0"))[:c]
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
-    return duckdb_time, duckdb_result
+    return duckdb_time, duckdb_count
 end
 
 function hl_SDMM(A, B, C)
@@ -195,9 +197,9 @@ function duckdb_SDMM(A, B, C)
                 WHERE A.j = B.j AND B.k = C.k AND A.i = C.i
                 GROUP BY C.i, C.k"
 
-    duckdb_result = DuckDB.execute(dbconn, query_str)
+    duckdb_count = only(DuckDB.execute(dbconn, "SELECT COUNT(*) as c FROM ($query_str) where v != 0"))[:c]
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
-    return duckdb_time, duckdb_result
+    return duckdb_time, duckdb_count
 end
 
 make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
@@ -205,10 +207,10 @@ make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
                                                         "operation" => operation,
                                                         "matrix" => matrix,
                                                         )
-
 matrices = datasets["yang"]
 graph_matrices = ["SNAP/soc-Epinions1", "SNAP/email-EuAll", "SNAP/ca-AstroPh"]
 results = []
+#=
 for matrix in graph_matrices
     main_edge = Tensor(SparseMatrixCSC(matrixdepot(matrix)))
     t_hl, t_hl_count = hl_triangle(main_edge, main_edge, main_edge)
@@ -239,20 +241,27 @@ for matrix in graph_matrices
     push!(results, make_entry(mm_duckdb, "DuckDB", "AA'", matrix))
     println("mm_duckdb: $(mm_duckdb)")
 end
-
+ =#
 elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
 
 for (A,B,C) in elementwise_matrices
-    A = Tensor(SparseMatrixCSC(matrixdepot(A)))
-    B = Tensor(SparseMatrixCSC(matrixdepot(B)))
-    C = Tensor(SparseMatrixCSC(matrixdepot(C)))
+    A_t = Tensor(SparseMatrixCSC(matrixdepot(A)))
+    B_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
+    C_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
 
-    element_hl, element_hl_count = hl_elementwise(A, B, C)
+    element_hl, element_hl_result = hl_elementwise(A_t, B_t, C_t)
     push!(results, make_entry(element_hl, "Finch", "(A.+B).* C", "($A,$B,$C)"))
+#    println(element_hl_result)
     println("element_hl: $(element_hl)")
-    element_duckdb, element_duckdb_result = duckdb_elementwise(A, B, C)
+    println("element_hl nnz: $(countstored(element_hl_result))")
+    element_hl_unfused, element_hl_unfused_result = hl_elementwise_unfused(A_t, B_t, C_t)
+    push!(results, make_entry(element_hl_unfused, "Finch (Unfused)", "(A.+B).* C", "($A,$B,$C)"))
+    println("element_hl_unfused: $(element_hl_unfused)")
+    println("element_hl_unfused nnz: $(countstored(element_hl_unfused_result))")
+    element_duckdb, element_duckdb_nnz = duckdb_elementwise(A_t, B_t, C_t)
     push!(results, make_entry(element_duckdb, "DuckDB", "(A.+B).* C",  "($A,$B,$C)"))
     println("element_duckdb: $(element_duckdb)")
+    println("element_duckdb nnz: $element_duckdb_nnz")
 end
 
 write("results.json", JSON.json(results, 4))
