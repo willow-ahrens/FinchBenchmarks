@@ -40,6 +40,16 @@ function hl_triangle(e1, e2, e3)
     return hl_time, compute(sum(lazy(e1)[:, :, nothing].* lazy(e2)[:, nothing, :] .* lazy(e3)[nothing, :, :]))
 end
 
+function hl_triangle_unfused(e1, e2, e3)
+    hl_time = @belapsed begin
+        ret = compute(lazy($e1)[:, :, nothing].* lazy($e2)[:, nothing, :])
+        ret = compute(sum(lazy(ret).* lazy($e3)[nothing, :, :]))
+    end seconds=10 samples=3
+    ret = compute(lazy(e1)[:, :, nothing].* lazy(e2)[:, nothing, :])
+    ret = compute(sum(lazy(ret).* lazy(e3)[nothing, :, :]))
+    return hl_time, ret
+end
+
 function finch_triangle_dcsc_gallop(e1, e2, e3)
     E1 = Finch.Tensor(SparseList(SparseList(Element(0.0), size(e1)[1]), size(e1)[2]))
     E2 = Finch.Tensor(SparseList(SparseList(Element(0.0), size(e2)[1]), size(e2)[2]))
@@ -144,9 +154,9 @@ function duckdb_mm(A, B)
                 FROM A
                 Join B on A.j=B.j
                 GROUP BY A.i, B.k"
-    duckdb_result = DuckDB.execute(dbconn, query_str)
+    duckdb_count = only(DuckDB.execute(dbconn, "SELECT Sum(v) as v FROM ($query_str)"))[:v]
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
-    return duckdb_time, duckdb_result
+    return duckdb_time, duckdb_count
 end
 
 function hl_elementwise(A, B, C)
@@ -177,14 +187,24 @@ function duckdb_elementwise(A, B, C)
                             FROM A
                             FULL OUTER JOIN B on A.j = B.j and A.i = B.i) as AB
                 ON AB.i = C.i AND AB.j = C.j"
-    duckdb_count = only(DuckDB.execute(dbconn, "SELECT COUNT(*) as c FROM ($query_str) where v != 0"))[:c]
+    duckdb_count = only(DuckDB.execute(dbconn, "SELECT Sum(v) as v FROM ($query_str)"))[:v]
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
     return duckdb_time, duckdb_count
 end
 
-function hl_SDMM(A, B, C)
+function hl_SDDMM(A, B, C)
     hl_time = @belapsed compute(sum(lazy($A)[:, :, nothing].* lazy($B)[nothing, :,  :] .* lazy($C)[:,nothing, :], dims=[2]))  seconds=10 samples=3
     return hl_time, compute(sum(lazy(A)[:, :, nothing].* lazy(B)[nothing, :, :] .* lazy(C)[:,nothing, :], dims=[2]))
+end
+
+function hl_SDDMM_unfused(A, B, C)
+    hl_time = @belapsed begin
+        ret = compute(lazy($A)[:, :, nothing].* lazy($C)[:, nothing, :])
+        ret = compute(sum(lazy(ret).* lazy($B)[nothing, :, :]))
+    end seconds=10 samples=3
+    ret = compute(lazy(A)[:, :, nothing].* lazy(C)[:, nothing, :])
+    ret = compute(sum(lazy(ret).* lazy(B)[nothing, :, :]))
+    return hl_time, ret
 end
 
 function duckdb_SDMM(A, B, C)
@@ -192,12 +212,12 @@ function duckdb_SDMM(A, B, C)
     load_to_duck_db(dbconn, A, ["i", "j"], "A")
     load_to_duck_db(dbconn, B, ["j", "k"], "B")
     load_to_duck_db(dbconn, C, ["i", "k"], "C")
-    query_str = "Select SUM(A.v*B.v*C.v), C.i, C.k
+    query_str = "Select SUM(A.v*B.v*C.v) as v, C.i, C.k
                 FROM A, B, C
                 WHERE A.j = B.j AND B.k = C.k AND A.i = C.i
                 GROUP BY C.i, C.k"
 
-    duckdb_count = only(DuckDB.execute(dbconn, "SELECT COUNT(*) as c FROM ($query_str) where v != 0"))[:c]
+    duckdb_count = only(DuckDB.execute(dbconn, "SELECT Sum(v) as v FROM ($query_str)"))[:v]
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
     return duckdb_time, duckdb_count
 end
@@ -210,58 +230,65 @@ make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
 matrices = datasets["yang"]
 graph_matrices = ["SNAP/soc-Epinions1", "SNAP/email-EuAll", "SNAP/ca-AstroPh"]
 results = []
-#=
 for matrix in graph_matrices
     main_edge = Tensor(SparseMatrixCSC(matrixdepot(matrix)))
     t_hl, t_hl_count = hl_triangle(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_hl, "Finch", "triangle count", matrix))
     println("t_hl: $(t_hl)")
+    println("t_hl sum: $(sum(t_hl_count))")
+    t_hl_unfused, t_hl_unfused_count = hl_triangle_unfused(main_edge, main_edge, main_edge)
+    push!(results, make_entry(t_hl_unfused, "Finch (Unfused)", "triangle count", matrix))
+    println("t_hl_unfused: $(t_hl_unfused)")
+    println("t_hl_unfused sum: $(sum(t_hl_unfused_count))")
     t_duckdb, t_duckdb_count = duckdb_triangle_count(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_duckdb, "DuckDB", "triangle count", matrix))
-    println(t_hl_count)
-    println(t_duckdb_count)
-    println(t_hl_count .== t_duckdb_count)
     println("t_duckdb: $(t_duckdb)")
+    println("t_duckdb sum: $(t_duckdb_count)")
 
     n,m = size(main_edge)
     l = 100
     A = Tensor(rand(n,l))
     B =  Tensor(rand(l,m))
-    sddmm_hl, sddmm_hl_count = hl_SDMM(A, B, main_edge)
+    sddmm_hl, sddmm_hl_count = hl_SDDMM(A, B, main_edge)
     push!(results, make_entry(sddmm_hl, "Finch", "SDDMM", matrix))
     println("sddmm_hl: $(sddmm_hl)")
-    sddmm_duckdb, sddmm_duckdb_count = duckdb_SDMM(A, B, main_edge)
+    println("sddmm_hl sum: $(sum(sddmm_hl_count))")
+    sddmm_hl_unfused, sddmm_hl_unfused_count = hl_SDDMM_unfused(A, B, main_edge)
+    push!(results, make_entry(sddmm_hl_unfused, "Finch (Unfused)", "SDDMM", matrix))
+    println("sddmm_hl_unfused: $(sddmm_hl_unfused)")
+    println("sddmm_hl_unfused sum: $(sum(sddmm_hl_unfused_count))")
+    sddmm_duckdb, sddmm_duckdb_sum = duckdb_SDMM(A, B, main_edge)
     push!(results, make_entry(sddmm_duckdb, "DuckDB", "SDDMM", matrix))
     println("sddmm_duckdb: $(sddmm_duckdb)")
+    println("sddmm_duckdb sum: $(sddmm_duckdb_sum)")
 
     mm_hl = hl_mm(main_edge, main_edge)
     push!(results, make_entry(mm_hl, "Finch", "AA'", matrix))
     println("mm_hl: $(mm_hl)")
+    println("mm_hl sum: $(sum(mm_hl))")
     mm_duckdb, mm_duckdb_result = duckdb_mm(main_edge, main_edge)
     push!(results, make_entry(mm_duckdb, "DuckDB", "AA'", matrix))
     println("mm_duckdb: $(mm_duckdb)")
+    println("mm_duckdb sum: $(mm_duckdb_result)")
 end
- =#
 elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
 
 for (A,B,C) in elementwise_matrices
     A_t = Tensor(SparseMatrixCSC(matrixdepot(A)))
     B_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
-    C_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
-
+    C_t = Tensor(SparseMatrixCSC(matrixdepot(C)))
     element_hl, element_hl_result = hl_elementwise(A_t, B_t, C_t)
     push!(results, make_entry(element_hl, "Finch", "(A.+B).* C", "($A,$B,$C)"))
-#    println(element_hl_result)
     println("element_hl: $(element_hl)")
-    println("element_hl nnz: $(countstored(element_hl_result))")
+    println("element_hl sum: $(sum(element_hl_result))")
     element_hl_unfused, element_hl_unfused_result = hl_elementwise_unfused(A_t, B_t, C_t)
     push!(results, make_entry(element_hl_unfused, "Finch (Unfused)", "(A.+B).* C", "($A,$B,$C)"))
     println("element_hl_unfused: $(element_hl_unfused)")
-    println("element_hl_unfused nnz: $(countstored(element_hl_unfused_result))")
+    println("element_hl_unfused sum: $(sum(element_hl_unfused_result))")
     element_duckdb, element_duckdb_nnz = duckdb_elementwise(A_t, B_t, C_t)
     push!(results, make_entry(element_duckdb, "DuckDB", "(A.+B).* C",  "($A,$B,$C)"))
     println("element_duckdb: $(element_duckdb)")
-    println("element_duckdb nnz: $element_duckdb_nnz")
+    println("element_duckdb sum: $element_duckdb_nnz")
 end
 
 write("results.json", JSON.json(results, 4))
