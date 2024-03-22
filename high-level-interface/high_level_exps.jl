@@ -172,7 +172,6 @@ function hl_elementwise_unfused(A, B, C)
     elementwise_time = @belapsed begin res = $A .+ $B; res = res .* $C end seconds=10 samples=3
     res = A .+ B
     res = res .* C
-    println(typeof(res))
     return elementwise_time, res
 end
 
@@ -227,18 +226,17 @@ make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
                                                         "operation" => operation,
                                                         "matrix" => matrix,
                                                         )
-matrices = datasets["yang"]
-graph_matrices = ["SNAP/soc-Epinions1", "SNAP/email-EuAll", "SNAP/ca-AstroPh"]
+graph_matrices = datasets["yang"]
 results = []
 for matrix in graph_matrices
     main_edge = Tensor(SparseMatrixCSC(matrixdepot(matrix)))
     t_hl, t_hl_count = hl_triangle(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_hl, "Finch", "triangle count", matrix))
     println("t_hl: $(t_hl)")
-    println("t_hl sum: $(sum(t_hl_count))")
+    println("t_hl sum: $(sum(t_hl_count))")#=
     t_hl_unfused, t_hl_unfused_count = hl_triangle_unfused(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_hl_unfused, "Finch (Unfused)", "triangle count", matrix))
-    println("t_hl_unfused: $(t_hl_unfused)")
+    println("t_hl_unfused: $(t_hl_unfused)") =#
     println("t_hl_unfused sum: $(sum(t_hl_unfused_count))")
     t_duckdb, t_duckdb_count = duckdb_triangle_count(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_duckdb, "DuckDB", "triangle count", matrix))
@@ -252,11 +250,11 @@ for matrix in graph_matrices
     sddmm_hl, sddmm_hl_count = hl_SDDMM(A, B, main_edge)
     push!(results, make_entry(sddmm_hl, "Finch", "SDDMM", matrix))
     println("sddmm_hl: $(sddmm_hl)")
-    println("sddmm_hl sum: $(sum(sddmm_hl_count))")
+    println("sddmm_hl sum: $(sum(sddmm_hl_count))")#=
     sddmm_hl_unfused, sddmm_hl_unfused_count = hl_SDDMM_unfused(A, B, main_edge)
     push!(results, make_entry(sddmm_hl_unfused, "Finch (Unfused)", "SDDMM", matrix))
     println("sddmm_hl_unfused: $(sddmm_hl_unfused)")
-    println("sddmm_hl_unfused sum: $(sum(sddmm_hl_unfused_count))")
+    println("sddmm_hl_unfused sum: $(sum(sddmm_hl_unfused_count))") =#
     sddmm_duckdb, sddmm_duckdb_sum = duckdb_SDMM(A, B, main_edge)
     push!(results, make_entry(sddmm_duckdb, "DuckDB", "SDDMM", matrix))
     println("sddmm_duckdb: $(sddmm_duckdb)")
@@ -271,8 +269,8 @@ for matrix in graph_matrices
     println("mm_duckdb: $(mm_duckdb)")
     println("mm_duckdb sum: $(mm_duckdb_result)")
 end
-elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
 
+elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
 for (A,B,C) in elementwise_matrices
     A_t = Tensor(SparseMatrixCSC(matrixdepot(A)))
     B_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
