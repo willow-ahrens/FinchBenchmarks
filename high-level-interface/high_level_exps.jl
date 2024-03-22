@@ -179,6 +179,27 @@ function duckdb_elementwise(A, B, C)
     duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
     return duckdb_time, duckdb_result
 end
+
+function hl_SDMM(A, B, C)
+    hl_time = @belapsed compute(sum(lazy($A)[:, :, nothing].* lazy($B)[nothing, :,  :] .* lazy($C)[:,nothing, :], dims=[2]))  seconds=10 samples=3
+    return hl_time, compute(sum(lazy(A)[:, :, nothing].* lazy(B)[nothing, :, :] .* lazy(C)[:,nothing, :], dims=[2]))
+end
+
+function duckdb_SDMM(A, B, C)
+    dbconn = DBInterface.connect(DuckDB.DB, ":memory:")
+    load_to_duck_db(dbconn, A, ["i", "j"], "A")
+    load_to_duck_db(dbconn, B, ["j", "k"], "B")
+    load_to_duck_db(dbconn, C, ["i", "k"], "C")
+    query_str = "Select SUM(A.v*B.v*C.v), C.i, C.k
+                FROM A, B, C
+                WHERE A.j = B.j AND B.k = C.k AND A.i = C.i
+                GROUP BY C.i, C.k"
+
+    duckdb_result = DuckDB.execute(dbconn, query_str)
+    duckdb_time = @belapsed DuckDB.execute($dbconn, $query_str)  seconds=10 samples=3
+    return duckdb_time, duckdb_result
+end
+
 make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
                                                         "method" => method,
                                                         "operation" => operation,
@@ -186,12 +207,10 @@ make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
                                                         )
 
 matrices = datasets["yang"]
-matrices = ["SNAP/soc-Epinions1",]
+graph_matrices = ["SNAP/soc-Epinions1", "SNAP/email-EuAll", "SNAP/ca-AstroPh"]
 results = []
-for matrix in matrices
-    main_edge = SparseMatrixCSC(matrixdepot(matrix))
-    main_edge = Tensor(main_edge)
-    #main_edge = Tensor(Dense(Sparse(Element(0.0))), fsprand(5, 5, .5))
+for matrix in graph_matrices
+    main_edge = Tensor(SparseMatrixCSC(matrixdepot(matrix)))
     t_hl, t_hl_count = hl_triangle(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_hl, "Finch", "triangle count", matrix))
     println("t_hl: $(t_hl)")
@@ -202,14 +221,16 @@ for matrix in matrices
     println(t_hl_count .== t_duckdb_count)
     println("t_duckdb: $(t_duckdb)")
 
-    mmsum_hl, mmsum_hl_count = hl_mm_sum(main_edge, main_edge)
-    push!(results, make_entry(mmsum_hl, "Finch", "MM Sum", matrix))
-    println("mmsum_hl: $(mmsum_hl)")
-    mmsum_duckdb, mmsum_duckdb_count = duckdb_mm_sum(main_edge, main_edge)
-    push!(results, make_entry(mmsum_duckdb, "DuckDB", "MM Sum", matrix))
-    println(mmsum_hl_count)
-    println(mmsum_duckdb_count)
-    println("mmsum_duckdb: $(mmsum_duckdb)")
+    n,m = size(main_edge)
+    l = 100
+    A = Tensor(rand(n,l))
+    B =  Tensor(rand(l,m))
+    sddmm_hl, sddmm_hl_count = hl_SDMM(A, B, main_edge)
+    push!(results, make_entry(sddmm_hl, "Finch", "SDDMM", matrix))
+    println("sddmm_hl: $(sddmm_hl)")
+    sddmm_duckdb, sddmm_duckdb_count = duckdb_SDMM(A, B, main_edge)
+    push!(results, make_entry(sddmm_duckdb, "DuckDB", "SDDMM", matrix))
+    println("sddmm_duckdb: $(sddmm_duckdb)")
 
     mm_hl = hl_mm(main_edge, main_edge)
     push!(results, make_entry(mm_hl, "Finch", "AA'", matrix))
@@ -217,14 +238,21 @@ for matrix in matrices
     mm_duckdb, mm_duckdb_result = duckdb_mm(main_edge, main_edge)
     push!(results, make_entry(mm_duckdb, "DuckDB", "AA'", matrix))
     println("mm_duckdb: $(mm_duckdb)")
+end
 
-    element_hl, element_hl_count = hl_elementwise(main_edge, main_edge, main_edge)
-    push!(results, make_entry(element_hl, "Finch", "(A.+B).* C'", matrix))
+elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
+
+for (A,B,C) in elementwise_matrices
+    A = Tensor(SparseMatrixCSC(matrixdepot(A)))
+    B = Tensor(SparseMatrixCSC(matrixdepot(B)))
+    C = Tensor(SparseMatrixCSC(matrixdepot(C)))
+
+    element_hl, element_hl_count = hl_elementwise(A, B, C)
+    push!(results, make_entry(element_hl, "Finch", "(A.+B).* C", "($A,$B,$C)"))
     println("element_hl: $(element_hl)")
-    element_duckdb, element_duckdb_result = duckdb_elementwise(main_edge, main_edge, main_edge)
-    push!(results, make_entry(element_duckdb, "DuckDB", "(A.+B).* C''", matrix))
+    element_duckdb, element_duckdb_result = duckdb_elementwise(A, B, C)
+    push!(results, make_entry(element_duckdb, "DuckDB", "(A.+B).* C",  "($A,$B,$C)"))
     println("element_duckdb: $(element_duckdb)")
-    println(element_duckdb_result)
 end
 
 write("results.json", JSON.json(results, 4))

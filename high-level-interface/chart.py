@@ -70,5 +70,7 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation, baseline method, and log scale parameter
-generate_chart_for_operation("triangle counting", baseline_method="DuckDB")
+generate_chart_for_operation("triangle count", baseline_method="DuckDB")
 generate_chart_for_operation("AA'", baseline_method="DuckDB")
+generate_chart_for_operation("(A.+B).* C", baseline_method="DuckDB")
+generate_chart_for_operation("SDDMM", baseline_method="DuckDB")
