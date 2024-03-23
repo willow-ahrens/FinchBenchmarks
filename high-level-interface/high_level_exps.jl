@@ -236,8 +236,8 @@ for matrix in graph_matrices
     println("t_hl sum: $(sum(t_hl_count))")#=
     t_hl_unfused, t_hl_unfused_count = hl_triangle_unfused(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_hl_unfused, "Finch (Unfused)", "triangle count", matrix))
-    println("t_hl_unfused: $(t_hl_unfused)") =#
-    println("t_hl_unfused sum: $(sum(t_hl_unfused_count))")
+    println("t_hl_unfused: $(t_hl_unfused)")
+    println("t_hl_unfused sum: $(sum(t_hl_unfused_count))") =#
     t_duckdb, t_duckdb_count = duckdb_triangle_count(main_edge, main_edge, main_edge)
     push!(results, make_entry(t_duckdb, "DuckDB", "triangle count", matrix))
     println("t_duckdb: $(t_duckdb)")
@@ -259,7 +259,7 @@ for matrix in graph_matrices
     push!(results, make_entry(sddmm_duckdb, "DuckDB", "SDDMM", matrix))
     println("sddmm_duckdb: $(sddmm_duckdb)")
     println("sddmm_duckdb sum: $(sddmm_duckdb_sum)")
-
+#=
     mm_hl = hl_mm(main_edge, main_edge)
     push!(results, make_entry(mm_hl, "Finch", "AA'", matrix))
     println("mm_hl: $(mm_hl)")
@@ -267,7 +267,7 @@ for matrix in graph_matrices
     mm_duckdb, mm_duckdb_result = duckdb_mm(main_edge, main_edge)
     push!(results, make_entry(mm_duckdb, "DuckDB", "AA'", matrix))
     println("mm_duckdb: $(mm_duckdb)")
-    println("mm_duckdb sum: $(mm_duckdb_result)")
+    println("mm_duckdb sum: $(mm_duckdb_result)") =#
 end
 
 elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
