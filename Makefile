@@ -10,7 +10,7 @@ else
 export NPROC_VAL := $(shell lscpu -p | egrep -v '^\#' | wc -l)
 endif
 
-SPMV = spmv/spmv_taco
+SPMV = spmv/spmv_taco spmv/spmv_taco_row_maj
 
 SPGEMM = spgemm/spgemm_taco
 
@@ -52,3 +52,6 @@ spgemm/spgemm_taco: $(SPARSE_BENCH) $(TACO) spgemm/spgemm_taco.cpp
 
 spmv/spmv_taco: $(SPARSE_BENCH) $(TACO) spmv/spmv_taco.cpp
 	$(CXX) $(TACO_CXXFLAGS) -o $@ spmv/spmv_taco.cpp $(TACO_LDLIBS)
+
+spmv/spmv_taco_row_maj: $(SPARSE_BENCH) $(TACO) spmv/spmv_taco_row_maj.cpp
+	$(CXX) $(TACO_CXXFLAGS) -o $@ spmv/spmv_taco_row_maj.cpp $(TACO_LDLIBS)
