@@ -34,7 +34,7 @@ def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_sca
 
         mtx = result["matrix"]
         method = result["method"].replace(".jl", "")
-        if method != baseline_method and mtx in baseline_times:
+        if mtx in baseline_times:
             time = result["time"]
             speedup = baseline_times[mtx] / time if time else 0
             data[method].append(speedup)
@@ -72,5 +72,5 @@ if not os.path.exists(CHARTS_DIRECTORY):
 # Generate charts for each operation by calling the function with the operation, baseline method, and log scale parameter
 generate_chart_for_operation("triangle count", baseline_method="DuckDB")
 generate_chart_for_operation("AA'", baseline_method="DuckDB")
-generate_chart_for_operation("(A.+B).* C", baseline_method="DuckDB")
+generate_chart_for_operation("(A+B)*C", baseline_method="DuckDB")
 generate_chart_for_operation("SDDMM", baseline_method="DuckDB")
