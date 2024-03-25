@@ -259,32 +259,26 @@ for matrix in graph_matrices
     push!(results, make_entry(sddmm_duckdb, "DuckDB", "SDDMM", matrix))
     println("sddmm_duckdb: $(sddmm_duckdb)")
     println("sddmm_duckdb sum: $(sddmm_duckdb_sum)")
-#=
-    mm_hl = hl_mm(main_edge, main_edge)
-    push!(results, make_entry(mm_hl, "Finch", "AA'", matrix))
-    println("mm_hl: $(mm_hl)")
-    println("mm_hl sum: $(sum(mm_hl))")
-    mm_duckdb, mm_duckdb_result = duckdb_mm(main_edge, main_edge)
-    push!(results, make_entry(mm_duckdb, "DuckDB", "AA'", matrix))
-    println("mm_duckdb: $(mm_duckdb)")
-    println("mm_duckdb sum: $(mm_duckdb_result)") =#
 end
 
-elementwise_matrices = [("DIMACS10/smallworld", "DIMACS10/preferentialAttachment", "DIMACS10/G_n_pin_pout")]
-for (A,B,C) in elementwise_matrices
-    A_t = Tensor(SparseMatrixCSC(matrixdepot(A)))
-    B_t = Tensor(SparseMatrixCSC(matrixdepot(B)))
-    C_t = Tensor(SparseMatrixCSC(matrixdepot(C)))
-    element_hl, element_hl_result = hl_elementwise(A_t, B_t, C_t)
-    push!(results, make_entry(element_hl, "Finch", "(A.+B).* C", "($A,$B,$C)"))
+n,m = (10000, 10000)
+A_sparsity, B_sparsity = (.1, .1)
+A = Tensor(Dense(Sparse(Element(0.0))), fsprand(n, m, A_sparsity))
+B = Tensor(Dense(Sparse(Element(0.0))), fsprand(n, m, B_sparsity))
+C_sparsities = [.0001, .001, .01, .1, 1]
+C_sparsities = [1.0]
+for C_sparsity in C_sparsities
+    C = Tensor(Dense(Sparse(Element(0.0))), fsprand(n, m, C_sparsity))
+    element_hl, element_hl_result = hl_elementwise(A, B, C)
+    push!(results, make_entry(element_hl, "Finch", "(A+B)*C", "$C_sparsity"))
     println("element_hl: $(element_hl)")
     println("element_hl sum: $(sum(element_hl_result))")
-    element_hl_unfused, element_hl_unfused_result = hl_elementwise_unfused(A_t, B_t, C_t)
-    push!(results, make_entry(element_hl_unfused, "Finch (Unfused)", "(A.+B).* C", "($A,$B,$C)"))
+    element_hl_unfused, element_hl_unfused_result = hl_elementwise_unfused(A, B, C)
+    push!(results, make_entry(element_hl_unfused, "Finch (Unfused)", "(A+B)*C", "$C_sparsity"))
     println("element_hl_unfused: $(element_hl_unfused)")
     println("element_hl_unfused sum: $(sum(element_hl_unfused_result))")
-    element_duckdb, element_duckdb_nnz = duckdb_elementwise(A_t, B_t, C_t)
-    push!(results, make_entry(element_duckdb, "DuckDB", "(A.+B).* C",  "($A,$B,$C)"))
+    element_duckdb, element_duckdb_nnz = duckdb_elementwise(A, B, C)
+    push!(results, make_entry(element_duckdb, "DuckDB", "(A+B)*C",  "$C_sparsity"))
     println("element_duckdb: $(element_duckdb)")
     println("element_duckdb sum: $element_duckdb_nnz")
 end
