@@ -66,34 +66,41 @@ def all_formats_chart(ordered_by_format=False):
             times[method] = ref_time / time
 
     if ordered_by_format:
-        ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
+        #ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
+        ordered_data = sorted(data.items(), key = lambda mtx_results: (FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
     else:
         ordered_data = sorted(data.items(), key = lambda mtx_results: mtx_results[1]["finch"], reverse=True)
 
-    faster_data = defaultdict(list)
-    slower_data = defaultdict(list)
-    splice_idx = 0
+    #faster_data = defaultdict(list)
+    #slower_data = defaultdict(list)
+    all_data = defaultdict(list)
+    #splice_idx = 0
     for i, (mtx, times) in enumerate(ordered_data):
         for method, time in times.items():
-            if times["finch"] > 1.0:
-                splice_idx = max(splice_idx, i + 1)
-                faster_data[method].append(time)
-            else:
-                slower_data[method].append(time)
+            all_data[method].append(time)
+            #if times["finch"] > 1.0:
+            #    splice_idx = max(splice_idx, i + 1)
+            #    faster_data[method].append(time)
+            #else:
+            #    slower_data[method].append(time)
 
     ordered_mtxs = [mtx for mtx, _ in ordered_data]
     labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
-    methods = ["finch", "julia_stdlib", "suite_sparse"]
+    #methods = ["finch", "julia_stdlib", "suite_sparse"]
+    methods = ["finch", "julia_stdlib"]
     colors = {"finch": "tab:blue", "julia_stdlib": "tab:orange", "suite_sparse": "tab:green"}
 
-    if ordered_by_format:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled")
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance (Faster than TACO)")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance (Slower than TACO)")
-    else:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance Sorted (Faster than TACO)")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance Sorted (Slower than TACO)")
+    make_grouped_bar_chart(methods, ordered_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled")
+    make_grouped_bar_chart(methods, ordered_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)")
+
+    #if ordered_by_format:
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance (Faster than TACO)")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance (Slower than TACO)")
+    #else:
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance Sorted (Faster than TACO)")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance Sorted (Slower than TACO)")
     
 
     # for mtx in mtxs:
@@ -187,6 +194,7 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
 
     fig, ax = plt.subplots()
     for label in labels:
+        print(label)
         label_data = data[label]
         max_height = max(max_height, max(label_data))
         offset = width * multiplier
