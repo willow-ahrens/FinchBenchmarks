@@ -4,7 +4,7 @@ import json
 from collections import defaultdict
 import os
 
-RESULTS_FILE_PATH = "results.json"
+RESULTS_FILE_PATH = "man_results.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
 def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_scale=False):

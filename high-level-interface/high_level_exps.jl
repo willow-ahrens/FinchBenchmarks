@@ -226,6 +226,7 @@ make_entry(time, method, operation, matrix) = OrderedDict("time" => time,
                                                         "operation" => operation,
                                                         "matrix" => matrix,
                                                         )
+
 graph_matrices = datasets["yang"]
 results = []
 for matrix in graph_matrices
@@ -244,7 +245,7 @@ for matrix in graph_matrices
     println("t_duckdb sum: $(t_duckdb_count)")
 
     n,m = size(main_edge)
-    l = 100
+    l = 25
     A = Tensor(rand(n,l))
     B =  Tensor(rand(l,m))
     sddmm_hl, sddmm_hl_count = hl_SDDMM(A, B, main_edge)
