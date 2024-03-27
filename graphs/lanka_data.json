@@ -202,6 +202,36 @@
         "method": "GraphBLAS",
         "operation": "bfs",
         "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 0.4370365,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 7.523181,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 1.322282,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.03238891,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 20.77266,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
     }
 ]
 
