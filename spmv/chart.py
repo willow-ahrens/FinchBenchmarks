@@ -90,8 +90,10 @@ def all_formats_chart(ordered_by_format=False):
     methods = ["finch", "julia_stdlib"]
     colors = {"finch": "tab:blue", "julia_stdlib": "tab:orange", "suite_sparse": "tab:green"}
 
-    make_grouped_bar_chart(methods, ordered_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled")
-    make_grouped_bar_chart(methods, ordered_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)")
+    short_mtxs = [mtx.rsplit('/',1)[-1] for mtx in ordered_mtxs]
+
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled")
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)")
 
     #if ordered_by_format:
     #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
@@ -194,7 +196,6 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
 
     fig, ax = plt.subplots()
     for label in labels:
-        print(label)
         label_data = data[label]
         max_height = max(max_height, max(label_data))
         offset = width * multiplier
