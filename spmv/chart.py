@@ -4,9 +4,10 @@ import numpy as np
 import json
 import math
 from collections import defaultdict
+import re
 
 RESULTS_FILE_PATH = "spmv_results_lanka.json"
-CHARTS_DIRECTORY = "spmv/charts/"
+CHARTS_DIRECTORY = "charts/"
 FORMAT_ORDER = {
     "finch": -1,
     "finch_unsym": -2,
@@ -91,6 +92,13 @@ def all_formats_chart(ordered_by_format=False):
     colors = {"finch": "tab:blue", "julia_stdlib": "tab:orange", "suite_sparse": "tab:green"}
 
     short_mtxs = [mtx.rsplit('/',1)[-1] for mtx in ordered_mtxs]
+    new_mtxs = {
+        "toeplitz_large_band": "large_band",
+        "toeplitz_medium_band": "medium_band",
+        "toeplitz_small_band": "small_band",
+        #"TSOPF_RS_b678_c1": "*RS_b678_c1",
+    }
+    short_mtxs = [new_mtxs.get(mtx, mtx) for mtx in short_mtxs]
 
     make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled")
     make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)")
@@ -194,7 +202,7 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
     multiplier = 0
     max_height = 0
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(16, 6))
     for label in labels:
         label_data = data[label]
         max_height = max(max_height, max(label_data))

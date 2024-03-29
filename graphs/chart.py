@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.figure import figaspect
 import numpy as np
 import json
 from collections import defaultdict
@@ -39,13 +40,14 @@ def generate_chart_for_operation(operation, baseline_method="Graphs.jl", log_sca
             speedup = baseline_times[mtx] / time if time else 0
             data[method].append(speedup)
 
+    mtxs = [mtx.rsplit('/',1)[-1] for mtx in mtxs]
     methods = list(data.keys())
     make_grouped_bar_chart(methods, mtxs, data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
 
 def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
     width = 0.15  # Adjust width based on the number of labels
-    fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
+    fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
 
     for i, label in enumerate(labels):
         offset = width * i
@@ -57,11 +59,13 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     ax.set_ylabel(y_label)
     ax.set_title(title)
     ax.set_xticks(x + width * (len(labels) - 1) / 2)
-    ax.set_xticklabels(x_axis, rotation=45, ha="right")
+    #ax.set_xticklabels(x_axis, rotation=45, ha="right")
+    ax.set_xticklabels(x_axis, font = {'size': 12})
     ax.legend()
 
     plt.tight_layout()
     fig_file = f"{title.lower().replace(' ', '_').replace('-', '_')}.png"
+
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200)
     plt.show()
 

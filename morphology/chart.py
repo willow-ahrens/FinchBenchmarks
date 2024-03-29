@@ -18,6 +18,7 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
     data = defaultdict(lambda: defaultdict(list))
     baseline_times = {}
 
+
     # Filter results by the specific operation and prepare data
     for result in results:
         if result["operation"] != operation or result["dataset"] in excluded_datasets:
@@ -42,7 +43,7 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
             time = result["time"]
             speedup = baseline_times[(dataset, label)] / time if time else 0
             data[method][dataset].append(speedup)
-
+        
     # Calculate geometric mean for each method across all datasets
     geomean_data = {}
     for method, datasets in data.items():
@@ -66,7 +67,13 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     ax.set_ylabel(y_label)
     ax.set_title(title)
     ax.set_xticks(x)
-    ax.set_xticklabels(x_axis, rotation=45, ha="right")
+    #ax.set_xticklabels(x_axis, rotation=45, ha="right")
+    new_labels = {"mnist": "MNIST", "omniglot": "Omniglot", "humansketches":
+    "Sketches", "testimage_dip3e": "dip3e", "mnist_magnify": "MNIST 8X",
+    "omniglot_magnify": "Omniglot 8X", "humansketches_magnify": "Sketches 8X",
+    "testimage_dip3e_magnify": "dip3e 8X"}
+    x_axis = [new_labels[dataset] for dataset in x_axis]
+    ax.set_xticklabels(x_axis, font = {'size': 12})
     ax.legend()
 
     if log_scale:

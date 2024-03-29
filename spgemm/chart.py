@@ -3,6 +3,7 @@ import numpy as np
 import json
 from collections import defaultdict
 import os
+import re
 
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
@@ -42,16 +43,19 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
         for method in filtered_method_order
     }
 
+    filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
+
     make_grouped_bar_chart(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
 
 def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
     width = 0.1  # Adjust width based on the number of labels
-    fig, ax = plt.subplots(figsize=(10, 6))  # Adjust figure size as needed
+    fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
 
     for i, label in enumerate(labels):
         offset = width * (i - len(labels)/2)  # Center bars around the tick
-        ax.bar(x + offset, data[label], width, label=label)
+        ax.bar(x + offset, data[label], width, label=re.sub("spgemm_", "", label))
+        
 
     ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
 
@@ -60,8 +64,8 @@ def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Sp
     ax.set_ylabel(y_label)
     ax.set_title(title)
     ax.set_xticks(x)
-    ax.set_xticklabels(x_axis, rotation=45, ha="right")
-    ax.legend()
+    ax.set_xticklabels(x_axis, rotation=25, ha="right")
+    ax.legend(ncol=4)
 
     plt.tight_layout()
     plt.savefig(CHARTS_DIRECTORY + filename, dpi=200)
@@ -115,10 +119,10 @@ method_order = [
 ]
 
 # Example usage, specifying method and matrix order when calling the function
-generate_chart_for_operation("lanka_joel.json", "spgemm", "lanka_joel_speedup.png", 
+generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup.png", 
                              method_order, matrix_order,
                              baseline_method="spgemm_taco_gustavson")
 
-generate_chart_for_operation("lanka_small.json", "spgemm", "lanka_small_speedup_log_scale.png", 
+generate_chart_for_operation("lanka_small.json", "spgemm", "spgemm_small_speedup_log_scale.png", 
                              method_order, matrix_order,
                              baseline_method="spgemm_taco_gustavson", log_scale=True)
