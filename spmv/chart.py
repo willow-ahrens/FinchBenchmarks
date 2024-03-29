@@ -198,11 +198,11 @@ def all_formats_for_matrix_chart(matrix):
 
 def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}):
     x = np.arange(len(data[labels[0]]))
-    width = 0.2 
+    width = 0.3 
     multiplier = 0
     max_height = 0
 
-    fig, ax = plt.subplots(figsize=(16, 6))
+    fig, ax = plt.subplots(figsize=(12, 4))
     for label in labels:
         label_data = data[label]
         max_height = max(max_height, max(label_data))
@@ -212,7 +212,7 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
         else:
             rects = ax.bar(x + offset, label_data, width, label=label)
         bar_labels = bar_labels_dict[label] if (label in bar_labels_dict) else [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
-        ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5, rotation=90)
+        ax.bar_label(rects, padding=0, labels=bar_labels, fontsize=5, rotation=90)
         multiplier += 1
 
     ax.set_ylabel(y_label)
@@ -221,6 +221,9 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
     ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
     ax.legend(loc='upper left', ncols=4)
     ax.set_ylim(0, max_height + 0.5)
+
+        # Adjusting x-axis limits to make bars go to the edges
+    ax.set_xlim(-0.5, len(x_axis) - 0.5 + width * len(labels))
 
     plt.plot([-1, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75)
 
