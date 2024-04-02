@@ -20,7 +20,7 @@ function bellmanford_finch_kernel(edges, source=1)
     parents = Tensor(Dense(Element(0)), n)
 
     for iter = 1:n  
-        @finch for j=_; if active_prev[j] dists[j] <<minby>>= dists_prev[j] end end
+        @finch for j=_; if active_prev[j] dists[j] <<min>>= dists_prev[j] end end
 
         @finch begin
             active .= false
@@ -29,7 +29,7 @@ function bellmanford_finch_kernel(edges, source=1)
                     for i = _
                         let d = dists_prev[j] + edges[i, j]
                             dists[i] <<min>>= d
-                            active[i] |= d < first(dists_prev[i])
+                            active[i] |= d < dists_prev[i]
                         end
                     end
                 end
