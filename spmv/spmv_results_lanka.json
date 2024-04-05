@@ -7,7 +7,7 @@
     },
     {
         "time": 0.003031817,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Boeing/ct20stif",
         "dataset": "vuduc_symmetric"
@@ -84,7 +84,7 @@
     },
     {
         "time": 0.00106156,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Simon/olafu",
         "dataset": "vuduc_symmetric"
@@ -161,7 +161,7 @@
     },
     {
         "time": 0.001524136,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Boeing/bcsstk35",
         "dataset": "vuduc_symmetric"
@@ -238,7 +238,7 @@
     },
     {
         "time": 0.000991466,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Boeing/crystk02",
         "dataset": "vuduc_symmetric"
@@ -315,7 +315,7 @@
     },
     {
         "time": 0.001792957,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Boeing/crystk03",
         "dataset": "vuduc_symmetric"
@@ -392,7 +392,7 @@
     },
     {
         "time": 0.002790485,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Nasa/nasasrb",
         "dataset": "vuduc_symmetric"
@@ -469,7 +469,7 @@
     },
     {
         "time": 0.003480236,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Rothberg/3dtube",
         "dataset": "vuduc_symmetric"
@@ -546,7 +546,7 @@
     },
     {
         "time": 0.001372097,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Simon/raefsky4",
         "dataset": "vuduc_symmetric"
@@ -623,7 +623,7 @@
     },
     {
         "time": 0.000911688,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Mulvey/finan512",
         "dataset": "vuduc_symmetric"
@@ -700,7 +700,7 @@
     },
     {
         "time": 0.000513644,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Pothen/pwt",
         "dataset": "vuduc_symmetric"
@@ -777,7 +777,7 @@
     },
     {
         "time": 0.000406227,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Cote/vibrobox",
         "dataset": "vuduc_symmetric"
@@ -854,7 +854,7 @@
     },
     {
         "time": 4.1319e-5,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "HB/saylr4",
         "dataset": "vuduc_symmetric"
@@ -931,7 +931,7 @@
     },
     {
         "time": 0.002332946,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Gupta/gupta1",
         "dataset": "vuduc_symmetric"
@@ -1570,7 +1570,7 @@
         "dataset": "banded"
     }, {
         "time": 0.000145713,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "toeplitz_small_band",
         "dataset": "banded"
@@ -1606,7 +1606,7 @@
         "dataset": "banded"
     }, {
         "time": 0.000580156,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "toeplitz_medium_band",
         "dataset": "banded"
@@ -1642,7 +1642,7 @@
         "dataset": "banded"
     }, {
         "time": 0.001905001,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "toeplitz_large_band",
         "dataset": "banded"
@@ -2590,7 +2590,7 @@
         "dataset": "willow_symmetric"
     }, {
         "time": 0.002056729,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "GHS_indef/exdata_1",
         "dataset": "willow_symmetric"
@@ -2656,7 +2656,7 @@
         "dataset": "willow_symmetric"
     }, {
         "time": 0.00108453,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
         "dataset": "willow_symmetric"
@@ -2714,7 +2714,43 @@
         "kernel": "spmv",
         "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
         "dataset": "willow_symmetric"
-    },
+    }, {
+        "time": 0.000773087,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.00066688,
+        "method": "finch_point",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000651464,
+        "method": "finch_point_row_maj",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000632112,
+        "method": "finch_point_pattern",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000603092,
+        "method": "finch_point_pattern_row_maj",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.00047327500000000005,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, 
     {
         "time": 0.000525711,
         "method": "julia_stdlib",
@@ -2723,7 +2759,7 @@
         "dataset": "taco_symmetric"
     }, {
         "time": 0.000468151,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "HB/bcsstk17",
         "dataset": "taco_symmetric"
@@ -2789,7 +2825,7 @@
         "dataset": "taco_symmetric"
     }, {
         "time": 0.004982465,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Williams/pdb1HYS",
         "dataset": "taco_symmetric"
@@ -2837,7 +2873,7 @@
         "dataset": "taco_symmetric"
     }, {
         "time": 0.004713197,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Williams/cant",
         "dataset": "taco_symmetric"
@@ -2903,7 +2939,7 @@
         "dataset": "taco_symmetric"
     }, {
         "time": 0.00742021,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "Williams/consph",
         "dataset": "taco_symmetric"
@@ -2969,7 +3005,7 @@
         "dataset": "taco_symmetric"
     }, {
         "time": 0.009408746,
-        "method": "finch",
+        "method": "finch_sym",
         "kernel": "spmv",
         "matrix": "DNVS/shipsec1",
         "dataset": "taco_symmetric"
@@ -3027,6 +3063,12 @@
         "kernel": "spmv",
         "matrix": "DNVS/shipsec1",
         "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000564638,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
     }, {
         "time": 0.00419164,
         "method": "taco_row_maj",
@@ -3747,5 +3789,138 @@
         "kernel": "spmv",
         "matrix": "Wang/wang3",
         "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.005979156,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.000801499,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "permutation_synthetic",
+        "dataset": "permutation"
+    }, {
+        "time": 0.001050783,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000121363,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000196293,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000418395,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001477514,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.109585631,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001828745,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000212358,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.002962651,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.001333515,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0046661,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.006654532,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 9.4288e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 4.3771e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000163381,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000907738,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.005085812,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, 
+    {
+        "time": 0.003286207,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    }, {
+        "time": 0.00041548,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    }, {
+        "time": 0.002306668,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
     }
 ]
