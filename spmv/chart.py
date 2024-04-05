@@ -57,10 +57,13 @@ def all_formats_chart(ordered_by_format=False):
         method = result["method"]
         time = result["time"]
 
-        if method == "finch_unsym":
+        if (method == "finch_unsym") or (method == "finch_unsym_row_maj"):
             # finch_baseline_time = data[mtx]["finch_baseline"]
             # data[mtx]["finch_baseline"] = time if finch_baseline_time == 0 else min(time, finch_baseline_time)
-            data[mtx]["finch_baseline"] = time
+            #infinity in python is float('inf')
+            #data[mtx]["finch_baseline"] = min(data[mtx].get("finch_baseline", float('inf')), data[mtx][method])
+            #the above line doesn't work, but this one does:
+            data[mtx]["finch_baseline"] = min(data[mtx].get("finch_baseline", float('inf')), time)
         if "finch" in method and finch_formats[mtx] != method:
             continue
         method = "finch" if "finch" in method else method
@@ -184,7 +187,7 @@ def all_formats_for_matrix_chart(matrix):
 
 def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}, legend_labels=None, reference_label = ""):
     x = np.arange(len(data[labels[0]]))
-    width = 0.3 
+    width = 0.22 
     multiplier = 0
     max_height = 0
 
@@ -206,9 +209,9 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
     ax.set_xticks(x + width * (len(labels) - 1)/2, x_axis)
     ax.tick_params(axis='x', which='major', labelsize=6, labelrotation=90)
     if legend_labels:
-        ax.legend(legend_labels, loc='upper left', ncols=2, fontsize='small')
+        ax.legend(legend_labels, loc='upper left', ncols=3, fontsize='small')
     else:
-        ax.legend(loc='upper left', ncols=2, fontsize='small')
+        ax.legend(loc='upper left', ncols=3, fontsize='small')
     ax.set_ylim(0, max_height + 0.5)
 
         # Adjusting x-axis limits to make bars go to the edges
