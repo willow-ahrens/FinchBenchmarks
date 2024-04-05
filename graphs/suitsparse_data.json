@@ -1,0 +1,38 @@
+[
+    {
+        "time": 0.002,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.319,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.221,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.003,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.173,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 3.129,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    }
+]

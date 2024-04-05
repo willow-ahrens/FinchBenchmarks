@@ -1,0 +1,50 @@
+[
+    {
+        "time": 0.166281946,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.03208313,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.003443649,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.182572041,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.019919157,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.136039261,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.031463039,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.007570785,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    }
+]

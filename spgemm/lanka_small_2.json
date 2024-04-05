@@ -1,0 +1,50 @@
+[
+    {
+        "time": 0.204012468,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.033551286,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.006899983,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.232029972,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.021310877,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.133664609,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.043465619,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.022323086,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    }
+]

@@ -9,6 +9,9 @@
 #include "../deps/SparseRooflineBenchmark/src/benchmark.hpp"
 
 using namespace taco;
+extern int optind;
+
+extern int optind;
 
 int main(int argc, char **argv) {
   auto params = parse(argc, argv);
@@ -28,7 +31,8 @@ int main(int argc, char **argv) {
   // Parse the options
   int option_index = 0;
   int c;
-  while ((c = getopt_long(params.argc, params.argv, "hs:a:b", long_options, &option_index)) != -1) {
+  optind = 1;
+  while ((c = getopt_long(params.argc, params.argv, "hs:a:b:", long_options, &option_index)) != -1) {
     switch (c) {
       case 'h':
         std::cout << "Options:" << std::endl;
@@ -86,24 +90,30 @@ int main(int argc, char **argv) {
   int m = A.getDimension(0);
   int n = B.getDimension(1);
 
-  Tensor<double> C("C", {m, n}, Format({Dense, Sparse})); // cond
+  Tensor<double> C;
 
-  //fprintf(stderr, "OOOO\n");
-	//std::cerr<<"OO: "<<cF<<std::endl;
+  if (schedule == "inner" || schedule == "gustavson") {
+    C = Tensor<double>("C", {m, n}, Format({Dense, Sparse}));
+  } else if (schedule == "outer") {
+    C = Tensor<double>("C", {m, n}, Format({Dense, Dense}));
+  } else {
+    std::cerr << "Invalid schedule" << std::endl;
+    exit(1);
+  }
 
   IndexVar i, j, k;
   IndexStmt stmt;
 
-  if (schedule == "gustavson") {
-    C(i, j) += A(i, k) * B(k, j);
-  } else if (schedule == "inner") {
+  if (schedule == "inner") {
     C(i, j) += A(i, k) * B(j, k);
     stmt= C.getAssignment().concretize();
     stmt = stmt.reorder({i,j,k}); 
+  } else if (schedule == "gustavson") {
+    C(i, j) += A(i, k) * B(k, j);
   } else if (schedule == "outer") {
     C(i, j) += A(k, i) * B(k, j);
-    stmt= C.getAssignment().concretize();
-    stmt = stmt.reorder({k,i,j}); 
+    stmt = C.getAssignment().concretize();
+    stmt = stmt.reorder({k,i,j});
   } else {
     std::cerr << "Invalid schedule" << std::endl;
     exit(1);

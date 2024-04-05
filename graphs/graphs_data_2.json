@@ -1,0 +1,32 @@
+[
+    {
+        "time": 1.204989454,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.403329267,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 1.022745242,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.230368859,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.551303647,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    }
+]

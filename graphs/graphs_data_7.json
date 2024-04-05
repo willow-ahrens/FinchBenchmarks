@@ -1,0 +1,26 @@
+[
+    {
+        "time": 11.379907903,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.283687492,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.325861258,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 1333.531158442,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "GAP/GAP-road"
+    }
+]

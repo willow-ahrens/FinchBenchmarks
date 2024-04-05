@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.20998577200000001,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "time": 0.149601928,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    }
+]

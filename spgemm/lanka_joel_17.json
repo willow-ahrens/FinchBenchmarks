@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.773799364,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.538210365,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/roadNet-CA"
+    }
+]

@@ -1,0 +1,8 @@
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+DuckDB = "d2f5444f-75bc-4fdf-ac35-56f514c445e1"
+Finch = "9177782c-1635-4eb9-9bfb-d9dfa25e6bce"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+MatrixDepot = "b51810bb-c9f3-55da-ae3c-350fc1fbce05"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"

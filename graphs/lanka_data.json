@@ -1,0 +1,237 @@
+[
+    {
+        "method": "Graphs.jl",
+        "time": 0.018738592,
+        "matrix": "DIMACS10/kron_g500-logn16",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 0.0023424,
+        "matrix": "DIMACS10/kron_g500-logn16",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 0.023434301,
+        "matrix": "DIMACS10/kron_g500-logn16",
+        "operation": "bfs"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 0.183739573,
+        "matrix": "DIMACS10/kron_g500-logn16",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Finch",
+        "time": 0.0814245,
+        "matrix": "DIMACS10/kron_g500-logn16",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 1.204989454,
+        "matrix": "SNAP/com-LiveJournal",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 0.403329267,
+        "matrix": "SNAP/com-LiveJournal",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 1.022745242,
+        "matrix": "SNAP/com-LiveJournal",
+        "operation": "bfs"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 2.230368859,
+        "matrix": "SNAP/com-LiveJournal",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Finch",
+        "time": 2.551303647,
+        "matrix": "SNAP/com-LiveJournal",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 0.276481698,
+        "matrix": "SNAP/roadNet-CA",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 0.198948289,
+        "matrix": "SNAP/roadNet-CA",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 0.198791708,
+        "matrix": "SNAP/roadNet-CA",
+        "operation": "bfs"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 1.998041693,
+        "matrix": "SNAP/roadNet-CA",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Finch",
+        "time": 0.370184209,
+        "matrix": "SNAP/roadNet-CA",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 0.003991873,
+        "matrix": "SNAP/soc-Epinions1",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 0.003008594,
+        "matrix": "SNAP/soc-Epinions1",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 0.005325293,
+        "matrix": "SNAP/soc-Epinions1",
+        "operation": "bfs"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 0.014757517,
+        "matrix": "SNAP/soc-Epinions1",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Finch",
+        "time": 0.012104117,
+        "matrix": "SNAP/soc-Epinions1",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 1.543495559,
+        "matrix": "SNAP/com-Orkut",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 0.265789248,
+        "matrix": "SNAP/com-Orkut",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 1.679374921,
+        "matrix": "SNAP/com-Orkut",
+        "operation": "bfs"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 7.609703099,
+        "matrix": "SNAP/com-Orkut",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Finch",
+        "time": 6.680689298,
+        "matrix": "SNAP/com-Orkut",
+        "operation": "bellmanford"
+    },
+    {
+        "method": "Graphs.jl",
+        "time": 11.379907903,
+        "matrix": "GAP/GAP-road",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_pull",
+        "time": 3.283687492,
+        "matrix": "GAP/GAP-road",
+        "operation": "bfs"
+    },
+    {
+        "method": "finch_push_only",
+        "time": 3.325861258,
+        "matrix": "GAP/GAP-road",
+        "operation": "bfs"
+    },
+    {
+        "time": 0.002,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.319,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.221,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.003,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.173,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 3.129,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 0.4370365,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 7.523181,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 1.322282,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.03238891,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 20.77266,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    }
+]
+

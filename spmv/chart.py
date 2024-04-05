@@ -4,9 +4,10 @@ import numpy as np
 import json
 import math
 from collections import defaultdict
+import re
 
 RESULTS_FILE_PATH = "spmv_results_lanka.json"
-CHARTS_DIRECTORY = "spmv/charts/"
+CHARTS_DIRECTORY = "charts/"
 FORMAT_ORDER = {
     "finch_sym": -1,
     "finch_unsym": -2,
@@ -71,35 +72,52 @@ def all_formats_chart(ordered_by_format=False):
             times[method] = ref_time / time
 
     if ordered_by_format:
-        ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
+        #ordered_data = sorted(data.items(), key = lambda mtx_results: (mtx_results[1]["finch"] > 1, FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
+        ordered_data = sorted(data.items(), key = lambda mtx_results: (FORMAT_ORDER[finch_formats[mtx_results[0]]], mtx_results[1]["finch"]), reverse=True)
     else:
         ordered_data = sorted(data.items(), key = lambda mtx_results: mtx_results[1]["finch"], reverse=True)
 
-    faster_data = defaultdict(list)
-    slower_data = defaultdict(list)
-    splice_idx = 0
+    #faster_data = defaultdict(list)
+    #slower_data = defaultdict(list)
+    all_data = defaultdict(list)
+    #splice_idx = 0
     for i, (mtx, times) in enumerate(ordered_data):
         for method, time in times.items():
-            if times["finch"] > 1.0:
-                splice_idx = max(splice_idx, i + 1)
-                faster_data[method].append(time)
-            else:
-                slower_data[method].append(time)
+            all_data[method].append(time)
+            #if times["finch"] > 1.0:
+            #    splice_idx = max(splice_idx, i + 1)
+            #    faster_data[method].append(time)
+            #else:
+            #    slower_data[method].append(time)
 
     ordered_mtxs = [mtx for mtx, _ in ordered_data]
     labels = [FORMAT_LABELS[finch_formats[mtx]] for mtx, _ in ordered_data]
-    methods = ["finch", "finch_baseline", "julia_stdlib", "suite_sparse"]
-    legend_labels = ["Finch (Best)", "Finch (Baseline)", "Julia Stdlib", "SuiteSparse"]
+    # methods = ["finch", "finch_baseline", "julia_stdlib"]
+    methods = ["finch", "julia_stdlib"]
+    # legend_labels = ["Finch (Best)", "Finch (Baseline)", "Julia Stdlib"]
+    legend_labels = ["Finch (Best)", "Julia Stdlib"]
     colors = {"finch": "tab:blue", "finch_baseline": "tab:gray", "julia_stdlib": "tab:orange", "suite_sparse": "tab:green"}
 
-    if ordered_by_format:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled", legend_labels=legend_labels, reference_label="TACO")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled", legend_labels=legend_labels, reference_label="TACO")
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance (Faster than TACO)", legend_labels=legend_labels, reference_label="TACO")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance (Slower than TACO)", legend_labels=legend_labels, reference_label="TACO")
-    else:
-        make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance Sorted (Faster than TACO)", legend_labels=legend_labels, reference_label="TACO")
-        make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance Sorted (Slower than TACO)", legend_labels=legend_labels, reference_label="TACO")
+    short_mtxs = [mtx.rsplit('/',1)[-1] for mtx in ordered_mtxs]
+    new_mtxs = {
+        "toeplitz_large_band": "large_band",
+        "toeplitz_medium_band": "medium_band",
+        "toeplitz_small_band": "small_band",
+        #"TSOPF_RS_b678_c1": "*RS_b678_c1",
+    }
+    short_mtxs = [new_mtxs.get(mtx, mtx) for mtx in short_mtxs]
+
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled", legend_labels=legend_labels, reference_label="TACO")
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)", legend_labels=legend_labels, reference_label="TACO")
+
+    #if ordered_by_format:
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:splice_idx]}, title="SpMV Performance (Faster than TACO) Labeled")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[splice_idx:]}, title="SpMV Performance (Slower than TACO) Labeled")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance (Faster than TACO)")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance (Slower than TACO)")
+    #else:
+    #    make_grouped_bar_chart(methods, ordered_mtxs[:splice_idx], faster_data, colors=colors, title="SpMV Performance Sorted (Faster than TACO)")
+    #    make_grouped_bar_chart(methods, ordered_mtxs[splice_idx:], slower_data, colors=colors, title="SpMV Performance Sorted (Slower than TACO)")
     
 
     # for mtx in mtxs:
@@ -187,11 +205,11 @@ def all_formats_for_matrix_chart(matrix):
 
 def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}, legend_labels=None, reference_label = ""):
     x = np.arange(len(data[labels[0]]))
-    width = 0.2 
+    width = 0.3 
     multiplier = 0
     max_height = 0
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(12, 4))
     for label in labels:
         label_data = data[label]
         max_height = max(max_height, max(label_data))
@@ -201,7 +219,7 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
         else:
             rects = ax.bar(x + offset, label_data, width, label=label)
         bar_labels = bar_labels_dict[label] if (label in bar_labels_dict) else [round(float(val), 2) if label in labeled_groups else "" for val in label_data]
-        ax.bar_label(rects, padding=4, labels=bar_labels, fontsize=5, rotation=90)
+        ax.bar_label(rects, padding=0, labels=bar_labels, fontsize=5, rotation=90)
         multiplier += 1
 
     ax.set_ylabel(y_label)
@@ -214,7 +232,10 @@ def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups =
         ax.legend(loc='upper left', ncols=2, fontsize='small')
     ax.set_ylim(0, max_height + 0.5)
 
-    plt.plot([-1, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75, label=reference_label)
+        # Adjusting x-axis limits to make bars go to the edges
+    ax.set_xlim(-0.5, len(x_axis) - 0.5 + width * len(labels))
+
+    plt.plot([-1, len(x_axis)], [1, 1], linestyle='--', color="tab:red", linewidth=0.75)
 
     fig_file = title.lower().replace(" ", "_") + ".png"
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200, bbox_inches="tight")

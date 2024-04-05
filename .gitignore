@@ -1,6 +1,16 @@
 *.o
+*.DS_Store
+cache/*
 spmv/spmv
 spmv/spmv_taco
 spmv/spmv_taco_row_maj
 deps/SparseRooflineBenchmark/build
 .vscode/settings.json
+cache/*
+*.jls
+graphs/lib
+graphs/bin
+graphs/share
+graphs/pyvenv.cfg
+morphology/output/*
+*/manifest.toml

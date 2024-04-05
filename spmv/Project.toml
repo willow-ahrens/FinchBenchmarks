@@ -8,3 +8,10 @@ JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 MatrixDepot = "b51810bb-c9f3-55da-ae3c-350fc1fbce05"
 SuiteSparseGraphBLAS = "c2e53296-7b14-11e9-1210-bddfa8111e1d"
 TensorMarket = "8b7d4fe7-0b45-4d0d-9dd8-5cc9b23b4b77"
+
+[compat]
+BenchmarkTools = "1.5"
+Finch = "0.6.18"
+MatrixDepot = "1.0.11"
+SuiteSparseGraphBLAS = "0.10"
+julia = "~1.9"

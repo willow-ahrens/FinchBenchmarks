@@ -1,0 +1,50 @@
+[
+    {
+        "time": 1.7457265620000002,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.008002824,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.336187944,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 1.674866413,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.006301514,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.029031138,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.016785531,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.486962593,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    }
+]

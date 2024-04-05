@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.28340624600000003,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.200062188,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    }
+]

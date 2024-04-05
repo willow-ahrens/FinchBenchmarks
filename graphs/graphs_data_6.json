@@ -1,0 +1,32 @@
+[
+    {
+        "time": 1.543495559,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 0.265789248,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 1.679374921,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 7.609703099,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 6.680689298,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    }
+]

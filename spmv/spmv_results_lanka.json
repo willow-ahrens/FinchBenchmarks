@@ -2714,43 +2714,7 @@
         "kernel": "spmv",
         "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
         "dataset": "willow_symmetric"
-    }, {
-        "time": 0.000773087,
-        "method": "julia_stdlib",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.00066688,
-        "method": "finch_point",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.000651464,
-        "method": "finch_point_row_maj",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.000632112,
-        "method": "finch_point_pattern",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.000603092,
-        "method": "finch_point_pattern_row_maj",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.00047327500000000005,
-        "method": "taco",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, 
+    },
     {
         "time": 0.000525711,
         "method": "julia_stdlib",
@@ -3063,12 +3027,6 @@
         "kernel": "spmv",
         "matrix": "DNVS/shipsec1",
         "dataset": "taco_symmetric"
-    }, {
-        "time": 0.000564638,
-        "method": "taco_row_maj",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
     }, {
         "time": 0.00419164,
         "method": "taco_row_maj",
@@ -3789,18 +3747,6 @@
         "kernel": "spmv",
         "matrix": "Wang/wang3",
         "dataset": "vuduc_unsymmetric"
-    }, {
-        "time": 0.005979156,
-        "method": "suite_sparse",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
-    }, {
-        "time": 0.000801499,
-        "method": "finch_unsym",
-        "kernel": "spmv",
-        "matrix": "permutation_synthetic",
-        "dataset": "permutation"
     }, {
         "time": 0.001050783,
         "method": "finch_unsym",

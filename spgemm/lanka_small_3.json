@@ -1,0 +1,50 @@
+[
+    {
+        "time": 0.553076126,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.055340348000000004,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.068735312,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.528355204,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.037808148,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.309739025,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.103958319,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.090179272,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    }
+]

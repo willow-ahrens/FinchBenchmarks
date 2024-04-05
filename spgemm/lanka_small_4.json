@@ -1,0 +1,50 @@
+[
+    {
+        "time": 1.2078284430000001,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.012293381,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.12218076600000001,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 1.19072659,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.008709435,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.045500402,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.020964281,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.158017259,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    }
+]

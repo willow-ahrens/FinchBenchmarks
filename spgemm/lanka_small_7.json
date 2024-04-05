@@ -1,0 +1,50 @@
+[
+    {
+        "time": 1.424616778,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.19183128200000002,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.284358178,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 1.262466093,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.169729276,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 1.492552065,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.463066646,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.363664462,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    }
+]

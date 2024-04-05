@@ -1,0 +1,14 @@
+[
+    {
+        "time": 0.035328963000000005,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "time": 0.024325387,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    }
+]
