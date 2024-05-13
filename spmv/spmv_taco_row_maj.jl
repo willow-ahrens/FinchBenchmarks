@@ -7,7 +7,7 @@ function spmv_taco_helper_row_maj(args, A, x)
         x_path = joinpath(tmpdir, "x.ttx")
         y_path = joinpath(tmpdir, "y.ttx")
         A_T = Tensor(Dense(SparseList(Element(0.0))))
-        @finch mode=fastfinch begin
+        @finch mode=:fast begin
             A_T .= 0
             for j=_, i=_
                 A_T[i, j] = A[j, i]

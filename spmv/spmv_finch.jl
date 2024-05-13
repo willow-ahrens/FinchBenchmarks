@@ -85,7 +85,7 @@ function spmv_finch(y, A, x)
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseList(Element(0.0))), A)
     _d = Tensor(Dense(Element(0.0)))
-    @finch mode=fastfinch begin
+    @finch mode=:fast begin
         _A .= 0
         _d .= 0
         for j = _, i = _

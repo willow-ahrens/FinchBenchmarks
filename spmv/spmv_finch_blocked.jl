@@ -184,7 +184,7 @@ function spmv_finch_blocked(y, A, x)
     b = 10
     (n, m) = size(A)
     _block_A = Tensor(Dense(SparseHash{1}(Dense(Dense(Element(0.0))))), b, b, fld1(n, b), fld1(m, b))
-    @finch mode=fastfinch begin
+    @finch mode=:fast begin
         _block_A .= 0
         for j = _
             for i = _
@@ -197,7 +197,7 @@ function spmv_finch_blocked(y, A, x)
     @info "blocked inflation" countstored(block_A) / countstored(_A)
 
     block_x = Tensor(Dense(Dense(Element(0.0))), b, fld1(n, b))
-    @finch mode=fastfinch begin 
+    @finch mode=:fast begin 
         block_x .= 0
         for j = _
             block_x[mod1(j, b), fld1(j, b)] = x[j]
@@ -208,7 +208,7 @@ function spmv_finch_blocked(y, A, x)
     block_y = Tensor(Dense(Dense(Element(0.0))), b, fld1(n, b))
     time = @belapsed spmv_finch_blocked_helper($block_y, $block_A, $block_x, $b)
     y = Tensor(Dense(Element(0.0)), n)
-    @finch mode=fastfinch begin
+    @finch mode=:fast begin
         y .= 0
         for I = _, i = _
             let _i = (I - 1) * 10 + i
