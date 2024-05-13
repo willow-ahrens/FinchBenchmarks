@@ -49,7 +49,7 @@ end
 function spmv_finch_point_pattern_row_maj(y, A, x) 
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparsePoint(Element(0.0))), A)
-    @finch mode=fastfinch begin
+    @finch mode=:fast begin
         _A .= 0
         for j=_, i=_
             _A[i, j] = A[j, i]

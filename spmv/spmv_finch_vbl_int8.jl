@@ -104,7 +104,7 @@ function spmv_finch_vbl_int8(y, A, x)
     _y = Tensor(Dense(Element(0.0)), y)
     _A = Tensor(Dense(SparseVBLLevel(Element(Int8(0)))), A)
     _d = Tensor(Dense(Element(Int8(0))))
-    @finch mode=fastfinch begin
+    @finch mode=:fast begin
         _A .= Int8(0)
         _d .= Int8(0)
         for j = _, i = _

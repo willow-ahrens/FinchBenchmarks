@@ -18,7 +18,7 @@ block_x = Tensor(Dense(Dense(Element(0.0))))
 block_y = Tensor(Dense(Dense(Element(0.0))))
 
 # 0.92x slowdown
-println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_kernel_helper(y, A, x, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -39,7 +39,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x,
 end) 
 
 # 0.90x slowdown
-println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_kernel_helper(y, A, x, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -62,7 +62,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x,
 end) 
 
 # 1.30x speedup
-println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x, diag, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_kernel_helper(y, A, x, diag, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -79,7 +79,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_kernel_helper(y, A, x,
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_int8_kernel_helper(y, A_int8, x, diag_int8, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_int8_kernel_helper(y, A_int8, x, diag_int8, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -96,7 +96,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_int8_kernel_helper(y, 
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_pattern_kernel_helper(y, A_pattern, x, diag_pattern, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_pattern_kernel_helper(y, A_pattern, x, diag_pattern, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -113,7 +113,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_pattern_kernel_helper(
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_pattern_kernel_helper(y, A_pattern, x)
+println(@finch_kernel mode=:fast function spmv_finch_pattern_kernel_helper(y, A_pattern, x)
     y .= 0
     for j = _, i = _
         y[i] += A_pattern[i, j] * x[j]
@@ -121,7 +121,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_pattern_kernel_helper(y
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_pattern_kernel_helper_row_maj(y, A_pattern, x)
+println(@finch_kernel mode=:fast function spmv_finch_pattern_kernel_helper_row_maj(y, A_pattern, x)
     y .= 0
     for j = _, i = _
         y[j] += A_pattern[i, j] * x[i]
@@ -129,7 +129,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_pattern_kernel_helper_r
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_parallel_kernel_helper(y, A, x, diag, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_parallel_kernel_helper(y, A, x, diag, y_j)
     y .= 0
     for j = parallel(_)
         let x_j = x[j]
@@ -146,7 +146,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_parallel_kernel_helper
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_kernel_helper(y, A, x)
+println(@finch_kernel mode=:fast function spmv_finch_kernel_helper(y, A, x)
     y .= 0
     for j = _, i = _
         y[i] += A[i, j] * x[j]
@@ -154,7 +154,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_kernel_helper(y, A, x)
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_kernel_helper_row_maj(y, A, x)
+println(@finch_kernel mode=:fast function spmv_finch_kernel_helper_row_maj(y, A, x)
     y .= 0
     for j = _, i = _
         y[j] += A[i, j] * x[i]
@@ -162,7 +162,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_kernel_helper_row_maj(y
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_kernel_helper(y, A_vbl, x, diag, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_vbl_kernel_helper(y, A_vbl, x, diag, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -179,7 +179,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_kernel_helper(y, A
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_int8_kernel_helper(y, A_vbl_int8, x, diag_int8, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_vbl_int8_kernel_helper(y, A_vbl_int8, x, diag_int8, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -196,7 +196,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_int8_kernel_helper
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_pattern_kernel_helper(y, A_vbl_pattern, x, diag_pattern, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_vbl_pattern_kernel_helper(y, A_vbl_pattern, x, diag_pattern, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -213,7 +213,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_vbl_pattern_kernel_hel
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_vbl_kernel_helper(y, A_vbl, x)
+println(@finch_kernel mode=:fast function spmv_finch_vbl_kernel_helper(y, A_vbl, x)
     y .= 0
     for j = _, i = _
         y[i] += A_vbl[i, j] * x[j]
@@ -221,7 +221,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_vbl_kernel_helper(y, A_
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_vbl_kernel_helper_row_maj(y, A_vbl, x)
+println(@finch_kernel mode=:fast function spmv_finch_vbl_kernel_helper_row_maj(y, A_vbl, x)
     y .= 0
     for j = _, i = _
         y[j] += A_vbl[i, j] * x[i]
@@ -229,7 +229,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_vbl_kernel_helper_row_m
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function ssymv_finch_band_kernel_helper(y, A_band, x, diag, y_j)
+println(@finch_kernel mode=:fast function ssymv_finch_band_kernel_helper(y, A_band, x, diag, y_j)
     y .= 0
     for j = _
         let x_j = x[j]
@@ -246,7 +246,7 @@ println(@finch_kernel mode=fastfinch function ssymv_finch_band_kernel_helper(y, 
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_band_kernel_helper(y, A_band, x)
+println(@finch_kernel mode=:fast function spmv_finch_band_kernel_helper(y, A_band, x)
     y .= 0
     for j = _, i = _
         y[i] += A_band[i, j] * x[j]
@@ -254,7 +254,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_band_kernel_helper(y, A
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_band_kernel_helper_row_maj(y, A_band, x)
+println(@finch_kernel mode=:fast function spmv_finch_band_kernel_helper_row_maj(y, A_band, x)
     y .= 0
     for j = _, i = _
         y[j] += A_band[i, j] * x[i]
@@ -262,7 +262,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_band_kernel_helper_row_
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_point_kernel_helper(y, A_point, x)
+println(@finch_kernel mode=:fast function spmv_finch_point_kernel_helper(y, A_point, x)
     y .= 0
     for j = _, i = _
         y[i] += A_point[i, j] * x[j]
@@ -270,7 +270,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_kernel_helper(y, 
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_point_kernel_helper_row_maj(y, A_point, x)
+println(@finch_kernel mode=:fast function spmv_finch_point_kernel_helper_row_maj(y, A_point, x)
     y .= 0
     for j = _, i = _
         y[j] += A_point[i, j] * x[i]
@@ -278,7 +278,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_kernel_helper_row
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_helper(y, A_point_pattern, x)
+println(@finch_kernel mode=:fast function spmv_finch_point_pattern_kernel_helper(y, A_point_pattern, x)
     y .= 0
     for j = _, i = _
         y[i] += A_point_pattern[i, j] * x[j]
@@ -286,7 +286,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_he
     return y
 end)
 
-println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_helper_row_maj(y, A_point_pattern, x)
+println(@finch_kernel mode=:fast function spmv_finch_point_pattern_kernel_helper_row_maj(y, A_point_pattern, x)
     y .= 0
     for j = _, i = _
         y[j] += A_point_pattern[i, j] * x[i]
@@ -294,7 +294,7 @@ println(@finch_kernel mode=fastfinch function spmv_finch_point_pattern_kernel_he
     return y
 end)
 
-print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_8x8(y, block_A, block_x)
+print(@finch_kernel mode=:fast function blocked_spmv_kernel_8x8(y, block_A, block_x)
     y .= 0
     for J = _
         for I = _
@@ -309,7 +309,7 @@ print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_8x8(y, block_A, 
     end
 end)
 
-print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_10x10(y, block_A, block_x)
+print(@finch_kernel mode=:fast function blocked_spmv_kernel_10x10(y, block_A, block_x)
     y .= 0
     for J = _
         for I = _
@@ -324,7 +324,7 @@ print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_10x10(y, block_A
     end
 end)
 
-print(@finch_kernel mode=fastfinch function blocked_spmv_kernel_10x10(block_y, block_A, block_x)
+print(@finch_kernel mode=:fast function blocked_spmv_kernel_10x10(block_y, block_A, block_x)
     block_y .= 0
     for J = _
         for I = _
