@@ -31,13 +31,23 @@ function main(infile, outname)
 
     target = data[isequal("0.1 density").(data.x), :]
 
+    
     p = boxplot(
         CategoricalArray(label.(target.method), levels=label.(interest)),
         target.speedup,
         xlabel="Method",
         ylabel = "Speedup Over TACO",
-        legend=false
+        legend=false,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.4,
+        dpi=200,
+        permute=(:x, :y)
     )
+    vline!([1.0], line=:dash, color=:red, label=nothing)
 
     savefig(p, "$(outname)_1density.png")
 
@@ -48,8 +58,17 @@ function main(infile, outname)
         target.speedup,
         xlabel="Method",
         ylabel = "Speedup Over TACO",
-        legend=false
+        legend=false,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.4,
+        dpi=200,
+        permute=(:x, :y)
     )
+    vline!([1.0], line=:dash, color=:red, label=nothing)
 
     savefig(p, "$(outname)_10count.png")
 end

@@ -34,7 +34,15 @@ function main(infile, outfile)
         group=group,
         legend=:topleft,
         xlabel="Dataset",
-        ylabel = "Speedup Over OpenCV"
+        ylabel = "Speedup Over OpenCV",
+        linecolor=nothing,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.6,
+        dpi=200,
     )
 
     savefig(p, outfile)

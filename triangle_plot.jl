@@ -31,8 +31,17 @@ function main(infile, outfile)
         group,
         data.speedup,
         xlabel="Method",
-        ylabel = "Speedup Over TACO"
+        ylabel = "Speedup Over TACO",
+        legend=false,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.4,
+        dpi=200,
     )
+    hline!([1.0], line=:dash, color=:red, label=nothing)
 
     savefig(p, outfile)
 end

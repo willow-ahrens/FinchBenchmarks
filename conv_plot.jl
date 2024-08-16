@@ -24,7 +24,14 @@ function main(infile, outfile)
         ylabel = "Runtime (s)",
         xscale = :log,
         yscale = :log,
-        xflip = true
+        xflip = true,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.4,
+        dpi=200,
     )
     for method in interest
         target = data[isequal(method).(data.method), :]

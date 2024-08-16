@@ -32,11 +32,21 @@ function main(infile, outfile)
     dataset = CategoricalArray(label.(data.dataset), levels=label.(["omniglot_train", "humansketches"]))
 
     p = groupedbar(dataset,
+        legend=:topleft,
         data.speedup,
         group=group,
         xlabel="Dataset",
-        ylabel = "Speedup Over OpenCV"
+        ylabel = "Speedup Over OpenCV",
+        linecolor=nothing,
+        legendfontsize=12,
+        xtickfontsize=16,
+        ytickfontsize=16,
+        size=(6 * 200, 3 * 200),
+        xgrid=false,
+        bar_width=0.4,
+        dpi=200,
     )
+    hline!([1.0], line=:dash, color=:red, label=nothing)
 
     savefig(p, outfile)
 end

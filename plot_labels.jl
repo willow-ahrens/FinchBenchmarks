@@ -6,16 +6,16 @@ label_lookup = Dict(
     "humansketches" => "HumanSketches",
     "opencv"=>"opencv",
     "taco_rle"=>"TACO (RLE)",
-    "finch_sparse"=>"Finch (Sparse)",
-    "finch_gallop"=>"Finch (Gallop)",
-    "finch_lead"=>"Finch (Lead)",
-    "finch_follow"=>"Finch (Follow)",
-    "finch_vbl"=>"Finch (VBL)",
-    "finch_rle"=>"Finch (RLE)",
-    "finch_uint8"=>"Finch (Sparse) (UInt8)",
+    "finch_sparse"=>"Finch (SparseList Walk)",
+    "finch_gallop"=>"Finch (SparseList Gallop)",
+    "finch_lead"=>"Finch (SparseList Lead)",
+    "finch_follow"=>"Finch (SparseList Follow)",
+    "finch_vbl"=>"Finch (SparseBlockList)",
+    "finch_rle"=>"Finch (RunList)",
+    "finch_uint8"=>"Finch (SparseList) (UInt8)",
     "finch_uint8_gallop"=>"Finch (Gallop) (UInt8)",
-    "finch_uint8_vbl"=>"Finch (VBL) (UInt8)",
-    "finch_uint8_rle"=>"Finch (RLE) (UInt8)"
+    "finch_uint8_vbl"=>"Finch (SparseBlockList) (UInt8)",
+    "finch_uint8_rle"=>"Finch (RunList) (UInt8)"
 )
 
 label(key) = label_lookup[key]

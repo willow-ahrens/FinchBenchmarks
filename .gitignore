@@ -14,3 +14,7 @@ opencv/install
 scratch
 julia-1.8.2
 .julia
+graphs/lib/*
+graphs/bin/*
+graphs/share/*
+*pyenv.cfg
