@@ -14,3 +14,7 @@ graphs/share
 graphs/pyvenv.cfg
 morphology/output/*
 */manifest.toml
+opencv/*
+taco-rle/*
+taco/*
+.julia/*
