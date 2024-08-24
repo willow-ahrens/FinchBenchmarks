@@ -66,6 +66,9 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     plt.tight_layout()
     fig_file = f"{title.lower().replace(' ', '_').replace('-', '_')}.png"
 
+    # Add a horizontal dashed red line at y=1.0
+    ax.axhline(y=1.0, color='red', linestyle='--')
+
     plt.savefig(CHARTS_DIRECTORY + fig_file, dpi=200)
     plt.show()
 

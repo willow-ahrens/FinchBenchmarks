@@ -54,8 +54,8 @@ def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Sp
 
     for i, label in enumerate(labels):
         offset = width * (i - len(labels)/2)  # Center bars around the tick
+        #cross-hatch the bar if the string "finch" is not in the label
         ax.bar(x + offset, data[label], width, label=re.sub("spgemm_", "", label))
-        
 
     ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
 
