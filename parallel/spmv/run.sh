@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for t in {1..4}
+do
+    echo "Running run_spmv.jl with $t threads"
+    
+    # Run Julia command with current number of threads
+    julia --threads="$t" "run_spmv.jl"    
+done
