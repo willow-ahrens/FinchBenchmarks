@@ -26,7 +26,8 @@ s = ArgParseSettings("Run SPMV experiments.")
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
-        default = "vuduc_symmetric"
+        #default = "vuduc_symmetric"
+        default = "willow_unsymmetric"
 end
 
 parsed_args = parse_args(ARGS, s)
@@ -76,14 +77,14 @@ datasets = Dict(
     #     # "Janna/Geo_1438",
     #     "TAMU_SmartGridCenter/ACTIVSg70K"
     # ],
-    # "willow_unsymmetric" => [
-    #     "Goodwin/Goodwin_071", 
-    #     # "Hamm/scircuit", 
-    #     # "LPnetlib/lpi_gran",
-    #     "Norris/heart3",
-    #     "Rajat/rajat26", 
-    #     "TSOPF/TSOPF_RS_b678_c1" 
-    # ],
+     "willow_unsymmetric" => [
+         "Goodwin/Goodwin_071", 
+         # "Hamm/scircuit", 
+         # "LPnetlib/lpi_gran",
+         "Norris/heart3",
+         "Rajat/rajat26", 
+         "TSOPF/TSOPF_RS_b678_c1" 
+     ],
     # "permutation" => [
     #     "permutation_synthetic"
     # ], 
@@ -150,6 +151,8 @@ include("spmv_finch_point_pattern_row_maj.jl")
 include("spmv_finch_blocked.jl")
 include("spmv_julia.jl")
 include("spmv_taco.jl")
+include("spmv_eigen.jl")
+include("spmv_mkl.jl")
 include("spmv_taco_row_maj.jl")
 include("spmv_suite_sparse.jl")
 
@@ -187,7 +190,9 @@ methods = Dict(
         # "finch_unsym_row_maj" => spmv_finch_unsym_row_maj,
         # "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         # "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
-        # "taco" => spmv_taco,
+         "taco" => spmv_taco,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,  
         # "blocked" => spmv_finch_blocked,  
@@ -196,7 +201,7 @@ methods = Dict(
         # "julia_stdlib" => spmv_julia,
         # "finch" => spmv_finch,
         # "finch_unsym" => spmv_finch_unsym,
-        "finch_pattern" => spmv_finch_pattern,
+        #"finch_pattern" => spmv_finch_pattern,
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
