@@ -28,7 +28,7 @@ s = ArgParseSettings("Run spgemm experiments.")
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
-        default = "joel"
+        default = "small"
     "--batch", "-b"
         arg_type = Int
         help = "batch number"
@@ -97,12 +97,16 @@ datasets = Dict(
 include("spgemm_finch.jl")
 include("spgemm_finch_par.jl")
 include("spgemm_taco.jl")
+include("spgemm_eigen.jl")
+include("spgemm_mkl.jl")
 
 methods = Dict(
     "all" => [
         "spgemm_taco_inner" => spgemm_taco_inner,
         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
         "spgemm_taco_outer" => spgemm_taco_outer,
+        "spgemm_eigen_gustavson" => spgemm_eigen,
+        "spgemm_mkl_gustavson" => spgemm_mkl,
         "spgemm_finch_inner" => spgemm_finch_inner,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_finch_outer" => spgemm_finch_outer,
@@ -112,6 +116,8 @@ methods = Dict(
     "gustavson" => [
         "spgemm_taco_gustavson" => spgemm_taco_gustavson,
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
+        "spgemm_eigen_gustavson" => spgemm_eigen,
+        "spgemm_mkl_gustavson" => spgemm_mkl,
     ]
 )
 
