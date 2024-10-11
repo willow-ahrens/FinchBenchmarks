@@ -15,3 +15,9 @@ graphs/pyvenv.cfg
 images/output/*
 */manifest.toml
 old/*
+morphology/output/*
+*/manifest.toml
+opencv/*
+taco-rle/*
+taco/*
+.julia/*

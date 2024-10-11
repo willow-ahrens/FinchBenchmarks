@@ -85,14 +85,14 @@ def add_value_labels(ax, spacing=5):
         label = "{:.1f}".format(y_value)
 
         # Create annotation
-        ax.annotate(
-            label,                      # Use `label` as label
-            (x_value, y_value),         # Place label at end of the bar
-            xytext=(0, space),          # Vertically shift label by `space`
-            textcoords="offset points", # Interpret `xytext` as offset in points
-            ha='center',                # Horizontally center label
-            va=va)                      # Vertically align label differently for
-                                        # positive and negative values.
+        #ax.annotate(
+        #    label,                      # Use `label` as label
+        #    (x_value, y_value),         # Place label at end of the bar
+        #    xytext=(0, space),          # Vertically shift label by `space`
+        #    textcoords="offset points", # Interpret `xytext` as offset in points
+        #    ha='center',                # Horizontally center label
+        #    va=va)                      # Vertically align label differently for
+        #                                # positive and negative values.
 
 def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))  # the label locations
@@ -118,6 +118,9 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
 
     if log_scale:
         ax.set_yscale('log')  # Set the y-axis to a logarithmic scale
+
+    # Add a horizontal dashed red line at y=1.0
+    ax.axhline(y=1.0, color='red', linestyle='--')
 
     plt.tight_layout()
     fig_file = f"{title.lower().replace(' ', '_').replace('-', '_').replace('/', '_')}.png"
