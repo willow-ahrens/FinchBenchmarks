@@ -29,7 +29,8 @@ for z0 = (0, 0.0, false)
         return C
     end)
 
-    w = Tensor(SparseHash{2}(Element(z)))
+    #w = Tensor(SparseHash{2}(Element(z)))
+    w = Tensor(SparseDict(SparseDict(Element(z))))
     eval(@finch_kernel function spgemm_finch_outer_kernel(C, w, A, BT)
         w .= 0
         for k=_, j=_, i=_
@@ -72,7 +73,8 @@ end
 function spgemm_finch_inner_measure(A, B)
     z = default(A) * default(B) + false
     C = Tensor(Dense(SparseList(Element(z))))
-    w2D = Tensor(SparseHash{2}(Element(z)))
+    #w2D = Tensor(SparseHash{2}(Element(z)))
+    w2D = Tensor(SparseDict(SparseDict(Element(z))))
     AT = Tensor(Dense(SparseList(Element(z))))
     AT = copyto!(AT, swizzle(A, 2, 1))
     time = @belapsed spgemm_finch_inner_kernel($C, $AT, $B)
@@ -92,7 +94,8 @@ end
 function spgemm_finch_outer_measure(A, B)
     z = default(A) * default(B) + false
     C = Tensor(Dense(SparseList(Element(z))))
-    w = Tensor(SparseHash{2}(Element(z)))
+    #w = Tensor(SparseHash{2}(Element(z)))
+    w = Tensor(SparseDict(SparseDict(Element(z))))
     BT = Tensor(Dense(SparseList(Element(z))))
     BT = copyto!(BT, swizzle(B, 2, 1))
     time = @belapsed spgemm_finch_outer_kernel($C, $w, $A, $BT)
