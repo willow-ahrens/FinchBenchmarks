@@ -108,7 +108,8 @@ sample(r) = r[randperm(end)[1:min(N, end)]]
 mnist_i = sample(1:mnist_train_length())
 omniglot_i = sample(1:omniglot_train_length())
 humansketches_i = sample(1:humansketches_length())
-testimage_dip3e_i = sample(dip3e_masks)
+#testimage_dip3e_i = sample(dip3e_masks)
+testimage_dip3e_i = sample(remotefiles_dip3e)
 
 datas = Dict(
     "mnist" => (mnist_train, mnist_i, (img) -> Array{UInt8}(img .> 0x02)),

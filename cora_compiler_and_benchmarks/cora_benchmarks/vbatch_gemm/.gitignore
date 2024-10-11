@@ -1,0 +1,3 @@
+vbatch_gemm/cublas/gemm_cublas
+vbatch_gemm/cbt/gemm
+data.txt

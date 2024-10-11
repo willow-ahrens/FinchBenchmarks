@@ -1,0 +1,5 @@
+taco_csr_trmm
+taco_csr_tradd
+taco_bcsr_trmul
+taco_csr_trmul
+taco_bcsr_trmm
