@@ -1,0 +1,13 @@
+**/taco_csr_trmm
+**/taco_csr_tradd
+**/gemm_config.in
+**/results
+**/__pycache__
+perf/
+genlibs/
+**/dump
+**/core
+**/dump
+**/gemm
+**/log
+**/ansor_out_*

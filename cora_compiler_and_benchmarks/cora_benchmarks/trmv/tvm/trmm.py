@@ -138,12 +138,13 @@ def schedule_op(O, suffix, cache_write_tensor=None):
     # s[S].pragma(S_l_o_o_o_o, "auto_unroll_max_step", 512)
     # s[S].pragma(S_l_o_o_o_o, "unroll_explicit", True)
 
-if args.target == "cuda":
-    if args.op_split:
-        schedule_op(O1, '1')
-        schedule_op(O2, '2', O2i)
-    else:
-        schedule_op(O, '', S)
+if args.optimize:
+    if args.target == "cuda":
+        if args.op_split:
+            schedule_op(O1, '1')
+            schedule_op(O2, '2', O2i)
+        else:
+            schedule_op(O, '', S)
 
 gen_prefix = os.path.splitext(os.path.basename(os.path.realpath(__file__)))[0]
 _ = tvm.register_func(utils.get_tvm_callback_cuda_compile(256))

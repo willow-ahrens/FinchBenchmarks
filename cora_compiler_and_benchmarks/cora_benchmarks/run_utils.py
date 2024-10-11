@@ -416,6 +416,7 @@ def run_trmm(built, i_inputs_tensors, t_inputs_tensors, lw_args, args, pad_sum=N
     import tvm
     ctx = get_ctx(args.target)
     cpu_ctx = get_ctx("llvm")
+
     host_i_inputs, dev_i_inputs = [], []
     if len(i_inputs_tensors) == 2:
         host_i_inputs = [tvm.nd.array(create_numpy_array(i, "int32"), cpu_ctx) for i in i_inputs_tensors[0]]

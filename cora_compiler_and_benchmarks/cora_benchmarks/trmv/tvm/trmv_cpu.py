@@ -14,12 +14,12 @@ parser = run_utils.get_cmd_parser(no_options=True)
 parser.add_argument('--target', nargs='?', default='llvm')
 parser.add_argument('--dtype', dest='dtype', nargs='?', default='float32')
 parser.add_argument('--m', dest='m', default=1024, type=int)
-parser.add_argument('--n', dest='n', default=128, type=int)
+parser.add_argument('--n', dest='n', default=1, type=int)
 parser.add_argument('--debug', dest='debug', default=False, action='store_true')
 parser.add_argument('--load-balance', dest='load_balance', default=False, action='store_true')
 parser.add_argument('--debug-code', dest='debug_code', default=None, type=str)
 parser.add_argument('--debug-functions', dest='debug_functions', default=False, action='store_true')
-parser.add_argument('--op-split', dest='op_split', default=False, action='store_true')
+parser.add_argument('--optimize', dest='optimize', default=False, action='store_true')
 parser.add_argument('--manual-code', dest='manual_code', default=False, action='store_true')
 parser.add_argument('--dense-storage', dest='dense_storage', default=False, action='store_true')
 parser.add_argument('--gen-lib', dest='gen_lib', default=False, action='store_true')
@@ -52,44 +52,21 @@ A = te.ragged_placeholder((M, M), [md, kd], loop_ufs, name='A', width_ufs=None)
 B = te.placeholder((M, N), name='B')
 
 alpha = 2
-if args.op_split:
-    def len_ufw(name, pad): return Ufw(name, "l", (pad, M), [md], [], lambda: lambda m: utils.floormult(m, pad))
-    luf = len_ufw('s2k', 128).get_uf()
+def len_ufw(name, pad): return Ufw(name, "l", (pad, M), [md], [], lambda: lambda m: utils.ceilmult(m + 1, pad))
+luf = len_ufw('s2k', 256).get_uf()
 
-    loop_ufs=[ls[0], ls[1]]
-    O1 = te.ragged_compute((M, N), [md, nd], loop_ufs,
-                           lambda ds, rds: tvm.sum(A[ds[md], rds['k']] * B[rds['k'], ds[nd]],
-                                                   axis=rds['k'], dimensions = [kd]),
-                           name = 'O1', reduce_axis_ufs = [('k', luf)], width_uf_lists=None)
+loop_ufs=[ls[0], ls[1]]
+S = te.ragged_compute((M, N), [md, nd], loop_ufs,
+                      lambda ds, rds: tvm.sum(tvm.tir.Cast('int32', rds['k'] < (ds[md] + 1)) *
+                                              A[ds[md], rds['k']] * B[rds['k'], ds[nd]],
+                                              axis=rds['k'], dimensions = [kd]),
+                      # lambda ds, rds: tvm.sum(A[ds[md], rds['k']] * B[rds['k'], ds[nd]],
+                                              # axis=rds['k'], dimensions = [kd]),
+                      name = 'S', reduce_axis_ufs = [('k', luf)], width_uf_lists=None)
 
-    O2i = te.ragged_compute((M, N), [md, nd], loop_ufs,
-                            lambda ds, rds: tvm.sum(tvm.tir.Cast('int32', utils.floormult(ds[md], 32) + rds['k'] < (ds[md] + 1)) *
-                                                    A[ds[md], utils.floormult(ds[md], 32) + rds['k']] *
-                                                    B[utils.floormult(ds[md], 32) + rds['k'], ds[nd]],
-                                                    axis=rds['k'], dimensions = [kd]),
-                            name = 'O2i', reduce_axis_ufs = [('k', Uf.from_constant('kd', 32, 'l'))], width_uf_lists=None)
+O = te.ragged_compute((M, N), [md, nd], loop_ufs, lambda ds: alpha*S[ds[md], ds[nd]], name = 'O', width_uf_lists=None)
 
-    O2 = te.ragged_compute((M, N), [md, nd], loop_ufs,
-                           lambda ds: alpha*(O1[ds[md], ds[nd]] + O2i[ds[md], ds[nd]]),
-                           name = 'O2', width_uf_lists=None)
-
-    s = tvm.create_schedule([O1.op, O2.op])
-else:
-    def len_ufw(name, pad): return Ufw(name, "l", (pad, M), [md], [], lambda: lambda m: utils.ceilmult(m + 1, pad))
-    luf = len_ufw('s2k', 256).get_uf()
-
-    loop_ufs=[ls[0], ls[1]]
-    S = te.ragged_compute((M, N), [md, nd], loop_ufs,
-                          lambda ds, rds: tvm.sum(tvm.tir.Cast('int32', rds['k'] < (ds[md] + 1)) *
-                                                  A[ds[md], rds['k']] * B[rds['k'], ds[nd]],
-                                                  axis=rds['k'], dimensions = [kd]),
-                          # lambda ds, rds: tvm.sum(A[ds[md], rds['k']] * B[rds['k'], ds[nd]],
-                                                  # axis=rds['k'], dimensions = [kd]),
-                          name = 'S', reduce_axis_ufs = [('k', luf)], width_uf_lists=None)
-
-    O = te.ragged_compute((M, N), [md, nd], loop_ufs, lambda ds: alpha*S[ds[md], ds[nd]], name = 'O', width_uf_lists=None)
-
-    s = tvm.create_schedule([O.op])
+s = tvm.create_schedule([O.op])
 
 def schedule_op(O, suffix, cache_write_tensor=None):
     if cache_write_tensor is not None:
@@ -124,14 +101,10 @@ def schedule_op(O, suffix, cache_write_tensor=None):
     else: return []
 
 substitute_ops = []
-if args.op_split:
-    substitute_ops += schedule_op(O1, '1')
-    substitute_ops += schedule_op(O2, '2', O2i)
-else:
+if args.optimize:
     substitute_ops += schedule_op(O, '', S)
 
-if args.op_split: inputs = [[], [A, B, O1, O2]]
-else: inputs = [[], [A, B, O]]
+inputs = [[], [A, B, O]]
 
 substitutes=None
 if args.load_balance:
