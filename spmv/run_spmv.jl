@@ -33,50 +33,50 @@ end
 parsed_args = parse_args(ARGS, s)
 
 datasets = Dict(
-    # "vuduc_symmetric" => [
-    #     "Boeing/ct20stif",
-    #     "Simon/olafu",
-    #     "Boeing/bcsstk35",
-    #     "Boeing/crystk02",
-    #     "Boeing/crystk03",
-    #     "Nasa/nasasrb",
-    #     "Simon/raefsky4",
-    #     "Mulvey/finan512",
-    #     "Cote/vibrobox",
-    #     "HB/saylr4",
-    # ],
+     "vuduc_symmetric" => [
+         "Boeing/ct20stif",
+         "Simon/olafu",
+         "Boeing/bcsstk35",
+         "Boeing/crystk02",
+         "Boeing/crystk03",
+         "Nasa/nasasrb",
+         "Simon/raefsky4",
+         "Mulvey/finan512",
+         "Cote/vibrobox",
+         "HB/saylr4",
+     ],
     "vuduc_symmetric_pattern" => [
         "Rothberg/3dtube",
         "Pothen/pwt",
         "Gupta/gupta1"
     ],
-    # "vuduc_unsymmetric" => [
-    #     "Simon/raefsky3",
-    #     "Simon/venkat01",
-    #     "FIDAP/ex11",
-    #     "Zitney/rdist1",
-    #     "HB/orani678",
-    #     "Goodwin/rim",
-    #     "Hamm/memplus",
-    #     "HB/gemat11",
-    #     "Mallya/lhr10",
-    #     "Grund/bayer02",
-    #     "Grund/bayer10",
-    #     "Brethour/coater2",
-    #     "ATandT/onetone2",
-    #     "Wang/wang4",
-    #     "HB/lnsp3937",
-    #     "HB/sherman5",
-    #     "HB/sherman3",
-    #     "Shyy/shyy161",
-    #     "Wang/wang3",
-    # ],
-    # "willow_symmetric" => [
-    #     "GHS_indef/exdata_1",
-    #     # "Janna/Emilia_923",
-    #     # "Janna/Geo_1438",
-    #     "TAMU_SmartGridCenter/ACTIVSg70K"
-    # ],
+     "vuduc_unsymmetric" => [
+         "Simon/raefsky3",
+         "Simon/venkat01",
+         "FIDAP/ex11",
+         "Zitney/rdist1",
+         "HB/orani678",
+         "Goodwin/rim",
+         "Hamm/memplus",
+         "HB/gemat11",
+         "Mallya/lhr10",
+         "Grund/bayer02",
+         "Grund/bayer10",
+         "Brethour/coater2",
+         "ATandT/onetone2",
+         "Wang/wang4",
+         "HB/lnsp3937",
+         "HB/sherman5",
+         "HB/sherman3",
+         "Shyy/shyy161",
+         "Wang/wang3",
+     ],
+     "willow_symmetric" => [
+         "GHS_indef/exdata_1",
+         # "Janna/Emilia_923",
+         # "Janna/Geo_1438",
+         "TAMU_SmartGridCenter/ACTIVSg70K"
+     ],
      "willow_unsymmetric" => [
          "Goodwin/Goodwin_071", 
          # "Hamm/scircuit", 
@@ -88,44 +88,47 @@ datasets = Dict(
     # "permutation" => [
     #     "permutation_synthetic"
     # ], 
-    # "graph_symmetric" => [
-    #     "SNAP/email-Enron", 
-    #     "SNAP/as-735",
-    #     "SNAP/Oregon-1",
-    #     "Newman/as-22july06",
-    #     "SNAP/loc-Brightkite",
-    #     "SNAP/as-Skitter"
-    # ],
-    # "graph_unsymmetric" => [
-    #     "SNAP/soc-Epinions1",
-    #     "SNAP/wiki-Vote",
-    #     "SNAP/email-EuAll",
-    #     "SNAP/cit-HepPh",
-    #     "SNAP/web-NotreDame",
-    #     "SNAP/amazon0302",
-    #     "SNAP/p2p-Gnutella08",
-    #     "SNAP/email-Eu-core",
-    # ],
-    # "banded" => [
-    #     "toeplitz_small_band",
-    #     "toeplitz_medium_band",
-    #     "toeplitz_large_band",
-    # ],
-    # "taco_symmetric" => [
-    #     "HB/bcsstk17",
-    #     "Williams/pdb1HYS",
-    #     "Williams/cant",
-    #     "Williams/consph",
-    #     # "Williams/cop20k_A",
-    #     "DNVS/shipsec1",
-    #     # "Boeing/pwtk",
-    # ],
-    # "taco_unsymmetric" => [
-    #     "Bova/rma10"
-    # ],
-    # "blocked" => [
-    #     "blocked_10x10"
-    # ]
+     "graph_symmetric" => [
+         "SNAP/email-Enron", 
+         "SNAP/as-735",
+         "SNAP/Oregon-1",
+         "Newman/as-22july06",
+         "SNAP/loc-Brightkite",
+         "SNAP/as-Skitter"
+     ],
+     "graph_unsymmetric" => [
+         "SNAP/soc-Epinions1",
+         "SNAP/wiki-Vote",
+         "SNAP/email-EuAll",
+         "SNAP/cit-HepPh",
+         "SNAP/web-NotreDame",
+         "SNAP/amazon0302",
+         "SNAP/p2p-Gnutella08",
+         "SNAP/email-Eu-core",
+     ],
+     "banded" => [
+         "toeplitz_small_band",
+         "toeplitz_medium_band",
+         "toeplitz_large_band",
+     ],
+     "triangle" => [
+         "upper_triangle",
+     ],
+     "taco_symmetric" => [
+         "HB/bcsstk17",
+         "Williams/pdb1HYS",
+         "Williams/cant",
+         "Williams/consph",
+         # "Williams/cop20k_A",
+         "DNVS/shipsec1",
+         # "Boeing/pwtk",
+     ],
+     "taco_unsymmetric" => [
+         "Bova/rma10"
+     ],
+#     "blocked" => [
+#         "blocked_10x10"
+#     ]
 )
 
 include("synthetic.jl")
@@ -164,6 +167,7 @@ dataset_tags = Dict(
     "willow_unsymmetric" => "unsymmetric",
     "permutation" => "permutation",
     "banded" => "banded",
+    "triangle" => "banded",
     "graph_symmetric" => "symmetric_pattern",
     "graph_unsymmetric" => "unsymmetric_pattern",
     "taco_symmetric" => "symmetric",
@@ -183,6 +187,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
     "unsymmetric" => [
         # "julia_stdlib" => spmv_julia,
@@ -190,7 +196,6 @@ methods = Dict(
         # "finch_unsym_row_maj" => spmv_finch_unsym_row_maj,
         # "finch_vbl_unsym" => spmv_finch_vbl_unsym,
         # "finch_vbl_unsym_row_maj" => spmv_finch_vbl_unsym_row_maj,
-         "taco" => spmv_taco,
          "eigen" => spmv_eigen,
          "mkl" => spmv_mkl,
         # "taco_row_maj" => spmv_taco_row_maj,
@@ -205,6 +210,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
     "unsymmetric_pattern" => [
         # "julia_stdlib" => spmv_julia,
@@ -214,6 +221,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
     "symmetric_quantized" => [
         # "julia_stdlib" => spmv_julia,
@@ -235,6 +244,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
     "banded" => [
         # "julia_stdlib" => spmv_julia,
@@ -246,6 +257,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse,
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
     "blocked" => [
         # "julia_stdlib" => spmv_julia,
@@ -255,6 +268,8 @@ methods = Dict(
         # "taco" => spmv_taco,
         # "taco_row_maj" => spmv_taco_row_maj,
         # "suite_sparse" => spmv_suite_sparse, 
+         "eigen" => spmv_eigen,
+         "mkl" => spmv_mkl,
     ],
 )
 
