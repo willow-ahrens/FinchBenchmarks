@@ -33,6 +33,7 @@ end
 parsed_args = parse_args(ARGS, s)
 
 datasets = OrderedDict(
+#=
      "vuduc_symmetric" => [
          "Boeing/ct20stif",
          "Simon/olafu",
@@ -111,9 +112,11 @@ datasets = OrderedDict(
          "toeplitz_medium_band",
          "toeplitz_large_band",
      ],
-     #"triangle" => [
-     #    "upper_triangle",
-     #],
+    =#
+     "triangle" => [
+         "upper_triangle",
+     ],
+     #=
      "taco_symmetric" => [
          "HB/bcsstk17",
          "Williams/pdb1HYS",
@@ -129,6 +132,7 @@ datasets = OrderedDict(
 #     "blocked" => [
 #         "blocked_10x10"
 #     ]
+=#
 )
 
 include("synthetic.jl")
@@ -249,14 +253,14 @@ methods = OrderedDict(
     ],
     "banded" => [
         # "julia_stdlib" => spmv_julia,
-        # "finch" => spmv_finch,
-        # "finch_unsym" => spmv_finch_unsym,
-        # "finch_band" => spmv_finch_band,
-        # "finch_band_unsym" => spmv_finch_band_unsym,
-        # "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
-        # "taco" => spmv_taco,
-        # "taco_row_maj" => spmv_taco_row_maj,
-        # "suite_sparse" => spmv_suite_sparse,
+         "finch" => spmv_finch,
+         "finch_unsym" => spmv_finch_unsym,
+         "finch_band" => spmv_finch_band,
+         "finch_band_unsym" => spmv_finch_band_unsym,
+         "finch_band_unsym_row_maj" => spmv_finch_band_unsym_row_maj,
+         "taco" => spmv_taco,
+         "taco_row_maj" => spmv_taco_row_maj,
+         #"suite_sparse" => spmv_suite_sparse,
          "eigen" => spmv_eigen,
          "mkl" => spmv_mkl,
     ],
