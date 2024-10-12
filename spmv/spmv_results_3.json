@@ -1,21 +1,7 @@
 [
     {
-        "time": 0.000790135,
-        "method": "finch",
-        "kernel": "spmv",
-        "matrix": "upper_triangle",
-        "dataset": "triangle"
-    },
-    {
         "time": 0.000446589,
         "method": "finch_unsym",
-        "kernel": "spmv",
-        "matrix": "upper_triangle",
-        "dataset": "triangle"
-    },
-    {
-        "time": 0.001098222,
-        "method": "finch_band",
         "kernel": "spmv",
         "matrix": "upper_triangle",
         "dataset": "triangle"
@@ -58,6 +44,13 @@
     {
         "time": 0.000596277,
         "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.0006160543900000001,
+        "method": "cora",
         "kernel": "spmv",
         "matrix": "upper_triangle",
         "dataset": "triangle"

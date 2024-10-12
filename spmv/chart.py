@@ -170,6 +170,8 @@ def all_formats_chart(ordered_by_format=False):
         "eigen": "tab:red",
         "cora": "tab:purple"
     }
+
+    ordered_data = [(mtx, times) for mtx, times in ordered_data if mtx in good_mtxs]
     all_data = defaultdict(list)
     for i, (mtx, times) in enumerate(ordered_data):
         for method in methods:
@@ -275,6 +277,7 @@ def all_formats_for_matrix_chart(matrix):
 def make_grouped_bar_chart(labels, x_axis, data, colors = None, labeled_groups = [], title = "", y_label = "", bar_labels_dict={}, legend_labels=None, reference_label = ""):
     x = np.arange(len(data[labels[0]]))
     width = 0.22 
+    width = 0.8 / len(labels)
     multiplier = 0
     max_height = 0
 
