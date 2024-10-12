@@ -10,7 +10,7 @@ function spmv_mkl(y, A, x)
         fwrite(x_path, Tensor(Dense(Element(0.0)), x))
 	mkl_path = joinpath(@__DIR__, "/data/scratch/changwan/mkl/2024.2/lib/intel64")
 	withenv("DYLD_FALLBACK_LIBRARY_PATH"=>"$mkl_path", "LD_LIBRARY_PATH" => "$mkl_path", "MKL_CFLAGS" => "-O3 -ffast-math -std=c99 -march=native -ggdb") do
-	  spmv_path = joinpath(@__DIR__, "spmv_mkl")
+	  spmv_path = "/data/scratch/changwan/Finch_oopsla_v3/FinchBenchmarks/spmv/spmv_mkl"
 	  run(`$spmv_path -i $tmpdir -o $tmpdir`)
 	end 
         y = fread(y_path)

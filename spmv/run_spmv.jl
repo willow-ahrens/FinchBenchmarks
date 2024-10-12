@@ -32,7 +32,7 @@ end
 
 parsed_args = parse_args(ARGS, s)
 
-datasets = Dict(
+datasets = OrderedDict(
      "vuduc_symmetric" => [
          "Boeing/ct20stif",
          "Simon/olafu",
@@ -111,9 +111,9 @@ datasets = Dict(
          "toeplitz_medium_band",
          "toeplitz_large_band",
      ],
-     "triangle" => [
-         "upper_triangle",
-     ],
+     #"triangle" => [
+     #    "upper_triangle",
+     #],
      "taco_symmetric" => [
          "HB/bcsstk17",
          "Williams/pdb1HYS",
@@ -159,7 +159,7 @@ include("spmv_mkl.jl")
 include("spmv_taco_row_maj.jl")
 include("spmv_suite_sparse.jl")
 
-dataset_tags = Dict(
+dataset_tags = OrderedDict(
     "vuduc_symmetric" => "symmetric",
     "vuduc_unsymmetric" => "unsymmetric",
     "vuduc_symmetric_pattern" => "symmetric_pattern",
@@ -175,7 +175,7 @@ dataset_tags = Dict(
     "blocked" => "blocked",
 )
 
-methods = Dict(
+methods = OrderedDict(
     "symmetric" => [
         # "julia_stdlib" => spmv_julia,
         # "finch" => spmv_finch,
