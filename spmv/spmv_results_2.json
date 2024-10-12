@@ -1,0 +1,856 @@
+[
+    {
+        "time": 0.041212660000000005,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0059797470000000005,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.015335595,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001961186,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.022606736000000002,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0032220010000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.014467232000000002,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0017560030000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.026377547,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0031330000000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.042416593,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.006131999,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.020215391000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0024537030000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.014421796,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005041768,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0051484270000000006,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001063995,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000571097,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00022756000000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.050178455000000004,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.006358672,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.007489422000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.0023983660000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.032233501000000005,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.00416196,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.022487929,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002627668,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.029578505,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.005208721,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.016523019,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0020668400000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001637671,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000335727,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001431739,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00023034900000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.015857956,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002338245,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002726535,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001092944,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000851332,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00032551600000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00399124,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000845317,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0019709040000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0008548220000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00202993,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000836227,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0036131080000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0007882900000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.006006132,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0023622590000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.004304108,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001640911,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000671706,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000255649,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0005402460000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00020759100000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000646663,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00029598600000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.009963722000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00454299,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.004301473,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0016401290000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.031442721,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.002653022,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.008962163,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.004311117000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.029608604,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0051066770000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.009483116,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00083031,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.007428309,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0032106450000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.061548083,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.006141664000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.008138282,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.00259604,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000991879,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000460593,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.001578104,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000696064,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.003190675,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.0014083720000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.010995249,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.003997353,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.520604894,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.15793917400000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.013566060000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00497002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002063596,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0005859320000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.027364991,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.014579429000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.008961237,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002664746,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.04531165,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.018810821000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.04150336,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.016498398,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00079798,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00036157400000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000432044,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 8.9184e-5,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002194953,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.000662818,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.009012594,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.0011293870000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.027994905,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.002589669,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.006802008,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.001081158,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.063152707,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.00722753,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.060891355,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.008175529,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.09025101,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.011503677,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.06320408200000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.012780167,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.036665804,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Bova/rma10",
+        "dataset": "taco_unsymmetric"
+    },
+    {
+        "time": 0.005293702,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Bova/rma10",
+        "dataset": "taco_unsymmetric"
+    }
+]
