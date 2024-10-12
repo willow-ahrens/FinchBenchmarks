@@ -292,6 +292,10 @@ for (dataset, mtxs) in datasets
             end
         elseif dataset == "blocked"
             A = SparseMatrixCSC(blocked_matrix(10000, 10))
+        elseif dataset == "triangle"
+            if mtx == "upper_triangle"
+                A = SparseMatrixCSC(upper_triangle_matrix(1024))
+            end
         else
             A = SparseMatrixCSC(matrixdepot(mtx))
         end

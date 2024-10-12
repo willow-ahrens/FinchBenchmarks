@@ -23,6 +23,16 @@ function banded_matrix(n, b)
     return banded
 end
 
+function upper_triangle_matrix(n)
+    tri = zeros(n, n)
+    for i in 1:n
+        for j in i:n
+            tri[i, j] = rand()
+        end
+    end
+    return tri
+end
+
 function blocked_matrix(n, b)
     return kron(sprand(n, n, 0.01), ones(b, b))
 end
