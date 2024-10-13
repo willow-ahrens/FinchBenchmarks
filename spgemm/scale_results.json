@@ -1,0 +1,446 @@
+[
+    {
+        "time": 8.6712e-5,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 3.4072e-5,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 2.7222e-5,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 5.4156e-5,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 2.544e-6,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 4.5644e-5,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 2.1918888888888887e-6,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 1.9244e-6,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 8.595483870967741e-7,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 6.0843e-5,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 0.00031313200000000004,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 3.9228000000000005e-5,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 4.1636000000000006e-5,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 0.00011055,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 3.3120000000000002e-6,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 0.000259756,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 4.883571428571428e-6,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 5.492333333333333e-6,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 1.9197e-6,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 0.000243925,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 0.0018341610000000002,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 4.7158000000000005e-5,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.00010230700000000001,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.00025519700000000003,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 6.022e-6,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.001863149,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 1.4266e-5,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 2.4835e-5,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 8.576e-6,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.000981243,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.009442018,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.00010481100000000001,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.00036385300000000003,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.000729053,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 2.2892e-5,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.012519677,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 5.7491e-5,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.000193758,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.000107324,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.004282569,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.08891273300000001,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.000509757,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.014903593000000001,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.00273222,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.000163813,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.085496177,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.000337729,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.00094397,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.000946518,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.023885268,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.6205260730000001,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.0042296930000000005,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.07061821,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.016794530000000002,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.0007984540000000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.665825087,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.003339578,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.00800435,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.00792803,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.095429961,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 4.56779634,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.040288433000000005,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.2874276,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.137625893,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.004735863,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 5.61423137,
+        "method": "spgemm_finch_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.030512252,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.132250287,
+        "method": "spgemm_finch_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.140935263,
+        "method": "spgemm_finch_outer_bytemap",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.391982484,
+        "method": "spgemm_finch_outer_dense",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 34.418905226,
+        "method": "spgemm_taco_inner",
+        "kernel": "spgemm",
+        "matrix": "rand_16384.mtx"
+    },
+    {
+        "time": 0.420861888,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_16384.mtx"
+    },
+    {
+        "time": 1.434863886,
+        "method": "spgemm_taco_outer",
+        "kernel": "spgemm",
+        "matrix": "rand_16384.mtx"
+    },
+    {
+        "time": 1.342151828,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_16384.mtx"
+    }
+]
