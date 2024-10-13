@@ -74,14 +74,14 @@ datasets = OrderedDict(
     =#
 
     "willow_symmetric" => [
-#        "GHS_indef/exdata_1",
+        "GHS_indef/exdata_1",
         #"Janna/Emilia_923",#iffy
         #"Janna/Geo_1438",#iffy
-#        "TAMU_SmartGridCenter/ACTIVSg70K"
+        "TAMU_SmartGridCenter/ACTIVSg70K"
     ],
     "willow_unsymmetric" => [
-#        "Goodwin/Goodwin_071", 
-#        "Hamm/scircuit", #iffy
+        "Goodwin/Goodwin_071", 
+        "Hamm/scircuit", #iffy
         "LPnetlib/lpi_gran", #iffy
         "Norris/heart3",
         "Rajat/rajat26", 

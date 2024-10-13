@@ -1,0 +1,4768 @@
+[{
+        "time": 0.004665799,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.003031817,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00507384,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.006101636,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005250941,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00579258,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005689097,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.401548113,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.333875635,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.428703808,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.003569642,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001242071,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00106156,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001533061,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001529505,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001736564,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001843817,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001843619,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.01157174,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.009154953,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.01449872,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0012511870000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001812978,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001524136,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002376206,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002377766,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002405278,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00224111,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002238736,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.025817033,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.041550256,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.059201169,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001770393,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001156579,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000991466,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001456296,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001467664,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001484315,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00147405,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001473087,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.013744473,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.010882657,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.017646976,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00119775,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002400288,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001792957,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002915536,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002914728,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002677965,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002668734,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002661164,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.031290784,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.02490987,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.039191262,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002156933,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.004224834,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002790485,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005533858,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005159266,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.004492669,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005335241,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005349258,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.048185635,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.037312551,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.059101503,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0036201870000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.004740985,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.003480236,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.006797743,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.007096835,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005107357,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005739631,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005707533,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.219976307,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.178961834,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.263417868,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.004560042,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001655739,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001372097,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0020449,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002058183,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002096921,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002104416,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002100531,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.048128651,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.033357967,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.05043338,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0016132380000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000920518,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000911688,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00106432,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00107179,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001939963,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002507716,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002496858,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 2.36782554,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 2.446226895,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 2.702260582,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000825861,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000546346,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000513644,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000565141,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000579251,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000996174,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001241628,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001241477,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.217250716,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.297914549,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.36884979,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000447849,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000464019,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000406227,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000517295,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000583061,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00114972,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001463165,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001624927,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.110291717,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.080240786,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.118606147,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000435734,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 3.7662e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 4.1319e-5,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 4.6602e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 4.6366e-5,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 8.5252e-5,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00010047,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000100627,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001478605,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000791558,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001711593,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 7.8762e-5,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.003381512,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.002332946,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0044625,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.004089205,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.006701111,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.009856445,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.009833326,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.264527855,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.526375295,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.67816796,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0030000390000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00099504,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.00077115,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000802645,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000109457,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 9.3629e-5,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000138491,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000187326,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000158685,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000191733,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000410452,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000329232,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000343424,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.001407164,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.001135524,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.00106761,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.095734004,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.067483716,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.074869223,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.002585957,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.003248661,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.003290169,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.004204098,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.004136292,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.055060516,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.085332298,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002284911,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000768095,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000964609,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000980937,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000683247,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00067234,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002100203,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.003828833,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0008899340000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000587716,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000668348,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.000675004,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.001344177,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.001352693,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.175253891,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.211115936,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0005443770000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.007125805,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.011763472,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.008631206,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00412784,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.004058542,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.148970772,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.267502569,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0062853810000000005,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00177876,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.001598903,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.001468729,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0013127030000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000198119,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000181824,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000215911,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000241193,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002717942,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002805567,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002390759,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0017237390000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.001285444,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.001160066,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000954831,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0009391330000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.003985169,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.003843985,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.003642466,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0031530330000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.006059389,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.005052697,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.003336712,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.003039225,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 8.8788e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 9.1972e-5,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 6.5856e-5,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000102985,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    },  {
+        "time": 3.8845e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 3.2019e-5,
+        "method": "finch_pattern_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 3.799e-5,
+        "method": "finch_pattern_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 8.052700000000001e-5,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0001459,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000145713,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000172277,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000183167,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000170159,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000175651,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000713575,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000580156,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000681118,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000468663,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000733507,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.0007646080000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.003176709,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.001905001,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002206943,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.00129484,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002541142,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002574298,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.001900083,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002362657,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002416974,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001523086,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0015277,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.026028155,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.042678527,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0018182430000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    },  {
+        "time": 0.002453747,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002767339,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002846681,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.003772135,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00375212,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.339833634,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.391779869,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0020388100000000003,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001372163,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001644916,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001649832,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002153556,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002153203,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.011748845,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.018019228,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0013527600000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000112508,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000137774,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000158611,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000150064,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000133013,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000567558,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00037179,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000153881,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000110848,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000136238,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00013666,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000168425,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000185362,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002388766,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002704938,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000159774,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001214596,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001597801,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001614041,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002242605,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002238594,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.010699167,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.013535271,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001249115,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000223011,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000231638,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000265778,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000441773,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000552227,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.181011104,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.25557952,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00020517000000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 7.0051e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000100193,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 8.5467e-5,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000143122,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000196815,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00211243,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.018546131,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00011230800000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    },  {
+        "time": 0.00028488,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00039893,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000376377,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000991626,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000392767,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002157891,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.051731844,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00032701800000000005,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    },  {
+        "time": 0.000107004,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0001335,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000142809,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000293212,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000292792,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002535366,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.043456964,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000128708,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000149265,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00016118,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000184999,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000296202,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000318273,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.009558458,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.062429798,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000151681,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    },  {
+        "time": 0.000331648,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000391147,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000389479,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001215171,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001175853,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002605698,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.004438577,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00033145600000000005,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000365313,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000463921,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000456453,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00101143,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001112122,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.016586259,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.031245732,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00036557900000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000270449,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000330875,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000332088,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000743185,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000741145,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.041352794,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.065014769,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00027355900000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 3.8503e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.7251e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.7577e-5,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000115455,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000118504,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00032924,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000653465,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 7.9697e-5,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    },{
+        "time": 3.2253e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.2588e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.1636e-5,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 8.3167e-5,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 6.792e-5,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001553341,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002600417,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 7.4764e-5,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 3.7392e-5,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.8901e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 4.9461e-5,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 9.868e-5,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 9.9009e-5,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001144946,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.002471507,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 7.8439e-5,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00059034,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000701912,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00070618,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001495373,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00149786,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.01909275,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.029240591,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000490789,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    },{
+        "time": 0.000269892,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000331856,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000331773,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000741187,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00074094,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.041276003,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.064981225,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000270624,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.003278086,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.002056729,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.004248018,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.004288122,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.002443609,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001395891,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001447278,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.012394437,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.022639515,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.033867107,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.0030134470000000003,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.00095263,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.00108453,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001143148,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001167263,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001478871,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001957371,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.001956761,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.038596441,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.050349976,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.068808619,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.000857296,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, 
+    {
+        "time": 0.000525711,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000468151,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000704086,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000698199,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000834369,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000914606,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.00091642,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.00682159,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.005155747,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.008269339,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.000557843,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    },{
+        "time": 0.007350555,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.004982465,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.011536065,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.011171627,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.212714495,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.190880003,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.247078586,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006249691000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006673359,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.004713197,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.008676946,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.008676848,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006248867,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.007816449,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.007843473,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.040319976,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.031016388,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.048274028,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.00581347,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.010098095,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.00742021,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.014175945,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.014054507,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.009140805,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.010769656,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.010771791,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.615320471,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.532827942,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.695333983,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.008694693,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.013570222,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.009408746,
+        "method": "finch_sym",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.008347918,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.017093101,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.013197461,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.018769884,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.014653725,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 1.0412827,
+        "method": "finch_band",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.88966375,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 1.30842823,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.005796758,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.00419164,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001445592,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.002113588,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001365929,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.002452667,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.0043156800000000006,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.005193253,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001848009,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001074146,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.000561425,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.0005403210000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 8.9225e-5,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.0035021160000000004,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.000673909,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006906983,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006638745000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.009997305000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.006871168,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.0008988360000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000140867,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.00020683500000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.00038619900000000005,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001237508,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 1.0,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.0028109230000000003,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.0009102860000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.000660947,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.00674161,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.0015576980000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.00023975800000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0025509760000000004,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0011976530000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0037265630000000004,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.004642197000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000125733,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 8.6613e-5,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.00019256400000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000873191,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002690126,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002120892,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0025234240000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0015523190000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00017599300000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000170306,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0015036670000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00024666,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000126006,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00040134000000000003,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00016104200000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00019008000000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00039114,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000520626,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000360943,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 8.793100000000001e-5,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 8.625500000000001e-5,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 9.1944e-5,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.0006212580000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00035937800000000004,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.003047821,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.0009273730000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.004293111,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000528355,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000832937,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001670677,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.005719355,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.319062726,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.003543188,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.000983913,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    }, {
+        "time": 0.004918152,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.00146491,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.002233255,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001349021,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.002661938,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.004895084,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.026475085,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001919175,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.001127967,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.003450767,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.000567591,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 6.6142e-5,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.017969345,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric"
+    }, {
+        "time": 0.000666315,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.007948572,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.007250341,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.010827816,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.014437827,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    }, {
+        "time": 0.003099095,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },  {
+        "time": 0.000877853,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.000665394,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.008008217,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    }, {
+        "time": 0.007176014,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.001145184,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.013232781,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.005102893,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.019263024,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.023391657,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000416738,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000261199,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000188442,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000863313,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002916449,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.002539558,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00277441,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001592345,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000159765,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000145313,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001554352,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.00028486,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000106161,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000361573,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000159703,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000205686,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000379592,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000481278,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000359368,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 6.7623e-5,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 5.8799e-5,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 6.7174e-5,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000716411,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.000359642,
+        "method": "suite_sparse",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    }, {
+        "time": 0.001050783,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000121363,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000196293,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.000418395,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001477514,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.109585631,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    }, {
+        "time": 0.001828745,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000212358,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.002962651,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.001333515,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.0046661,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.006654532,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 9.4288e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 4.3771e-5,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    }, {
+        "time": 0.000163381,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.000907738,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    }, {
+        "time": 0.005085812,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    }, 
+    {
+        "time": 0.003286207,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    }, {
+        "time": 0.00041548,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    }, {
+        "time": 0.002306668,
+        "method": "finch_pattern",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.041212660000000005,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0059797470000000005,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/ct20stif",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.015335595,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001961186,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/olafu",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.022606736000000002,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0032220010000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/bcsstk35",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.014467232000000002,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0017560030000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk02",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.026377547,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0031330000000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Boeing/crystk03",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.042416593,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.006131999,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Nasa/nasasrb",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.020215391000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0024537030000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.014421796,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.005041768,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Mulvey/finan512",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.0051484270000000006,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.001063995,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Cote/vibrobox",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.000571097,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.00022756000000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/saylr4",
+        "dataset": "vuduc_symmetric"
+    },
+    {
+        "time": 0.050178455000000004,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.006358672,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Rothberg/3dtube",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.007489422000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.0023983660000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Pothen/pwt",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.032233501000000005,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.00416196,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Gupta/gupta1",
+        "dataset": "vuduc_symmetric_pattern"
+    },
+    {
+        "time": 0.022487929,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002627668,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/raefsky3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.029578505,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.005208721,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Simon/venkat01",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.016523019,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0020668400000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "FIDAP/ex11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001637671,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000335727,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Zitney/rdist1",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001431739,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00023034900000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/orani678",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.015857956,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002338245,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Goodwin/rim",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.002726535,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001092944,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Hamm/memplus",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000851332,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00032551600000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/gemat11",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00399124,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000845317,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Mallya/lhr10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0019709040000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0008548220000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer02",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00202993,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000836227,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Grund/bayer10",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0036131080000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0007882900000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Brethour/coater2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.006006132,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0023622590000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "ATandT/onetone2",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.004304108,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.001640911,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Wang/wang4",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000671706,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000255649,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/lnsp3937",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0005402460000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00020759100000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/sherman5",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.000646663,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00029598600000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/sherman3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.009963722000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.00454299,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Shyy/shyy161",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.004301473,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.0016401290000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Wang/wang3",
+        "dataset": "vuduc_unsymmetric"
+    },
+    {
+        "time": 0.031442721,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.002653022,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.008962163,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.004311117000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.029608604,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0051066770000000004,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.009483116,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00083031,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Norris/heart3",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.007428309,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0032106450000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Rajat/rajat26",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.061548083,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.006141664000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "TSOPF/TSOPF_RS_b678_c1",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.008138282,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.00259604,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Enron",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000991879,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000460593,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-735",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.001578104,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.000696064,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/Oregon-1",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.003190675,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.0014083720000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Newman/as-22july06",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.010995249,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.003997353,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/loc-Brightkite",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.520604894,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.15793917400000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/as-Skitter",
+        "dataset": "graph_symmetric"
+    },
+    {
+        "time": 0.013566060000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00497002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/soc-Epinions1",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002063596,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.0005859320000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/wiki-Vote",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.027364991,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.014579429000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-EuAll",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.008961237,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002664746,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/cit-HepPh",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.04531165,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.018810821000000002,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/web-NotreDame",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.04150336,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.016498398,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/amazon0302",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00079798,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.00036157400000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/p2p-Gnutella08",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.000432044,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 8.9184e-5,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "SNAP/email-Eu-core",
+        "dataset": "graph_unsymmetric"
+    },
+    {
+        "time": 0.002194953,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.000662818,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_small_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.009012594,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.0011293870000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_medium_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.027994905,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.002589669,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "toeplitz_large_band",
+        "dataset": "banded"
+    },
+    {
+        "time": 0.006802008,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.001081158,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "HB/bcsstk17",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.063152707,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.00722753,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/pdb1HYS",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.060891355,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.008175529,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/cant",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.09025101,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.011503677,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Williams/consph",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.06320408200000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.012780167,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "DNVS/shipsec1",
+        "dataset": "taco_symmetric"
+    },
+    {
+        "time": 0.000446589,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.000134932,
+        "method": "finch_band_unsym",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.000478833,
+        "method": "finch_band_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.00046403700000000004,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.00040107600000000005,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.007276904000000001,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.000596277,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    },
+    {
+        "time": 0.0006160543900000001,
+        "method": "cora",
+        "kernel": "spmv",
+        "matrix": "upper_triangle",
+        "dataset": "triangle"
+    }
+]
