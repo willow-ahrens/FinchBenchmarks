@@ -122,9 +122,9 @@ method_order = [
 ]
 
 # Example usage, specifying method and matrix order when calling the function
-generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup.png", 
+generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup_log_scale.png", 
                              method_order, matrix_order,
-                             baseline_method="spgemm_taco_gustavson")
+                             baseline_method="spgemm_taco_gustavson", log_scale=True)
 
 generate_chart_for_operation("lanka_small.json", "spgemm", "spgemm_small_speedup_log_scale.png", 
                              method_order, matrix_order,
