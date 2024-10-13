@@ -42,6 +42,8 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
         method: [data[method][mtx] for mtx in filtered_matrix_order if mtx in data[method]]
         for method in filtered_method_order
     }
+    print(ordered_data)
+    print(filtered_matrix_order)
 
     filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
 
@@ -112,6 +114,7 @@ method_order = [
     "spgemm_finch_inner",
     "spgemm_taco_gustavson",
     "spgemm_finch_gustavson",
+    "spgemm_eigen_gustavson",
     "spgemm_taco_outer",
     "spgemm_finch_outer_dense",
     "spgemm_finch_outer",

@@ -574,6 +574,78 @@
         "time": 0.480480559,
         "kernel": "spgemm",
         "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.07966297900000001,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.033861507,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.033963032000000004,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella05"
+    },
+    {
+        "time": 0.099140513,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-HepTh"
+    },
+    {
+        "time": 0.086974521,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.195107091,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.039968210000000004,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.413607259,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-otc"
+    },
+    {
+        "time": 0.021471973000000002,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella08"
+    },
+    {
+        "time": 0.9854124540000001,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.02600101,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella09"
+    },
+    {
+        "time": 0.509803087,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
     }
 ]
 
