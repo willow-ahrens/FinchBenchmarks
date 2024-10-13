@@ -1,0 +1,20 @@
+[
+    {
+        "time": 0.39875543,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "time": 0.405106889,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "time": 2.723636184,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    }
+]

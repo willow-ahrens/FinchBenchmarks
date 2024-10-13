@@ -1,0 +1,26 @@
+[
+    {
+        "time": 0.283770954,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.20030219,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.9483157190000001,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.07344705700000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    }
+]

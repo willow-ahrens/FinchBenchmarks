@@ -1,0 +1,20 @@
+[
+    {
+        "time": 0.033076378000000003,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-HepTh"
+    },
+    {
+        "time": 0.022298468,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-HepTh"
+    },
+    {
+        "time": 0.099140513,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-HepTh"
+    }
+]

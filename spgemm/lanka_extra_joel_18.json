@@ -1,0 +1,26 @@
+[
+    {
+        "time": 0.035478857,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "time": 0.024517244,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "time": 0.16477861600000002,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "time": 0.006808906000000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    }
+]

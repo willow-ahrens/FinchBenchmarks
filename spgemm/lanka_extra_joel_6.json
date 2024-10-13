@@ -1,0 +1,20 @@
+[
+    {
+        "time": 1.521225644,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "time": 1.14444992,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "time": 6.060818816,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    }
+]

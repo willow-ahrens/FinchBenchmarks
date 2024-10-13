@@ -1,0 +1,20 @@
+[
+    {
+        "time": 2.206014508,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 1.730822709,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 7.647495984000001,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    }
+]

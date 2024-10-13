@@ -1,0 +1,20 @@
+[
+    {
+        "time": 1.528060027,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "time": 1.188929687,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "time": 5.9673261040000005,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    }
+]

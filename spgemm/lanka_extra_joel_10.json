@@ -1,0 +1,20 @@
+[
+    {
+        "time": 1.265827543,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "time": 1.127308072,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "time": 5.9346808740000005,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    }
+]

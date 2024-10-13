@@ -1,0 +1,26 @@
+[
+    {
+        "time": 0.154510392,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.112023527,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.512748062,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.022621927,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "time": 0.178124568,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "time": 0.148579115,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "time": 0.829455547,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "time": 0.054994315,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    }
+]

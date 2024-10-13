@@ -1,0 +1,20 @@
+[
+    {
+        "time": 0.1060056,
+        "method": "spgemm_taco_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-otc"
+    },
+    {
+        "time": 0.074598381,
+        "method": "spgemm_finch_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-otc"
+    },
+    {
+        "time": 0.413607259,
+        "method": "spgemm_eigen_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-otc"
+    }
+]
