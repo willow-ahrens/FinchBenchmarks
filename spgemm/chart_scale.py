@@ -47,27 +47,27 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
 
     filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
 
-    make_grouped_bar_chart(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
+    make_line_plot(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
 
-def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
-    x = np.arange(len(x_axis))
-    width = 0.1  # Adjust width based on the number of labels
+def make_line_plot(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
+    x = np.arange(len(x_axis))  # Positions for each matrix
     fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
 
-    for i, label in enumerate(labels):
-        offset = width * (i - len(labels)/2)  # Center bars around the tick
-        #cross-hatch the bar if the string "finch" is not in the label
-        ax.bar(x + offset, data[label], width, label=re.sub("spgemm_", "", label))
+    # Plotting each method's data as a line
+    for label in labels:
+        ax.plot(x, data[label], marker='o', label=re.sub("spgemm_", "", label))  # Line plot with markers
 
     ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
 
     if log_scale:
         ax.set_yscale('log')
+
     ax.set_ylabel(y_label)
+    ax.set_xlabel("Matrix Dimension Size")  # You can modify this based on your x-axis data
     ax.set_title(title)
     ax.set_xticks(x)
     ax.set_xticklabels(x_axis, rotation=25, ha="right")
-    ax.legend(ncol=4)
+    ax.legend(ncol=2)
 
     plt.tight_layout()
     plt.savefig(CHARTS_DIRECTORY + filename, dpi=200)
@@ -77,36 +77,14 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 matrix_order = [
-"SNAP/email-Eu-core", 
-"SNAP/CollegeMsg", 
-"SNAP/soc-sign-bitcoin-alpha", 
-"SNAP/ca-GrQc", 
-"SNAP/soc-sign-bitcoin-otc", 
-"SNAP/p2p-Gnutella08", 
-"SNAP/as-735", 
-"SNAP/p2p-Gnutella09", 
-"SNAP/wiki-Vote", 
-"SNAP/p2p-Gnutella06", 
-"SNAP/p2p-Gnutella05", 
-"SNAP/ca-HepTh", 
-"FEMLAB/poisson3Da", 
-"SNAP/ca-CondMat", 
-"SNAP/email-Enron", 
-"SNAP/p2p-Gnutella31", 
-"Um/2cubes_sphere", 
-"Oberwolfach/filter3D", 
-"Williams/cop20k_A", 
-"vanHeukelum/cage12", 
-"Hamm/scircuit", 
-"JGD_Homology/m133-b3", 
-"Pajek/patents_main", 
-"Um/offshore", 
-"GHS_indef/mario002", 
-"SNAP/amazon0312", 
-"SNAP/web-Google", 
-"Williams/webbase-1M", 
-"SNAP/roadNet-CA", 
-"SNAP/cit-Patents"
+    "rand_128.mtx",
+    "rand_256.mtx",
+    "rand_512.mtx",
+    "rand_1024.mtx",
+    "rand_2048.mtx",
+    "rand_4096.mtx",
+    "rand_8192.mtx",
+    "rand_16384.mtx",
 ]
 
 method_order = [
@@ -122,10 +100,6 @@ method_order = [
 ]
 
 # Example usage, specifying method and matrix order when calling the function
-generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup_log_scale.png", 
-                             method_order, matrix_order,
-                             baseline_method="spgemm_taco_gustavson", log_scale=True)
-
-generate_chart_for_operation("lanka_small.json", "spgemm", "spgemm_small_speedup_log_scale.png", 
+generate_chart_for_operation("scale_results.json", "spgemm", "scaling_spgemm.png", 
                              method_order, matrix_order,
                              baseline_method="spgemm_taco_gustavson", log_scale=True)

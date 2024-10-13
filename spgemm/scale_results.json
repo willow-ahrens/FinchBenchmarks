@@ -418,29 +418,5 @@
         "method": "spgemm_finch_outer_dense",
         "kernel": "spgemm",
         "matrix": "rand_8192.mtx"
-    },
-    {
-        "time": 34.418905226,
-        "method": "spgemm_taco_inner",
-        "kernel": "spgemm",
-        "matrix": "rand_16384.mtx"
-    },
-    {
-        "time": 0.420861888,
-        "method": "spgemm_taco_gustavson",
-        "kernel": "spgemm",
-        "matrix": "rand_16384.mtx"
-    },
-    {
-        "time": 1.434863886,
-        "method": "spgemm_taco_outer",
-        "kernel": "spgemm",
-        "matrix": "rand_16384.mtx"
-    },
-    {
-        "time": 1.342151828,
-        "method": "spgemm_eigen_gustavson",
-        "kernel": "spgemm",
-        "matrix": "rand_16384.mtx"
     }
 ]
