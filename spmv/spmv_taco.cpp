@@ -18,7 +18,7 @@ int main(int argc, char **argv){
     Tensor<double> x = read(fs::path(params.input)/"x.ttx", Format({Dense}), true);
     int m = A.getDimension(0);
     int n = A.getDimension(1);
-    Tensor<double> y("y", {n}, Format({Dense}));
+    Tensor<double> y("y", {m}, Format({Dense}));
 
     IndexVar i, j;
 

@@ -17,4 +17,4 @@ echo $(pwd)
 export TMPDIR=/tmp
 
 # Use SLURM_ARRAY_TASK_ID for batch number (-b) and set the total number of batches (-B) to 20
-julia run_spmv.jl -o spmv_results_3.json
+julia run_spmv.jl -o spmv_results_5.json

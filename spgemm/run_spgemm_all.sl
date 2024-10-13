@@ -6,7 +6,7 @@
 #SBATCH --partition=lanka-v3
 #SBATCH --qos=commit-main
 #SBATCH --mem 102400
-#SBATCH --array=3,5,7%12
+#SBATCH --array=1-12%6
 
 cd /data/scratch/willow/FinchBenchmarks/spgemm
 source /afs/csail.mit.edu/u/w/willow/everyone/.bashrc
@@ -18,4 +18,4 @@ echo $PATH
 echo $(pwd)
 export TMPDIR=/tmp
 
-julia run_spgemm.jl -d "small" --kernels "all" -b $SLURM_ARRAY_TASK_ID -B 12 -o lanka_small_$SLURM_ARRAY_TASK_ID.json
+julia run_spgemm.jl -d "small" --kernels "new" -b $SLURM_ARRAY_TASK_ID -B 12 -o lanka_extra_small_$SLURM_ARRAY_TASK_ID.json

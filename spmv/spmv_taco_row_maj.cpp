@@ -17,9 +17,9 @@ int main(int argc, char **argv)
     auto params = parse(argc, argv);
     Tensor<double> A = read(fs::path(params.input) / "A.ttx", Format({Dense, Sparse}), true);
     Tensor<double> x = read(fs::path(params.input) / "x.ttx", Format({Dense}), true);
-    int m = A.getDimension(0);
-    int n = A.getDimension(1);
-    Tensor<double> y("y", {n}, Format({Dense}));
+    int n = A.getDimension(0);
+    int m = A.getDimension(1);
+    Tensor<double> y("y", {m}, Format({Dense}));
 
     IndexVar i, j;
 

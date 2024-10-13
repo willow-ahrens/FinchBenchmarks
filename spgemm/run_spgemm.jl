@@ -118,6 +118,12 @@ methods = Dict(
         "spgemm_finch_gustavson" => spgemm_finch_gustavson,
         "spgemm_eigen_gustavson" => spgemm_eigen,
         "spgemm_mkl_gustavson" => spgemm_mkl,
+    ],
+    "new" => [
+        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
+        "spgemm_finch_gustavson" => spgemm_finch_gustavson,
+        "spgemm_eigen_gustavson" => spgemm_eigen,
+        #"spgemm_mkl_gustavson" => spgemm_mkl,
     ]
 )
 

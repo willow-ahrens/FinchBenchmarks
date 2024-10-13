@@ -95,6 +95,6 @@ function spmv_finch_vbl_unsym_row_maj(y, A, x)
     
     _x = Tensor(Dense(Element(0.0)), x)
     y = Ref{Any}()
-    time = @belapsed $y[] = spmv_finch_vbl_kernel($_y, $_A, $_x)
+    time = @belapsed $y[] = spmv_finch_vbl_kernel_row_maj($_y, $_A, $_x)
     return (;time = time, y = y[])
 end

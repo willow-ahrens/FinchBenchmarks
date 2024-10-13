@@ -26,8 +26,7 @@ s = ArgParseSettings("Run SPMV experiments.")
     "--dataset", "-d"
         arg_type = String
         help = "dataset keyword"
-        #default = "vuduc_symmetric"
-        default = "willow_unsymmetric"
+        default = "all"
 end
 
 parsed_args = parse_args(ARGS, s)
@@ -73,15 +72,16 @@ datasets = OrderedDict(
         "Wang/wang3",
     ],
     =#
+
     "willow_symmetric" => [
-        "GHS_indef/exdata_1",
-        "Janna/Emilia_923",#iffy
-        "Janna/Geo_1438",#iffy
-        "TAMU_SmartGridCenter/ACTIVSg70K"
+#        "GHS_indef/exdata_1",
+        #"Janna/Emilia_923",#iffy
+        #"Janna/Geo_1438",#iffy
+#        "TAMU_SmartGridCenter/ACTIVSg70K"
     ],
     "willow_unsymmetric" => [
-        "Goodwin/Goodwin_071", 
-        "Hamm/scircuit", #iffy
+#        "Goodwin/Goodwin_071", 
+#        "Hamm/scircuit", #iffy
         "LPnetlib/lpi_gran", #iffy
         "Norris/heart3",
         "Rajat/rajat26", 
@@ -134,7 +134,7 @@ datasets = OrderedDict(
         "Boeing/pwtk",#iffy
     ],
     "taco_unsymmetric" => [
-        "Bova/rma10"
+        "Bova/rma10",
         "Williams/mac_econ_fwd500",
         "Williams/webbase-1M",#iffy
         #"Hamm/scircuit",#dupe
@@ -288,6 +288,10 @@ results = []
 
 int(val) = mod(floor(Int, val), Int8)
 
+if parsed_args["dataset"] != "all"
+	datasets = [(parsed_args["dataset"], datasets[parsed_args["dataset"]])]
+end
+
 for (dataset, mtxs) in datasets
     tag = dataset_tags[dataset]
     for mtx in mtxs
@@ -312,10 +316,10 @@ for (dataset, mtxs) in datasets
         end
 
         # A = map((val) -> int(val), A)
-        (n, n) = size(A)
+        (m, n) = size(A)
         x = rand(n)
         # x = sprand(n, 0.1)
-        y = zeros(n)
+        y = zeros(m)
         y_ref = nothing
         for (key, method) in methods[tag]
             @info "testing" key mtx

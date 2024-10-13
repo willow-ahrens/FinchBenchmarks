@@ -1,0 +1,282 @@
+[
+    {
+        "time": 0.002741582,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001741833,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.002968684,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.003080531,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001779645,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.00065746,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000655629,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001960991,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.0017823390000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.03144566,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.0026791180000000003,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "GHS_indef/exdata_1",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000667106,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000740269,
+        "method": "finch",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000764255,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000766711,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000968508,
+        "method": "finch_vbl",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001446085,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001446647,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.0007868640000000001,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.000583618,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.008964484,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.004311401,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "TAMU_SmartGridCenter/ACTIVSg70K",
+        "dataset": "willow_symmetric"
+    },
+    {
+        "time": 0.001788085,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002015506,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002136133,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002929284,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.00290942,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0018659140000000002,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0016899220000000002,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.029965749000000003,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.005096484,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Goodwin/Goodwin_071",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.001870153,
+        "method": "julia_stdlib",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.001885137,
+        "method": "finch_unsym",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.001926628,
+        "method": "finch_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.004305613,
+        "method": "finch_vbl_unsym",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.004311493,
+        "method": "finch_vbl_unsym_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.002205185,
+        "method": "taco",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.0015599610000000001,
+        "method": "taco_row_maj",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.027098132,
+        "method": "eigen",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    },
+    {
+        "time": 0.011184178000000001,
+        "method": "mkl",
+        "kernel": "spmv",
+        "matrix": "Hamm/scircuit",
+        "dataset": "willow_unsymmetric"
+    }
+]
