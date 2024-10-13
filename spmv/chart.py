@@ -40,51 +40,6 @@ vuduc_mtxs = [
     "Shyy/shyy161",
     "Wang/wang3",
 ]
-good_mtxs = [
-    #willow
-    "GHS_indef/exdata_1",
-    "Janna/Emilia_923",
-    "Janna/Geo_1438",
-    "TAMU_SmartGridCenter/ACTIVSg70K"
-    "Goodwin/Goodwin_071", 
-    "Norris/heart3",
-    "Rajat/rajat26", 
-    "TSOPF/TSOPF_RS_b678_c1" 
-    #permutation
-    "permutation_synthetic"
-    #graph
-    "SNAP/email-Enron", 
-    "SNAP/as-735",
-    "SNAP/Oregon-1",
-    "Newman/as-22july06",
-    "SNAP/loc-Brightkite",
-    "SNAP/as-Skitter"
-    "SNAP/soc-Epinions1",
-    "SNAP/wiki-Vote",
-    "SNAP/email-EuAll",
-    "SNAP/cit-HepPh",
-    "SNAP/web-NotreDame",
-    "SNAP/amazon0302",
-    "SNAP/p2p-Gnutella08",
-    "SNAP/email-Eu-core",
-    #banded
-    "toeplitz_small_band",
-    "toeplitz_medium_band",
-    "toeplitz_large_band",
-    #triangle
-    "upper_triangle",
-    #taco
-    "HB/bcsstk17",
-    "Williams/pdb1HYS",
-    "Williams/cant",
-    "Williams/consph",
-    "Williams/cop20k_A",
-    "DNVS/shipsec1",
-    "Boeing/pwtk",
-    "Bova/rma10"
-    #blocked
-    "blocked_10x10",
-]
 
 RESULTS_FILE_PATH = "spmv_results_lanka.json"
 CHARTS_DIRECTORY = "charts/"
@@ -162,6 +117,7 @@ def all_formats_chart(ordered_by_format=False):
 
     methods = ["finch", "finch_baseline", "julia_stdlib", "mkl", "eigen", "cora"]#, "suite_sparse"]
     legend_labels = ["Finch (Best)", "Finch (Baseline)", "Julia Stdlib", "MKL", "Eigen", "CoRa"]#, "SuiteSparse"]
+
     colors = {
         "finch": "tab:green",
         "finch_baseline": "tab:gray",
@@ -171,7 +127,6 @@ def all_formats_chart(ordered_by_format=False):
         "cora": "tab:purple"
     }
 
-    ordered_data = [(mtx, times) for mtx, times in ordered_data if mtx in good_mtxs]
     all_data = defaultdict(list)
     for i, (mtx, times) in enumerate(ordered_data):
         for method in methods:
@@ -188,8 +143,8 @@ def all_formats_chart(ordered_by_format=False):
     }
     short_mtxs = [new_mtxs.get(mtx, mtx) for mtx in short_mtxs]
 
-    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled")
-    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)")
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, labeled_groups=["finch"], bar_labels_dict={"finch": labels[:]}, title="SpMV Performance (Speedup Over Taco) labeled", legend_labels=legend_labels)
+    make_grouped_bar_chart(methods, short_mtxs, all_data, colors=colors, title="SpMV Performance (Speedup Over Taco)", legend_labels=legend_labels)
 
     # for mtx in mtxs:
         # all_formats_for_matrix_chart(mtx)

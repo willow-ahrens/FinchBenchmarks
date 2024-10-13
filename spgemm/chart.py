@@ -42,6 +42,8 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
         method: [data[method][mtx] for mtx in filtered_matrix_order if mtx in data[method]]
         for method in filtered_method_order
     }
+    print(ordered_data)
+    print(filtered_matrix_order)
 
     filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
 
@@ -112,6 +114,7 @@ method_order = [
     "spgemm_finch_inner",
     "spgemm_taco_gustavson",
     "spgemm_finch_gustavson",
+    "spgemm_eigen_gustavson",
     "spgemm_taco_outer",
     "spgemm_finch_outer_dense",
     "spgemm_finch_outer",
@@ -119,9 +122,9 @@ method_order = [
 ]
 
 # Example usage, specifying method and matrix order when calling the function
-generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup.png", 
+generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup_log_scale.png", 
                              method_order, matrix_order,
-                             baseline_method="spgemm_taco_gustavson")
+                             baseline_method="spgemm_taco_gustavson", log_scale=True)
 
 generate_chart_for_operation("lanka_small.json", "spgemm", "spgemm_small_speedup_log_scale.png", 
                              method_order, matrix_order,
