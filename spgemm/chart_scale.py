@@ -32,8 +32,9 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
         method = result["method"]
         if mtx in matrix_order and method in method_order:  # Only include specified matrices and methods
             time = result["time"]
-            speedup = baseline_times[mtx] / time if mtx in baseline_times and time else 0
-            data[method][mtx] = speedup
+            data[method][mtx] = time
+            #speedup = baseline_times[mtx] / time if mtx in baseline_times and time else 0
+            #data[method][mtx] = speedup
 
     filtered_method_order = [method for method in method_order if method in data]
     filtered_matrix_order = [mtx for mtx in matrix_order if any(mtx in data[method] for method in method_order)]
@@ -46,10 +47,12 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
     print(filtered_matrix_order)
 
     filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
+    #Strip everything except the digits from the matrix name
+    filtered_matrix_order = [re.sub(r'\D', '', mtx) for mtx in filtered_matrix_order]
 
-    make_line_plot(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
+    make_line_plot(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"SpGEMM Runtime Versus Increasing Dimension (Density = 0.0001)", log_scale=log_scale)
 
-def make_line_plot(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
+def make_line_plot(labels, x_axis, data, filename, title="", y_label="Runtime (s)", log_scale=False):
     x = np.arange(len(x_axis))  # Positions for each matrix
     fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
 
