@@ -7,7 +7,7 @@ import re
 
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(path, operation, filename, method_order, matrix_order, baseline_method="spgemm_taco_gustavson", log_scale=False):
+def generate_chart_for_operation(path, operation, filename, method_order, matrix_order, baseline_method="spgemm_taco_gustavson", log_scale=False, title=""):
     # Load the results from the JSON file
     results = json.load(open(path, 'r'))
 
@@ -47,7 +47,7 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
 
     filtered_matrix_order = [mtx.rsplit('/',1)[-1] for mtx in filtered_matrix_order]
 
-    make_grouped_bar_chart(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"{path} Speedup over {baseline_method}", log_scale=log_scale)
+    make_grouped_bar_chart(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=title, log_scale=log_scale)
 
 def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
@@ -124,8 +124,8 @@ method_order = [
 # Example usage, specifying method and matrix order when calling the function
 generate_chart_for_operation("lanka_joel.json", "spgemm", "spgemm_joel_speedup_log_scale.png", 
                              method_order, matrix_order,
-                             baseline_method="spgemm_taco_gustavson", log_scale=True)
+                             baseline_method="spgemm_taco_gustavson", log_scale=True, title="SpGEMM Speedup Over Taco Gustavson on Large Matrices")
 
 generate_chart_for_operation("lanka_small.json", "spgemm", "spgemm_small_speedup_log_scale.png", 
                              method_order, matrix_order,
-                             baseline_method="spgemm_taco_gustavson", log_scale=True)
+                             baseline_method="spgemm_taco_gustavson", log_scale=True, title="SpGEMM Speedup Over Taco Gustavson on Small Matrices")

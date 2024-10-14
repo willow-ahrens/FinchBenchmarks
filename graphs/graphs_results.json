@@ -1,0 +1,579 @@
+[
+    {
+        "time": 2.481893706,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 0.187473325,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 3.84099259,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 137.839532526,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 65.701638655,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 2.948368837,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 0.42744879,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 5.785549853,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 145.558694452,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 85.094860649,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 5.217652691,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 0.83375303,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 8.144931099,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 153.542372026,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 111.433078026,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 0.01975655,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.002566237,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.024292787,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.210667195,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.080720522,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 1.056079146,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.379166446,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.956756904,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.393809472,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 2.514040854,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.006019627,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.00351335,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.007381979,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.024706084,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.016056287,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 1.688581206,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 0.242981011,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 2.000838103,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 9.035627163,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 8.653688101,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 1.278007832,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 0.353778361,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 1.108441657,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 3.309788234,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 3.187920947,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 0.475415184,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 0.095361852,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 0.499808191,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 4.131716487,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 1.384836139,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 1.282815191,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 1.47007833,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 1.238431417,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 9.116781897,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 2.807458187,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 1.552378217,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 0.271723298,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 1.79257968,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 8.074640833,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 6.680340131,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 0.289704645,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.196279264,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.197094715,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 1.509359127,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.376684783,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 8.195829442,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "DIMACS10/rgg_n_2_24_s0"
+    },
+    {
+        "time": 6.450522444,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "DIMACS10/rgg_n_2_24_s0"
+    },
+    {
+        "time": 6.753932723,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "DIMACS10/rgg_n_2_24_s0"
+    },
+    {
+        "time": 5.14922348,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.106142774,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 3.102600528,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    },
+    {
+        "time": 5.250743558,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "DIMACS10/road_usa"
+    },
+    {
+        "time": 3.118664491,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "DIMACS10/road_usa"
+    },
+    {
+        "time": 3.142844162,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "DIMACS10/road_usa"
+    },
+    {
+        "time": 7.561,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "DIMACS10/rgg_n_2_24_s0"
+    },
+    {
+        "time": 3.123,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "DIMACS10/road_usa"
+    },
+    {
+        "time": 0.152,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 68.2414,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "rmat_s22_e64"
+    },
+    {
+        "time": 0.324,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 88.4202,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "rmat_s23_e32"
+    },
+    {
+        "time": 0.602,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 120.6271,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "rmat_s24_e16"
+    },
+    {
+        "time": 0.166,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 18.83133,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "soc-orkut"
+    },
+    {
+        "time": 0.079,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 7.657469,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "LAW/hollywood-2009"
+    },
+    {
+        "time": 0.815,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 10.54393,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 0.305,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 8.250971,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-LiveJournal1"
+    },
+    {
+        "time": 0.002,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.4360493,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "DIMACS10/kron_g500-logn16"
+    },
+    {
+        "time": 0.32,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 7.062945,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-LiveJournal"
+    },
+    {
+        "time": 0.219,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 1.323802,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.002,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.03307353,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/soc-Epinions1"
+    },
+    {
+        "time": 0.173,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 20.65757,
+        "method": "GraphBLAS",
+        "operation": "bellmanford",
+        "matrix": "SNAP/com-Orkut"
+    },
+    {
+        "time": 3.122,
+        "method": "GraphBLAS",
+        "operation": "bfs",
+        "matrix": "GAP/GAP-road"
+    }
+]
+
