@@ -47,12 +47,12 @@ datasets = Dict(
 # Mapping from method keywords to methods
 include("serialize_default_implementation.jl")
 include("parallel_row.jl")
-include("kernel.jl")
+include("parallel_col_atomic.jl")
 
 methods = OrderedDict(
     "serialize_default_implementation" => serialize_default_implementation_mul,
     "parallel_row" => parallel_row_mul,
-    "kernel" => kernel_mul,
+    "parallel_col_atomic" => parallel_col_atomic_mul,
 )
 
 if !isnothing(parsed_args["method"])
@@ -78,7 +78,7 @@ function calculate_results(dataset, mtxs, results)
         # x is a dense vector
         x = rand(num_rows)
         # y is the result vector
-        y = zero(num_cols)
+        y = zeros(num_cols)
 
         for (key, method) in methods
             result = method(y, A, x)

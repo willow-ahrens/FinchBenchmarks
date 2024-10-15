@@ -11,7 +11,7 @@ RESULTS_FOLDER = "results"
 NTHREADS = [1, 2, 3, 4]
 
 DEFAULT_METHOD = "serialize_default_implementation"
-METHODS = [DEFAULT_METHOD, "parallel_row"]
+METHODS = [DEFAULT_METHOD, "parallel_row", "parallel_col_atomic"]
 
 DATASETS = [
     {"uniform": ["1000-0.1", "10000-0.1"]},

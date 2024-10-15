@@ -5,5 +5,5 @@ do
     echo "Running run_spmv.jl with $t threads"
     
     # Run Julia command with current number of threads
-    julia --threads="$t" "run_spmv.jl"    
+    julia --threads="$t" "run_spmv.jl"
 done
