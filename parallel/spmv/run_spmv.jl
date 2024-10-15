@@ -23,6 +23,12 @@ s = ArgParseSettings("Run Parallel SpMV Experiments.")
     "--dataset", "-d"
     arg_type = String
     help = "dataset keyword"
+    "--method", "-m"
+    arg_type = String
+    help = "method keyword"
+    "--accuracy-check", "-a"
+    action = :store_true
+    help = "check method accuracy"
 end
 parsed_args = parse_args(ARGS, s)
 
@@ -39,12 +45,23 @@ datasets = Dict(
 )
 
 # Mapping from method keywords to methods
-include("reference.jl")
+include("serialize_default_implementation.jl")
 include("parallel_row.jl")
+include("kernel.jl")
+
 methods = OrderedDict(
-    "reference" => reference_mul,
+    "serialize_default_implementation" => serialize_default_implementation_mul,
     "parallel_row" => parallel_row_mul,
+    "kernel" => kernel_mul,
 )
+
+if !isnothing(parsed_args["method"])
+    method_name = parsed_args["method"]
+    @assert haskey(methods, method_name) "Unrecognize method for $method_name"
+    methods = OrderedDict(
+        method_name => methods[method_name]
+    )
+end
 
 function calculate_results(dataset, mtxs, results)
     for mtx in mtxs
@@ -66,9 +83,11 @@ function calculate_results(dataset, mtxs, results)
         for (key, method) in methods
             result = method(y, A, x)
 
-            # Check the result of the multiplication
-            reference_result = reference_mul(y, A, x)
-            @assert result.y == reference_result.y "Incorrect result for $key"
+            if parsed_args["accuracy-check"]
+                # Check the result of the multiplication
+                serialize_default_implementation_result = serialize_default_implementation_mul(y, A, x)
+                @assert result.y == serialize_default_implementation_result.y "Incorrect result for $key"
+            end
 
             # Write result
             time = result.time

@@ -2,7 +2,7 @@ using Finch
 using BenchmarkTools
 
 
-function reference_mul(y, A, x)
+function serialize_default_implementation_mul(y, A, x)
         _y = Tensor(Dense(Element(0.0)), y)
         _A = Tensor(Dense(SparseList(Element(0.0))), A)
         _x = Tensor(Dense(Element(0.0)), x)

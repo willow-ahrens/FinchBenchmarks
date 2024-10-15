@@ -1,36 +1,36 @@
 [
     {
-        "time": 0.0037815,
+        "time": 0.003599667,
         "n_threads": 1,
-        "method": "reference",
+        "method": "serialize_default_implementation",
         "dataset": "FEMLAB",
         "matrix": "FEMLAB/poisson3Da"
     },
     {
-        "time": 0.029378875,
+        "time": 0.036077333,
         "n_threads": 1,
         "method": "parallel_col",
         "dataset": "FEMLAB",
         "matrix": "FEMLAB/poisson3Da"
     },
     {
-        "time": 0.023929125,
+        "time": 0.024111333,
         "n_threads": 1,
-        "method": "reference",
+        "method": "serialize_default_implementation",
         "dataset": "FEMLAB",
         "matrix": "FEMLAB/poisson3Db"
     },
     {
-        "time": 0.2359745,
+        "time": 0.241341209,
         "n_threads": 1,
         "method": "parallel_col",
         "dataset": "FEMLAB",
         "matrix": "FEMLAB/poisson3Db"
     },
     {
-        "time": 0.001182541,
+        "time": 0.0011015,
         "n_threads": 1,
-        "method": "reference",
+        "method": "serialize_default_implementation",
         "dataset": "uniform",
         "matrix": {
             "size": 1000,
@@ -38,7 +38,7 @@
         }
     },
     {
-        "time": 0.003675083,
+        "time": 0.004204208,
         "n_threads": 1,
         "method": "parallel_col",
         "dataset": "uniform",
@@ -48,9 +48,9 @@
         }
     },
     {
-        "time": 0.124985125,
+        "time": 0.1337625,
         "n_threads": 1,
-        "method": "reference",
+        "method": "serialize_default_implementation",
         "dataset": "uniform",
         "matrix": {
             "size": 10000,
@@ -58,7 +58,7 @@
         }
     },
     {
-        "time": 0.256712375,
+        "time": 0.197653583,
         "n_threads": 1,
         "method": "parallel_col",
         "dataset": "uniform",
