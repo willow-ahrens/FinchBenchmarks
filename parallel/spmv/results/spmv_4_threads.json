@@ -1,0 +1,104 @@
+[
+    {
+        "time": 0.000240959,
+        "n_threads": 4,
+        "method": "serialize_default_implementation",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.074614833,
+        "n_threads": 4,
+        "method": "parallel_row",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.001182125,
+        "n_threads": 4,
+        "method": "parallel_col_atomic",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.001952,
+        "n_threads": 4,
+        "method": "serialize_default_implementation",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Db"
+    },
+    {
+        "time": 0.49058025,
+        "n_threads": 4,
+        "method": "parallel_row",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Db"
+    },
+    {
+        "time": 0.005274167,
+        "n_threads": 4,
+        "method": "parallel_col_atomic",
+        "dataset": "FEMLAB",
+        "matrix": "FEMLAB/poisson3Db"
+    },
+    {
+        "time": 4.7917e-5,
+        "n_threads": 4,
+        "method": "serialize_default_implementation",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 1000,
+            "sparsity": 0.1
+        }
+    },
+    {
+        "time": 0.005447958,
+        "n_threads": 4,
+        "method": "parallel_row",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 1000,
+            "sparsity": 0.1
+        }
+    },
+    {
+        "time": 0.000481542,
+        "n_threads": 4,
+        "method": "parallel_col_atomic",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 1000,
+            "sparsity": 0.1
+        }
+    },
+    {
+        "time": 0.00434475,
+        "n_threads": 4,
+        "method": "serialize_default_implementation",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 10000,
+            "sparsity": 0.1
+        }
+    },
+    {
+        "time": 0.067347125,
+        "n_threads": 4,
+        "method": "parallel_row",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 10000,
+            "sparsity": 0.1
+        }
+    },
+    {
+        "time": 0.023017167,
+        "n_threads": 4,
+        "method": "parallel_col_atomic",
+        "dataset": "uniform",
+        "matrix": {
+            "size": 10000,
+            "sparsity": 0.1
+        }
+    }
+]
