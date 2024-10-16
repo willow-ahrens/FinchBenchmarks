@@ -111,6 +111,7 @@ results = []
 
 for mtx in datasets[parsed_args["dataset"]]
     A = SparseMatrixCSC(matrixdepot(mtx))
+    A = A + permutedims(A)
     (n, n) = size(A)
     for (op_name, check, methods) in [
         ("bfs",
