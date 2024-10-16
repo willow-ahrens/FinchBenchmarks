@@ -51,13 +51,26 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
 
 def make_grouped_bar_chart(labels, x_axis, data, filename, title="", y_label="Speedup", log_scale=False):
     x = np.arange(len(x_axis))
-    width = 0.1  # Adjust width based on the number of labels
+    width = 0.7/len(labels)  # Adjust width based on the number of labels
     fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
+
+    method_nice_names = {
+        "spgemm_taco_inner": "TACO Inner",
+        "spgemm_finch_inner": "Finch Inner",
+        "spgemm_taco_gustavson": "TACO Gustavson",
+        "spgemm_finch_gustavson": "Finch Gustavson",
+        "spgemm_eigen_gustavson": "Eigen",
+        "spgemm_mkl_gustavson": "MKL",
+        "spgemm_taco_outer": "TACO Outer",
+        "spgemm_finch_outer_dense": "Finch Outer Dense",
+        "spgemm_finch_outer": "Finch Outer",
+        "spgemm_finch_outer_bytemap": "Finch Outer Bytemap",
+    }
 
     for i, label in enumerate(labels):
         offset = width * (i - len(labels)/2)  # Center bars around the tick
         #cross-hatch the bar if the string "finch" is not in the label
-        ax.bar(x + offset, data[label], width, label=re.sub("spgemm_", "", label))
+        ax.bar(x + offset, data[label], width, label=method_nice_names[label])
 
     ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
 
@@ -106,7 +119,7 @@ matrix_order = [
 "SNAP/web-Google", 
 "Williams/webbase-1M", 
 "SNAP/roadNet-CA", 
-"SNAP/cit-Patents"
+#"SNAP/cit-Patents"
 ]
 
 method_order = [
@@ -115,6 +128,7 @@ method_order = [
     "spgemm_taco_gustavson",
     "spgemm_finch_gustavson",
     "spgemm_eigen_gustavson",
+    "spgemm_mkl_gustavson",
     "spgemm_taco_outer",
     "spgemm_finch_outer_dense",
     "spgemm_finch_outer",

@@ -340,5 +340,119 @@
         "method": "spgemm_eigen_gustavson",
         "kernel": "spgemm",
         "matrix": "vanHeukelum/cage12"
+    },
+    {
+        "time": 0.17638113900000002,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    },
+    {
+        "time": 0.8431207350000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/amazon0312"
+    },
+    {
+        "time": 0.19004092800000003,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    },
+    {
+        "time": 2.925028702,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    },
+    {
+        "time": 0.24868140500000002,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "GHS_indef/mario002"
+    },
+    {
+        "time": 7.513544481,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/cit-Patents"
+    },
+    {
+        "time": 0.06911842,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "JGD_Homology/m133-b3"
+    },
+    {
+        "time": 0.9811996700000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/webbase-1M"
+    },
+    {
+        "time": 0.466420288,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/roadNet-CA"
+    },
+    {
+        "time": 0.022061678,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella31"
+    },
+    {
+        "time": 0.10273407200000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    },
+    {
+        "time": 0.09033553400000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 1.160532656,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Enron"
+    },
+    {
+        "time": 0.12258425,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-CondMat"
+    },
+    {
+        "time": 1.0014083710000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    },
+    {
+        "time": 0.954039191,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/cop20k_A"
+    },
+    {
+        "time": 1.305989867,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    },
+    {
+        "time": 0.47921566000000004,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/2cubes_sphere"
+    },
+    {
+        "time": 0.616411276,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "vanHeukelum/cage12"
     }
 ]

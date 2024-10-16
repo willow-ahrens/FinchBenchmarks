@@ -44,11 +44,21 @@ def calculate_speedups(data, operation):
 def main(filename):
     # Read data from the JSON file
     with open(filename, 'r') as file:
-        data = json.load(file)
+        datas = json.load(file)
+
+    mtx_order = ["soc-orkut", "soc-LiveJournal1", "hollywood-2009", "indochina-2004", "kron_g500-logn16", "rmat_s22_e64", "rmat_s23_e32", "rmat_s24_e16", "rgg_n_2_24_s0", "roadNet-CA", "road_usa"]
+
+    # Apply rsplit to the mtx fields of datas
+    for data in datas:
+        data["matrix"] = data["matrix"].rsplit('/', 1)[-1]
+
+    # Sort and filter datas by the order in mtx_order
+    datas = [data for data in datas if data["matrix"] in mtx_order]
+    datas = sorted(datas, key=lambda x: mtx_order.index(x["matrix"]))
 
     # Calculate geo-mean speedups for BFS and Bellman-Ford
-    bfs_speedups = calculate_speedups(data, 'bfs')
-    bellmanford_speedups = calculate_speedups(data, 'bellmanford')
+    bfs_speedups = calculate_speedups(datas, 'bfs')
+    bellmanford_speedups = calculate_speedups(datas, 'bellmanford')
 
     # Output results for BFS
     print("Geometric Mean Speedups for BFS:")

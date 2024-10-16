@@ -646,6 +646,78 @@
         "method": "spgemm_eigen_gustavson",
         "kernel": "spgemm",
         "matrix": "SNAP/wiki-Vote"
+    },
+    {
+        "time": 0.018927948,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    },
+    {
+        "time": 0.005423343000000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella06"
+    },
+    {
+        "time": 0.0055121250000000005,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella05"
+    },
+    {
+        "time": 0.019940890000000003,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-HepTh"
+    },
+    {
+        "time": 0.01979061,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    },
+    {
+        "time": 0.033367155,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-alpha"
+    },
+    {
+        "time": 0.007896925,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/ca-GrQc"
+    },
+    {
+        "time": 0.064843592,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/soc-sign-bitcoin-otc"
+    },
+    {
+        "time": 0.003659321,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella08"
+    },
+    {
+        "time": 0.12188141100000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/as-735"
+    },
+    {
+        "time": 0.004314996000000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella09"
+    },
+    {
+        "time": 0.090930728,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/wiki-Vote"
     }
 ]
 

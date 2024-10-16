@@ -8,7 +8,8 @@ from scipy.stats import gmean
 RESULTS_FILE_PATH = "lanka_data.json"
 CHARTS_DIRECTORY = "./charts/"  # Ensure this directory exists
 
-def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=False, excluded_datasets=None):
+
+def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=False, excluded_datasets=None, title=""):
     if excluded_datasets is None:
         excluded_datasets = []
     # Load the results from the JSON file
@@ -52,7 +53,8 @@ def generate_chart_for_operation(operation, baseline_method="opencv", log_scale=
     # Plot
     #datasets = sorted(datasets)  # Sort datasets for consistent plotting
     methods = sorted(geomean_data.keys())
-    make_grouped_bar_chart(methods, datasets, geomean_data, title=f"{operation} Speedup over {baseline_method}", log_scale=log_scale)
+
+    make_grouped_bar_chart(methods, datasets, geomean_data, title=title)
 
 def add_value_labels(ax, spacing=5):
     """Add labels to the end of each bar in a bar chart.
@@ -99,10 +101,19 @@ def make_grouped_bar_chart(labels, x_axis, data, title="", y_label="Speedup", lo
     num_labels = len(labels)
     width = 0.8 / num_labels  # the width of the bars, adjust to fit
 
+    method_labels = {
+        "opencv": "OpenCV",
+        "finch": "Finch (Naive)",
+        "finch_rle": "Finch (RunList)",
+        "finch_bits": "Finch (Bitwise)",
+        "finch_bits_mask": "Finch (Bitwise + Mask)"
+    }
+
+
     fig, ax = plt.subplots(figsize=(12, 6))
     for i, label in enumerate(labels):
         speeds = [data[label].get(dataset, 0) for dataset in x_axis]
-        ax.bar(x + i*width - width*(num_labels-1)/2, speeds, width, label=label)
+        ax.bar(x + i*width - width*(num_labels-1)/2, speeds, width, label=method_labels.get(label, label))
 
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -135,6 +146,6 @@ if not os.path.exists(CHARTS_DIRECTORY):
     os.makedirs(CHARTS_DIRECTORY)
 
 # Generate charts for each operation by calling the function with the operation and baseline method
-generate_chart_for_operation("erode2", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"])
-generate_chart_for_operation("erode4", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"])
-generate_chart_for_operation("hist", baseline_method="opencv", log_scale=True)
+generate_chart_for_operation("erode2", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"], title = "Speedup over OpenCV on 2 Iterations of Erosion")
+generate_chart_for_operation("erode4", baseline_method="opencv", log_scale=True, excluded_datasets=["mnist", "omniglot"], title="Speedup over OpenCV on 4 Iterations of Erosion")
+generate_chart_for_operation("hist", baseline_method="opencv", log_scale=True, title="Speedup over OpenCV on Masked Histogram")

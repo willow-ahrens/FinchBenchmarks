@@ -418,5 +418,47 @@
         "method": "spgemm_finch_outer_dense",
         "kernel": "spgemm",
         "matrix": "rand_8192.mtx"
+    },
+    {
+        "time": 0.000025166000000000003,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_128.mtx"
+    },
+    {
+        "time": 0.000026261,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_256.mtx"
+    },
+    {
+        "time": 0.000021244000000000002,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_512.mtx"
+    },
+    {
+        "time": 0.00006948,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_1024.mtx"
+    },
+    {
+        "time": 0.00037496800000000005,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_2048.mtx"
+    },
+    {
+        "time": 0.002769142,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_4096.mtx"
+    },
+    {
+        "time": 0.023755925,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "rand_8192.mtx"
     }
 ]

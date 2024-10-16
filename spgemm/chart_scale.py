@@ -50,17 +50,28 @@ def generate_chart_for_operation(path, operation, filename, method_order, matrix
     #Strip everything except the digits from the matrix name
     filtered_matrix_order = [re.sub(r'\D', '', mtx) for mtx in filtered_matrix_order]
 
-    make_line_plot(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"SpGEMM Runtime Versus Increasing Dimension (Density = 0.0001)", log_scale=log_scale)
+    make_line_plot(filtered_method_order, filtered_matrix_order, ordered_data, filename, title=f"SpGEMM Runtime Versus Increasing Dimension (Density = 0.001)", log_scale=log_scale)
 
 def make_line_plot(labels, x_axis, data, filename, title="", y_label="Runtime (s)", log_scale=False):
     x = np.arange(len(x_axis))  # Positions for each matrix
     fig, ax = plt.subplots(figsize=(12, 6))  # Adjust figure size as needed
 
+    method_nice_names = {
+        "spgemm_taco_inner": "TACO Inner",
+        "spgemm_finch_inner": "Finch Inner",
+        "spgemm_taco_gustavson": "TACO Gustavson",
+        "spgemm_finch_gustavson": "Finch Gustavson",
+        "spgemm_eigen_gustavson": "Eigen",
+        "spgemm_mkl_gustavson": "MKL",
+        "spgemm_taco_outer": "TACO Outer",
+        "spgemm_finch_outer_dense": "Finch Outer Dense",
+        "spgemm_finch_outer": "Finch Outer",
+        "spgemm_finch_outer_bytemap": "Finch Outer Bytemap",
+    }
+
     # Plotting each method's data as a line
     for label in labels:
-        ax.plot(x, data[label], marker='o', label=re.sub("spgemm_", "", label))  # Line plot with markers
-
-    ax.axhline(y=1, color='r', linestyle='--', linewidth=1)
+        ax.plot(x, data[label], marker='o', label=method_nice_names[label])  # Line plot with markers
 
     if log_scale:
         ax.set_yscale('log')
@@ -96,6 +107,7 @@ method_order = [
     "spgemm_taco_gustavson",
     "spgemm_finch_gustavson",
     "spgemm_eigen_gustavson",
+    "spgemm_mkl_gustavson",
     "spgemm_taco_outer",
     "spgemm_finch_outer_dense",
     "spgemm_finch_outer",

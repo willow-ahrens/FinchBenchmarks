@@ -1,418 +1,66 @@
 [
   [
     {
-      "time": 0.283770954,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "FEMLAB/poisson3Da"
-    },
-    {
-      "time": 0.20030219,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "FEMLAB/poisson3Da"
-    },
-    {
-      "time": 0.9483157190000001,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "FEMLAB/poisson3Da"
-    },
-    {
-      "time": 0.07344705700000001,
+      "time": 0.000025166000000000003,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "FEMLAB/poisson3Da"
+      "matrix": "file:./rand_128.mtx"
     }
   ],
   [
     {
-      "time": 1.265827543,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/amazon0312"
-    },
-    {
-      "time": 1.127308072,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/amazon0312"
-    },
-    {
-      "time": 5.9346808740000005,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/amazon0312"
-    }
-  ],
-  [
-    {
-      "time": 0.31993472100000003,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Hamm/scircuit"
-    },
-    {
-      "time": 0.2538986,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Hamm/scircuit"
-    },
-    {
-      "time": 1.4566174280000002,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Hamm/scircuit"
-    }
-  ],
-  [
-    {
-      "time": 3.506918873,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/web-Google"
-    },
-    {
-      "time": 3.181364812,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/web-Google"
-    },
-    {
-      "time": 16.949923258000002,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/web-Google"
-    }
-  ],
-  [
-    {
-      "time": 0.39875543,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "GHS_indef/mario002"
-    },
-    {
-      "time": 0.405106889,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "GHS_indef/mario002"
-    },
-    {
-      "time": 2.723636184,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "GHS_indef/mario002"
-    }
-  ],
-  [
-    {
-      "time": 10.653278556,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/cit-Patents"
-    },
-    {
-      "time": 7.619361007,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/cit-Patents"
-    },
-    {
-      "time": 49.298480504000004,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/cit-Patents"
-    }
-  ],
-  [
-    {
-      "time": 0.143941234,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "JGD_Homology/m133-b3"
-    },
-    {
-      "time": 0.164505945,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "JGD_Homology/m133-b3"
-    },
-    {
-      "time": 1.040521703,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "JGD_Homology/m133-b3"
-    },
-    {
-      "time": 0.033360445,
+      "time": 0.000026261,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "JGD_Homology/m133-b3"
+      "matrix": "file:./rand_256.mtx"
     }
   ],
   [
     {
-      "time": 2.475939313,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Williams/webbase-1M"
-    },
-    {
-      "time": 2.689757102,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Williams/webbase-1M"
-    },
-    {
-      "time": 16.970739891,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Williams/webbase-1M"
-    }
-  ],
-  [
-    {
-      "time": 0.7725714610000001,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/roadNet-CA"
-    },
-    {
-      "time": 0.538269352,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/roadNet-CA"
-    },
-    {
-      "time": 4.235736510000001,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/roadNet-CA"
-    }
-  ],
-  [
-    {
-      "time": 0.035478857,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/p2p-Gnutella31"
-    },
-    {
-      "time": 0.024517244,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/p2p-Gnutella31"
-    },
-    {
-      "time": 0.16477861600000002,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/p2p-Gnutella31"
-    },
-    {
-      "time": 0.006808906000000001,
+      "time": 0.000021244000000000002,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "SNAP/p2p-Gnutella31"
+      "matrix": "file:./rand_512.mtx"
     }
   ],
   [
     {
-      "time": 0.178124568,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Pajek/patents_main"
-    },
-    {
-      "time": 0.148579115,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Pajek/patents_main"
-    },
-    {
-      "time": 0.829455547,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Pajek/patents_main"
-    },
-    {
-      "time": 0.054994315,
+      "time": 0.00006948,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "Pajek/patents_main"
+      "matrix": "file:./rand_1024.mtx"
     }
   ],
   [
     {
-      "time": 0.154510392,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/wiki-Vote"
-    },
-    {
-      "time": 0.112023527,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/wiki-Vote"
-    },
-    {
-      "time": 0.512748062,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/wiki-Vote"
-    },
-    {
-      "time": 0.022621927,
+      "time": 0.00037496800000000005,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "SNAP/wiki-Vote"
+      "matrix": "file:./rand_2048.mtx"
     }
   ],
   [
     {
-      "time": 2.039010583,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/email-Enron"
-    },
-    {
-      "time": 1.519502213,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/email-Enron"
-    },
-    {
-      "time": 9.45493772,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/email-Enron"
-    }
-  ],
-  [
-    {
-      "time": 0.213659859,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/ca-CondMat"
-    },
-    {
-      "time": 0.150036568,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/ca-CondMat"
-    },
-    {
-      "time": 0.7118440410000001,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "SNAP/ca-CondMat"
-    },
-    {
-      "time": 0.040344227,
+      "time": 0.002769142,
       "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "SNAP/ca-CondMat"
+      "matrix": "file:./rand_4096.mtx"
     }
   ],
   [
     {
-      "time": 1.528060027,
-      "method": "spgemm_taco_gustavson",
+      "time": 0.023755925,
+      "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "Oberwolfach/filter3D"
-    },
-    {
-      "time": 1.188929687,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Oberwolfach/filter3D"
-    },
-    {
-      "time": 5.9673261040000005,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Oberwolfach/filter3D"
+      "matrix": "file:./rand_8192.mtx"
     }
   ],
   [
     {
-      "time": 1.521225644,
-      "method": "spgemm_taco_gustavson",
+      "time": 0.21934618,
+      "method": "spgemm_mkl_gustavson",
       "kernel": "spgemm",
-      "matrix": "Williams/cop20k_A"
-    },
-    {
-      "time": 1.14444992,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Williams/cop20k_A"
-    },
-    {
-      "time": 6.060818816,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Williams/cop20k_A"
-    }
-  ],
-  [
-    {
-      "time": 2.206014508,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/offshore"
-    },
-    {
-      "time": 1.730822709,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/offshore"
-    },
-    {
-      "time": 7.647495984000001,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/offshore"
-    }
-  ],
-  [
-    {
-      "time": 0.827049655,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/2cubes_sphere"
-    },
-    {
-      "time": 0.604604142,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/2cubes_sphere"
-    },
-    {
-      "time": 2.63595527,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "Um/2cubes_sphere"
-    }
-  ],
-  [
-    {
-      "time": 1.06585095,
-      "method": "spgemm_taco_gustavson",
-      "kernel": "spgemm",
-      "matrix": "vanHeukelum/cage12"
-    },
-    {
-      "time": 0.824342225,
-      "method": "spgemm_finch_gustavson",
-      "kernel": "spgemm",
-      "matrix": "vanHeukelum/cage12"
-    },
-    {
-      "time": 4.6180858030000005,
-      "method": "spgemm_eigen_gustavson",
-      "kernel": "spgemm",
-      "matrix": "vanHeukelum/cage12"
+      "matrix": "file:./rand_16384.mtx"
     }
   ]
 ]
