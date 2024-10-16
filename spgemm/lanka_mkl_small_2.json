@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.01979061,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/CollegeMsg"
+    }
+]

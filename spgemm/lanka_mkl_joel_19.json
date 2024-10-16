@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.10273407200000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Pajek/patents_main"
+    }
+]

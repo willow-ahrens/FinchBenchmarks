@@ -18,4 +18,4 @@ echo $PATH
 echo $(pwd)
 export TMPDIR=/tmp
 
-julia run_spgemm.jl -d "small" --kernels "new" -b $SLURM_ARRAY_TASK_ID -B 12 -o lanka_extra_small_$SLURM_ARRAY_TASK_ID.json
+julia run_spgemm.jl -d "small" --kernels "new" -b $SLURM_ARRAY_TASK_ID -B 12 -o lanka_mkl_small_$SLURM_ARRAY_TASK_ID.json

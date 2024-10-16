@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.018927948,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/email-Eu-core"
+    }
+]

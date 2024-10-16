@@ -1,0 +1,8 @@
+[
+    {
+        "time": 1.0014083710000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Oberwolfach/filter3D"
+    }
+]

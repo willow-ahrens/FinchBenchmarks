@@ -1,0 +1,8 @@
+[
+    {
+        "time": 2.6261e-5,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "file:./rand_256.mtx"
+    }
+]

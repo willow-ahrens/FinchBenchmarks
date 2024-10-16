@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.17638113900000002,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "FEMLAB/poisson3Da"
+    }
+]

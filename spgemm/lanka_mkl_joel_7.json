@@ -1,0 +1,8 @@
+[
+    {
+        "time": 1.305989867,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Um/offshore"
+    }
+]

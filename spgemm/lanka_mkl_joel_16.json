@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.9811996700000001,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Williams/webbase-1M"
+    }
+]

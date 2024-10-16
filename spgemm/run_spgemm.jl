@@ -57,6 +57,16 @@ datasets = Dict(
         #"HB/gre_216b",
         #"HB/bcspwr07",
     ],
+    "scale" => [
+        "file:./rand_128.mtx",
+        "file:./rand_256.mtx",
+	"file:./rand_512.mtx",
+	"file:./rand_1024.mtx",
+	"file:./rand_2048.mtx",
+	"file:./rand_4096.mtx",
+	"file:./rand_8192.mtx",
+	"file:./rand_16384.mtx",
+    ],
     "small" => [
         "SNAP/email-Eu-core",
         "SNAP/CollegeMsg",
@@ -120,10 +130,10 @@ methods = Dict(
         "spgemm_mkl_gustavson" => spgemm_mkl,
     ],
     "new" => [
-        "spgemm_taco_gustavson" => spgemm_taco_gustavson,
-        "spgemm_finch_gustavson" => spgemm_finch_gustavson,
-        "spgemm_eigen_gustavson" => spgemm_eigen,
-        #"spgemm_mkl_gustavson" => spgemm_mkl,
+        #"spgemm_taco_gustavson" => spgemm_taco_gustavson,
+        #"spgemm_finch_gustavson" => spgemm_finch_gustavson,
+        #"spgemm_eigen_gustavson" => spgemm_eigen,
+        "spgemm_mkl_gustavson" => spgemm_mkl,
     ]
 )
 
@@ -140,7 +150,11 @@ batch = let
 end
 
 for mtx in batch
-    A = SparseMatrixCSC(matrixdepot(mtx))
+    if mtx[1:5] == "file:"
+        A = SparseMatrixCSC(fread(mtx[6:end]))
+    else
+        A = SparseMatrixCSC(matrixdepot(mtx))
+    end
     B = A
     C_ref = nothing
     for (key, method) in methods[parsed_args["kernels"]]

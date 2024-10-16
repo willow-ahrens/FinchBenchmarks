@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.19004092800000003,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "Hamm/scircuit"
+    }
+]

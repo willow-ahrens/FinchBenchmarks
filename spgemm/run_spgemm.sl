@@ -19,4 +19,4 @@ echo $(pwd)
 export TMPDIR=/tmp
 
 # Use SLURM_ARRAY_TASK_ID for batch number (-b) and set the total number of batches (-B) to 20
-julia run_spgemm.jl --kernels "new" -d "joel" -b $SLURM_ARRAY_TASK_ID -B 20 -o lanka_extra_joel_$SLURM_ARRAY_TASK_ID.json
+julia run_spgemm.jl --kernels "new" -d "joel" -b $SLURM_ARRAY_TASK_ID -B 20 -o lanka_mkl_joel_$SLURM_ARRAY_TASK_ID.json

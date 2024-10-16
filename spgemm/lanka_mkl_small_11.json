@@ -1,0 +1,8 @@
+[
+    {
+        "time": 0.0055121250000000005,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/p2p-Gnutella05"
+    }
+]

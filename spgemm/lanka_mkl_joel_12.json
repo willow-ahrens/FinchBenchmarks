@@ -1,0 +1,8 @@
+[
+    {
+        "time": 2.925028702,
+        "method": "spgemm_mkl_gustavson",
+        "kernel": "spgemm",
+        "matrix": "SNAP/web-Google"
+    }
+]
