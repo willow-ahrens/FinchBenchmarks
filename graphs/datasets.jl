@@ -16,5 +16,6 @@ const datasets = Dict(
     "yang3" => ["SNAP/roadNet-CA"],
     "yang4" => ["SNAP/soc-Epinions1"],
     "yang5" => ["SNAP/com-Orkut"],
-    "yang6" => ["GAP/GAP-road"]
+    "yang6" => ["GAP/GAP-road"],
+    "indo" => ["LAW/indochina-2004"],
 )

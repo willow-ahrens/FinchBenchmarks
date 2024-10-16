@@ -1,0 +1,32 @@
+[
+    {
+        "time": 0.0055515,
+        "method": "Graphs.jl",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 0.004883208,
+        "method": "finch_push_pull",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 0.004883625,
+        "method": "finch_push_only",
+        "operation": "bfs",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 0.026755958,
+        "method": "Graphs.jl",
+        "operation": "bellmanford",
+        "matrix": "LAW/indochina-2004"
+    },
+    {
+        "time": 32.519889792,
+        "method": "Finch",
+        "operation": "bellmanford",
+        "matrix": "LAW/indochina-2004"
+    }
+]
