@@ -119,7 +119,7 @@ matrix_order = [
 "SNAP/web-Google", 
 "Williams/webbase-1M", 
 "SNAP/roadNet-CA", 
-#"SNAP/cit-Patents"
+"SNAP/cit-Patents"
 ]
 
 method_order = [
