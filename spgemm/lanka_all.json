@@ -1,0 +1,992 @@
+[
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.28340624600000003,
+    "kernel": "spgemm",
+    "matrix": "FEMLAB/poisson3Da"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.200062188,
+    "kernel": "spgemm",
+    "matrix": "FEMLAB/poisson3Da"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 1.2628786490000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/amazon0312"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 1.129225168,
+    "kernel": "spgemm",
+    "matrix": "SNAP/amazon0312"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.320065313,
+    "kernel": "spgemm",
+    "matrix": "Hamm/scircuit"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.251642327,
+    "kernel": "spgemm",
+    "matrix": "Hamm/scircuit"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 3.5785003520000003,
+    "kernel": "spgemm",
+    "matrix": "SNAP/web-Google"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 3.15041726,
+    "kernel": "spgemm",
+    "matrix": "SNAP/web-Google"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.39790552,
+    "kernel": "spgemm",
+    "matrix": "GHS_indef/mario002"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.393230451,
+    "kernel": "spgemm",
+    "matrix": "GHS_indef/mario002"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.14421704700000001,
+    "kernel": "spgemm",
+    "matrix": "JGD_Homology/m133-b3"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.150914152,
+    "kernel": "spgemm",
+    "matrix": "JGD_Homology/m133-b3"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 2.472163451,
+    "kernel": "spgemm",
+    "matrix": "Williams/webbase-1M"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 2.765336976,
+    "kernel": "spgemm",
+    "matrix": "Williams/webbase-1M"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.773799364,
+    "kernel": "spgemm",
+    "matrix": "SNAP/roadNet-CA"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.538210365,
+    "kernel": "spgemm",
+    "matrix": "SNAP/roadNet-CA"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.035328963000000005,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella31"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.024325387,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella31"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.17620849100000002,
+    "kernel": "spgemm",
+    "matrix": "Pajek/patents_main"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.149351734,
+    "kernel": "spgemm",
+    "matrix": "Pajek/patents_main"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.15433269600000002,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.112211772,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 2.0408920260000003,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Enron"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 1.524088302,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Enron"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.20998577200000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-CondMat"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.149601928,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-CondMat"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 1.5360144260000002,
+    "kernel": "spgemm",
+    "matrix": "Oberwolfach/filter3D"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 1.161452103,
+    "kernel": "spgemm",
+    "matrix": "Oberwolfach/filter3D"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 1.517005552,
+    "kernel": "spgemm",
+    "matrix": "Williams/cop20k_A"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 1.192438331,
+    "kernel": "spgemm",
+    "matrix": "Williams/cop20k_A"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 2.20539303,
+    "kernel": "spgemm",
+    "matrix": "Um/offshore"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 1.692262039,
+    "kernel": "spgemm",
+    "matrix": "Um/offshore"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.827431396,
+    "kernel": "spgemm",
+    "matrix": "Um/2cubes_sphere"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.610428948,
+    "kernel": "spgemm",
+    "matrix": "Um/2cubes_sphere"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 1.0702073440000002,
+    "kernel": "spgemm",
+    "matrix": "vanHeukelum/cage12"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.824769142,
+    "kernel": "spgemm",
+    "matrix": "vanHeukelum/cage12"
+  },
+  {
+    "time": 10.653278556,
+    "method": "spgemm_taco_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/cit-Patents"
+  },
+  {
+    "time": 7.619361007,
+    "method": "spgemm_finch_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/cit-Patents"
+  },
+  {
+    "time": 0.9483157190000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "FEMLAB/poisson3Da"
+  },
+  {
+    "time": 5.9346808740000005,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/amazon0312"
+  },
+  {
+    "time": 1.4566174280000002,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Hamm/scircuit"
+  },
+  {
+    "time": 16.949923258000002,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/web-Google"
+  },
+  {
+    "time": 2.723636184,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "GHS_indef/mario002"
+  },
+  {
+    "time": 49.298480504000004,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/cit-Patents"
+  },
+  {
+    "time": 1.040521703,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "JGD_Homology/m133-b3"
+  },
+  {
+    "time": 16.970739891,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Williams/webbase-1M"
+  },
+  {
+    "time": 4.235736510000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/roadNet-CA"
+  },
+  {
+    "time": 0.16477861600000002,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella31"
+  },
+  {
+    "time": 0.829455547,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Pajek/patents_main"
+  },
+  {
+    "time": 0.512748062,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "time": 9.45493772,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Enron"
+  },
+  {
+    "time": 0.7118440410000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-CondMat"
+  },
+  {
+    "time": 5.9673261040000005,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Oberwolfach/filter3D"
+  },
+  {
+    "time": 6.060818816,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Williams/cop20k_A"
+  },
+  {
+    "time": 7.647495984000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Um/offshore"
+  },
+  {
+    "time": 2.63595527,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "Um/2cubes_sphere"
+  },
+  {
+    "time": 4.6180858030000005,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "vanHeukelum/cage12"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 0.166281946,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.03208313,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.003443649,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 0.182572041,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.019919157,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.136039261,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.031463039,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.007570785,
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.7457265620000002,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.008002824,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.336187944,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.674866413,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.006301514,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.029031138,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.016785531,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.486962593,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.776522587,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.008197491000000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.345355776,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.744597724,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.006392084,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.030506369,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.017164803,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.484329008,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 4.19416879,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.033016958,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.43944598,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 4.405910162,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.022627621,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.130120574,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.101676996,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.595034556,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 0.204012468,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.033551286,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.006899983,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 0.232029972,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.021310877,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.133664609,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.043465619,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.022323086,
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 0.553076126,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.055340348000000004,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.068735312,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 0.528355204,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.037808148,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.309739025,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.103958319,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.090179272,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.2078284430000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.012293381,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.12218076600000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.19072659,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.008709435,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.045500402,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.020964281,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.158017259,
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.201385496,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.10733593100000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.15965718,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.067957643,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.074495411,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.64502334,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.232111962,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.23982098,
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 0.820148337,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.005375389,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.175263318,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 0.756015671,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.004038464,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.018139233,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.009004464,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.249098891,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.424616778,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.19183128200000002,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.284358178,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.262466093,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.169729276,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 1.492552065,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.463066646,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.363664462,
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 1.3212963580000001,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.0062254680000000005,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.291623743,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 1.205245317,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.004838125,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.022003532,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.01155667,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.373089936,
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "method": "spgemm_taco_inner",
+    "time": 3.016874976,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_taco_gustavson",
+    "time": 0.153512759,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_taco_outer",
+    "time": 0.33507371900000005,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_inner",
+    "time": 2.630937413,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_gustavson",
+    "time": 0.112932492,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_outer",
+    "time": 0.933830915,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_outer_bytemap",
+    "time": 0.255482547,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "method": "spgemm_finch_outer_dense",
+    "time": 0.480480559,
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  },
+  {
+    "time": 0.07966297900000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/email-Eu-core"
+  },
+  {
+    "time": 0.033861507,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella06"
+  },
+  {
+    "time": 0.033963032000000004,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella05"
+  },
+  {
+    "time": 0.099140513,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-HepTh"
+  },
+  {
+    "time": 0.086974521,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/CollegeMsg"
+  },
+  {
+    "time": 0.195107091,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-alpha"
+  },
+  {
+    "time": 0.039968210000000004,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/ca-GrQc"
+  },
+  {
+    "time": 0.413607259,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/soc-sign-bitcoin-otc"
+  },
+  {
+    "time": 0.021471973000000002,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella08"
+  },
+  {
+    "time": 0.9854124540000001,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/as-735"
+  },
+  {
+    "time": 0.02600101,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/p2p-Gnutella09"
+  },
+  {
+    "time": 0.509803087,
+    "method": "spgemm_eigen_gustavson",
+    "kernel": "spgemm",
+    "matrix": "SNAP/wiki-Vote"
+  }
+]

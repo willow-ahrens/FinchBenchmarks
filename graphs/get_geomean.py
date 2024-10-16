@@ -1,5 +1,6 @@
 import json
 import math
+import argparse
 from collections import defaultdict
 
 def geometric_mean(arr):
@@ -40,9 +41,7 @@ def calculate_speedups(data, operation):
 
     return geo_speedups
 
-def main():
-    filename = 'graphs_results.json'
-    
+def main(filename):
     # Read data from the JSON file
     with open(filename, 'r') as file:
         data = json.load(file)
@@ -68,5 +67,10 @@ def main():
         print("No valid Bellman-Ford data for speedup calculation.")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Calculate geometric speedup from JSON results.")
+    parser.add_argument("filename", type=str, help="The path to the JSON file containing the results.")
+
+    args = parser.parse_args()
+
+    main(args.filename)
 
