@@ -45,7 +45,7 @@ MKL_LDLIBS = -L$(MKLROOT)/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_th
 ALL_TARGETS = $(SPGEMM_EIGEN) spadd/spadd_eigen spadd/spadd_nacho hadamard/hadamard_eigen mttkrp/mttkrp_taco spmspv/spmspv_eigen $(NACHO)
 
 ifeq ($(shell uname -m), x86_64)
-	ALL_TARGETS += $(SPGEMM_MKL) spadd/spadd_mkl outer/outer_mkl
+	ALL_TARGETS += $(SPGEMM_MKL) spadd/spadd_mkl outer/outer_mkl outer_transpose/outer_mkl
 endif
 
 all: $(ALL_TARGETS)
@@ -106,6 +106,9 @@ spgemm/spgemm_mkl: $(SPARSE_BENCH) spgemm/spgemm_mkl.cpp
 
 outer/outer_mkl: $(SPARSE_BENCH) outer/outer_mkl.cpp
 	bash -c 'source /opt/intel/oneapi/setvars.sh; $(CXX) $(CXXFLAGS) $(EIGEN_CXXFLAGS) $(MKL_CXXFLAGS) -o $@ outer/outer_mkl.cpp $(LDLIBS) $(MKL_LDLIBS)'
+
+outer_transpose/outer_mkl: $(SPARSE_BENCH) outer_transpose/outer_mkl.cpp
+	bash -c 'source /opt/intel/oneapi/setvars.sh; $(CXX) $(CXXFLAGS) $(EIGEN_CXXFLAGS) $(MKL_CXXFLAGS) -o $@ outer_transpose/outer_mkl.cpp $(LDLIBS) $(MKL_LDLIBS)'
 
 spadd/spadd_mkl: spadd/mkl_impl.cpp
 	bash -c 'source /opt/intel/oneapi/setvars.sh; $(CXX) $(CXXFLAGS) $(TACO_CXXFLAGS) $(EIGEN_CXXFLAGS) $(MKL_CXXFLAGS) -o $@ spadd/mkl_impl.cpp $(LDLIBS) $(MKL_LDLIBS) $(TACO_LDLIBS)'
