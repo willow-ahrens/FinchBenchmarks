@@ -20,7 +20,7 @@ fi
 
 FINCH_URL=https://github.com/finch-tensor/Finch.jl.git
 [ -d "$REPO_ROOT/Finch-wingspan.jl" ] || git clone --branch wingspan-arxiv-v0 "$FINCH_URL" "$REPO_ROOT/Finch-wingspan.jl"
-[ -d "$REPO_ROOT/Finch-birdseed.jl" ] || git clone --branch wma/hash-coalesce "$FINCH_URL" "$REPO_ROOT/Finch-birdseed.jl"
+[ -d "$REPO_ROOT/Finch-birdseed.jl" ] || git clone --branch wma/split-offset-merged "$FINCH_URL" "$REPO_ROOT/Finch-birdseed.jl"
 
 mkdir -p "$REPO_ROOT/.julia-depot" "$REPO_ROOT/.poetry-venv"
 
